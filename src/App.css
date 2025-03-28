@@ -2,7 +2,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
@@ -13,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #29dd3baa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #29dd3baa);
 }
 
 @keyframes logo-spin {
@@ -40,4 +40,15 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Card deck animation styles */
+.card-container .flipped {
+  transform: rotateY(180deg);
+}
+
+.card-container > div {
+  backface-visibility: hidden;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }

@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black">
       {/* Navbar */}
       <Navbar />
       
@@ -21,17 +21,17 @@ const Index = () => {
       </section>
       
       {/* Partners Carousel */}
-      <section id="partners">
+      <section id="partners" className="bg-black py-12">
         <PartnersCarousel />
       </section>
       
-      {/* Advertisers and Publishers Section */}
-      <section id="audience" className="mt-24">
+      {/* Advertisers and Publishers Section - Added larger gap */}
+      <section id="audience" className="mt-36 bg-black">
         <AudienceCards />
       </section>
       
       {/* Services Cards */}
-      <section id="solutions">
+      <section id="solutions" className="mt-24 bg-black">
         <ServiceCards />
       </section>
       
