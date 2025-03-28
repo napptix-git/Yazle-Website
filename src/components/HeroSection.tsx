@@ -59,8 +59,8 @@ const HeroSection: React.FC = () => {
     const canvas = canvasRef.current;
     particles.current = [];
     
-    // Increased particle count by reducing the divisor
-    const particleCount = Math.min(250, Math.floor(canvas.width * canvas.height / 5000));
+    // Further increased particle count by reducing the divisor even more
+    const particleCount = Math.min(400, Math.floor(canvas.width * canvas.height / 3000));
     
     for (let i = 0; i < particleCount; i++) {
       particles.current.push({

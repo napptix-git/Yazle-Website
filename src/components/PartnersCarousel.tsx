@@ -33,7 +33,7 @@ const PartnersCarousel: React.FC = () => {
   const partners = duplicateForCarousel(partnerLogos);
 
   return (
-    <section className="py-16 bg-napptix-dark relative overflow-hidden">
+    <section className="py-16 bg-black relative overflow-hidden">
       <div className="container mx-auto mb-10 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Our Clients & Partners</h2>
         <p className="text-napptix-light-grey max-w-2xl mx-auto">

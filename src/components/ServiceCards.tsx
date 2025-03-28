@@ -134,6 +134,7 @@ const ServiceCards: React.FC = () => {
   const [expandedCards, setExpandedCards] = useState(false);
   const [flippedCardIndexes, setFlippedCardIndexes] = useState<number[]>([]);
   const [lockScroll, setLockScroll] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -145,64 +146,62 @@ const ServiceCards: React.FC = () => {
   
   // Track scroll progress to trigger animations
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange(value => {
+    const unsubscribe = scrollYProgress.on("change", value => {
       // Expand cards first
       if (value > 0.3 && !expandedCards) {
         setExpandedCards(true);
         setLockScroll(true); // Lock scroll when cards start expanding
-      } else if (value < 0.2 && expandedCards) {
+      } else if (value < 0.2 && expandedCards && animationComplete) {
         setExpandedCards(false);
         setFlippedCardIndexes([]);
-        setLockScroll(false); // Unlock scroll when cards collapse
+        setAnimationComplete(false);
       }
       
       // Then flip cards one by one
       if (expandedCards) {
-        if (value > 0.4 && !flippedCardIndexes.includes(0)) {
-          setFlippedCardIndexes(prev => [...prev, 0]);
-        }
-        if (value > 0.5 && !flippedCardIndexes.includes(1)) {
-          setFlippedCardIndexes(prev => [...prev, 1]);
-        }
-        if (value > 0.6 && !flippedCardIndexes.includes(2)) {
-          setFlippedCardIndexes(prev => [...prev, 2]);
-        }
-        if (value > 0.7 && !flippedCardIndexes.includes(3)) {
-          setFlippedCardIndexes(prev => [...prev, 3]);
-          // Unlock scroll after last card is flipped
-          setTimeout(() => setLockScroll(false), 600);
-        }
+        const flipTiming = [0.4, 0.5, 0.6, 0.7];
+        
+        flipTiming.forEach((threshold, idx) => {
+          if (value > threshold && !flippedCardIndexes.includes(idx)) {
+            setFlippedCardIndexes(prev => [...prev, idx]);
+            
+            // When last card is flipped, mark animation as complete and unlock scroll
+            if (idx === 3) {
+              setTimeout(() => {
+                setLockScroll(false);
+                setAnimationComplete(true);
+              }, 600);
+            }
+          }
+        });
       }
     });
     
     return () => unsubscribe();
-  }, [scrollYProgress, expandedCards, flippedCardIndexes]);
+  }, [scrollYProgress, expandedCards, flippedCardIndexes, animationComplete]);
   
-  // Prevent scroll when animations are playing
+  // Create wheel event handler
   useEffect(() => {
-    const preventScroll = (e: Event) => {
+    const handleWheel = (e: WheelEvent) => {
       if (lockScroll) {
         e.preventDefault();
-        e.stopPropagation();
-        return false;
       }
-      return true;
     };
 
-    if (lockScroll) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('wheel', preventScroll, { passive: false });
-      window.addEventListener('touchmove', preventScroll, { passive: false });
-    } else {
-      document.body.style.overflow = '';
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
-    }
+    // Create touch event handlers
+    const handleTouchMove = (e: TouchEvent) => {
+      if (lockScroll) {
+        e.preventDefault();
+      }
+    };
+
+    // Add event listeners with passive: false to allow preventDefault
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, [lockScroll]);
   
@@ -217,7 +216,7 @@ const ServiceCards: React.FC = () => {
   };
 
   return (
-    <section id="solutions" className="py-32 bg-black" ref={containerRef}>
+    <section id="solutions" className="py-32 bg-black relative" ref={containerRef}>
       <div className="container mx-auto text-center mb-16">
         <motion.h2 
           className="text-3xl md:text-4xl font-bold mb-4 text-white"
