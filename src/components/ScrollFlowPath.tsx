@@ -8,27 +8,25 @@ const ScrollFlowPath: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   
-  // Transform scroll progress to path height
-  const pathHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  // Transform scroll progress to path progress
+  const pathProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
   
   // Create sections for the flow path
   const sections = [
-    { id: 'hero', label: 'Home' },
-    { id: 'partners', label: 'Partners' },
-    { id: 'audience', label: 'Audience' },
-    { id: 'solutions', label: 'Solutions' }
+    { id: 'hero', label: 'Home', position: 0 },
+    { id: 'partners', label: 'Partners', position: 0.33 },
+    { id: 'audience', label: 'Audience', position: 0.66 },
+    { id: 'solutions', label: 'Solutions', position: 1 }
   ];
   
-  // Pre-calculate all transforms OUTSIDE of the render method
-  const sectionProgress0 = useTransform(scrollYProgress, [0 * 0.25, 0 * 0.25 + 0.2], [0, 1]);
-  const sectionProgress1 = useTransform(scrollYProgress, [1 * 0.25, 1 * 0.25 + 0.2], [0, 1]);
-  const sectionProgress2 = useTransform(scrollYProgress, [2 * 0.25, 2 * 0.25 + 0.2], [0, 1]);
-  const sectionProgress3 = useTransform(scrollYProgress, [3 * 0.25, 3 * 0.25 + 0.2], [0, 1]);
+  // Pre-calculate all transforms for each section
+  const sectionProgress0 = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
+  const sectionProgress1 = useTransform(scrollYProgress, [0.25, 0.5], [0, 1]);
+  const sectionProgress2 = useTransform(scrollYProgress, [0.5, 0.75], [0, 1]);
+  const sectionProgress3 = useTransform(scrollYProgress, [0.75, 1], [0, 1]);
   
-  // Create arrays for transforms instead of using map (which can cause hook order issues)
   const sectionProgresses = [sectionProgress0, sectionProgress1, sectionProgress2, sectionProgress3];
   
-  // Pre-calculate all scale and opacity transforms
   const sectionScale0 = useTransform(sectionProgress0, [0, 1], [1, 1.5]);
   const sectionScale1 = useTransform(sectionProgress1, [0, 1], [1, 1.5]);
   const sectionScale2 = useTransform(sectionProgress2, [0, 1], [1, 1.5]);
@@ -42,6 +40,59 @@ const ScrollFlowPath: React.FC = () => {
   const sectionScales = [sectionScale0, sectionScale1, sectionScale2, sectionScale3];
   const sectionOpacities = [sectionOpacity0, sectionOpacity1, sectionOpacity2, sectionOpacity3];
   
+  // Calculate path positions for each dot
+  const getPathPoint = (t: number) => {
+    // SVG path coordinates calculation
+    // This creates a path similar to the one in the image
+    const width = 100;
+    const height = 400;
+    
+    if (t <= 0.25) {
+      // First curve - start to first loop
+      const adjustedT = t * 4;
+      const x = width * 0.5 * Math.sin(adjustedT * Math.PI);
+      const y = height * 0.25 * adjustedT;
+      return { x, y };
+    } else if (t <= 0.5) {
+      // First loop
+      const adjustedT = (t - 0.25) * 4;
+      const angle = adjustedT * Math.PI * 2;
+      const x = width * 0.5 * Math.sin(angle);
+      const y = height * 0.25 + width * 0.25 * (1 - Math.cos(angle));
+      return { x, y };
+    } else if (t <= 0.75) {
+      // Middle path to second loop
+      const adjustedT = (t - 0.5) * 4;
+      const x = width * 0.5 * Math.sin((1 - adjustedT) * Math.PI);
+      const y = height * 0.5 + height * 0.25 * adjustedT;
+      return { x, y };
+    } else {
+      // Second loop
+      const adjustedT = (t - 0.75) * 4;
+      const angle = adjustedT * Math.PI * 2;
+      const x = width * 0.5 * Math.sin(angle);
+      const y = height * 0.75 + width * 0.25 * (1 - Math.cos(angle));
+      return { x, y };
+    }
+  };
+  
+  // Generate the SVG path string for the curved path
+  const generatePathD = () => {
+    const numPoints = 100;
+    let d = `M 0 0`;
+    
+    for (let i = 0; i <= numPoints; i++) {
+      const t = i / numPoints;
+      const point = getPathPoint(t);
+      d += ` L ${point.x} ${point.y}`;
+    }
+    
+    return d;
+  };
+  
+  // Calculate the path length for the stroke-dasharray animation
+  const pathLength = useRef(1000); // approximation
+  
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -51,63 +102,86 @@ const ScrollFlowPath: React.FC = () => {
   return (
     <div 
       ref={containerRef}
-      className="fixed left-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center h-[60vh] pointer-events-none"
+      className="fixed left-8 top-1/2 -translate-y-1/2 z-40 hidden md:block h-[80vh] pointer-events-none"
+      style={{ width: '150px' }}
     >
-      {/* Flow Path Container */}
-      <div className="relative h-full flex flex-col items-center">
-        {/* Background line */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-full bg-white/10"></div>
-        
-        {/* Animated progress line */}
-        <motion.div 
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#29dd3b] origin-top"
-          style={{ height: pathHeight }}
+      {/* SVG Container for the curved path */}
+      <svg 
+        width="100%" 
+        height="100%" 
+        viewBox="0 0 100 400" 
+        preserveAspectRatio="none" 
+        className="overflow-visible"
+      >
+        {/* Background curved path */}
+        <path
+          d={generatePathD()}
+          fill="none"
+          stroke="rgba(255, 255, 255, 0.1)"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
         
-        {/* Section indicators */}
-        {sections.map((section, index) => (
-          <motion.div
-            key={section.id}
-            className="absolute w-12 h-12 flex items-center justify-center pointer-events-auto cursor-pointer"
-            style={{
-              top: `calc(${index * 33}% - 6px)`,
-              left: '50%',
-              x: '-50%',
-            }}
-            whileHover={{ scale: 1.2 }}
-            onClick={() => {
-              const element = document.getElementById(section.id);
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            <motion.div 
-              className="relative w-3 h-3 rounded-full bg-white z-10"
-              style={{
-                scale: sectionScales[index],
-                opacity: sectionOpacities[index],
-                backgroundColor: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
-              }}
-            />
-            
-            {/* Label for the section */}
-            <motion.span 
-              className="absolute left-6 ml-2 text-sm text-white whitespace-nowrap"
-              style={{
-                opacity: sectionOpacities[index],
-                color: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
-              }}
-            >
-              {section.label}
-            </motion.span>
-          </motion.div>
-        ))}
-      </div>
+        {/* Animated progress path */}
+        <motion.path
+          d={generatePathD()}
+          fill="none"
+          stroke="#29dd3b"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeDasharray={pathLength.current}
+          strokeDashoffset={useTransform(
+            pathProgress, 
+            [0, 1], 
+            [pathLength.current, 0]
+          )}
+        />
+        
+        {/* Section indicators positioned along the path */}
+        {sections.map((section, index) => {
+          const point = getPathPoint(section.position);
+          
+          return (
+            <motion.g key={section.id} className="pointer-events-auto cursor-pointer">
+              {/* Dot */}
+              <motion.circle
+                cx={point.x}
+                cy={point.y}
+                r={6}
+                fill="white"
+                style={{
+                  scale: sectionScales[index],
+                  opacity: sectionOpacities[index],
+                  fill: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
+                }}
+                onClick={() => {
+                  const element = document.getElementById(section.id);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              />
+              
+              {/* Label */}
+              <motion.text
+                x={point.x + 15}
+                y={point.y + 5}
+                className="text-sm pointer-events-none select-none"
+                style={{
+                  fill: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
+                  opacity: sectionOpacities[index],
+                }}
+              >
+                {section.label}
+              </motion.text>
+            </motion.g>
+          );
+        })}
+      </svg>
       
       {/* Scroll indicator at the bottom */}
       <motion.div 
-        className="absolute -bottom-20 flex flex-col items-center gap-2"
+        className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >
