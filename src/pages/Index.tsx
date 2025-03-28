@@ -8,6 +8,7 @@ import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import ServicesWheel from '@/components/ServicesWheel';
 import Footer from '@/components/Footer';
+import ScrollFlowPath from '@/components/ScrollFlowPath';
 
 const Index = () => {
   return (
@@ -15,17 +16,28 @@ const Index = () => {
       {/* Navbar */}
       <Navbar />
       
+      {/* Scroll Flow Path */}
+      <ScrollFlowPath />
+      
       {/* Hero Section */}
-      <HeroSection />
+      <section id="hero">
+        <HeroSection />
+      </section>
       
       {/* Partners Carousel */}
-      <PartnersCarousel />
+      <section id="partners">
+        <PartnersCarousel />
+      </section>
       
       {/* Advertisers and Publishers Section */}
-      <AudienceCards />
+      <section id="audience">
+        <AudienceCards />
+      </section>
       
       {/* Services Wheel */}
-      <ServicesWheel />
+      <section id="solutions">
+        <ServicesWheel />
+      </section>
       
       {/* Footer */}
       <Footer />
