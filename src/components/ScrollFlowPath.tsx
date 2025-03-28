@@ -19,7 +19,7 @@ const ScrollFlowPath: React.FC = () => {
     { id: 'solutions', label: 'Solutions', position: 1 }
   ];
   
-  // Pre-calculate all transforms for each section
+  // Pre-calculate all transforms for each section - these must be called at the top level
   const sectionProgress0 = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
   const sectionProgress1 = useTransform(scrollYProgress, [0.25, 0.5], [0, 1]);
   const sectionProgress2 = useTransform(scrollYProgress, [0.5, 0.75], [0, 1]);
@@ -32,13 +32,22 @@ const ScrollFlowPath: React.FC = () => {
   const sectionScale2 = useTransform(sectionProgress2, [0, 1], [1, 1.5]);
   const sectionScale3 = useTransform(sectionProgress3, [0, 1], [1, 1.5]);
   
+  const sectionScales = [sectionScale0, sectionScale1, sectionScale2, sectionScale3];
+  
   const sectionOpacity0 = useTransform(sectionProgress0, [0, 1], [0.5, 1]);
   const sectionOpacity1 = useTransform(sectionProgress1, [0, 1], [0.5, 1]);
   const sectionOpacity2 = useTransform(sectionProgress2, [0, 1], [0.5, 1]);
   const sectionOpacity3 = useTransform(sectionProgress3, [0, 1], [0.5, 1]);
   
-  const sectionScales = [sectionScale0, sectionScale1, sectionScale2, sectionScale3];
   const sectionOpacities = [sectionOpacity0, sectionOpacity1, sectionOpacity2, sectionOpacity3];
+  
+  // Fixed reference values for section colors to avoid conditional hook calls
+  const section0Color = useTransform(sectionProgress0, v => v > 0.5 ? '#29dd3b' : 'white');
+  const section1Color = useTransform(sectionProgress1, v => v > 0.5 ? '#29dd3b' : 'white');
+  const section2Color = useTransform(sectionProgress2, v => v > 0.5 ? '#29dd3b' : 'white');
+  const section3Color = useTransform(sectionProgress3, v => v > 0.5 ? '#29dd3b' : 'white');
+  
+  const sectionColors = [section0Color, section1Color, section2Color, section3Color];
   
   // Calculate path positions for each dot
   const getPathPoint = (t: number) => {
@@ -93,6 +102,9 @@ const ScrollFlowPath: React.FC = () => {
   // Calculate the path length for the stroke-dasharray animation
   const pathLength = useRef(1000); // approximation
   
+  // Animation for the scroll indicator
+  const pathOffset = useTransform(pathProgress, [0, 1], [pathLength.current, 0]);
+  
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -130,11 +142,7 @@ const ScrollFlowPath: React.FC = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeDasharray={pathLength.current}
-          strokeDashoffset={useTransform(
-            pathProgress, 
-            [0, 1], 
-            [pathLength.current, 0]
-          )}
+          strokeDashoffset={pathOffset}
         />
         
         {/* Section indicators positioned along the path */}
@@ -148,11 +156,10 @@ const ScrollFlowPath: React.FC = () => {
                 cx={point.x}
                 cy={point.y}
                 r={6}
-                fill="white"
                 style={{
                   scale: sectionScales[index],
                   opacity: sectionOpacities[index],
-                  fill: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
+                  fill: sectionColors[index]
                 }}
                 onClick={() => {
                   const element = document.getElementById(section.id);
@@ -168,7 +175,7 @@ const ScrollFlowPath: React.FC = () => {
                 y={point.y + 5}
                 className="text-sm pointer-events-none select-none"
                 style={{
-                  fill: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
+                  fill: sectionColors[index],
                   opacity: sectionOpacities[index],
                 }}
               >
