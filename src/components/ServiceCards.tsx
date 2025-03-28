@@ -1,6 +1,6 @@
 
-import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Gamepad, 
   MonitorPlay, 
@@ -19,112 +19,69 @@ const serviceData = [
   {
     title: "In-Game",
     description: "Native ad placements within the gaming environment that feel like a natural part of the experience.",
-    icon: <Gamepad className="h-10 w-10" />,
+    icon: <Gamepad className="h-10 w-10 text-[#29dd3b]" />,
   },
   {
     title: "On-Game",
     description: "Strategic ad placements around the game interface, loading screens, and menus.",
-    icon: <MonitorPlay className="h-10 w-10" />,
+    icon: <MonitorPlay className="h-10 w-10 text-[#29dd3b]" />,
   },
   {
     title: "Off-Game",
     description: "Extend your reach beyond gameplay through our network of gaming content platforms.",
-    icon: <Globe className="h-10 w-10" />,
+    icon: <Globe className="h-10 w-10 text-[#29dd3b]" />,
   },
   {
     title: "Pro Game",
     description: "Specialized solutions for esports events, tournaments, and professional gaming streams.",
-    icon: <Trophy className="h-10 w-10" />,
+    icon: <Trophy className="h-10 w-10 text-[#29dd3b]" />,
   },
 ];
 
-const ServiceCard: React.FC<ServiceProps> = ({ 
+const ServiceCard: React.FC<ServiceProps & { 
+  isActive: boolean, 
+  onCardClick: () => void 
+}> = ({ 
   title, 
   description, 
   icon,
-  index 
+  index,
+  isActive,
+  onCardClick
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: false, amount: 0.2 });
-  
   return (
     <motion.div
-      ref={cardRef}
-      className="absolute w-full h-full rounded-xl overflow-hidden"
-      initial={{ 
-        x: 0, 
-        rotateY: 0, 
-        opacity: 1, 
-        zIndex: 4 - index,
-        scale: 1 - (index * 0.05)
+      className={`absolute w-[320px] h-[420px] rounded-xl overflow-hidden transition-all duration-300 ease-in-out ${
+        isActive ? 'z-10 scale-105' : 'z-0'
+      }`}
+      style={{
+        left: `${index * 80}px`,
+        transform: `perspective(1000px) rotateY(${isActive ? 0 : index * 15}deg)`,
+        transformOrigin: 'bottom left',
+        filter: isActive ? 'none' : 'brightness(0.7)',
       }}
-      animate={isInView ? { 
-        x: `${index * 100}%`,
-        rotateY: 0,
-        opacity: 1,
-        transition: { 
-          delay: 0.2 + (index * 0.1),
-          duration: 0.6,
-          type: "spring",
-          stiffness: 100
-        }
-      } : {}}
       whileHover={{ 
-        scale: 1.03,
-        boxShadow: "0 20px 25px -5px rgba(41, 221, 59, 0.1), 0 10px 10px -5px rgba(41, 221, 59, 0.04)",
-        transition: { duration: 0.2 }
+        scale: 1.05,
+        zIndex: 10,
       }}
+      onClick={onCardClick}
     >
-      <div className="bg-white text-black shadow-lg rounded-xl h-full transform transition-all duration-500 border border-white/20">
-        <div className="p-6 flex flex-col h-full">
-          <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={isInView ? { 
-                opacity: 1, 
-                scale: 1,
-                transition: { delay: 0.3 + (index * 0.2), duration: 0.5 }
-              } : {}}
-              className="text-[#29dd3b]"
-            >
-              {icon}
-            </motion.div>
+      <div className="bg-white text-black h-full p-6 flex flex-col justify-between border border-white/10 rounded-xl shadow-lg">
+        <div className="flex flex-col items-center">
+          <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
+            {icon}
           </div>
           
-          <motion.h3 
-            className="text-xl font-bold text-black mb-3"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { 
-              opacity: 1,
-              transition: { delay: 0.4 + (index * 0.2), duration: 0.5 }
-            } : {}}
-          >
-            {title}
-          </motion.h3>
+          <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
           
-          <motion.p 
-            className="text-gray-600 flex-grow"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { 
-              opacity: 1,
-              transition: { delay: 0.5 + (index * 0.2), duration: 0.5 }
-            } : {}}
-          >
-            {description}
-          </motion.p>
-          
-          <motion.button 
-            className="mt-4 px-4 py-2 rounded-full bg-black hover:bg-black/90 text-white transition-colors border border-[#29dd3b]/20 shadow-[0_0_10px_rgba(41,221,59,0.2)]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { 
-              opacity: 1, 
-              y: 0,
-              transition: { delay: 0.6 + (index * 0.2), duration: 0.5 }
-            } : {}}
-          >
-            Learn more
-          </motion.button>
+          <p className="text-gray-600 text-center">{description}</p>
         </div>
+        
+        <button 
+          className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors"
+        >
+          Learn more
+        </button>
       </div>
     </motion.div>
   );
@@ -132,6 +89,8 @@ const ServiceCard: React.FC<ServiceProps> = ({
 
 const ServiceCards: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -139,32 +98,11 @@ const ServiceCards: React.FC = () => {
 
   const opacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
   const scale = useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1]);
-  const flipProgress = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]);
-  
-  // Effect to control the card flipping based on scroll position
-  useEffect(() => {
-    const updateCardsFlip = () => {
-      if (!containerRef.current) return;
-      const cards = containerRef.current.querySelectorAll('.card-container > div');
-      const progress = flipProgress.get();
-      
-      // Flip cards sequentially based on scroll position
-      cards.forEach((card, index) => {
-        const delay = index * 0.1;
-        const flipThreshold = 0.25 + (delay);
-        
-        if (progress > flipThreshold) {
-          card.classList.add('flipped');
-        } else {
-          card.classList.remove('flipped');
-        }
-      });
-    };
-    
-    const unsubscribe = flipProgress.onChange(updateCardsFlip);
-    return () => unsubscribe();
-  }, [flipProgress]);
-  
+
+  const handleCardClick = (index: number) => {
+    setActiveCardIndex(activeCardIndex === index ? null : index);
+  };
+
   return (
     <section id="solutions" className="py-24 bg-black" ref={containerRef}>
       <div className="container mx-auto text-center mb-12">
@@ -184,7 +122,7 @@ const ServiceCards: React.FC = () => {
       
       <div className="container mx-auto px-4 overflow-hidden">
         <motion.div 
-          className="relative h-[400px] max-w-4xl mx-auto card-container"
+          className="relative h-[500px] max-w-4xl mx-auto"
           style={{ opacity, scale }}
         >
           {serviceData.map((service, index) => (
@@ -192,6 +130,8 @@ const ServiceCards: React.FC = () => {
               key={index}
               {...service}
               index={index}
+              isActive={activeCardIndex === index}
+              onCardClick={() => handleCardClick(index)}
             />
           ))}
         </motion.div>
