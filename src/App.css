@@ -1,4 +1,3 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -45,4 +44,7 @@
 /* Add styles for clickable elements when using custom cursor */
 a, button, [role="button"], input, select, textarea, .clickable, html, body {
   cursor: none !important;
+  * {
+    cursor: none !important;
+  }
 }
