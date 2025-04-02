@@ -39,17 +39,16 @@ const serviceData = [
 ];
 
 const ServiceCard: React.FC<ServiceProps & { 
-  progress: number
+  isFlipped: boolean;
+  onFlipComplete: () => void;
 }> = ({ 
   title, 
   description, 
   icon,
   index,
-  progress
+  isFlipped,
+  onFlipComplete
 }) => {
-  // Calculate when this card should flip based on its index and the scroll progress
-  const flipThreshold = 0.1 + (index * 0.15); // Stagger the flip animations
-  const isFlipped = progress > flipThreshold;
   
   return (
     <div
@@ -65,6 +64,7 @@ const ServiceCard: React.FC<ServiceProps & {
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           transition: 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
         }}
+        onTransitionEnd={onFlipComplete}
       >
         {/* Front of card */}
         <div 
@@ -117,6 +117,13 @@ const ServiceCard: React.FC<ServiceProps & {
 const ServiceCards: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  // Track which card is currently flipped
+  const [currentFlippedIndex, setCurrentFlippedIndex] = useState(-1);
+  
+  // State to track if each card is flipped
+  const [flippedCards, setFlippedCards] = useState<boolean[]>(
+    Array(serviceData.length).fill(false)
+  );
 
   useEffect(() => {
     const checkMobile = () => {
@@ -137,8 +144,38 @@ const ServiceCards: React.FC = () => {
     offset: ["start end", "end start"]
   });
 
-  // Transform scroll progress to be used for card flipping
-  const progress = useTransform(scrollYProgress, [0.1, 0.7], [0, 1]);
+  // Start the card flip sequence when scrolled to this section
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (value) => {
+      if (value > 0.2 && currentFlippedIndex === -1) {
+        // Start the sequence when scrolled into view
+        setCurrentFlippedIndex(0);
+      }
+    });
+    
+    return () => unsubscribe();
+  }, [scrollYProgress, currentFlippedIndex]);
+  
+  // Handle the completion of a card flip
+  const handleFlipComplete = (index: number) => {
+    if (flippedCards[index] && index < serviceData.length - 1) {
+      // Move to the next card
+      setTimeout(() => {
+        setCurrentFlippedIndex(index + 1);
+      }, 200); // Small delay before flipping the next card
+    }
+  };
+  
+  // Update flippedCards state when currentFlippedIndex changes
+  useEffect(() => {
+    if (currentFlippedIndex >= 0 && currentFlippedIndex < serviceData.length) {
+      setFlippedCards(prev => {
+        const newState = [...prev];
+        newState[currentFlippedIndex] = true;
+        return newState;
+      });
+    }
+  }, [currentFlippedIndex]);
 
   return (
     <motion.section 
@@ -180,7 +217,8 @@ const ServiceCards: React.FC = () => {
               <ServiceCard 
                 {...service}
                 index={index}
-                progress={progress as any}
+                isFlipped={flippedCards[index]}
+                onFlipComplete={() => handleFlipComplete(index)}
               />
             </motion.div>
           ))}
