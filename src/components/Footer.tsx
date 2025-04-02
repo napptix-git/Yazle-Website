@@ -1,9 +1,28 @@
 
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Github, Youtube, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const location = useLocation();
+  
+  // Determine next page based on current route
+  const getNextPageInfo = () => {
+    const routes = [
+      { path: "/", name: "Solutions", to: "/solutions" },
+      { path: "/solutions", name: "Advertisers", to: "/advertisers" },
+      { path: "/advertisers", name: "Publishers", to: "/publishers" },
+      { path: "/publishers", name: "About", to: "/about" },
+      { path: "/about", name: "Contact", to: "/contact" },
+      { path: "/contact", name: "Home", to: "/" }
+    ];
+    
+    const currentIndex = routes.findIndex(route => route.path === location.pathname);
+    return currentIndex >= 0 ? routes[(currentIndex + 1) % routes.length] : routes[0];
+  };
+  
+  const nextPage = getNextPageInfo();
+  
   return (
     <footer className="relative h-screen w-full bg-black overflow-hidden">
       {/* Plain Background */}
@@ -38,10 +57,10 @@ const Footer: React.FC = () => {
         
         {/* Next Page Link - Now using Link component properly */}
         <Link 
-          to="/advertisers" 
+          to={nextPage.to} 
           className="flex items-center text-white hover:text-[#29dd3b] transition-colors bg-black/30 rounded-full px-4 py-2 backdrop-blur-sm"
         >
-          <span className="mr-2">Next Page: Advertisers</span>
+          <span className="mr-2">Next Page: {nextPage.name}</span>
           <ArrowRight size={18} />
         </Link>
       </div>

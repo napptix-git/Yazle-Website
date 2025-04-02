@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CountUpMetric from '@/components/CountUpMetric';
 
 const Publishers: React.FC = () => {
   return (
@@ -16,6 +17,40 @@ const Publishers: React.FC = () => {
             player satisfaction. Our advertising solutions are designed to integrate seamlessly with
             your games, providing a new revenue stream without compromising user experience.
           </p>
+          
+          {/* Metrics Section with Animated CountUp */}
+          <h2 className="text-3xl font-bold text-white mt-16 mb-10">Publisher Success Metrics</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+            <CountUpMetric 
+              end={10000} 
+              duration={2000} 
+              suffix="+" 
+              title="Active Publishers" 
+              description="Game developers using our platform globally"
+            />
+            <CountUpMetric 
+              end={42} 
+              duration={2000} 
+              suffix="%" 
+              title="Revenue Increase" 
+              description="Average growth in publisher revenue after integration"
+            />
+            <CountUpMetric 
+              end={75000} 
+              duration={2000} 
+              suffix="+" 
+              title="Games Integrated" 
+              description="Titles successfully monetized with our solution"
+            />
+            <CountUpMetric 
+              end={98} 
+              duration={2000} 
+              suffix="%" 
+              title="Player Retention" 
+              description="Average player retention rate with our non-intrusive ads"
+            />
+          </div>
           
           <h2 className="text-3xl font-bold text-white mt-12 mb-6">Benefits for Publishers</h2>
           
