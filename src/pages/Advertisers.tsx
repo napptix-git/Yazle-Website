@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CountUpMetric from '@/components/CountUpMetric';
 
 const Advertisers: React.FC = () => {
   return (
@@ -16,6 +17,41 @@ const Advertisers: React.FC = () => {
             advertising solutions. Our platform provides unique opportunities to reach gamers in a way
             that feels authentic and enhances their experience.
           </p>
+          
+          {/* Metrics Section with Animated CountUp */}
+          <h2 className="text-3xl font-bold text-white mt-16 mb-10">Our Reach & Impact</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+            <CountUpMetric 
+              end={250} 
+              duration={2000} 
+              suffix="M+" 
+              title="Monthly Active Users" 
+              description="Unique gamers across our network each month"
+            />
+            <CountUpMetric 
+              end={180} 
+              duration={2000} 
+              prefix="$" 
+              suffix="M" 
+              title="Ad Revenue Generated" 
+              description="Total revenue for our advertising partners in 2023"
+            />
+            <CountUpMetric 
+              end={94} 
+              duration={2000} 
+              suffix="%" 
+              title="Brand Recall" 
+              description="Average brand recall rate for ads on our platform"
+            />
+            <CountUpMetric 
+              end={5200} 
+              duration={2000} 
+              suffix="+" 
+              title="Active Campaigns" 
+              description="Concurrent advertising campaigns running globally"
+            />
+          </div>
           
           <h2 className="text-3xl font-bold text-white mt-12 mb-6">Why Choose Napptix?</h2>
           

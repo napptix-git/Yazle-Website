@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
           </a>
         </div>
         
-        {/* Next Page Link */}
+        {/* Next Page Link - Now using Link component properly */}
         <Link 
           to="/advertisers" 
           className="flex items-center text-white hover:text-[#29dd3b] transition-colors bg-black/30 rounded-full px-4 py-2 backdrop-blur-sm"
@@ -44,6 +44,30 @@ const Footer: React.FC = () => {
           <span className="mr-2">Next Page: Advertisers</span>
           <ArrowRight size={18} />
         </Link>
+      </div>
+      
+      {/* Added Footer Content */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full max-w-4xl px-6">
+        <h2 className="text-white text-3xl md:text-4xl font-bold mb-6">Join the Napptix Network</h2>
+        <p className="text-napptix-light-grey text-lg mb-8">
+          Connect with our global network of gamers, advertisers, and publishers. 
+          Napptix provides cutting-edge solutions to help you reach your target audience 
+          and maximize your engagement across the gaming ecosystem.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-white text-xl font-bold mb-4">24/7 Support</h3>
+            <p className="text-napptix-light-grey">Our dedicated team is always available to help you with any questions or concerns.</p>
+          </div>
+          <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-white text-xl font-bold mb-4">Global Reach</h3>
+            <p className="text-napptix-light-grey">Connect with gamers and publishers across the world with our extensive network.</p>
+          </div>
+          <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-white text-xl font-bold mb-4">Real-time Analytics</h3>
+            <p className="text-napptix-light-grey">Track your performance with our advanced analytics dashboard and reporting tools.</p>
+          </div>
+        </div>
       </div>
       
       {/* Bottom Copyright Bar */}
