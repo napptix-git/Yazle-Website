@@ -35,8 +35,10 @@ const Index = () => {
         <ServiceCards />
       </section>
       
-      {/* Footer */}
-      <Footer />
+      {/* Footer - Now full screen height */}
+      <section className="h-screen">
+        <Footer />
+      </section>
     </div>
   );
 };

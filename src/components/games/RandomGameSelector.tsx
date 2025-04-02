@@ -7,7 +7,7 @@ import SpaceInvadersGame from './SpaceInvadersGame';
 type GameType = 'runner' | 'breakout' | 'space-invaders';
 
 const RandomGameSelector: React.FC = () => {
-  const [selectedGame, setSelectedGame] = useState<GameType>('runner');
+  const [selectedGame, setSelectedGame] = useState<GameType>('breakout');
 
   useEffect(() => {
     // Choose a random game on component mount
