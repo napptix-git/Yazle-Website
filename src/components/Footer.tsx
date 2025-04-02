@@ -2,6 +2,7 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone } from 'lucide-react';
 import FooterGame from './FooterGame';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -41,10 +42,10 @@ const Footer: React.FC = () => {
           <div className="col-span-1">
             <h4 className="text-white font-bold mb-4">Solutions</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">In-Game Advertising</a></li>
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">On-Game Advertising</a></li>
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">Off-Game Advertising</a></li>
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">Pro Game Advertising</a></li>
+              <li><Link to="/solutions" className="text-napptix-light-grey hover:text-white transition-colors">In-Game Advertising</Link></li>
+              <li><Link to="/solutions" className="text-napptix-light-grey hover:text-white transition-colors">On-Game Advertising</Link></li>
+              <li><Link to="/solutions" className="text-napptix-light-grey hover:text-white transition-colors">Off-Game Advertising</Link></li>
+              <li><Link to="/solutions" className="text-napptix-light-grey hover:text-white transition-colors">Pro Game Advertising</Link></li>
             </ul>
           </div>
           
@@ -52,10 +53,10 @@ const Footer: React.FC = () => {
           <div className="col-span-1">
             <h4 className="text-white font-bold mb-4">Company</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="text-napptix-light-grey hover:text-white transition-colors">Contact</a></li>
+              <li><Link to="/about" className="text-napptix-light-grey hover:text-white transition-colors">About</Link></li>
+              <li><Link to="/advertisers" className="text-napptix-light-grey hover:text-white transition-colors">Advertisers</Link></li>
+              <li><Link to="/publishers" className="text-napptix-light-grey hover:text-white transition-colors">Publishers</Link></li>
+              <li><Link to="/contact" className="text-napptix-light-grey hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
           
@@ -73,9 +74,11 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             <div className="mt-4">
-              <button className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-2 px-5 rounded-full transition-all">
-                Request Demo
-              </button>
+              <Link to="/contact">
+                <button className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-2 px-5 rounded-full transition-all">
+                  Contact Us
+                </button>
+              </Link>
             </div>
           </div>
         </div>

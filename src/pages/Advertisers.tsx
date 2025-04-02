@@ -9,7 +9,7 @@ const Advertisers: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">For Advertisers</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">Advertisers</h1>
         <div className="text-napptix-light-grey font-roboto-mono space-y-6">
           <p>
             Napptix helps brands connect with the global gaming audience through effective and engaging

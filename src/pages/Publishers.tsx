@@ -9,7 +9,7 @@ const Publishers: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">For Publishers</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">Publishers</h1>
         <div className="text-napptix-light-grey font-roboto-mono space-y-6">
           <p>
             Napptix empowers game developers and publishers to monetize their games while maintaining

@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
@@ -136,6 +135,7 @@ const ServiceCards: React.FC = () => {
   const [lockScroll, setLockScroll] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const [initialScrollPosition, setInitialScrollPosition] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -145,22 +145,47 @@ const ServiceCards: React.FC = () => {
   const opacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
   const scale = useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1]);
   
-  // Track scroll progress to trigger animations
+  useEffect(() => {
+    if (lockScroll) {
+      setInitialScrollPosition(window.scrollY);
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100%';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${initialScrollPosition}px`;
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, initialScrollPosition);
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [lockScroll, initialScrollPosition]);
+  
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", value => {
-      // Expand cards first
       if (value > 0.3 && !expandedCards && !animating) {
+        setInitialScrollPosition(window.scrollY);
         setExpandedCards(true);
-        setLockScroll(true); // Lock scroll when cards start expanding
+        setLockScroll(true);
         setAnimating(true);
       } else if (value < 0.2 && expandedCards && animationComplete) {
         setExpandedCards(false);
         setFlippedCardIndexes([]);
         setAnimationComplete(false);
         setAnimating(false);
+        setLockScroll(false);
       }
       
-      // Then flip cards one by one
       if (expandedCards) {
         const flipTiming = [0.4, 0.5, 0.6, 0.7];
         
@@ -168,7 +193,6 @@ const ServiceCards: React.FC = () => {
           if (value > threshold && !flippedCardIndexes.includes(idx)) {
             setFlippedCardIndexes(prev => [...prev, idx]);
             
-            // When last card is flipped, mark animation as complete and unlock scroll
             if (idx === 3) {
               setTimeout(() => {
                 setLockScroll(false);
@@ -183,52 +207,6 @@ const ServiceCards: React.FC = () => {
     
     return () => unsubscribe();
   }, [scrollYProgress, expandedCards, flippedCardIndexes, animationComplete, animating]);
-  
-  // Create wheel event handler with better scroll lock
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    
-    const handleScroll = () => {
-      if (lockScroll) {
-        window.scrollTo(0, lastScrollY);
-      } else {
-        lastScrollY = window.scrollY;
-      }
-      ticking = false;
-    };
-    
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(handleScroll);
-        ticking = true;
-      }
-    };
-
-    // Create wheel event handler
-    const handleWheel = (e: WheelEvent) => {
-      if (lockScroll) {
-        e.preventDefault();
-      }
-    };
-
-    // Create touch event handlers
-    const handleTouchMove = (e: TouchEvent) => {
-      if (lockScroll) {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: false });
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, [lockScroll]);
   
   const handleCardClick = (index: number) => {
     if (expandedCards) {

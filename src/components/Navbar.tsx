@@ -25,10 +25,9 @@ const Navbar: React.FC = () => {
   }, []);
   
   const navLinks = [
-    { title: 'Solutions', href: '/solutions' },
     { title: 'Advertisers', href: '/advertisers' },
     { title: 'Publishers', href: '/publishers' },
-    { title: 'About Us', href: '/about' },
+    { title: 'About', href: '/about' },
     { title: 'Contact', href: '/contact' },
   ];
   
@@ -42,12 +41,12 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             {/* Logo - aligned to the left */}
-            <a href="/" className="text-white font-montserrat font-bold text-2xl mr-auto">
+            <Link to="/" className="text-white font-montserrat font-bold text-2xl mr-4">
               <span className="text-gradient">Napptix</span>
-            </a>
+            </Link>
             
-            {/* Desktop Navigation - centered */}
-            <nav className="hidden md:flex space-x-8">
+            {/* Desktop Navigation - moved to the left, next to logo */}
+            <nav className="hidden md:flex space-x-8 mr-auto">
               {navLinks.map((link, index) => (
                 <Link 
                   key={index}

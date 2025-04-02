@@ -1,8 +1,8 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Gamepad2 } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const AudienceCards: React.FC = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -38,7 +38,7 @@ const AudienceCards: React.FC = () => {
                   <Building2 className={`h-8 w-8 ${activeCard === 'advertisers' ? 'text-[#29dd3b]' : 'text-black'}`} />
                 </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-4 ${activeCard === 'advertisers' ? 'text-white' : 'text-black'}`}>For Advertisers</h3>
+              <h3 className={`text-2xl font-bold mb-4 ${activeCard === 'advertisers' ? 'text-white' : 'text-black'}`}>Advertisers</h3>
               <p className={`mb-6 ${activeCard === 'advertisers' ? 'text-white/80' : 'text-gray-600'}`}>
                 Reach millions of engaged gamers through innovative in-game, on-game, and off-game advertising solutions.
               </p>
@@ -69,21 +69,13 @@ const AudienceCards: React.FC = () => {
                 </li>
               </ul>
               <div className="flex flex-wrap gap-3">
-                <Button 
-                  className={`${activeCard === 'advertisers' ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-4 py-2 rounded-full transition-all`}
-                >
-                  Learn More
-                </Button>
-                <Button 
-                  className={`${activeCard === 'advertisers' ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-white border border-black text-black hover:bg-black/10'} px-4 py-2 rounded-full transition-all`}
-                >
-                  Get Started
-                </Button>
-                <Button 
-                  className={`${activeCard === 'advertisers' ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-white border border-black text-black hover:bg-black/10'} px-4 py-2 rounded-full transition-all`}
-                >
-                  Contact Sales
-                </Button>
+                <Link to="/advertisers">
+                  <Button 
+                    className={`${activeCard === 'advertisers' ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-4 py-2 rounded-full transition-all`}
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -108,7 +100,7 @@ const AudienceCards: React.FC = () => {
                   <Gamepad2 className={`h-8 w-8 ${activeCard === 'publishers' ? 'text-[#29dd3b]' : 'text-black'}`} />
                 </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-4 ${activeCard === 'publishers' ? 'text-white' : 'text-black'}`}>For Publishers</h3>
+              <h3 className={`text-2xl font-bold mb-4 ${activeCard === 'publishers' ? 'text-white' : 'text-black'}`}>Publishers</h3>
               <p className={`mb-6 ${activeCard === 'publishers' ? 'text-white/80' : 'text-gray-600'}`}>
                 Maximize your game's revenue potential with seamless advertising integration that respects the player experience.
               </p>
@@ -138,11 +130,13 @@ const AudienceCards: React.FC = () => {
                   <span className={`${activeCard === 'publishers' ? 'text-white/80' : 'text-gray-600'}`}>Transparent reporting and industry-leading payouts</span>
                 </li>
               </ul>
-              <Button 
-                className={`${activeCard === 'publishers' ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-6 py-2 rounded-full transition-all`}
-              >
-                Learn More
-              </Button>
+              <Link to="/publishers">
+                <Button 
+                  className={`${activeCard === 'publishers' ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-6 py-2 rounded-full transition-all`}
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
