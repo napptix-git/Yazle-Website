@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -18,7 +17,6 @@ const HeroSection: React.FC = () => {
   const animationFrameId = useRef<number>(0);
   const colors = ['#8B5CF6', '#F97316', '#0EA5E9'];
 
-  // Initialize particles
   useEffect(() => {
     if (!canvasRef.current) return;
     
@@ -26,19 +24,16 @@ const HeroSection: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    // Set canvas dimensions
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      // Recreate particles for the new canvas size
       initParticles();
     };
     
     window.addEventListener('resize', handleResize);
     handleResize();
     
-    // Handle mouse movement
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -52,14 +47,12 @@ const HeroSection: React.FC = () => {
     };
   }, []);
   
-  // Create particles with increased density
   const initParticles = () => {
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
     particles.current = [];
     
-    // Further increased particle count by reducing the divisor even more
     const particleCount = Math.min(400, Math.floor(canvas.width * canvas.height / 3000));
     
     for (let i = 0; i < particleCount; i++) {
@@ -74,7 +67,6 @@ const HeroSection: React.FC = () => {
     }
   };
   
-  // Animation loop
   useEffect(() => {
     if (!canvasRef.current) return;
     
@@ -85,24 +77,19 @@ const HeroSection: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw and update particles
       particles.current.forEach(particle => {
-        // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
         
-        // Boundary checking
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.y < 0) particle.y = canvas.height;
         if (particle.y > canvas.height) particle.y = 0;
         
-        // Mouse interaction - gentle attraction
         const dx = mousePosition.x - particle.x;
         const dy = mousePosition.y - particle.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         
-        // Only affect particles within a radius of 150px from mouse
         if (dist < 150) {
           const force = 0.2;
           const angle = Math.atan2(dy, dx);
@@ -110,11 +97,9 @@ const HeroSection: React.FC = () => {
           particle.vy += Math.sin(angle) * force;
         }
         
-        // Apply some drag to limit speed
         particle.vx *= 0.95;
         particle.vy *= 0.95;
         
-        // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
@@ -149,7 +134,12 @@ const HeroSection: React.FC = () => {
             transform: `translate(${(mousePosition.x - window.innerWidth / 2) / 50}px, ${(mousePosition.y - window.innerHeight / 2) / 50}px)`,
           }}
         >
-          Reach Every <span className="gamer-text">Gamer</span>
+          Reach Every <span className="gamer-text glow-green" style={{ 
+            background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
+            WebkitBackgroundClip: 'text',
+            textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
+            animation: 'text-flicker 4s linear infinite'
+          }}>Gamer</span>
         </motion.h1>
         
         <motion.p 

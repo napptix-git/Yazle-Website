@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
                 <Link 
                   key={index}
                   to={link.href}
-                  className="text-white opacity-80 hover:opacity-100 transition-opacity"
+                  className="text-white opacity-80 hover:opacity-100 hover:text-[#29dd3b] transition-all duration-300"
                 >
                   {link.title}
                 </Link>
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
             
             {/* Mobile Menu Button */}
             <button 
-              className="md:hidden text-white ml-4"
+              className="md:hidden text-white ml-4 hover:text-[#29dd3b] transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
                 <Link 
                   key={index}
                   to={link.href}
-                  className="text-white text-xl font-medium py-2"
+                  className="text-white text-xl font-medium py-2 hover:text-[#29dd3b] transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.title}
@@ -99,3 +99,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+

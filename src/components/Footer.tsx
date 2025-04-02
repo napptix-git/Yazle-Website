@@ -6,97 +6,116 @@ import { Link, useLocation } from 'react-router-dom';
 const Footer: React.FC = () => {
   const location = useLocation();
   
-  // Determine next page based on current route
+  // Determine next page based on current route with the requested flow
   const getNextPageInfo = () => {
     const routes = [
-      { path: "/", name: "Solutions", to: "/solutions" },
-      { path: "/solutions", name: "Advertisers", to: "/advertisers" },
+      { path: "/", name: "Advertisers", to: "/advertisers" },
       { path: "/advertisers", name: "Publishers", to: "/publishers" },
       { path: "/publishers", name: "About", to: "/about" },
       { path: "/about", name: "Contact", to: "/contact" },
-      { path: "/contact", name: "Home", to: "/" }
+      { path: "/contact", name: "Home", to: "/" },
+      // Default fallback
+      { path: "/solutions", name: "Advertisers", to: "/advertisers" }
     ];
     
     const currentIndex = routes.findIndex(route => route.path === location.pathname);
-    return currentIndex >= 0 ? routes[(currentIndex + 1) % routes.length] : routes[0];
+    return currentIndex >= 0 ? routes[currentIndex] : routes[0];
   };
   
   const nextPage = getNextPageInfo();
   
   return (
-    <footer className="relative h-screen w-full bg-black overflow-hidden">
-      {/* Plain Background */}
-      <div className="absolute inset-0 w-full h-full z-10 bg-black">
-        {/* Background gradient for visual interest */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-black opacity-50"></div>
-      </div>
+    <footer className="relative bg-black py-12 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-black opacity-50"></div>
       
-      {/* Top Navigation Bar */}
-      <div className="absolute top-0 left-0 w-full py-4 px-6 z-20 flex justify-between items-center">
-        {/* Social Links */}
-        <div className="flex space-x-4 items-center">
-          <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors p-2">
-            <Facebook size={18} />
-          </a>
-          <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors p-2">
-            <Twitter size={18} />
-          </a>
-          <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors p-2">
-            <Instagram size={18} />
-          </a>
-          <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors p-2">
-            <Linkedin size={18} />
-          </a>
-          <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors p-2">
-            <Github size={18} />
-          </a>
-          <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors p-2">
-            <Youtube size={18} />
-          </a>
+      {/* Content */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Column 1: About */}
+          <div>
+            <h3 className="text-white text-xl font-bold mb-4">Napptix</h3>
+            <p className="text-napptix-light-grey text-sm mb-4">
+              Innovative advertising solutions connecting brands with the gaming world.
+              Our mission is to enhance the gaming ecosystem through effective advertising.
+            </p>
+            {/* Social Links */}
+            <div className="flex space-x-3 items-center mt-4">
+              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+                <Facebook size={18} />
+              </a>
+              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+                <Twitter size={18} />
+              </a>
+              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+                <Instagram size={18} />
+              </a>
+              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+                <Linkedin size={18} />
+              </a>
+              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+                <Github size={18} />
+              </a>
+              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+                <Youtube size={18} />
+              </a>
+            </div>
+          </div>
+          
+          {/* Column 2: Quick Links */}
+          <div>
+            <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-napptix-light-grey">
+              <li><Link to="/" className="hover:text-[#29dd3b] transition-colors">Home</Link></li>
+              <li><Link to="/advertisers" className="hover:text-[#29dd3b] transition-colors">Advertisers</Link></li>
+              <li><Link to="/publishers" className="hover:text-[#29dd3b] transition-colors">Publishers</Link></li>
+              <li><Link to="/about" className="hover:text-[#29dd3b] transition-colors">About Us</Link></li>
+              <li><Link to="/contact" className="hover:text-[#29dd3b] transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+          
+          {/* Column 3: Resources */}
+          <div>
+            <h3 className="text-white text-xl font-bold mb-4">Resources</h3>
+            <ul className="space-y-2 text-napptix-light-grey">
+              <li><a href="#" className="hover:text-[#29dd3b] transition-colors">Documentation</a></li>
+              <li><a href="#" className="hover:text-[#29dd3b] transition-colors">API Reference</a></li>
+              <li><a href="#" className="hover:text-[#29dd3b] transition-colors">Blog</a></li>
+              <li><a href="#" className="hover:text-[#29dd3b] transition-colors">Case Studies</a></li>
+              <li><a href="#" className="hover:text-[#29dd3b] transition-colors">Support</a></li>
+            </ul>
+          </div>
+          
+          {/* Column 4: Contact */}
+          <div>
+            <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
+            <address className="not-italic text-napptix-light-grey text-sm">
+              <p className="mb-2">123 Gaming Street</p>
+              <p className="mb-2">Tech Valley, CA 94043</p>
+              <p className="mb-2">United States</p>
+              <p className="mb-2">Email: info@napptix.com</p>
+              <p>Phone: +1 (555) 123-4567</p>
+            </address>
+          </div>
         </div>
         
-        {/* Next Page Link - Now using Link component properly */}
-        <Link 
-          to={nextPage.to} 
-          className="flex items-center text-white hover:text-[#29dd3b] transition-colors bg-black/30 rounded-full px-4 py-2 backdrop-blur-sm"
-        >
-          <span className="mr-2">Next Page: {nextPage.name}</span>
-          <ArrowRight size={18} />
-        </Link>
-      </div>
-      
-      {/* Added Footer Content */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full max-w-4xl px-6">
-        <h2 className="text-white text-3xl md:text-4xl font-bold mb-6">Join the Napptix Network</h2>
-        <p className="text-napptix-light-grey text-lg mb-8">
-          Connect with our global network of gamers, advertisers, and publishers. 
-          Napptix provides cutting-edge solutions to help you reach your target audience 
-          and maximize your engagement across the gaming ecosystem.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-white text-xl font-bold mb-4">24/7 Support</h3>
-            <p className="text-napptix-light-grey">Our dedicated team is always available to help you with any questions or concerns.</p>
-          </div>
-          <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-white text-xl font-bold mb-4">Global Reach</h3>
-            <p className="text-napptix-light-grey">Connect with gamers and publishers across the world with our extensive network.</p>
-          </div>
-          <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-white text-xl font-bold mb-4">Real-time Analytics</h3>
-            <p className="text-napptix-light-grey">Track your performance with our advanced analytics dashboard and reporting tools.</p>
-          </div>
+        {/* Next Page Link - Now in a better UI position */}
+        <div className="flex justify-between items-center border-t border-napptix-grey/20 pt-6 mt-6">
+          <p className="text-napptix-light-grey text-xs">
+            &copy; {new Date().getFullYear()} Napptix. All rights reserved.
+          </p>
+          <Link 
+            to={nextPage.to} 
+            className="flex items-center text-white hover:text-[#29dd3b] transition-colors bg-black/30 rounded-full px-4 py-2 backdrop-blur-sm"
+          >
+            <span className="mr-2">Next: {nextPage.name}</span>
+            <ArrowRight size={18} />
+          </Link>
         </div>
-      </div>
-      
-      {/* Bottom Copyright Bar */}
-      <div className="absolute bottom-0 left-0 w-full py-4 px-6 z-20">
-        <p className="text-napptix-light-grey text-xs">
-          &copy; {new Date().getFullYear()} Napptix. All rights reserved.
-        </p>
       </div>
     </footer>
   );
 };
 
 export default Footer;
+
