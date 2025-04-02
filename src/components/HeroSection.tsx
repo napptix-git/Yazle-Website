@@ -126,7 +126,7 @@ const HeroSection: React.FC = () => {
       
       <div className="container relative z-10 mx-auto px-4 text-center">
         <motion.h1 
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 hero-text"
+          className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -134,12 +134,7 @@ const HeroSection: React.FC = () => {
             transform: `translate(${(mousePosition.x - window.innerWidth / 2) / 50}px, ${(mousePosition.y - window.innerHeight / 2) / 50}px)`,
           }}
         >
-          Reach Every <span className="gamer-text glow-green" style={{ 
-            background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
-            WebkitBackgroundClip: 'text',
-            textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
-            animation: 'text-flicker 4s linear infinite'
-          }}>Gamer</span>
+          Reach Every <span className="text-[#29dd3b]">Gamer</span>
         </motion.h1>
         
         <motion.p 
