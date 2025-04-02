@@ -11,16 +11,17 @@ interface GameObject {
   dy?: number;
 }
 
-const GAME_WIDTH = 600;
-const GAME_HEIGHT = 300;
-const PADDLE_WIDTH = 100;
+// Increased game dimensions
+const GAME_WIDTH = 800;
+const GAME_HEIGHT = 400;
+const PADDLE_WIDTH = 120;
 const PADDLE_HEIGHT = 15;
-const BALL_SIZE = 12;
-const BLOCK_WIDTH = 50;
-const BLOCK_HEIGHT = 20;
-const BLOCK_GAP = 10;
-const ROWS = 3;
-const COLS = 8;
+const BALL_SIZE = 14;
+const BLOCK_WIDTH = 60;
+const BLOCK_HEIGHT = 25;
+const BLOCK_GAP = 12;
+const ROWS = 4;
+const COLS = 10;
 
 // Calculate maximum FPS (60fps is standard)
 const FPS = 60;
@@ -49,8 +50,8 @@ const FooterGame: React.FC = () => {
     y: GAME_HEIGHT - PADDLE_HEIGHT - 20,
     width: BALL_SIZE,
     height: BALL_SIZE,
-    dx: 4,
-    dy: -4,
+    dx: 5,
+    dy: -5,
   });
   
   const blocksRef = useRef<GameObject[]>([]);
@@ -62,7 +63,7 @@ const FooterGame: React.FC = () => {
       for (let c = 0; c < COLS; c++) {
         blocks.push({
           x: c * (BLOCK_WIDTH + BLOCK_GAP) + (GAME_WIDTH - (COLS * (BLOCK_WIDTH + BLOCK_GAP) - BLOCK_GAP)) / 2,
-          y: r * (BLOCK_HEIGHT + BLOCK_GAP) + 40,
+          y: r * (BLOCK_HEIGHT + BLOCK_GAP) + 50,
           width: BLOCK_WIDTH,
           height: BLOCK_HEIGHT,
         });
@@ -92,8 +93,8 @@ const FooterGame: React.FC = () => {
       y: GAME_HEIGHT - PADDLE_HEIGHT - 20,
       width: BALL_SIZE,
       height: BALL_SIZE,
-      dx: 4,
-      dy: -4,
+      dx: 5,
+      dy: -5,
     };
     
     // Reset blocks if all destroyed
@@ -259,6 +260,19 @@ const FooterGame: React.FC = () => {
       paddleRef.current.height
     );
     
+    // Add paddle glow effect
+    ctx.shadowColor = '#29dd3b';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.fillRect(
+      paddleRef.current.x,
+      paddleRef.current.y,
+      paddleRef.current.width,
+      paddleRef.current.height
+    );
+    ctx.shadowBlur = 0;
+    
     // Draw ball
     ctx.fillStyle = '#FFFFFF';
     ctx.beginPath();
@@ -271,8 +285,22 @@ const FooterGame: React.FC = () => {
     );
     ctx.fill();
     
+    // Add ball glow
+    ctx.shadowColor = '#FFFFFF';
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.arc(
+      ballRef.current.x + BALL_SIZE / 2,
+      ballRef.current.y + BALL_SIZE / 2,
+      BALL_SIZE / 2,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    
     // Draw blocks with different colors
-    const blockColors = ['#8B5CF6', '#F97316', '#0EA5E9'];
+    const blockColors = ['#8B5CF6', '#F97316', '#0EA5E9', '#10B981'];
     
     blocksRef.current.forEach((block, index) => {
       const row = Math.floor(index / COLS);
@@ -286,9 +314,9 @@ const FooterGame: React.FC = () => {
     
     // Draw score
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '16px Roboto Mono';
+    ctx.font = '18px Roboto Mono';
     ctx.textAlign = 'left';
-    ctx.fillText(`Score: ${score}`, 10, 25);
+    ctx.fillText(`Score: ${score}`, 15, 30);
     
     // Draw game over message
     if (gameOver) {
@@ -296,16 +324,16 @@ const FooterGame: React.FC = () => {
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
       
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = '24px Roboto Mono';
+      ctx.font = '28px Roboto Mono';
       ctx.textAlign = 'center';
       ctx.fillText(
         blocksRef.current.length === 0 ? 'You Win!' : 'Game Over',
         GAME_WIDTH / 2,
-        GAME_HEIGHT / 2 - 10
+        GAME_HEIGHT / 2 - 15
       );
       
-      ctx.font = '16px Roboto Mono';
-      ctx.fillText('Click to play again', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 20);
+      ctx.font = '18px Roboto Mono';
+      ctx.fillText('Click to play again', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 25);
     }
   };
   
@@ -441,7 +469,7 @@ const FooterGame: React.FC = () => {
           ref={canvasRef}
           width={GAME_WIDTH}
           height={GAME_HEIGHT}
-          className="game-canvas"
+          className="game-canvas max-w-full"
           onMouseMove={handleMouseMove}
           onTouchMove={handleTouchMove}
           onClick={handleCanvasClick}
@@ -449,10 +477,10 @@ const FooterGame: React.FC = () => {
       </div>
       {!isPlaying && !gameOver && (
         <button
-          className="mt-4 px-6 py-2 bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold rounded-full transition-all"
+          className="mt-4 px-8 py-3 bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold rounded-full transition-all text-lg"
           onClick={() => setIsPlaying(true)}
         >
-          Start Game
+          Play Game
         </button>
       )}
     </div>

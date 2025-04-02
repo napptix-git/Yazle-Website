@@ -105,10 +105,10 @@
     content: '';
     position: absolute;
     inset: -0.15em;
-    background: linear-gradient(45deg, rgba(255, 55, 0, 0.9), rgba(47, 255, 58, 0.9), rgba(0, 234, 255, 0.9));
+    background: linear-gradient(45deg, rgba(255, 55, 0, 0.7), rgba(47, 255, 58, 0.7), rgba(0, 234, 255, 0.7));
     z-index: -1;
-    filter: blur(15px);
-    opacity: 1;
+    filter: blur(12px);
+    opacity: 0.8;
     animation: gradient-shift 5s ease infinite;
   }
   
@@ -200,6 +200,31 @@
 .backface-visibility-hidden {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+/* Wave effect for card flipping */
+@keyframes wave-effect {
+  0% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotateY(90deg);
+  }
+  100% {
+    transform: translateY(0) rotateY(180deg);
+  }
+}
+
+@keyframes reverse-wave-effect {
+  0% {
+    transform: translateY(0) rotateY(180deg);
+  }
+  50% {
+    transform: translateY(-5px) rotateY(90deg);
+  }
+  100% {
+    transform: translateY(0) rotateY(0deg);
+  }
 }
 
 /* Game related styles */

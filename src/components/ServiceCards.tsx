@@ -40,6 +40,7 @@ const serviceData = [
 
 const ServiceCard: React.FC<ServiceProps & { 
   isFlipped: boolean;
+  isReversing: boolean;
   onFlipComplete: () => void;
 }> = ({ 
   title, 
@@ -47,6 +48,7 @@ const ServiceCard: React.FC<ServiceProps & {
   icon,
   index,
   isFlipped,
+  isReversing,
   onFlipComplete
 }) => {
   
@@ -61,10 +63,13 @@ const ServiceCard: React.FC<ServiceProps & {
         className="relative w-[280px] h-[400px] card-container"
         style={{
           transformStyle: 'preserve-3d',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-          transition: 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          animation: isFlipped 
+            ? 'wave-effect 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
+            : isReversing 
+              ? 'reverse-wave-effect 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
+              : 'none',
         }}
-        onTransitionEnd={onFlipComplete}
+        onAnimationEnd={onFlipComplete}
       >
         {/* Front of card */}
         <div 
@@ -119,9 +124,16 @@ const ServiceCards: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   // Track which card is currently flipped
   const [currentFlippedIndex, setCurrentFlippedIndex] = useState(-1);
+  const [previousScrollY, setPreviousScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
   
   // State to track if each card is flipped
   const [flippedCards, setFlippedCards] = useState<boolean[]>(
+    Array(serviceData.length).fill(false)
+  );
+  
+  // State to track if each card is reversing
+  const [reversingCards, setReversingCards] = useState<boolean[]>(
     Array(serviceData.length).fill(false)
   );
 
@@ -143,26 +155,82 @@ const ServiceCards: React.FC = () => {
     target: sectionRef,
     offset: ["start end", "end start"]
   });
+  
+  // Track scroll direction
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > previousScrollY) {
+        setScrollDirection('down');
+      } else if (currentScrollY < previousScrollY) {
+        setScrollDirection('up');
+      }
+      setPreviousScrollY(currentScrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [previousScrollY]);
 
   // Start the card flip sequence when scrolled to this section
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
-      if (value > 0.2 && currentFlippedIndex === -1) {
-        // Start the sequence when scrolled into view
-        setCurrentFlippedIndex(0);
+      if (scrollDirection === 'down') {
+        if (value > 0.2 && currentFlippedIndex === -1) {
+          // Start the sequence when scrolled into view
+          setCurrentFlippedIndex(0);
+        }
+      } else {
+        // Reverse direction - start flipping from the last card
+        if (value < 0.8 && currentFlippedIndex === -1 && flippedCards.some(flipped => flipped)) {
+          // Find the last flipped card
+          const lastFlippedIndex = flippedCards.lastIndexOf(true);
+          if (lastFlippedIndex >= 0) {
+            // Set it to start reversing
+            setReversingCards(prev => {
+              const newState = [...prev];
+              newState[lastFlippedIndex] = true;
+              return newState;
+            });
+          }
+        }
       }
     });
     
     return () => unsubscribe();
-  }, [scrollYProgress, currentFlippedIndex]);
+  }, [scrollYProgress, currentFlippedIndex, flippedCards, scrollDirection]);
   
   // Handle the completion of a card flip
   const handleFlipComplete = (index: number) => {
-    if (flippedCards[index] && index < serviceData.length - 1) {
+    if (scrollDirection === 'down' && flippedCards[index] && index < serviceData.length - 1) {
       // Move to the next card
       setTimeout(() => {
         setCurrentFlippedIndex(index + 1);
       }, 200); // Small delay before flipping the next card
+    } else if (scrollDirection === 'up' && reversingCards[index]) {
+      // Card has completed reversal, update states
+      setFlippedCards(prev => {
+        const newState = [...prev];
+        newState[index] = false;
+        return newState;
+      });
+      
+      setReversingCards(prev => {
+        const newState = [...prev];
+        newState[index] = false;
+        return newState;
+      });
+      
+      // If there's a card before this one, start reversing it
+      if (index > 0 && flippedCards[index - 1]) {
+        setTimeout(() => {
+          setReversingCards(prev => {
+            const newState = [...prev];
+            newState[index - 1] = true;
+            return newState;
+          });
+        }, 200);
+      }
     }
   };
   
@@ -218,6 +286,7 @@ const ServiceCards: React.FC = () => {
                 {...service}
                 index={index}
                 isFlipped={flippedCards[index]}
+                isReversing={reversingCards[index]}
                 onFlipComplete={() => handleFlipComplete(index)}
               />
             </motion.div>
