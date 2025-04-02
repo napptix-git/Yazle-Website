@@ -217,7 +217,38 @@
   backface-visibility: hidden;
 }
 
-/* Wave effect for card flipping */
+/* Smooth wave effect for card flipping */
+@keyframes smooth-wave-effect {
+  0% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  30% {
+    transform: translateY(-8px) rotateY(60deg);
+  }
+  70% {
+    transform: translateY(-4px) rotateY(120deg);
+  }
+  100% {
+    transform: translateY(0) rotateY(180deg);
+  }
+}
+
+@keyframes smooth-reverse-wave-effect {
+  0% {
+    transform: translateY(0) rotateY(180deg);
+  }
+  30% {
+    transform: translateY(-8px) rotateY(120deg);
+  }
+  70% {
+    transform: translateY(-4px) rotateY(60deg);
+  }
+  100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+}
+
+/* Original wave effect animations (keeping for backward compatibility) */
 @keyframes wave-effect {
   0% {
     transform: translateY(0) rotateY(0deg);

@@ -64,9 +64,9 @@ const ServiceCard: React.FC<ServiceProps & {
         style={{
           transformStyle: 'preserve-3d',
           animation: isFlipped 
-            ? 'wave-effect 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
+            ? 'smooth-wave-effect 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards'
             : isReversing 
-              ? 'reverse-wave-effect 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
+              ? 'smooth-reverse-wave-effect 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards'
               : 'none',
         }}
         onAnimationEnd={onFlipComplete}
@@ -126,6 +126,8 @@ const ServiceCards: React.FC = () => {
   const [currentFlippedIndex, setCurrentFlippedIndex] = useState(-1);
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
+  // State to track if animations are in progress
+  const [animationsInProgress, setAnimationsInProgress] = useState(false);
   
   // State to track if each card is flipped
   const [flippedCards, setFlippedCards] = useState<boolean[]>(
@@ -150,6 +152,26 @@ const ServiceCards: React.FC = () => {
     };
   }, []);
 
+  // Lock/unlock scroll when animations are happening
+  useEffect(() => {
+    if (animationsInProgress) {
+      // Store the current scroll position and lock scrolling
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      // Restore scroll position when animations finish
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      }
+    }
+  }, [animationsInProgress]);
+
   // Use the useScroll hook to track scroll progress within this section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -159,6 +181,8 @@ const ServiceCards: React.FC = () => {
   // Track scroll direction
   useEffect(() => {
     const handleScroll = () => {
+      if (animationsInProgress) return; // Skip scroll tracking during animations
+      
       const currentScrollY = window.scrollY;
       if (currentScrollY > previousScrollY) {
         setScrollDirection('down');
@@ -170,10 +194,22 @@ const ServiceCards: React.FC = () => {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [previousScrollY]);
+  }, [previousScrollY, animationsInProgress]);
+
+  // Check if any animations are in progress
+  useEffect(() => {
+    // If any card is flipping or reversing, animations are in progress
+    const hasActiveAnimations = flippedCards.some((isFlipped, index) => 
+      (isFlipped && index === currentFlippedIndex) || reversingCards[index]
+    );
+    
+    setAnimationsInProgress(hasActiveAnimations);
+  }, [flippedCards, reversingCards, currentFlippedIndex]);
 
   // Enhanced scroll-triggered animation with improved reverse functionality
   useEffect(() => {
+    if (animationsInProgress) return; // Skip scroll triggers during animations
+    
     const unsubscribe = scrollYProgress.on("change", (value) => {
       // Improved scroll trigger thresholds for better user experience
       if (scrollDirection === 'down') {
@@ -199,7 +235,7 @@ const ServiceCards: React.FC = () => {
     });
     
     return () => unsubscribe();
-  }, [scrollYProgress, currentFlippedIndex, flippedCards, scrollDirection, reversingCards]);
+  }, [scrollYProgress, currentFlippedIndex, flippedCards, scrollDirection, reversingCards, animationsInProgress]);
   
   // Handle the completion of a card flip
   const handleFlipComplete = (index: number) => {
@@ -207,7 +243,7 @@ const ServiceCards: React.FC = () => {
       // Move to the next card
       setTimeout(() => {
         setCurrentFlippedIndex(index + 1);
-      }, 200); // Small delay before flipping the next card
+      }, 300); // Longer delay before flipping the next card for smoother sequence
     } else if (scrollDirection === 'up' && reversingCards[index]) {
       // Card has completed reversal, update states
       setFlippedCards(prev => {
@@ -230,8 +266,19 @@ const ServiceCards: React.FC = () => {
             newState[index - 1] = true;
             return newState;
           });
-        }, 200);
+        }, 300); // Longer delay for smoother transition
       }
+    }
+    
+    // Check if all animations are complete
+    const allComplete = index === serviceData.length - 1 || 
+                       (reversingCards[index] && index === 0);
+                       
+    if (allComplete) {
+      // Add a small delay before allowing scrolling again
+      setTimeout(() => {
+        setAnimationsInProgress(false);
+      }, 200);
     }
   };
   
@@ -251,7 +298,7 @@ const ServiceCards: React.FC = () => {
       id="solutions" 
       className="py-32 bg-black relative min-h-screen flex flex-col items-center justify-center"
       ref={sectionRef}
-      style={{ position: 'relative' }} // Add position relative for scroll tracking
+      style={{ position: 'relative' }} // Position relative for proper scroll tracking
     >
       <div className="container mx-auto text-center mb-16">
         <motion.h2 
