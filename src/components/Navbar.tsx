@@ -45,8 +45,8 @@ const Navbar: React.FC = () => {
               <span className="text-gradient">Napptix</span>
             </Link>
             
-            {/* Desktop Navigation - moved to the left, next to logo */}
-            <nav className="hidden md:flex space-x-8 mr-auto">
+            {/* Desktop Navigation - moved to the right */}
+            <nav className="hidden md:flex space-x-8 ml-auto">
               {navLinks.map((link, index) => (
                 <Link 
                   key={index}
