@@ -31,6 +31,11 @@ const Navbar: React.FC = () => {
     { title: 'Contact', href: '/contact' },
   ];
   
+  // Function to handle scrolling to top on navigation
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+  
   return (
     <>
       <header 
@@ -41,7 +46,7 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             {/* Logo - aligned to the left */}
-            <Link to="/" className="text-white font-montserrat font-bold text-2xl mr-4">
+            <Link to="/" onClick={scrollToTop} className="text-white font-montserrat font-bold text-2xl mr-4">
               <span className="text-gradient">Napptix</span>
             </Link>
             
@@ -51,6 +56,7 @@ const Navbar: React.FC = () => {
                 <Link 
                   key={index}
                   to={link.href}
+                  onClick={scrollToTop}
                   className="text-white opacity-80 hover:opacity-100 hover:text-[#29dd3b] transition-all duration-300"
                 >
                   {link.title}
@@ -85,7 +91,10 @@ const Navbar: React.FC = () => {
                   key={index}
                   to={link.href}
                   className="text-white text-xl font-medium py-2 hover:text-[#29dd3b] transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    scrollToTop();
+                  }}
                 >
                   {link.title}
                 </Link>
@@ -99,4 +108,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-

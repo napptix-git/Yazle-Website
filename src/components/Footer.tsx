@@ -23,6 +23,11 @@ const Footer: React.FC = () => {
   };
   
   const nextPage = getNextPageInfo();
+
+  // Function to handle scrolling to top on navigation
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   
   return (
     <footer className="relative bg-black py-12 overflow-hidden">
@@ -66,11 +71,11 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-napptix-light-grey">
-              <li><Link to="/" className="hover:text-[#29dd3b] transition-colors">Home</Link></li>
-              <li><Link to="/advertisers" className="hover:text-[#29dd3b] transition-colors">Advertisers</Link></li>
-              <li><Link to="/publishers" className="hover:text-[#29dd3b] transition-colors">Publishers</Link></li>
-              <li><Link to="/about" className="hover:text-[#29dd3b] transition-colors">About Us</Link></li>
-              <li><Link to="/contact" className="hover:text-[#29dd3b] transition-colors">Contact</Link></li>
+              <li><Link to="/" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Home</Link></li>
+              <li><Link to="/advertisers" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Advertisers</Link></li>
+              <li><Link to="/publishers" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Publishers</Link></li>
+              <li><Link to="/about" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">About Us</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Contact</Link></li>
             </ul>
           </div>
           
@@ -99,13 +104,14 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        {/* Next Page Link - Now in a better UI position */}
+        {/* Next Page Link - Now with scroll to top functionality */}
         <div className="flex justify-between items-center border-t border-napptix-grey/20 pt-6 mt-6">
           <p className="text-napptix-light-grey text-xs">
             &copy; {new Date().getFullYear()} Napptix. All rights reserved.
           </p>
           <Link 
             to={nextPage.to} 
+            onClick={scrollToTop}
             className="flex items-center text-white hover:text-[#29dd3b] transition-colors bg-black/30 rounded-full px-4 py-2 backdrop-blur-sm"
           >
             <span className="mr-2">Next: {nextPage.name}</span>
@@ -118,4 +124,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-

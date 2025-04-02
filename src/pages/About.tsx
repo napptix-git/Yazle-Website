@@ -1,30 +1,29 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TeamMember from '@/components/TeamMember';
 
 const About: React.FC = () => {
-  // Team member data
+  // Team member data with consistent image formats
   const teamMembers = [
     {
       name: "Alex Mercer",
       position: "Co-Founder & CEO",
-      imageSrc: "/public/lovable-uploads/7e606c44-61cb-46c1-9563-29b2a6d7b82e.png",
+      imageSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example",
       bgColor: "bg-gradient-to-br from-purple-100/20 via-teal-100/20 to-rose-100/20"
     },
     {
       name: "Sarah Kim",
       position: "Co-Founder & COO",
-      imageSrc: "/public/lovable-uploads/1e88692d-f880-4cde-a21b-1c81781f41ea.png",
+      imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example2",
       bgColor: "bg-gradient-to-br from-rose-100/20 via-purple-100/20 to-teal-100/20"
     },
     {
       name: "Michael Chen",
       position: "Chief Financial Officer",
-      imageSrc: "/public/lovable-uploads/38b35255-cc55-471a-a732-148058a4274d.png",
+      imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example3",
       bgColor: "bg-gradient-to-br from-teal-100/20 via-rose-100/20 to-purple-100/20"
     },
