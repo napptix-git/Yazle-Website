@@ -51,13 +51,13 @@ const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
-            {/* Logo - updated with new image */}
+            {/* Logo - increased size */}
             <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
-              <div className="h-8">
+              <div className="h-12 md:h-16"> {/* Increased height */}
                 <img 
                   src="/lovable-uploads/347b5bfb-a8d6-4595-8630-8f30916db04b.png" 
                   alt="Napptix" 
-                  className="h-full" 
+                  className="h-full w-auto object-contain" 
                 />
               </div>
             </Link>
