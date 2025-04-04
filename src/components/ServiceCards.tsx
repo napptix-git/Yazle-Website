@@ -10,10 +10,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// Service data remains unchanged
 const serviceData = [
   {
     title: "In-Game",
@@ -37,7 +35,6 @@ const serviceData = [
   },
 ];
 
-// ServiceCard component with improved animation handling
 interface ServiceProps {
   title: string;
   description: string;
@@ -71,11 +68,10 @@ const ServiceCard: React.FC<ServiceProps & {
         style={{
           transformStyle: 'preserve-3d',
           transform: `rotateY(${flipProgress * 180}deg)`,
-          transition: 'none', // Remove transition for smooth GSAP control
+          transition: 'none',
         }}
         onAnimationEnd={onFlipComplete}
       >
-        {/* Front of card */}
         <div 
           className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
             ${flipProgress > 0.5 ? 'z-10 shadow-[0_0_15px_rgba(41,221,59,0.3)]' : 'z-20'}`}
@@ -91,7 +87,6 @@ const ServiceCard: React.FC<ServiceProps & {
           </div>
         </div>
         
-        {/* Back of card (content side) */}
         <div 
           className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
             ${flipProgress > 0.5 ? 'z-20' : 'z-10'}`}
@@ -143,75 +138,60 @@ const ServiceCards: React.FC = () => {
     };
   }, []);
 
-  // Initialize scroll-triggered animations with improved settings
   useEffect(() => {
     if (!sectionRef.current) return;
     
-    // Clear any existing triggers
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     
-    // Create a scroll trigger for the whole section
     const sectionTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top center",
-      end: "bottom center",
-      pin: true, // Pin the section
+      start: "top top",
+      end: "bottom bottom",
+      pin: true,
       pinSpacing: true,
-      anticipatePin: 1, // Improves pin performance
+      anticipatePin: 1,
     });
 
-    // Create a scroll trigger for each card
     const triggers = serviceData.map((_, index) => {
-      // Calculate the progress range for each card
       const progressStart = index / serviceData.length;
       const progressEnd = (index + 1) / serviceData.length;
       
-      const cardTrigger = ScrollTrigger.create({
+      return ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.5, // Smooth scrubbing effect - adjust this number for smoother animation
-        pin: false, // Section is already pinned
+        scrub: 0.5,
         onUpdate: (self) => {
-          // Map the overall scroll progress to individual card progress
           const overallProgress = self.progress;
-          // Calculate normalized progress for this specific card (0-1)
-          const normalizedCardProgress = gsap.utils.clamp(
-            0,
-            1,
-            (overallProgress - progressStart) / (progressEnd - progressStart)
+          
+          const normalizedCardProgress = gsap.utils.mapRange(
+            progressStart, 
+            progressEnd, 
+            0, 
+            1, 
+            overallProgress
           );
           
-          // Update flip progress based on scroll position
+          const clampedProgress = gsap.utils.clamp(0, 1, normalizedCardProgress);
+          
           const newProgress = [...flipProgress];
-          newProgress[index] = normalizedCardProgress;
+          newProgress[index] = clampedProgress;
           setFlipProgress(newProgress);
           
-          // Update flipped state when progress passes threshold
-          if (normalizedCardProgress > 0.5 && !flippedCards[index]) {
-            const newFlipped = [...flippedCards];
-            newFlipped[index] = true;
-            setFlippedCards(newFlipped);
-          } else if (normalizedCardProgress < 0.5 && flippedCards[index]) {
-            const newFlipped = [...flippedCards];
-            newFlipped[index] = false;
-            setFlippedCards(newFlipped);
-          }
+          const newFlipped = [...flippedCards];
+          newFlipped[index] = clampedProgress > 0.5;
+          setFlippedCards(newFlipped);
         }
       });
-      
-      return cardTrigger;
     });
 
     return () => {
-      // Clean up
       sectionTrigger.kill();
       triggers.forEach(trigger => trigger.kill());
     };
   }, [flippedCards, flipProgress]);
 
   const handleFlipComplete = (index: number) => {
-    // Add any specific logic after flip completes if needed
     console.log(`Card ${index} flip completed`);
   };
 

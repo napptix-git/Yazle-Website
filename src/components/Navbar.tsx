@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -32,12 +31,10 @@ const Navbar: React.FC = () => {
     { title: 'Contact', href: '/contact' },
   ];
   
-  // Function to handle scrolling to top on navigation
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
   
-  // Check if the current route matches the link
   const isActive = (path: string) => {
     return location.pathname === path;
   };
@@ -50,10 +47,9 @@ const Navbar: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-3">
-            {/* Updated logo with new image and reduced height */}
+          <div className="flex justify-between items-center py-2">
             <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
-              <div className="h-14 md:h-16 lg:h-18">
+              <div className="h-20 md:h-24 lg:h-24">
                 <img 
                   src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                   alt="Napptix" 
@@ -62,7 +58,6 @@ const Navbar: React.FC = () => {
               </div>
             </Link>
             
-            {/* Desktop Navigation - with underline animation */}
             <nav className="hidden md:flex space-x-8 ml-auto">
               {navLinks.map((link, index) => (
                 <Link 
@@ -78,7 +73,6 @@ const Navbar: React.FC = () => {
               ))}
             </nav>
             
-            {/* Mobile Menu Button */}
             <button 
               className="md:hidden text-white ml-4 hover:text-[#29dd3b] transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -89,7 +83,6 @@ const Navbar: React.FC = () => {
         </div>
       </header>
       
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <motion.div 
           className="fixed inset-0 bg-napptix-dark z-40 md:hidden pt-20"
