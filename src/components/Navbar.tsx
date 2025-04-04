@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +37,11 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
   
+  // Check if the current route matches the link
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+  
   return (
     <>
       <header 
@@ -45,19 +51,27 @@ const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
-            {/* Logo - aligned to the left */}
-            <Link to="/" onClick={scrollToTop} className="text-white font-montserrat font-bold text-2xl mr-4">
-              <span className="text-gradient">Napptix</span>
+            {/* Logo - updated with new image */}
+            <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
+              <div className="h-8">
+                <img 
+                  src="/lovable-uploads/347b5bfb-a8d6-4595-8630-8f30916db04b.png" 
+                  alt="Napptix" 
+                  className="h-full" 
+                />
+              </div>
             </Link>
             
-            {/* Desktop Navigation - moved to the right */}
+            {/* Desktop Navigation - with underline animation */}
             <nav className="hidden md:flex space-x-8 ml-auto">
               {navLinks.map((link, index) => (
                 <Link 
                   key={index}
                   to={link.href}
                   onClick={scrollToTop}
-                  className="text-white opacity-80 hover:opacity-100 hover:text-[#29dd3b] transition-all duration-300"
+                  className={`text-white relative pb-1 ${
+                    isActive(link.href) ? 'after:scale-x-100' : 'after:scale-x-0'
+                  } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transition-transform after:duration-300 hover:after:scale-x-100 after:origin-left`}
                 >
                   {link.title}
                 </Link>
@@ -90,7 +104,9 @@ const Navbar: React.FC = () => {
                 <Link 
                   key={index}
                   to={link.href}
-                  className="text-white text-xl font-medium py-2 hover:text-[#29dd3b] transition-colors"
+                  className={`text-white text-xl font-medium py-2 relative ${
+                    isActive(link.href) ? 'after:scale-x-100' : 'after:scale-x-0'
+                  } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transition-transform after:duration-300 hover:after:scale-x-100 after:origin-left`}
                   onClick={() => {
                     setMobileMenuOpen(false);
                     scrollToTop();

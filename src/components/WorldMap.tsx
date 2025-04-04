@@ -37,22 +37,22 @@ const WorldMap: React.FC = () => {
   
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-20">
-      <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Our Offices</h2>
+      <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
       
       <div className="relative w-full">
-        {/* World Map Dots Background */}
+        {/* World Map Background */}
         <div className="w-full aspect-[2/1] overflow-hidden">
           <img 
             src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png" 
             alt="World Map" 
-            className="w-full object-contain"
+            className="w-full object-contain brightness-[1.5] contrast-[0.9] invert"
           />
           
-          {/* Location Markers */}
+          {/* Location Labels */}
           {offices.map((office, index) => (
             <motion.div
               key={office.city}
-              className="absolute flex items-center justify-center z-10"
+              className="absolute z-10"
               style={{
                 left: `${office.x}%`,
                 top: `${office.y}%`,
@@ -61,8 +61,11 @@ const WorldMap: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
-              <div className="absolute w-4 h-4 bg-white rounded-full animate-pulse-glow"></div>
-              <div className="absolute w-8 h-8 bg-white/20 rounded-full animate-pulse"></div>
+              <div className="absolute w-2 h-2 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute w-4 h-4 bg-white/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+              <div className="absolute text-white text-sm font-bold -translate-x-1/2 mt-2 whitespace-nowrap">
+                {office.country}
+              </div>
             </motion.div>
           ))}
         </div>

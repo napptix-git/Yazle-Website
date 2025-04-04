@@ -45,7 +45,7 @@ const Contact: React.FC = () => {
           <WorldMap />
         </div>
         
-        <h1 className="text-4xl md:text-5xl font-syne font-extrabold text-white mb-8">Contact Us</h1>
+        <h1 className="text-4xl md:text-5xl font-syne font-extrabold text-white mb-8">Get In Touch</h1>
         <div className="text-napptix-light-grey space-y-6 max-w-2xl mx-auto text-lg">
           <p className="text-center">
             Have questions about our advertising solutions? Interested in partnering with us?
