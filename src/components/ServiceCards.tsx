@@ -9,9 +9,10 @@ import {
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollLock } from 'gsap/ScrollLock';
 
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollLock);
 
 interface ServiceProps {
   title: string;
@@ -45,6 +46,7 @@ const serviceData = [
 
 const ServiceCard: React.FC<ServiceProps & { 
   isFlipped: boolean;
+  flipProgress: number;
   onFlipComplete: () => void;
 }> = ({ 
   title, 
@@ -52,6 +54,7 @@ const ServiceCard: React.FC<ServiceProps & {
   icon,
   index,
   isFlipped,
+  flipProgress,
   onFlipComplete
 }) => {
   
@@ -66,16 +69,15 @@ const ServiceCard: React.FC<ServiceProps & {
         className="relative w-[280px] h-[400px] card-container"
         style={{
           transformStyle: 'preserve-3d',
-          animation: isFlipped 
-            ? 'smooth-wave-effect 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards'
-            : 'none',
+          transform: `rotateY(${flipProgress * 180}deg)`,
+          transition: isFlipped || flipProgress === 0 ? 'none' : 'transform 0.3s ease-out',
         }}
         onAnimationEnd={onFlipComplete}
       >
         {/* Front of card */}
         <div 
           className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
-            ${isFlipped ? 'z-10 shadow-[0_0_15px_rgba(41,221,59,0.3)]' : 'z-20'}`}
+            ${flipProgress > 0.5 ? 'z-10 shadow-[0_0_15px_rgba(41,221,59,0.3)]' : 'z-20'}`}
           style={{
             backfaceVisibility: 'hidden',
             background: 'white',
@@ -91,7 +93,7 @@ const ServiceCard: React.FC<ServiceProps & {
         {/* Back of card (content side) */}
         <div 
           className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
-            ${isFlipped ? 'z-20' : 'z-10'}`}
+            ${flipProgress > 0.5 ? 'z-20' : 'z-10'}`}
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
@@ -124,6 +126,8 @@ const ServiceCards: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [flippedCards, setFlippedCards] = useState<boolean[]>([false, false, false, false]);
+  const [flipProgress, setFlipProgress] = useState<number[]>([0, 0, 0, 0]);
+  const [isScrollLocked, setIsScrollLocked] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -138,58 +142,73 @@ const ServiceCards: React.FC = () => {
     };
   }, []);
 
-  // Initialize GSAP smooth scrolling
+  // Initialize scroll-triggered animations
   useEffect(() => {
-    // Initialize smooth scroll with GSAP
-    const smoother = gsap.from(document.documentElement, {
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.2,
-      },
-      ease: "power2.out",
+    if (!sectionRef.current) return;
+    
+    // Clear any existing triggers
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    
+    // Create a scroll trigger for each card
+    const triggers = serviceData.map((_, index) => {
+      const cardTrigger = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: `top+=${300 + (index * 100)}px center`,
+        end: `top+=${300 + (index * 100) + 200}px center`,
+        scrub: 0.5, // Smooth scrubbing effect
+        onEnter: () => {
+          // When entering forward (scrolling down)
+          setIsScrollLocked(true);
+          setTimeout(() => setIsScrollLocked(false), 300); // Unlock after animation completes
+        },
+        onLeaveBack: () => {
+          // When leaving backward (scrolling up)
+          setIsScrollLocked(true);
+          setTimeout(() => setIsScrollLocked(false), 300);
+        },
+        onUpdate: (self) => {
+          // Update flip progress based on scroll position
+          const newProgress = [...flipProgress];
+          newProgress[index] = self.progress;
+          setFlipProgress(newProgress);
+          
+          // Update flipped state when progress passes threshold
+          if (self.progress > 0.5 && !flippedCards[index]) {
+            const newFlipped = [...flippedCards];
+            newFlipped[index] = true;
+            setFlippedCards(newFlipped);
+          } else if (self.progress < 0.5 && flippedCards[index]) {
+            const newFlipped = [...flippedCards];
+            newFlipped[index] = false;
+            setFlippedCards(newFlipped);
+          }
+        }
+      });
+      
+      return cardTrigger;
     });
+
+    // Apply scroll lock when animations are in progress
+    const scrollLockEffect = () => {
+      if (isScrollLocked) {
+        gsap.to(window, { 
+          scrollTo: window.scrollY, 
+          duration: 0.3, 
+          overwrite: true,
+          onComplete: () => setIsScrollLocked(false)
+        });
+      }
+    };
+
+    // Enable the scroll lock effect
+    gsap.ticker.add(scrollLockEffect);
 
     return () => {
       // Clean up
-      if (smoother) {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      }
+      triggers.forEach(trigger => trigger.kill());
+      gsap.ticker.remove(scrollLockEffect);
     };
-  }, []);
-
-  // Use the scroll trigger to flip cards
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    // Create scroll triggers for each card
-    serviceData.forEach((_, index) => {
-      let trigger = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: `top+=${300 + (index * 150)}px center`,
-        onEnter: () => {
-          setFlippedCards(prev => {
-            const newState = [...prev];
-            newState[index] = true;
-            return newState;
-          });
-        },
-        onLeaveBack: () => {
-          setFlippedCards(prev => {
-            const newState = [...prev];
-            newState[index] = false;
-            return newState;
-          });
-        }
-      });
-    });
-
-    return () => {
-      // Clean up all scroll triggers
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  }, [flippedCards, isScrollLocked]);
 
   const handleFlipComplete = (index: number) => {
     // Add any specific logic after flip completes if needed
@@ -201,7 +220,7 @@ const ServiceCards: React.FC = () => {
       id="solutions" 
       className="py-32 bg-black relative min-h-screen flex flex-col items-center justify-center"
       ref={sectionRef}
-      style={{ position: 'relative' }} // Position relative for proper scroll tracking
+      style={{ position: 'relative' }} 
     >
       <div className="container mx-auto text-center mb-16">
         <motion.h2 
@@ -237,6 +256,7 @@ const ServiceCards: React.FC = () => {
                 {...service}
                 index={index}
                 isFlipped={flippedCards[index]}
+                flipProgress={flipProgress[index]}
                 onFlipComplete={() => handleFlipComplete(index)}
               />
             </motion.div>
