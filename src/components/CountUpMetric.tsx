@@ -8,7 +8,7 @@ interface CountUpMetricProps {
   suffix?: string;
   title: string;
   description?: string;
-  className?: string; // Added className prop
+  className?: string;
 }
 
 const CountUpMetric: React.FC<CountUpMetricProps> = ({ 

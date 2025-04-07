@@ -1,10 +1,9 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CountUpMetric from '@/components/CountUpMetric';
 import { Button } from '@/components/ui/button';
-import { Code, ChevronDown, ChevronUp, Check } from 'lucide-react';
+import { Code, ChevronDown, ChevronUp, Check, Server, Globe, Code2 } from 'lucide-react';
 import { 
   Accordion,
   AccordionContent,
@@ -40,7 +39,100 @@ NapptixAds.showAd('rewarded', {
   onError: (err) => console.log(err)
 });`;
 
-  const [sdkTab, setSdkTab] = useState<'unity' | 'html5' | 'android'>('unity');
+  const [sdkTab, setSdkTab] = useState<'api' | 'javascript' | 'server'>('api');
+
+  const apiCode = `// API-Based Integration
+fetch('https://api.napptix.com/v1/ads', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    placementId: 'game-level-up',
+    adType: 'rewarded',
+    deviceInfo: { /* device info */ }
+  })
+})
+.then(response => response.json())
+.then(adData => {
+  // Render ad using the returned data
+  console.log('Ad ready to display', adData);
+});`;
+
+  const javascriptCode = `<!-- JavaScript/HTML5 Integration -->
+<script>
+  // Initialize Napptix ads
+  window.napptix = window.napptix || {};
+  window.napptix.queue = window.napptix.queue || [];
+  
+  // Configuration
+  window.napptix.queue.push({
+    command: 'init',
+    publisherId: 'YOUR_PUBLISHER_ID'
+  });
+  
+  // Display a rewarded ad when player completes level
+  function showRewardedAd() {
+    window.napptix.queue.push({
+      command: 'showAd',
+      adType: 'rewarded',
+      placementId: 'level-complete',
+      onComplete: function() {
+        givePlayerReward();
+      }
+    });
+  }
+</script>
+<script async src="https://cdn.napptix.com/loader.js"></script>`;
+
+  const serverCode = `// Server-to-Server (S2S) Integration
+const axios = require('axios');
+
+// Request ad from server
+async function requestAd(userId, placement) {
+  const response = await axios.post('https://api.napptix.com/s2s/v1/auction', {
+    publisherId: 'YOUR_PUBLISHER_ID',
+    userId: userId,
+    placementId: placement,
+    bidFloor: 0.01,
+    sessionId: 'unique-session-id',
+  }, {
+    headers: {
+      'Authorization': 'Bearer YOUR_S2S_API_KEY',
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  return response.data;
+}
+
+// Report impression when ad is shown
+async function reportImpression(adId, userId) {
+  await axios.post('https://api.napptix.com/s2s/v1/impression', {
+    adId: adId,
+    userId: userId,
+    timestamp: Date.now()
+  }, {
+    headers: {
+      'Authorization': 'Bearer YOUR_S2S_API_KEY',
+      'Content-Type': 'application/json'
+    }
+  });
+}`;
+
+  const getCodeForTab = () => {
+    switch (sdkTab) {
+      case 'api':
+        return apiCode;
+      case 'javascript':
+        return javascriptCode;
+      case 'server':
+        return serverCode;
+      default:
+        return apiCode;
+    }
+  };
 
   const beforeAfterData = [
     {
@@ -91,7 +183,7 @@ NapptixAds.showAd('rewarded', {
               Plug into a revenue stream designed for gamers and built for developers.
             </p>
             <Button size="lg" className="bg-[#29dd3b] hover:bg-[#29dd3b]/80 text-black font-medium mt-4">
-              Explore SDK <Code className="ml-2" />
+              Explore Integration <Code className="ml-2" />
             </Button>
           </div>
           <div className="bg-napptix-dark rounded-xl p-4 border border-napptix-grey/20">
@@ -104,12 +196,12 @@ NapptixAds.showAd('rewarded', {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               </div>
-              <span className="text-xs text-napptix-light-grey">napptix-sdk-example.js</span>
+              <span className="text-xs text-napptix-light-grey">napptix-integration-example.js</span>
             </div>
           </div>
         </div>
         
-        {/* Section 2: Publisher Success Metrics (Split Layout) */}
+        {/* Section 2: Publisher Success Metrics */}
         <h2 className="text-3xl font-bold text-white mt-20 mb-12">Publisher Success Metrics</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
@@ -162,32 +254,38 @@ NapptixAds.showAd('rewarded', {
           </div>
         </div>
         
-        {/* Section 3: Seamless Integration */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Seamless Integration</h2>
+        {/* Section 3: Integration Options */}
+        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Integration Options</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-20">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 flex items-center space-x-4">
-              <div className="bg-[#29dd3b] h-8 w-8 rounded-full flex items-center justify-center text-black font-bold">1</div>
+              <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                <Server className="w-6 h-6 text-[#29dd3b]" />
+              </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Install SDK</h3>
-                <p className="text-napptix-light-grey">Add our package to your game project</p>
+                <h3 className="text-xl font-bold text-white">API-Based Integration</h3>
+                <p className="text-napptix-light-grey">Full control, full flexibility.</p>
               </div>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 flex items-center space-x-4">
-              <div className="bg-[#29dd3b] h-8 w-8 rounded-full flex items-center justify-center text-black font-bold">2</div>
+              <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                <Globe className="w-6 h-6 text-[#29dd3b]" />
+              </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Add Ad Unit</h3>
-                <p className="text-napptix-light-grey">Configure where ads appear in your game</p>
+                <h3 className="text-xl font-bold text-white">JavaScript/HTML5 Integration</h3>
+                <p className="text-napptix-light-grey">Fast and familiar.</p>
               </div>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 flex items-center space-x-4">
-              <div className="bg-[#29dd3b] h-8 w-8 rounded-full flex items-center justify-center text-black font-bold">3</div>
+              <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                <Code2 className="w-6 h-6 text-[#29dd3b]" />
+              </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Launch</h3>
-                <p className="text-napptix-light-grey">Start earning revenue instantly</p>
+                <h3 className="text-xl font-bold text-white">Server-to-Server (S2S) Integration</h3>
+                <p className="text-napptix-light-grey">Scalable, secure, server-first.</p>
               </div>
             </div>
           </div>
@@ -196,22 +294,22 @@ NapptixAds.showAd('rewarded', {
             <div className="flex items-center justify-between p-4 border-b border-napptix-grey/20">
               <div className="flex space-x-2">
                 <button 
-                  onClick={() => setSdkTab('unity')} 
-                  className={`px-3 py-1 rounded ${sdkTab === 'unity' ? 'bg-[#29dd3b] text-black' : 'bg-transparent text-white'}`}
+                  onClick={() => setSdkTab('api')} 
+                  className={`px-3 py-1 rounded ${sdkTab === 'api' ? 'bg-[#29dd3b] text-black' : 'bg-transparent text-white'}`}
                 >
-                  Unity
+                  RESTful API
                 </button>
                 <button 
-                  onClick={() => setSdkTab('html5')} 
-                  className={`px-3 py-1 rounded ${sdkTab === 'html5' ? 'bg-[#29dd3b] text-black' : 'bg-transparent text-white'}`}
+                  onClick={() => setSdkTab('javascript')} 
+                  className={`px-3 py-1 rounded ${sdkTab === 'javascript' ? 'bg-[#29dd3b] text-black' : 'bg-transparent text-white'}`}
                 >
-                  HTML5
+                  JavaScript
                 </button>
                 <button 
-                  onClick={() => setSdkTab('android')} 
-                  className={`px-3 py-1 rounded ${sdkTab === 'android' ? 'bg-[#29dd3b] text-black' : 'bg-transparent text-white'}`}
+                  onClick={() => setSdkTab('server')} 
+                  className={`px-3 py-1 rounded ${sdkTab === 'server' ? 'bg-[#29dd3b] text-black' : 'bg-transparent text-white'}`}
                 >
-                  Android
+                  Server-to-Server
                 </button>
               </div>
               <button className="text-sm text-white px-2 py-1 bg-napptix-grey/30 rounded hover:bg-napptix-grey/40 transition-colors">
@@ -220,13 +318,58 @@ NapptixAds.showAd('rewarded', {
             </div>
             <div className="p-4">
               <pre className="font-mono text-sm text-white/80 overflow-auto max-h-72">
-                {integrationCode}
+                {getCodeForTab()}
               </pre>
             </div>
           </div>
         </div>
         
-        {/* Section 4: Performance in Action (Live Charts) */}
+        {/* Section 4: Integration Details */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <Card className="bg-napptix-dark border-napptix-grey/20">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <Server className="w-6 h-6 text-[#29dd3b]" />
+                </div>
+                <h3 className="text-xl font-bold text-white">API-Based Integration</h3>
+              </div>
+              <p className="text-napptix-light-grey mb-4">
+                Use simple RESTful APIs to serve and track ads directly from your backend or custom client implementation. Ideal for advanced teams building custom workflows.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-napptix-dark border-napptix-grey/20">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <Globe className="w-6 h-6 text-[#29dd3b]" />
+                </div>
+                <h3 className="text-xl font-bold text-white">JavaScript/HTML5</h3>
+              </div>
+              <p className="text-napptix-light-grey mb-4">
+                Add monetization to browser or WebView-based games using plug-and-play embed scripts. Perfect for WebGL, Phaser, or cross-platform HTML5 titles.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-napptix-dark border-napptix-grey/20">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <Code2 className="w-6 h-6 text-[#29dd3b]" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Server-to-Server</h3>
+              </div>
+              <p className="text-napptix-light-grey mb-4">
+                Connect directly from your backend to our ad server to control bidding, delivery, and event tracking—no client SDKs required.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        
+        {/* Section 5: Performance in Action (Live Charts) */}
         <h2 className="text-3xl font-bold text-white mt-24 mb-10">Performance in Action</h2>
         
         <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 mb-20">
@@ -279,8 +422,8 @@ NapptixAds.showAd('rewarded', {
           </div>
         </div>
         
-        {/* Section 5: Why Publishers Choose Napptix */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Why Publishers Choose Napptix</h2>
+        {/* Section 6: Why Publishers Choose Napptix */}
+        <h2 className="text-3xl font-bold text-white mt-24 mb-10 text-center">Why Publishers Choose Napptix</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
@@ -336,66 +479,7 @@ NapptixAds.showAd('rewarded', {
                 </div>
                 <h3 className="text-xl font-bold text-white">Flexible Integration Options</h3>
               </div>
-              <p className="text-napptix-light-grey">Our SDK supports Unity, Unreal, WebGL, and native mobile platforms, making integration easy regardless of your development environment.</p>
-            </CardContent>
-          </Card>
-        </div>
-        
-        {/* Section 6: Publisher Case Studies */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Publisher Success Stories</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="h-16 w-full flex items-center justify-center mb-6">
-                <div className="h-12 w-12 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-black font-bold">GP</span>
-                </div>
-              </div>
-              <blockquote className="text-white italic mb-4">
-                "We saw a 60% increase in revenue within just 3 weeks of integration, with no negative impact on player retention."
-              </blockquote>
-              <div className="text-napptix-light-grey text-sm">
-                GamePulse Studios - Mobile Puzzle Game
-              </div>
-              <Separator className="my-4" />
-              <Button variant="link" className="text-[#29dd3b] p-0">See Full Case Study</Button>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="h-16 w-full flex items-center justify-center mb-6">
-                <div className="h-12 w-12 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-black font-bold">VG</span>
-                </div>
-              </div>
-              <blockquote className="text-white italic mb-4">
-                "The integration was incredibly smooth. We were up and running in less than a day, and our players actually enjoy the rewarded ad experience."
-              </blockquote>
-              <div className="text-napptix-light-grey text-sm">
-                Vortex Games - Racing Simulator
-              </div>
-              <Separator className="my-4" />
-              <Button variant="link" className="text-[#29dd3b] p-0">See Full Case Study</Button>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="h-16 w-full flex items-center justify-center mb-6">
-                <div className="h-12 w-12 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-black font-bold">PS</span>
-                </div>
-              </div>
-              <blockquote className="text-white italic mb-4">
-                "The analytics dashboard gives us incredible insights into player behavior and ad performance. We've optimized our placement strategy and increased ARPDAU by 35%."
-              </blockquote>
-              <div className="text-napptix-light-grey text-sm">
-                PixelShift - Strategy RPG
-              </div>
-              <Separator className="my-4" />
-              <Button variant="link" className="text-[#29dd3b] p-0">See Full Case Study</Button>
+              <p className="text-napptix-light-grey">Our platform supports multiple integration methods, making it easy to monetize your game regardless of your development environment.</p>
             </CardContent>
           </Card>
         </div>
@@ -408,7 +492,7 @@ NapptixAds.showAd('rewarded', {
             <div className="aspect-video bg-black/50 rounded-lg flex items-center justify-center mb-4">
               <div className="w-16 h-16 bg-[#29dd3b]/20 rounded-full flex items-center justify-center">
                 <svg className="w-8 h-8 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
