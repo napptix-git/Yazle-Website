@@ -17,28 +17,28 @@ const WorldMap: React.FC = () => {
       address: "102, Firdos Apartments, Waroda Road Bandra West, Mumbai, Maharashtra 400050",
       x: 76, 
       y: 58,
-      color: "#ff9f7f"
+      color: "#4ade80"
     },
     { 
       city: "Dubai", 
       address: "302, Building 08, Media City, Dubai",
       x: 65, 
       y: 48,
-      color: "#8bffb0"
+      color: "#4ade80"
     },
     { 
       city: "New York", 
       address: "350 5th Ave, New York, NY 10118, United States",
       x: 20, 
       y: 38,
-      color: "#8e99ff"
+      color: "#4ade80"
     },
     { 
       city: "Amsterdam", 
       address: "Herengracht 595, 1017 CE Amsterdam, Netherlands",
       x: 47, 
       y: 28,
-      color: "#ff7aef"
+      color: "#4ade80"
     }
   ];
   
