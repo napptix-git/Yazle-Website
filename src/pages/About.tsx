@@ -200,10 +200,10 @@ const About: React.FC = () => {
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="mt-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-10">Our People</h2>
+          <div className="mt-20">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-16">Our People</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
               {allTeamMembers.slice(0, 6).map((member, index) => (
                 <div key={index} className="team-member-card h-full">
                   <TeamMember 
@@ -218,7 +218,7 @@ const About: React.FC = () => {
             </div>
           </div>
           
-          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
+          <h2 className="text-3xl font-bold text-white mt-20 mb-8">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">

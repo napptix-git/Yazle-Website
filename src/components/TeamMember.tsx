@@ -21,29 +21,29 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   
   return (
     <div 
-      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+      className="flex flex-col md:flex-row h-[500px] overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`${bgColor} p-8 md:w-2/5 relative flex flex-col justify-between`}>
+      <div className={`${bgColor} p-10 md:w-2/5 relative flex flex-col justify-between`}>
         <div>
-          <p className="text-sm text-white/80 mb-6">{position}</p>
+          <p className="text-sm text-white/80 mb-8">{position}</p>
           
           <div className="mt-auto">
-            <h3 className="text-3xl font-bold text-white mb-1 member-name">{name.split(' ')[0]}</h3>
-            <h3 className="text-3xl font-bold text-white">{name.split(' ').slice(1).join(' ')}</h3>
+            <h3 className="text-4xl font-bold text-white mb-2 member-name">{name.split(' ')[0]}</h3>
+            <h3 className="text-4xl font-bold text-white">{name.split(' ').slice(1).join(' ')}</h3>
           </div>
         </div>
         
         {linkedinUrl && (
-          <div className="mt-8">
+          <div className="mt-10">
             <a 
               href={linkedinUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className={`inline-flex transition-all duration-200 ${isHovered ? 'translate-x-1' : ''}`}
             >
-              <ArrowUpRight className="text-white w-6 h-6" />
+              <ArrowUpRight className="text-white w-7 h-7" />
             </a>
           </div>
         )}
