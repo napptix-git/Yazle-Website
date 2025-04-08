@@ -15,29 +15,29 @@ const WorldMap: React.FC = () => {
     {
       city: "Dubai",
       address: "Business Bay, Dubai, United Arab Emirates",
-      x: 56,
-      y: 45,
+      x: 23,
+      y: 25,
       color: "bg-green-400"
     },
     {
       city: "Delhi",
       address: "Connaught Place, New Delhi, India",
-      x: 67,
-      y: 42,
+      x: 38,
+      y: 25,
       color: "bg-purple-400"
     },
     {
       city: "Mumbai",
       address: "Bandra Kurla Complex, Mumbai, India",
-      x: 65,
-      y: 48,
+      x: 30,
+      y: 35,
       color: "bg-orange-400"
     },
     {
       city: "Singapore",
       address: "Marina Bay, Singapore",
-      x: 73,
-      y: 55,
+      x: 58,
+      y: 40,
       color: "bg-blue-400"
     }
   ];
