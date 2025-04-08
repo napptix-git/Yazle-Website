@@ -16,14 +16,14 @@ const About: React.FC = () => {
       position: "Co-Founder & CEO",
       imageSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example",
-      bgColor: "bg-gradient-to-br from-purple-100/20 via-teal-100/20 to-rose-100/20"
+      bgColor: "bg-[#2f2b3a]"
     },
     {
       name: "Sarah Kim",
       position: "Co-Founder & COO",
       imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example2",
-      bgColor: "bg-gradient-to-br from-rose-100/20 via-purple-100/20 to-teal-100/20"
+      bgColor: "bg-[#3c2b3a]"
     },
     {
       name: "Michael Chen",
@@ -200,21 +200,12 @@ const About: React.FC = () => {
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
-            <p className="text-2xl text-white/80 mb-12">
-              Ideas shape the world,<br />
-              our people shape <span className="gamer-text" style={{ 
-                background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
-                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)'
-              }}>ideas</span>
-            </p>
+          <div className="mt-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-10">Our People</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              {allTeamMembers.slice(0, 6).map((member, index) => (
+                <div key={index} className="team-member-card h-full">
                   <TeamMember 
                     name={member.name}
                     position={member.position}
