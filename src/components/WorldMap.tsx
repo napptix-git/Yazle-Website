@@ -91,7 +91,7 @@ const WorldMap: React.FC = () => {
       <div className="relative w-full">
         <div className="w-full aspect-[2/1] overflow-hidden relative">
           <img 
-            src="/lovable-uploads/4cd66301-b585-4147-b394-e874eec88954.png" 
+            src="/lovable-uploads/06bdeaf6-97c9-4e5e-9397-b0ae1a7ee1b5.png" 
             alt="World Map" 
             className="w-full object-contain"
           />
