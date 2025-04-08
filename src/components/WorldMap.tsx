@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
 
 interface Office {
   city: string;
@@ -14,31 +13,31 @@ interface Office {
 const WorldMap: React.FC = () => {
   const offices: Office[] = [
     {
-      city: "Mumbai",
-      address: "Bandra Kurla Complex, Mumbai, India",
-      x: 47,
-      y: 52,
-      color: "bg-orange-400"
-    },
-    {
       city: "Dubai",
       address: "Business Bay, Dubai, United Arab Emirates",
-      x: 28,
-      y: 42,
+      x: 56,
+      y: 45,
       color: "bg-green-400"
     },
     {
       city: "Delhi",
       address: "Connaught Place, New Delhi, India",
-      x: 44,
-      y: 38,
+      x: 67,
+      y: 42,
       color: "bg-purple-400"
+    },
+    {
+      city: "Mumbai",
+      address: "Bandra Kurla Complex, Mumbai, India",
+      x: 65,
+      y: 48,
+      color: "bg-orange-400"
     },
     {
       city: "Singapore",
       address: "Marina Bay, Singapore",
-      x: 62,
-      y: 63,
+      x: 73,
+      y: 55,
       color: "bg-blue-400"
     }
   ];
@@ -89,10 +88,10 @@ const WorldMap: React.FC = () => {
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-20">
       <div className="relative w-full">
-        <div className="w-full aspect-[1/1] overflow-hidden relative">
+        <div className="w-full aspect-[2/1] overflow-hidden relative">
           <img 
-            src="/lovable-uploads/255872a9-b069-4344-8df4-4901d830aa91.png" 
-            alt="Asia Map" 
+            src="/lovable-uploads/4cd66301-b585-4147-b394-e874eec88954.png" 
+            alt="World Map" 
             className="w-full object-contain"
           />
           
@@ -102,7 +101,7 @@ const WorldMap: React.FC = () => {
               const lineCoords = getLineCoordinates(index);
               const lineTotalLength = Math.sqrt(
                 Math.pow((parseFloat(lineCoords.x2) - parseFloat(lineCoords.x1)) / 100 * 1000, 2) + 
-                Math.pow((parseFloat(lineCoords.y2) - parseFloat(lineCoords.y1)) / 100 * 1000, 2)
+                Math.pow((parseFloat(lineCoords.y2) - parseFloat(lineCoords.y1)) / 100 * 500, 2)
               );
               
               return (
@@ -137,17 +136,12 @@ const WorldMap: React.FC = () => {
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
               <div className="relative">
-                {/* Location pin marker */}
-                <div className={`absolute -translate-x-1/2 -translate-y-1/2`}>
-                  <MapPin 
-                    className={`text-${office.color.replace('bg-', '')} animate-pulse`} 
-                    size={24}
-                    strokeWidth={2.5}
-                    fill="rgba(255, 255, 255, 0.2)"
-                  />
+                <div className={`absolute w-36 h-10 ${office.color} rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center`}>
+                  <span className="text-black font-bold text-lg">
+                    {office.city}
+                  </span>
                 </div>
-                {/* Glowing effect around pin */}
-                <div className={`absolute w-8 h-8 ${office.color}/30 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
+                <div className={`absolute w-44 h-14 ${office.color}/40 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
               </div>
             </motion.div>
           ))}
