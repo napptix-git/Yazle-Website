@@ -16,29 +16,29 @@ const WorldMap: React.FC = () => {
     {
       city: "Mumbai",
       address: "Bandra Kurla Complex, Mumbai, India",
-      x: 30,
-      y: 35,
+      x: 47,
+      y: 52,
       color: "bg-orange-400"
     },
     {
       city: "Dubai",
       address: "Business Bay, Dubai, United Arab Emirates",
-      x: 23,
-      y: 25,
+      x: 28,
+      y: 42,
       color: "bg-green-400"
     },
     {
       city: "Delhi",
       address: "Connaught Place, New Delhi, India",
-      x: 38,
-      y: 25,
+      x: 44,
+      y: 38,
       color: "bg-purple-400"
     },
     {
       city: "Singapore",
       address: "Marina Bay, Singapore",
-      x: 58,
-      y: 40,
+      x: 62,
+      y: 63,
       color: "bg-blue-400"
     }
   ];
@@ -89,10 +89,10 @@ const WorldMap: React.FC = () => {
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-20">
       <div className="relative w-full">
-        <div className="w-full aspect-[2/1] overflow-hidden relative">
+        <div className="w-full aspect-[1/1] overflow-hidden relative">
           <img 
-            src="/lovable-uploads/06bdeaf6-97c9-4e5e-9397-b0ae1a7ee1b5.png" 
-            alt="World Map" 
+            src="/lovable-uploads/255872a9-b069-4344-8df4-4901d830aa91.png" 
+            alt="Asia Map" 
             className="w-full object-contain"
           />
           
@@ -102,7 +102,7 @@ const WorldMap: React.FC = () => {
               const lineCoords = getLineCoordinates(index);
               const lineTotalLength = Math.sqrt(
                 Math.pow((parseFloat(lineCoords.x2) - parseFloat(lineCoords.x1)) / 100 * 1000, 2) + 
-                Math.pow((parseFloat(lineCoords.y2) - parseFloat(lineCoords.y1)) / 100 * 500, 2)
+                Math.pow((parseFloat(lineCoords.y2) - parseFloat(lineCoords.y1)) / 100 * 1000, 2)
               );
               
               return (
