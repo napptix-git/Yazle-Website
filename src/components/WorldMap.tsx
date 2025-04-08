@@ -14,6 +14,13 @@ interface Office {
 const WorldMap: React.FC = () => {
   const offices: Office[] = [
     {
+      city: "Mumbai",
+      address: "Bandra Kurla Complex, Mumbai, India",
+      x: 30,
+      y: 35,
+      color: "bg-orange-400"
+    },
+    {
       city: "Dubai",
       address: "Business Bay, Dubai, United Arab Emirates",
       x: 23,
@@ -26,13 +33,6 @@ const WorldMap: React.FC = () => {
       x: 38,
       y: 25,
       color: "bg-purple-400"
-    },
-    {
-      city: "Mumbai",
-      address: "Bandra Kurla Complex, Mumbai, India",
-      x: 30,
-      y: 35,
-      color: "bg-orange-400"
     },
     {
       city: "Singapore",
