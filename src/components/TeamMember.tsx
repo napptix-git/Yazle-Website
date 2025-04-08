@@ -21,11 +21,11 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   
   return (
     <div 
-      className="flex flex-col h-full overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`${bgColor} p-6 md:w-full relative`}>
+      <div className={`${bgColor} p-6 md:w-1/2 lg:w-2/5 relative`}>
         <div className="mb-4">
           <p className="text-sm text-white/80">{position}</p>
         </div>
@@ -48,7 +48,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         </div>
       </div>
       
-      <div className="w-full h-72">
+      <div className="md:w-1/2 lg:w-3/5">
         <img 
           src={imageSrc} 
           alt={name} 

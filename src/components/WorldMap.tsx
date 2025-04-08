@@ -15,29 +15,29 @@ const WorldMap: React.FC = () => {
     {
       city: "Dubai",
       address: "Business Bay, Dubai, United Arab Emirates",
-      x: 43,
-      y: 37,
+      x: 23,
+      y: 25,
       color: "bg-green-400"
     },
     {
       city: "Delhi",
       address: "Connaught Place, New Delhi, India",
-      x: 54,
-      y: 35,
+      x: 38,
+      y: 25,
       color: "bg-purple-400"
     },
     {
       city: "Mumbai",
       address: "Bandra Kurla Complex, Mumbai, India",
-      x: 51,
-      y: 45,
+      x: 30,
+      y: 35,
       color: "bg-orange-400"
     },
     {
       city: "Singapore",
       address: "Marina Bay, Singapore",
-      x: 65,
-      y: 60,
+      x: 58,
+      y: 40,
       color: "bg-blue-400"
     }
   ];
@@ -90,7 +90,7 @@ const WorldMap: React.FC = () => {
       <div className="relative w-full">
         <div className="w-full aspect-[2/1] overflow-hidden relative">
           <img 
-            src="/lovable-uploads/97862068-79ac-42f8-b8f7-f56e9ca5e0a9.png" 
+            src="/lovable-uploads/4cd66301-b585-4147-b394-e874eec88954.png" 
             alt="World Map" 
             className="w-full object-contain"
           />
