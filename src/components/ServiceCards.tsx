@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -153,24 +152,18 @@ const ServiceCards: React.FC = () => {
       anticipatePin: 1,
     });
 
-    // Modified animation timing to make each card flip sequentially
     const triggers = serviceData.map((_, index) => {
-      // Calculate start and end positions for each card's animation
-      // Adjust these values to make animations sequential rather than overlapping
-      const totalDuration = 1; // Total animation duration as proportion of scroll
-      const cardDuration = totalDuration / serviceData.length;
-      const progressStart = index * cardDuration;
-      const progressEnd = (index + 1) * cardDuration;
+      const progressStart = index / serviceData.length;
+      const progressEnd = (index + 1) / serviceData.length;
       
       return ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.5, // Increased scrub value for smoother animations
+        scrub: 0.5,
         onUpdate: (self) => {
           const overallProgress = self.progress;
           
-          // Map the overall scroll progress to this card's specific animation progress
           const normalizedCardProgress = gsap.utils.mapRange(
             progressStart, 
             progressEnd, 
@@ -190,16 +183,6 @@ const ServiceCards: React.FC = () => {
           setFlippedCards(newFlipped);
         }
       });
-    });
-
-    // Add smoother scroll behavior to the entire page
-    gsap.to(window, {
-      scrollTo: {
-        y: 0,
-        autoKill: false
-      },
-      duration: 0.1,
-      ease: "power2.out"
     });
 
     return () => {
