@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -144,59 +143,52 @@ const testimonials = [
   }
 ];
 
-const analyticsData = [
-  { category: "CTR", traditional: 60, napptix: 85 },
-  { category: "Engagement", traditional: 40, napptix: 90 },
-  { category: "Recall", traditional: 45, napptix: 80 }
-];
-
 const Advertisers: React.FC = () => {
-  const barChartRef = useRef<HTMLDivElement>(null);
-  const [chartAnimated, setChartAnimated] = useState(false);
-  
-  useEffect(() => {
-    // Clean up existing triggers to prevent memory leaks
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    
-    if (barChartRef.current) {
-      // Create a new animation for the chart
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !chartAnimated) {
-            animateChart();
-            setChartAnimated(true);
-          }
-        },
-        { threshold: 0.5 }
-      );
-      
-      observer.observe(barChartRef.current);
-      
-      return () => {
-        if (barChartRef.current) {
-          observer.unobserve(barChartRef.current);
-        }
-      };
-    }
-  }, [chartAnimated]);
-  
-  const animateChart = () => {
-    const bars = document.querySelectorAll('.analytics-bar');
-    bars.forEach((bar, index) => {
-      const height = bar.getAttribute('data-height') || '0%';
-      gsap.fromTo(
-        bar,
-        { height: '0%' },
-        { 
-          height: height, 
-          duration: 1,
-          delay: index * 0.2,
-          ease: 'power3.out'
-        }
-      );
-    });
+  const sectionRefs = {
+    stats: useRef<HTMLDivElement>(null),
+    chart: useRef<HTMLDivElement>(null)
   };
-  
+  const [barsAnimated, setBarsAnimated] = useState(false);
+
+  useEffect(() => {
+    // Animation for the performance chart
+    if (sectionRefs.chart.current) {
+      const ctx = gsap.context(() => {
+        const trigger = ScrollTrigger.create({
+          trigger: sectionRefs.chart.current,
+          start: "top 80%",
+          onEnter: () => {
+            if (!barsAnimated) {
+              animateBars();
+              setBarsAnimated(true);
+            }
+          },
+          onEnterBack: () => {
+            if (!barsAnimated) {
+              animateBars();
+              setBarsAnimated(true);
+            }
+          }
+        });
+
+        return () => {
+          trigger.kill();
+        };
+      }, sectionRefs.chart);
+
+      const animateBars = () => {
+        gsap.from(".chart-bar", {
+          height: 0,
+          duration: 1.5,
+          ease: "power3.out",
+          stagger: 0.2,
+        });
+      };
+
+      return () => ctx.revert();
+    }
+  }, [barsAnimated]);
+
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
@@ -237,7 +229,7 @@ const Advertisers: React.FC = () => {
       </section>
       
       {/* Section 2: Our Reach & Impact */}
-      <section className="py-16 bg-napptix-dark">
+      <section className="py-16 bg-napptix-dark" ref={sectionRefs.stats}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Our Reach & Impact</h2>
           
@@ -472,61 +464,72 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 6: Analytics Breakdown - Completely reworked bar graph */}
-      <section className="py-16 bg-napptix-dark">
+      {/* Section 6: Analytics Breakdown */}
+      <section className="py-16 bg-napptix-dark" ref={sectionRefs.chart}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Analytics Breakdown</h2>
           <p className="text-napptix-light-grey font-roboto-mono text-center mb-12 max-w-2xl mx-auto">
             Performance comparison between Napptix and traditional ad platforms
           </p>
           
-          <div ref={barChartRef} className="bg-black p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-xl font-bold text-white mb-8">Performance Comparison</h3>
-            
-            <div className="grid grid-cols-3 gap-8 h-[400px] relative">
-              {analyticsData.map((item, index) => (
-                <div key={index} className="flex flex-col items-center justify-end h-full">
-                  <div className="relative w-full flex justify-center gap-6 h-[300px]">
-                    {/* Traditional bar */}
-                    <div className="flex flex-col items-center justify-end w-12 md:w-16 h-full">
-                      <div 
-                        className="analytics-bar w-full bg-gray-500 rounded-t-md transition-all duration-1000 relative group"
-                        data-height={`${item.traditional}%`}
-                        style={{ height: '0%' }}
-                      >
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                          {item.traditional}%
-                        </div>
-                      </div>
-                      <p className="text-xs text-white mt-2">Traditional</p>
-                    </div>
-                    
-                    {/* Napptix bar */}
-                    <div className="flex flex-col items-center justify-end w-12 md:w-16 h-full">
-                      <div 
-                        className="analytics-bar w-full bg-[#29dd3b] rounded-t-md transition-all duration-1000 relative group"
-                        data-height={`${item.napptix}%`}
-                        style={{ height: '0%' }}
-                      >
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                          {item.napptix}%
-                        </div>
-                      </div>
-                      <p className="text-xs text-white mt-2">Napptix</p>
-                    </div>
-                  </div>
-                  
-                  <h4 className="text-white text-center mt-4 text-lg">{item.category}</h4>
+          <div className="relative h-[300px] md:h-[400px] p-6 border border-napptix-grey/20 rounded-xl bg-black">
+            <div className="absolute bottom-0 w-full max-w-4xl mx-auto left-0 right-0 px-8 pb-8">
+              <div className="relative h-[280px] flex items-end justify-around gap-4">
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-napptix-grey/20"></div>
+                
+                <div className="w-16 flex flex-col items-center">
+                  <div 
+                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
+                    style={{ height: '60%' }}
+                  ></div>
+                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
+                  <p className="text-white font-bold">Traditional</p>
                 </div>
-              ))}
-              
-              {/* Y-axis labels */}
-              <div className="absolute left-0 top-0 h-full flex flex-col justify-between pointer-events-none">
-                <span className="text-xs text-napptix-light-grey">100%</span>
-                <span className="text-xs text-napptix-light-grey">75%</span>
-                <span className="text-xs text-napptix-light-grey">50%</span>
-                <span className="text-xs text-napptix-light-grey">25%</span>
-                <span className="text-xs text-napptix-light-grey">0%</span>
+                
+                <div className="w-16 flex flex-col items-center">
+                  <div 
+                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
+                    style={{ height: '85%' }}
+                  ></div>
+                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
+                  <p className="text-white font-bold">Napptix</p>
+                </div>
+                
+                <div className="w-16 flex flex-col items-center">
+                  <div 
+                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
+                    style={{ height: '40%' }}
+                  ></div>
+                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
+                  <p className="text-white font-bold">Traditional</p>
+                </div>
+                
+                <div className="w-16 flex flex-col items-center">
+                  <div 
+                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
+                    style={{ height: '90%' }}
+                  ></div>
+                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
+                  <p className="text-white font-bold">Napptix</p>
+                </div>
+                
+                <div className="w-16 flex flex-col items-center">
+                  <div 
+                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
+                    style={{ height: '45%' }}
+                  ></div>
+                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
+                  <p className="text-white font-bold">Traditional</p>
+                </div>
+                
+                <div className="w-16 flex flex-col items-center">
+                  <div 
+                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
+                    style={{ height: '80%' }}
+                  ></div>
+                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
+                  <p className="text-white font-bold">Napptix</p>
+                </div>
               </div>
             </div>
           </div>
@@ -562,10 +565,103 @@ const Advertisers: React.FC = () => {
               </motion.div>
             ))}
           </div>
+          
+          <div className="flex justify-center items-center mt-12 gap-8">
+            <div className="p-4 bg-black/50 rounded-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
+                alt="Partner 1" 
+                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
+              />
+            </div>
+            <div className="p-4 bg-black/50 rounded-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
+                alt="Partner 2" 
+                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
+              />
+            </div>
+            <div className="p-4 bg-black/50 rounded-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
+                alt="Partner 3" 
+                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
+              />
+            </div>
+            <div className="p-4 bg-black/50 rounded-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
+                alt="Partner 4" 
+                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
+              />
+            </div>
+          </div>
         </div>
       </section>
       
-      {/* Section 8: Call to Action */}
+      {/* Section 8: Explainer Video */}
+      <section className="py-16 bg-napptix-dark">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="relative aspect-video rounded-xl overflow-hidden border border-napptix-grey/20">
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                <Button variant="outline" size="lg" className="rounded-full w-16 h-16 p-0 border-white/50 hover:border-[#29dd3b]/80 hover:bg-black/60 transition-all">
+                  <Play className="h-8 w-8 text-white" />
+                </Button>
+              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                alt="Explainer Video" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">How Napptix Works</h2>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p className="text-napptix-light-grey font-roboto-mono">
+                    Simple API integration with your existing ad stack
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p className="text-napptix-light-grey font-roboto-mono">
+                    Advanced audience targeting based on gameplay data
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p className="text-napptix-light-grey font-roboto-mono">
+                    Real-time analytics dashboard with actionable insights
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p className="text-napptix-light-grey font-roboto-mono">
+                    Average onboarding time of less than 7 days
+                  </p>
+                </li>
+              </ul>
+              
+              <Button className="mt-8 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
+                Schedule a Demo
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Section 9: Call to Action */}
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Power Your Next Campaign?</h2>

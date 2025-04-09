@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -151,16 +150,29 @@ const About: React.FC = () => {
         { 
           opacity: 1, 
           y: 0,
-          duration: 0.5,
-          delay: index * 0.05,
+          duration: 0.5, // Faster duration
+          delay: index * 0.05, // Much smaller delay between cards
           scrollTrigger: {
             trigger: card,
-            start: "top bottom-=50",
+            start: "top bottom-=50", // Trigger earlier
             toggleActions: "play none none reverse"
           },
-          ease: "power1.out"
+          ease: "power1.out" // Smoother easing
         }
       );
+
+      // Add glow animation similar to the "Gamer" text
+      const nameElement = card.querySelector('.member-name');
+      if (nameElement) {
+        gsap.to(nameElement, {
+          textShadow: "0 0 15px rgba(41, 221, 59, 0.5), 0 0 20px rgba(41, 221, 59, 0.2)",
+          color: "#fff",
+          repeat: -1,
+          yoyo: true,
+          duration: 2,
+          ease: "sine.inOut"
+        });
+      }
     });
 
     return () => {
@@ -180,24 +192,35 @@ const About: React.FC = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       
-      <div className="w-full pt-32 pb-20">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6 max-w-3xl mx-auto text-center">
+      <div className="container mx-auto pt-32 pb-20 px-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">About Us</h1>
+        <div className="text-napptix-light-grey font-roboto-mono space-y-6">
           <p>
             Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg w-full max-w-[100vw] mx-auto">
-            <h2 className="text-6xl md:text-7xl font-bold text-white mb-6 text-center">Our People</h2>
-            <p className="text-2xl text-white/80 mb-20 text-center">
+          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Mission</h2>
+          <p>
+            To revolutionize gaming advertising by developing technologies that enhance rather than
+            interrupt the gaming experience, creating value for players, developers, and advertisers alike.
+          </p>
+          
+          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
+            <p className="text-2xl text-white/80 mb-12">
               Ideas shape the world,<br />
-              our people shape <span className="text-[#29dd3b] font-bold">ideas</span>
+              our people shape <span className="gamer-text glow-green" style={{ 
+                background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
+                WebkitBackgroundClip: 'text',
+                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
+                animation: 'text-flicker 4s linear infinite'
+              }}>ideas</span>
             </p>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-24 w-[98vw] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
               {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card h-[85vh] lg:h-[95vh]">
+                <div key={index} className="team-member-card">
                   <TeamMember 
                     name={member.name}
                     position={member.position}
@@ -210,21 +233,21 @@ const About: React.FC = () => {
             </div>
           </div>
           
-          <h2 className="text-3xl font-bold text-white mt-12 mb-6 text-center">Our Values</h2>
+          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-72 flex flex-col justify-center">
-              <h3 className="text-xl font-bold text-white mb-4 text-center">Innovation</h3>
+            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+              <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
               <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
             </div>
             
-            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-72 flex flex-col justify-center">
-              <h3 className="text-xl font-bold text-white mb-4 text-center">Integrity</h3>
+            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+              <h3 className="text-xl font-bold text-white mb-4">Integrity</h3>
               <p>We prioritize transparency and ethical practices in all our operations.</p>
             </div>
             
-            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-72 flex flex-col justify-center">
-              <h3 className="text-xl font-bold text-white mb-4 text-center">Player-First</h3>
+            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+              <h3 className="text-xl font-bold text-white mb-4">Player-First</h3>
               <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
             </div>
           </div>

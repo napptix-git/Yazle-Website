@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -370,123 +369,119 @@ async function reportImpression(adId, userId) {
           </Card>
         </div>
         
-        {/* Section 5: Performance in Action (Live Charts) - Fixed the layout issue */}
-        <div className="relative">
-          <h2 className="text-3xl font-bold text-white mt-24 mb-10">Performance in Action</h2>
+        {/* Section 5: Performance in Action (Live Charts) */}
+        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Performance in Action</h2>
+        
+        <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 mb-20">
+          <h3 className="text-xl font-bold text-white mb-6">Revenue Growth After Integration</h3>
           
-          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 mb-20">
-            <h3 className="text-xl font-bold text-white mb-6">Revenue Growth After Integration</h3>
-            
-            <div className="h-[400px]">
-              <ChartContainer config={chartConfig}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={beforeAfterData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                    <XAxis dataKey="name" stroke="#999" />
-                    <YAxis stroke="#999" />
-                    <Tooltip content={<ChartTooltipContent />} />
-                    <Legend />
-                    <Bar dataKey="before" name="Before Napptix" fill="#6b7280" />
-                    <Bar dataKey="after" name="With Napptix" fill="#29dd3b" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </ChartContainer>
+          <div className="h-[400px]">
+            <ChartContainer config={chartConfig}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={beforeAfterData}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                  <XAxis dataKey="name" stroke="#999" />
+                  <YAxis stroke="#999" />
+                  <Tooltip content={<ChartTooltipContent />} />
+                  <Legend />
+                  <Bar dataKey="before" name="Before Napptix" fill="#6b7280" />
+                  <Bar dataKey="after" name="With Napptix" fill="#29dd3b" />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+              <div className="w-4 h-4 mr-2">
+                <img src="/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png" alt="Unity" className="w-full h-full object-contain" />
+              </div>
+              Unity
             </div>
-            
-            <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
-                <div className="w-4 h-4 mr-2">
-                  <img src="/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png" alt="Unity" className="w-full h-full object-contain" />
-                </div>
-                Unity
+            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+              <div className="w-4 h-4 mr-2">
+                <img src="/lovable-uploads/38b35255-cc55-471a-a732-148058a4274d.png" alt="Unreal" className="w-full h-full object-contain" />
               </div>
-              <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
-                <div className="w-4 h-4 mr-2">
-                  <img src="/lovable-uploads/38b35255-cc55-471a-a732-148058a4274d.png" alt="Unreal" className="w-full h-full object-contain" />
-                </div>
-                Unreal Engine
+              Unreal Engine
+            </div>
+            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+              <div className="w-4 h-4 mr-2">
+                <img src="/lovable-uploads/347b5bfb-a8d6-4595-8630-8f30916db04b.png" alt="HTML5" className="w-full h-full object-contain" />
               </div>
-              <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
-                <div className="w-4 h-4 mr-2">
-                  <img src="/lovable-uploads/347b5bfb-a8d6-4595-8630-8f30916db04b.png" alt="HTML5" className="w-full h-full object-contain" />
-                </div>
-                HTML5
+              HTML5
+            </div>
+            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+              <div className="w-4 h-4 mr-2">
+                <img src="/lovable-uploads/1e88692d-f880-4cde-a21b-1c81781f41ea.png" alt="Android" className="w-full h-full object-contain" />
               </div>
-              <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
-                <div className="w-4 h-4 mr-2">
-                  <img src="/lovable-uploads/1e88692d-f880-4cde-a21b-1c81781f41ea.png" alt="Android" className="w-full h-full object-contain" />
-                </div>
-                Android
-              </div>
+              Android
             </div>
           </div>
         </div>
         
-        {/* Section 6: Why Publishers Choose Napptix - Fixed the z-index issue so it doesn't overlap with the chart */}
-        <div className="relative z-10 bg-black pb-20">
-          <h2 className="text-3xl font-bold text-white mb-10 text-center">Why Publishers Choose Napptix</h2>
+        {/* Section 6: Why Publishers Choose Napptix */}
+        <h2 className="text-3xl font-bold text-white mt-24 mb-10 text-center">Why Publishers Choose Napptix</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white">Global Game Inventory Access</h3>
+              </div>
+              <p className="text-napptix-light-grey">Tap into our network of premium advertisers from around the world, ensuring high fill rates and competitive CPMs for your game.</p>
+            </CardContent>
+          </Card>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="bg-[#29dd3b]/20 p-3 rounded-full">
-                    <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-white">Global Game Inventory Access</h3>
+          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
                 </div>
-                <p className="text-napptix-light-grey">Tap into our network of premium advertisers from around the world, ensuring high fill rates and competitive CPMs for your game.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="bg-[#29dd3b]/20 p-3 rounded-full">
-                    <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-white">Real-Time Revenue Reporting</h3>
+                <h3 className="text-xl font-bold text-white">Real-Time Revenue Reporting</h3>
+              </div>
+              <p className="text-napptix-light-grey">Monitor your earnings with our transparent dashboard providing real-time insights into impressions, clicks, and revenue.</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+                  </svg>
                 </div>
-                <p className="text-napptix-light-grey">Monitor your earnings with our transparent dashboard providing real-time insights into impressions, clicks, and revenue.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="bg-[#29dd3b]/20 p-3 rounded-full">
-                    <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-white">Player-Friendly Ad Formats</h3>
+                <h3 className="text-xl font-bold text-white">Player-Friendly Ad Formats</h3>
+              </div>
+              <p className="text-napptix-light-grey">Designed specifically for games, our ad formats enhance rather than disrupt the player experience, maintaining high retention rates.</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="bg-[#29dd3b]/20 p-3 rounded-full">
+                  <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
                 </div>
-                <p className="text-napptix-light-grey">Designed specifically for games, our ad formats enhance rather than disrupt the player experience, maintaining high retention rates.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="bg-[#29dd3b]/20 p-3 rounded-full">
-                    <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-white">Flexible Integration Options</h3>
-                </div>
-                <p className="text-napptix-light-grey">Our platform supports multiple integration methods, making it easy to monetize your game regardless of your development environment.</p>
-              </CardContent>
-            </Card>
-          </div>
+                <h3 className="text-xl font-bold text-white">Flexible Integration Options</h3>
+              </div>
+              <p className="text-napptix-light-grey">Our platform supports multiple integration methods, making it easy to monetize your game regardless of your development environment.</p>
+            </CardContent>
+          </Card>
         </div>
         
         {/* Section 7: Explainer / Dev Video */}

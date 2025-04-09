@@ -19,26 +19,20 @@ const TeamMember: React.FC<TeamMemberProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   
-  // Split the name into first name and last name
-  const nameParts = name.split(' ');
-  const firstName = nameParts[0];
-  const lastName = nameParts.slice(1).join(' ');
-  
   return (
     <div 
-      className="flex flex-row h-full overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`${bgColor} p-20 w-1/4 relative flex flex-col justify-between`}>
-        <div>
-          <p className="text-2xl text-white/80 mb-28">{position}</p>
+      <div className={`${bgColor} p-6 md:w-1/2 lg:w-2/5 relative`}>
+        <div className="mb-4">
+          <p className="text-sm text-white/80">{position}</p>
         </div>
-        
-        <div className="flex flex-col">
+        <div className="mt-auto flex items-end justify-between">
           <div>
-            <h3 className="text-7xl font-bold text-white member-name">{firstName}</h3>
-            <h3 className="text-7xl font-bold text-white">{lastName}</h3>
+            <h3 className="text-2xl font-bold text-white member-name">{name.split(' ')[0]}</h3>
+            <h3 className="text-2xl font-bold text-white">{name.split(' ').slice(1).join(' ')}</h3>
           </div>
           
           {linkedinUrl && (
@@ -46,15 +40,15 @@ const TeamMember: React.FC<TeamMemberProps> = ({
               href={linkedinUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`p-3 mt-10 transition-all duration-200 ${isHovered ? 'opacity-100 scale-105' : 'opacity-0'}`}
+              className={`p-2 transition-all duration-200 ${isHovered ? 'opacity-100 scale-105' : 'opacity-0'}`}
             >
-              <ArrowUpRight className="text-white w-12 h-12" />
+              <ArrowUpRight className="text-white w-6 h-6" />
             </a>
           )}
         </div>
       </div>
       
-      <div className="w-3/4">
+      <div className="md:w-1/2 lg:w-3/5">
         <img 
           src={imageSrc} 
           alt={name} 

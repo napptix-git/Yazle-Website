@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -16,9 +15,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  
   // Initialize GSAP smooth scrolling
   useEffect(() => {
     // Scroll to top when page loads
@@ -35,32 +31,13 @@ const Index = () => {
       ease: "power2.out",
     });
 
-    // Add scroll to next page functionality
-    const handleScrollToNextPage = () => {
-      const isAtBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 50;
-      
-      if (isAtBottom) {
-        // Define the navigation order
-        const pageOrder = ['/', '/advertisers', '/publishers', '/about', '/contact'];
-        const currentIndex = pageOrder.indexOf(location.pathname);
-        
-        if (currentIndex >= 0 && currentIndex < pageOrder.length - 1) {
-          // Navigate to the next page
-          navigate(pageOrder[currentIndex + 1]);
-        }
-      }
-    };
-    
-    window.addEventListener('scroll', handleScrollToNextPage);
-
     return () => {
       // Clean up
       if (smoother) {
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       }
-      window.removeEventListener('scroll', handleScrollToNextPage);
     };
-  }, [navigate, location.pathname]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black">

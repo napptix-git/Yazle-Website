@@ -1,116 +1,153 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
 
 interface Office {
   city: string;
   address: string;
   x: number;
   y: number;
+  color: string;
 }
 
 const WorldMap: React.FC = () => {
   const offices: Office[] = [
-    {
-      city: "Mumbai",
-      address: "123 Marine Drive, Mumbai, Maharashtra 400001, India",
-      x: 65.2,
-      y: 51.5
+    { 
+      city: "Mumbai", 
+      address: "102, Firdos Apartments, Waroda Road Bandra West, Mumbai, Maharashtra 400050",
+      x: 76, 
+      y: 58,
+      color: "#ff9f7f"
     },
-    {
-      city: "Dubai",
-      address: "456 Sheikh Zayed Road, Dubai, UAE",
-      x: 58.5,
-      y: 48
+    { 
+      city: "Dubai", 
+      address: "302, Building 08, Media City, Dubai",
+      x: 65, 
+      y: 48,
+      color: "#8bffb0"
     },
-    {
-      city: "Delhi",
-      address: "789 Connaught Place, New Delhi 110001, India",
-      x: 67,
-      y: 48
+    { 
+      city: "New York", 
+      address: "350 5th Ave, New York, NY 10118, United States",
+      x: 20, 
+      y: 38,
+      color: "#8e99ff"
     },
-    {
-      city: "Singapore",
-      address: "10 Marina Boulevard, Singapore 018983",
-      x: 72,
-      y: 57.5
+    { 
+      city: "Amsterdam", 
+      address: "Herengracht 595, 1017 CE Amsterdam, Netherlands",
+      x: 47, 
+      y: 28,
+      color: "#ff7aef"
     }
   ];
   
-  const [activeRegion, setActiveRegion] = useState("Worldwide");
-  const [lineProgress, setLineProgress] = useState<{ [key: string]: number }>({});
+  // Draw lines between locations
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   
   useEffect(() => {
-    // Animate the connection lines between cities
-    const timer = setTimeout(() => {
-      offices.forEach((office, i) => {
-        if (i < offices.length - 1) {
-          setTimeout(() => {
-            setLineProgress(prev => ({ 
-              ...prev, 
-              [`${office.city}-${offices[i+1].city}`]: 1 
-            }));
-          }, i * 1000);
-        }
-      });
-    }, 500);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     
-    return () => clearTimeout(timer);
-  }, []);
-  
-  const filterOfficesByRegion = (region: string) => {
-    if (region === "Worldwide") return offices;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     
-    const regionMap: {[key: string]: string[]} = {
-      "Asia": ["Mumbai", "Delhi", "Singapore"],
-      "Middle East": ["Dubai"]
+    // Set canvas dimensions to match the parent container
+    const resizeCanvas = () => {
+      const container = canvas.parentElement;
+      if (container) {
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+        drawConnections();
+      }
     };
     
-    return offices.filter(office => regionMap[region]?.includes(office.city));
-  };
-  
-  const filteredOffices = filterOfficesByRegion(activeRegion);
-  
-  const drawLine = (start: Office, end: Office, progress: number) => {
-    const lineKey = `${start.city}-${end.city}`;
+    // Draw lines between points
+    const drawConnections = () => {
+      if (!ctx) return;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Calculate actual pixel positions
+      const points = offices.map(office => ({
+        x: (office.x / 100) * canvas.width,
+        y: (office.y / 100) * canvas.height,
+        color: office.color
+      }));
+      
+      // Animate connection drawing
+      let progress = 0;
+      const animate = () => {
+        if (progress >= 1) return;
+        
+        progress += 0.01;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw connections with progress
+        for (let i = 0; i < points.length; i++) {
+          for (let j = i + 1; j < points.length; j++) {
+            const startPoint = points[i];
+            const endPoint = points[j];
+            
+            const gradient = ctx.createLinearGradient(
+              startPoint.x, startPoint.y, 
+              endPoint.x, endPoint.y
+            );
+            gradient.addColorStop(0, startPoint.color);
+            gradient.addColorStop(1, endPoint.color);
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1;
+            
+            const currentX = startPoint.x + (endPoint.x - startPoint.x) * progress;
+            const currentY = startPoint.y + (endPoint.y - startPoint.y) * progress;
+            
+            ctx.beginPath();
+            ctx.moveTo(startPoint.x, startPoint.y);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+          }
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      
+      // Start animation
+      requestAnimationFrame(animate);
+    };
     
-    return (
-      <motion.path
-        key={lineKey}
-        d={`M${start.x}% ${start.y}% L${end.x}% ${end.y}%`}
-        fill="none"
-        stroke="rgba(255, 255, 255, 0.5)"
-        strokeWidth="1"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: lineProgress[lineKey] || 0 }}
-        transition={{ duration: 1 }}
-      />
-    );
-  };
+    // Initial setup
+    resizeCanvas();
+    
+    // Handle window resize
+    window.addEventListener('resize', resizeCanvas);
+    
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, [offices]);
   
   return (
-    <div className="relative w-full max-w-6xl mx-auto mb-20">
+    <div className="relative w-full max-w-5xl mx-auto mb-20">
+      <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
+      
       <div className="relative w-full">
+        {/* World Map Background with Canvas Overlay */}
         <div className="w-full aspect-[2/1] overflow-hidden relative">
+          <canvas 
+            ref={canvasRef} 
+            className="absolute top-0 left-0 w-full h-full z-10"
+          ></canvas>
           <img 
-            src="/lovable-uploads/4cd66301-b585-4147-b394-e874eec88954.png" 
+            src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png" 
             alt="World Map" 
-            className="w-full object-contain brightness-150" 
+            className="w-full object-contain brightness-[0.8] opacity-60"
           />
           
-          <svg 
-            className="absolute top-0 left-0 w-full h-full" 
-            style={{ pointerEvents: 'none' }}
-          >
-            {offices.map((start, i) => 
-              offices.slice(i + 1).map(end => 
-                drawLine(start, end, lineProgress[`${start.city}-${end.city}`] || 0)
-              )
-            )}
-          </svg>
-          
-          {filteredOffices.map((office, index) => (
+          {/* Location Labels */}
+          {offices.map((office, index) => (
             <motion.div
               key={office.city}
               className="absolute z-20"
@@ -122,28 +159,20 @@ const WorldMap: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
-              <div className="relative">
-                <MapPin 
-                  className="w-8 h-8 text-white -translate-x-1/2 -translate-y-1/2" 
-                  fill="rgba(255,255,255,0.2)"
-                />
-                <div className="absolute w-3 h-3 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" 
-                     style={{ top: '50%', left: '50%' }}
-                />
-                <div className="absolute w-8 h-8 bg-white/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-ping"
-                     style={{ top: '50%', left: '50%' }}
-                />
-                <div className="text-white font-medium text-sm absolute -translate-x-1/2 translate-y-2">
-                  {office.city}
-                </div>
+              <div 
+                className="px-6 py-2 rounded-full text-center font-medium text-black -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+                style={{ backgroundColor: office.color }}
+              >
+                {office.city}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
       
+      {/* Office Locations List */}
       <div className="mt-16 space-y-8">
-        {filteredOffices.map((office) => (
+        {offices.map((office) => (
           <div key={office.city} className="border-b border-white/20 pb-8">
             <div className="flex flex-col md:flex-row justify-between">
               <h3 className="text-4xl md:text-5xl font-syne font-extrabold mb-4 md:mb-0">{office.city}</h3>
@@ -153,16 +182,16 @@ const WorldMap: React.FC = () => {
         ))}
       </div>
       
+      {/* Region Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mt-16">
-        {["Worldwide", "Asia", "Middle East"].map((region) => (
+        {["Worldwide", "APAC", "MEA", "Europe", "Americas"].map((region, index) => (
           <button
             key={region}
             className={`px-6 py-2 rounded-full text-lg transition-all ${
-              region === activeRegion 
+              index === 0 
                 ? "bg-white text-black" 
                 : "bg-white/10 text-white hover:bg-white/20"
             }`}
-            onClick={() => setActiveRegion(region)}
           >
             {region}
           </button>
