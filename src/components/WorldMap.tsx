@@ -26,13 +26,6 @@ const WorldMap: React.FC = () => {
       color: "#8bffb0"
     },
     { 
-      city: "Delhi", 
-      address: "42-B, Connaught Place, New Delhi, 110001",
-      x: 65, 
-      y: 48,
-      color: "#8e99ff"
-    },
-    { 
       city: "Singapore", 
       address: "8 Marina Gardens Drive, Singapore 018953",
       x: 75, 
@@ -117,9 +110,9 @@ const WorldMap: React.FC = () => {
       window.removeEventListener('resize', resizeCanvas);
     };
   }, [offices]);
-  
+
   return (
-    <div className="relative w-full max-w-4xl mx-auto mb-20">
+    <div className="relative w-full max-w-3xl mx-auto mb-20">
       <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
       
       <div className="relative w-full">
@@ -131,7 +124,7 @@ const WorldMap: React.FC = () => {
           <img 
             src="/lovable-uploads/51e8b6c1-9de8-457c-883f-ab3a9d4bb28e.png" 
             alt="World Map" 
-            className="w-full h-full object-cover brightness-[0.8] opacity-90"
+            className="w-full h-full object-cover brightness-[0.9] opacity-95"
           />
           
           {offices.map((office, index) => (
