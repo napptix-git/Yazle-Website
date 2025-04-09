@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
@@ -24,6 +25,13 @@ const WorldMap: React.FC = () => {
       x: 54, 
       y: 54,
       color: "#8bffb0"
+    },
+    { 
+      city: "Delhi", 
+      address: "42-B, Connaught Place, New Delhi, 110001",
+      x: 65, 
+      y: 48,
+      color: "#8e99ff"
     },
     { 
       city: "Singapore", 
@@ -112,7 +120,7 @@ const WorldMap: React.FC = () => {
   }, [offices]);
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto mb-20">
+    <div className="relative w-full max-w-2xl mx-auto mb-20">
       <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
       
       <div className="relative w-full">
@@ -144,7 +152,7 @@ const WorldMap: React.FC = () => {
         </div>
       </div>
       
-      <div className="mt-16 space-y-8">
+      <div className="mt-24 space-y-8">
         {offices.map((office) => (
           <div key={office.city} className="border-b border-white/20 pb-8">
             <div className="flex flex-col md:flex-row justify-between">
