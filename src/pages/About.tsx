@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -195,9 +194,9 @@ const About: React.FC = () => {
               our people shape <span className="text-[#29dd3b] font-bold">ideas</span>
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 mb-16">
               {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card h-[60vh]">
+                <div key={index} className="team-member-card h-[70vh] xl:h-[80vh]">
                   <TeamMember 
                     name={member.name}
                     position={member.position}

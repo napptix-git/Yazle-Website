@@ -30,15 +30,15 @@ const TeamMember: React.FC<TeamMemberProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`${bgColor} p-10 w-2/5 relative flex flex-col justify-between`}>
+      <div className={`${bgColor} p-12 w-2/5 relative flex flex-col justify-between`}>
         <div>
-          <p className="text-sm text-white/80 mb-16">{position}</p>
+          <p className="text-sm text-white/80 mb-20">{position}</p>
         </div>
         
         <div className="flex flex-col">
           <div>
-            <h3 className="text-4xl font-bold text-white member-name">{firstName}</h3>
-            <h3 className="text-4xl font-bold text-white">{lastName}</h3>
+            <h3 className="text-5xl font-bold text-white member-name">{firstName}</h3>
+            <h3 className="text-5xl font-bold text-white">{lastName}</h3>
           </div>
           
           {linkedinUrl && (
@@ -46,9 +46,9 @@ const TeamMember: React.FC<TeamMemberProps> = ({
               href={linkedinUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`p-2 mt-4 transition-all duration-200 ${isHovered ? 'opacity-100 scale-105' : 'opacity-0'}`}
+              className={`p-2 mt-6 transition-all duration-200 ${isHovered ? 'opacity-100 scale-105' : 'opacity-0'}`}
             >
-              <ArrowUpRight className="text-white w-6 h-6" />
+              <ArrowUpRight className="text-white w-8 h-8" />
             </a>
           )}
         </div>
