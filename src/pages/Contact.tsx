@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
+import { MapPin } from 'lucide-react';
+import gsap from 'gsap';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,28 +14,32 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [submitting, setSubmitting] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
 
-  // Cities data
   const cities = [
     { 
       name: "Mumbai", 
-      address: "123 Marine Drive, Mumbai, Maharashtra 400001, India",
+      address: "Level 42, World Trade Center, Cuffe Parade, Mumbai 400005",
+      position: { x: '30%', y: '45%' },
       tag: "Asia"
     },
     { 
       name: "Dubai", 
-      address: "456 Sheikh Zayed Road, Dubai, UAE",
+      address: "Emirates Towers, Sheikh Zayed Road, Dubai, UAE",
+      position: { x: '23%', y: '43%' },
       tag: "Middle East"
     },
     { 
-      name: "Delhi", 
-      address: "789 Connaught Place, New Delhi 110001, India",
-      tag: "Asia"
+      name: "Singapore", 
+      address: "One Raffles Place, Tower 2, Singapore 048616",
+      position: { x: '50%', y: '55%' },
+      tag: "South East"
     },
     { 
-      name: "Singapore", 
-      address: "10 Marina Boulevard, Singapore 018983",
-      tag: "South East"
+      name: "Delhi", 
+      address: "Cyber Hub, DLF Cyber City, Gurugram, Delhi NCR 122002",
+      position: { x: '36%', y: '38%' },
+      tag: "Asia"
     }
   ];
 
@@ -59,44 +65,169 @@ const Contact: React.FC = () => {
     }, 1500);
   };
 
+  // Initialize map animations
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    // Create dots animation
+    const dots = document.querySelectorAll('.map-dot');
+    dots.forEach((dot) => {
+      gsap.to(dot, {
+        opacity: 0.6,
+        scale: 1.3,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+
+    // Create lines animation
+    const lines = document.querySelectorAll('.connection-line');
+    lines.forEach((line) => {
+      gsap.fromTo(
+        line, 
+        { strokeDashoffset: 1000 },
+        { 
+          strokeDashoffset: 0, 
+          duration: 3,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+    });
+
+    // Create marker pulsing effect
+    const markers = document.querySelectorAll('.location-marker');
+    markers.forEach((marker) => {
+      gsap.to(marker, {
+        scale: 1.2,
+        duration: 1,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+
+    return () => {
+      // Clean up animations
+      gsap.killTweensOf(dots);
+      gsap.killTweensOf(lines);
+      gsap.killTweensOf(markers);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-black font-manrope">
       <Navbar />
       
       <div className="container mx-auto pt-24 pb-20 px-4">
+        <h1 className="text-4xl md:text-5xl font-syne font-extrabold text-white mb-8 text-center">Get In Touch</h1>
+        
         <div className="mb-16 w-full">
-          {/* City names and addresses in large format */}
-          <div className="space-y-12 mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">Global Presence</h2>
+          
+          <div 
+            ref={mapRef} 
+            className="relative w-full h-[500px] bg-black rounded-xl overflow-hidden"
+          >
+            <img 
+              src="/lovable-uploads/c5496b5e-971e-4d17-930f-937cb0026419.png" 
+              alt="Napptix Global Map" 
+              className="w-full h-full object-contain opacity-90"
+            />
+            
+            {/* Map dots for visual effect */}
+            <div className="absolute inset-0">
+              {Array.from({ length: 100 }).map((_, i) => (
+                <div 
+                  key={i}
+                  className="map-dot absolute w-1 h-1 bg-white rounded-full opacity-30"
+                  style={{ 
+                    left: `${Math.random() * 100}%`, 
+                    top: `${Math.random() * 100}%` 
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* City markers */}
             {cities.map((city, index) => (
-              <div key={index} className="border-b border-gray-800 pb-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                  <h2 className="text-5xl md:text-7xl font-syne font-bold text-white mb-4 md:mb-0">{city.name}</h2>
-                  <p className="text-xl text-napptix-light-grey">{city.address}</p>
+              <div 
+                key={index} 
+                className="absolute"
+                style={{ 
+                  left: city.position.x, 
+                  top: city.position.y
+                }}
+              >
+                <div className="relative">
+                  <MapPin 
+                    className="location-marker text-[#29dd3b] w-6 h-6 -translate-x-1/2 -translate-y-1/2" 
+                  />
+                  <div className="absolute top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                    <span className="text-white font-bold text-sm bg-black/70 px-2 py-1 rounded">
+                      {city.name}
+                    </span>
+                  </div>
+                  
+                  {/* Tag label */}
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2">
+                    <span className="text-xs px-2 py-0.5 bg-[#29dd3b]/20 text-[#29dd3b] rounded-full">
+                      {city.tag}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
+            
+            {/* Connection lines between cities */}
+            <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+              <line 
+                x1="30%" y1="45%" x2="23%" y2="43%"
+                className="connection-line" 
+                stroke="#29dd3b" 
+                strokeWidth="1" 
+                strokeDasharray="5,5" 
+                opacity="0.6"
+              />
+              <line 
+                x1="23%" y1="43%" x2="36%" y2="38%"
+                className="connection-line" 
+                stroke="#29dd3b" 
+                strokeWidth="1" 
+                strokeDasharray="5,5" 
+                opacity="0.6"
+              />
+              <line 
+                x1="36%" y1="38%" x2="50%" y2="55%"
+                className="connection-line" 
+                stroke="#29dd3b" 
+                strokeWidth="1" 
+                strokeDasharray="5,5" 
+                opacity="0.6"
+              />
+              <line 
+                x1="50%" y1="55%" x2="30%" y2="45%"
+                className="connection-line" 
+                stroke="#29dd3b" 
+                strokeWidth="1" 
+                strokeDasharray="5,5" 
+                opacity="0.6"
+              />
+            </svg>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">Global Presence</h2>
-          
-          {/* Map */}
-          <div className="relative w-full h-[400px] bg-black rounded-xl overflow-hidden mb-8">
-            <img 
-              src="/lovable-uploads/05b91cc3-4a1e-4bfb-87d2-97dcf501ce33.png" 
-              alt="Napptix Global Map" 
-              className="w-full h-full object-contain"
-            />
-          </div>
-          
-          {/* Region buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-10 mb-12">
-            {["Worldwide", "Asia", "Middle East", "South East"].map((region) => (
-              <button
-                key={region}
-                className="px-6 py-2 rounded-full text-lg transition-all bg-white/10 text-white hover:bg-white/20"
-              >
-                {region}
-              </button>
+          {/* City addresses */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+            {cities.map((city, index) => (
+              <div key={index} className="bg-napptix-dark p-5 rounded-lg border border-napptix-grey/20">
+                <div className="flex items-center mb-2">
+                  <MapPin className="text-[#29dd3b] mr-2 w-5 h-5" />
+                  <h3 className="text-white font-bold text-lg">{city.name}</h3>
+                </div>
+                <span className="block text-napptix-light-grey text-sm">{city.address}</span>
+              </div>
             ))}
           </div>
         </div>

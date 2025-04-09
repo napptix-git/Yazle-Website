@@ -58,22 +58,6 @@ const ServiceCard: React.FC<ServiceProps & {
   onFlipComplete,
   previousCardFlipped
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    if (!cardRef.current) return;
-    
-    // Create floating animation for each card
-    gsap.to(cardRef.current, {
-      y: "random(-10, 10)",
-      x: "random(-5, 5)",
-      rotation: "random(-2, 2)",
-      duration: 3 + index,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
-  }, [index]);
   
   return (
     <div
@@ -81,14 +65,13 @@ const ServiceCard: React.FC<ServiceProps & {
       style={{
         zIndex: 4 - index,
       }}
-      ref={cardRef}
     >
       <div 
         className="relative w-[280px] h-[400px] card-container"
         style={{
           transformStyle: 'preserve-3d',
           transform: `rotateY(${flipProgress * 180}deg)`,
-          transition: 'transform 3s ease-in-out', // Slower transition
+          transition: 'transform 2.5s ease-in-out', // Slower transition
         }}
         onAnimationEnd={onFlipComplete}
       >
@@ -178,9 +161,10 @@ const ServiceCards: React.FC = () => {
 
     // Create sequential card flip animations
     const totalScrollDistance = 1;
+    const cardDelay = 0.25; // Percent of scroll progress to delay between cards
     
     // Increased segment size for slower animations
-    const segmentSize = totalScrollDistance / (serviceData.length + 2); // Add more space between animations
+    const segmentSize = totalScrollDistance / (serviceData.length + 1);
 
     // Use GSAP Timeline for better control over the sequence
     const tl = gsap.timeline({
@@ -188,7 +172,7 @@ const ServiceCards: React.FC = () => {
         trigger: sectionRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 4, // Even slower scrub for smoother animations
+        scrub: 3, // Much slower scrub for smoother animations
         onUpdate: (self) => {
           const overallProgress = self.progress;
           
@@ -285,14 +269,14 @@ const ServiceCards: React.FC = () => {
       <div className="container mx-auto px-4">
         <div 
           ref={cardsContainerRef}
-          className={`flex ${isMobile ? 'flex-col items-center' : 'flex-row justify-center items-center'} gap-10`} // Increased gap
+          className={`flex ${isMobile ? 'flex-col items-center' : 'flex-row justify-center items-center'} gap-6`}
         >
           {serviceData.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 2, delay: index * 0.5 }} // Increased duration and delay
+              transition={{ duration: 2, delay: index * 0.3 }} // Increased duration for smoother animations
             >
               <ServiceCard 
                 {...service}

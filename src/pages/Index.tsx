@@ -35,11 +35,30 @@ const Index = () => {
       ease: "power2.out",
     });
 
+    // Add scroll to next page functionality
+    const handleScrollToNextPage = () => {
+      const isAtBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 50;
+      
+      if (isAtBottom) {
+        // Define the navigation order
+        const pageOrder = ['/', '/advertisers', '/publishers', '/about', '/contact'];
+        const currentIndex = pageOrder.indexOf(location.pathname);
+        
+        if (currentIndex >= 0 && currentIndex < pageOrder.length - 1) {
+          // Navigate to the next page
+          navigate(pageOrder[currentIndex + 1]);
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScrollToNextPage);
+
     return () => {
       // Clean up
       if (smoother) {
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       }
+      window.removeEventListener('scroll', handleScrollToNextPage);
     };
   }, [navigate, location.pathname]);
 

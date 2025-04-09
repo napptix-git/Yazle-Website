@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-1">
             <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
-              <div className="h-16 md:h-20 lg:h-22">
+              <div className="h-14 md:h-18 lg:h-18">
                 <img 
                   src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                   alt="Napptix" 
