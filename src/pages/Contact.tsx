@@ -116,20 +116,6 @@ const Contact: React.FC = () => {
               </button>
             </div>
           </form>
-          
-          <div className="mt-12 bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-xl font-bold text-white mb-4 text-center">Other Ways to Reach Us</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="text-center">
-                <p className="font-bold text-white text-lg">Email</p>
-                <p className="text-lg">info@napptix.com</p>
-              </div>
-              <div className="text-center">
-                <p className="font-bold text-white text-lg">Phone</p>
-                <p className="text-lg">+1 (555) 123-4567</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       

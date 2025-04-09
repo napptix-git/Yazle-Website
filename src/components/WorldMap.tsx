@@ -39,11 +39,11 @@ const WorldMap: React.FC = () => {
   ];
   
   return (
-    <div className="relative w-full max-w-4xl mx-auto mb-20">
-      <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
+    <div className="relative w-full max-w-6xl mx-auto mb-20">
+      <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-16 text-center">Global Presence</h2>
       
       <div className="relative w-full">
-        <div className="w-full aspect-[2/1] overflow-hidden relative">
+        <div className="w-full aspect-[2/1] overflow-hidden relative mb-16">
           <img 
             src="/lovable-uploads/de1f01a3-c2a1-49bf-89d7-0f5535044663.png" 
             alt="World Map" 
@@ -69,29 +69,14 @@ const WorldMap: React.FC = () => {
         </div>
       </div>
       
-      <div className="mt-16 space-y-8">
+      <div className="mt-16 space-y-8 w-full">
         {offices.map((office) => (
           <div key={office.city} className="border-b border-white/20 pb-8">
-            <div className="flex flex-col md:flex-row justify-between">
-              <h3 className="text-4xl md:text-5xl font-syne font-extrabold mb-4 md:mb-0">{office.city}</h3>
-              <p className="text-xl max-w-md">{office.address}</p>
+            <div className="flex flex-row justify-between items-center w-full">
+              <h3 className="text-4xl md:text-6xl font-syne font-extrabold">{office.city}</h3>
+              <p className="text-xl">{office.address}</p>
             </div>
           </div>
-        ))}
-      </div>
-      
-      <div className="flex flex-wrap justify-center gap-4 mt-16">
-        {["Worldwide", "APAC", "MEA", "Europe", "Americas"].map((region, index) => (
-          <button
-            key={region}
-            className={`px-6 py-2 rounded-full text-lg transition-all ${
-              index === 0 
-                ? "bg-white text-black" 
-                : "bg-white/10 text-white hover:bg-white/20"
-            }`}
-          >
-            {region}
-          </button>
         ))}
       </div>
     </div>

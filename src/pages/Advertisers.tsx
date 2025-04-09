@@ -26,6 +26,7 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,7 +152,6 @@ const Advertisers: React.FC = () => {
   const [barsAnimated, setBarsAnimated] = useState(false);
 
   useEffect(() => {
-    // Animation for the performance chart
     if (sectionRefs.chart.current) {
       const ctx = gsap.context(() => {
         const trigger = ScrollTrigger.create({
@@ -188,6 +188,13 @@ const Advertisers: React.FC = () => {
       return () => ctx.revert();
     }
   }, [barsAnimated]);
+
+  const analyticsData = [
+    { name: 'CTR', traditional: 1.2, napptix: 3.8 },
+    { name: 'Engagement Rate', traditional: 0.9, napptix: 4.5 },
+    { name: 'Conversion', traditional: 1.5, napptix: 4.2 },
+    { name: 'Recall', traditional: 2.1, napptix: 4.8 }
+  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -468,68 +475,48 @@ const Advertisers: React.FC = () => {
       <section className="py-16 bg-napptix-dark" ref={sectionRefs.chart}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Analytics Breakdown</h2>
-          <p className="text-napptix-light-grey font-roboto-mono text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-napptix-light-grey font-roboto-mono text-center mb-16 max-w-2xl mx-auto">
             Performance comparison between Napptix and traditional ad platforms
           </p>
           
-          <div className="relative h-[300px] md:h-[400px] p-6 border border-napptix-grey/20 rounded-xl bg-black">
-            <div className="absolute bottom-0 w-full max-w-4xl mx-auto left-0 right-0 px-8 pb-8">
-              <div className="relative h-[280px] flex items-end justify-around gap-4">
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-napptix-grey/20"></div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '60%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '85%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '40%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '90%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '45%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '80%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
+          <div className="relative p-6 border border-napptix-grey/20 rounded-xl bg-black">
+            <div className="h-[400px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={analyticsData}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#444" vertical={false} />
+                  <XAxis dataKey="name" stroke="#999" />
+                  <YAxis stroke="#999" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: "#222", border: "1px solid #444" }} 
+                    itemStyle={{ color: "#fff" }} 
+                    labelStyle={{ fontWeight: "bold", color: "#fff" }} 
+                  />
+                  <Legend wrapperStyle={{ paddingTop: "20px" }} />
+                  <Bar dataKey="traditional" name="Traditional Ads" fill="#6b7280" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="napptix" name="Napptix Ads" fill="#29dd3b" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="p-4 bg-napptix-dark/50 rounded-lg border border-napptix-grey/20">
+                <p className="text-white font-bold text-lg">3.1x Higher CTR</p>
+                <p className="text-napptix-light-grey">Than industry average</p>
+              </div>
+              <div className="p-4 bg-napptix-dark/50 rounded-lg border border-napptix-grey/20">
+                <p className="text-white font-bold text-lg">5x Engagement</p>
+                <p className="text-napptix-light-grey">User interaction rate</p>
+              </div>
+              <div className="p-4 bg-napptix-dark/50 rounded-lg border border-napptix-grey/20">
+                <p className="text-white font-bold text-lg">2.8x Conversion</p>
+                <p className="text-napptix-light-grey">Click-to-action completions</p>
+              </div>
+              <div className="p-4 bg-napptix-dark/50 rounded-lg border border-napptix-grey/20">
+                <p className="text-white font-bold text-lg">2.3x Brand Recall</p>
+                <p className="text-napptix-light-grey">Post-ad brand recognition</p>
               </div>
             </div>
           </div>

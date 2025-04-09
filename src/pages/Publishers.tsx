@@ -202,9 +202,9 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 2: Publisher Success Metrics */}
-        <h2 className="text-3xl font-bold text-white mt-20 mb-12">Publisher Success Metrics</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-12">Publisher Success Metrics</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
           <div className="space-y-8">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
               <CountUpMetric 
@@ -255,9 +255,9 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 3: Integration Options */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Integration Options</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-14">Integration Options</h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-32">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 flex items-center space-x-4">
               <div className="bg-[#29dd3b]/20 p-3 rounded-full">
@@ -325,7 +325,7 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 4: Integration Details */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
           <Card className="bg-napptix-dark border-napptix-grey/20">
             <CardContent className="p-6">
               <div className="flex items-center space-x-4 mb-4">
@@ -370,50 +370,50 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 5: Performance in Action (Live Charts) */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Performance in Action</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-14">Performance in Action</h2>
         
-        <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 mb-20">
-          <h3 className="text-xl font-bold text-white mb-6">Revenue Growth After Integration</h3>
+        <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 mb-32">
+          <h3 className="text-xl font-bold text-white mb-10">Revenue Growth After Integration</h3>
           
-          <div className="h-[400px]">
+          <div className="h-[450px]">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={beforeAfterData}
-                  margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                  margin={{ top: 30, right: 40, left: 30, bottom: 30 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#444" vertical={false} />
                   <XAxis dataKey="name" stroke="#999" />
                   <YAxis stroke="#999" />
                   <Tooltip content={<ChartTooltipContent />} />
-                  <Legend />
-                  <Bar dataKey="before" name="Before Napptix" fill="#6b7280" />
-                  <Bar dataKey="after" name="With Napptix" fill="#29dd3b" />
+                  <Legend wrapperStyle={{ paddingTop: "20px" }} />
+                  <Bar dataKey="before" name="Before Napptix" fill="#6b7280" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="after" name="With Napptix" fill="#29dd3b" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+          <div className="flex flex-wrap justify-center gap-6 mt-12">
+            <div className="bg-napptix-grey/20 p-3 px-6 rounded-full text-sm text-white flex items-center">
               <div className="w-4 h-4 mr-2">
                 <img src="/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png" alt="Unity" className="w-full h-full object-contain" />
               </div>
               Unity
             </div>
-            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+            <div className="bg-napptix-grey/20 p-3 px-6 rounded-full text-sm text-white flex items-center">
               <div className="w-4 h-4 mr-2">
                 <img src="/lovable-uploads/38b35255-cc55-471a-a732-148058a4274d.png" alt="Unreal" className="w-full h-full object-contain" />
               </div>
               Unreal Engine
             </div>
-            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+            <div className="bg-napptix-grey/20 p-3 px-6 rounded-full text-sm text-white flex items-center">
               <div className="w-4 h-4 mr-2">
                 <img src="/lovable-uploads/347b5bfb-a8d6-4595-8630-8f30916db04b.png" alt="HTML5" className="w-full h-full object-contain" />
               </div>
               HTML5
             </div>
-            <div className="bg-napptix-grey/20 p-2 px-4 rounded-full text-sm text-white flex items-center">
+            <div className="bg-napptix-grey/20 p-3 px-6 rounded-full text-sm text-white flex items-center">
               <div className="w-4 h-4 mr-2">
                 <img src="/lovable-uploads/1e88692d-f880-4cde-a21b-1c81781f41ea.png" alt="Android" className="w-full h-full object-contain" />
               </div>
@@ -423,9 +423,9 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 6: Why Publishers Choose Napptix */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10 text-center">Why Publishers Choose Napptix</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-14 text-center">Why Publishers Choose Napptix</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
           <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center space-x-4 mb-4">
@@ -445,7 +445,7 @@ async function reportImpression(adId, userId) {
               <div className="flex items-center space-x-4 mb-4">
                 <div className="bg-[#29dd3b]/20 p-3 rounded-full">
                   <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 012-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white">Real-Time Revenue Reporting</h3>
@@ -485,9 +485,9 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 7: Explainer / Dev Video */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">Developer Resources</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-14">Developer Resources</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
             <div className="aspect-video bg-black/50 rounded-lg flex items-center justify-center mb-4">
               <div className="w-16 h-16 bg-[#29dd3b]/20 rounded-full flex items-center justify-center">
@@ -525,9 +525,9 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 8: FAQ for Developers */}
-        <h2 className="text-3xl font-bold text-white mt-24 mb-10">FAQ for Developers</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-14">FAQ for Developers</h2>
         
-        <div className="bg-napptix-dark rounded-xl border border-napptix-grey/20 mb-20">
+        <div className="bg-napptix-dark rounded-xl border border-napptix-grey/20 mb-32">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1" className="border-b border-napptix-grey/20">
               <AccordionTrigger className="px-6 py-4 text-white hover:text-[#29dd3b]">
