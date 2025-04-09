@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -144,62 +145,49 @@ const testimonials = [
 ];
 
 const Advertisers: React.FC = () => {
-  const sectionRefs = {
-    stats: useRef<HTMLDivElement>(null),
-    chart: useRef<HTMLDivElement>(null)
-  };
-  const [barsAnimated, setBarsAnimated] = useState(false);
-  const chartBarsRef = useRef<(HTMLDivElement | null)[]>([]);
-
+  // Custom bar chart implementation with plain HTML/CSS instead of recharts
+  const barChartRef = useRef<HTMLDivElement>(null);
+  const [chartAnimated, setChartAnimated] = useState(false);
+  
   useEffect(() => {
-    // Animation for the performance chart
-    if (sectionRefs.chart.current) {
-      const ctx = gsap.context(() => {
-        const trigger = ScrollTrigger.create({
-          trigger: sectionRefs.chart.current,
-          start: "top 80%",
-          onEnter: () => {
-            if (!barsAnimated) {
-              animateBars();
-              setBarsAnimated(true);
-            }
-          },
-          onEnterBack: () => {
-            if (!barsAnimated) {
-              animateBars();
-              setBarsAnimated(true);
-            }
+    if (barChartRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !chartAnimated) {
+            animateChart();
+            setChartAnimated(true);
           }
-        });
-
-        return () => {
-          if (trigger) trigger.kill();
-        };
-      }, sectionRefs.chart);
-
-      const animateBars = () => {
-        // Ensure all bars are initially at 0 height
-        chartBarsRef.current.forEach((bar) => {
-          if (bar) {
-            // Store the original height as a data attribute
-            const targetHeight = bar.dataset.targetHeight || "0%";
-            gsap.set(bar, { height: "0%" });
-            
-            // Animate to the target height
-            gsap.to(bar, {
-              height: targetHeight,
-              duration: 1.5,
-              ease: "power3.out",
-              stagger: 0.2,
-            });
-          }
-        });
+        },
+        { threshold: 0.5 }
+      );
+      
+      observer.observe(barChartRef.current);
+      
+      return () => {
+        if (barChartRef.current) {
+          observer.unobserve(barChartRef.current);
+        }
       };
-
-      return () => ctx.revert();
     }
-  }, [barsAnimated]);
-
+  }, [chartAnimated]);
+  
+  const animateChart = () => {
+    const bars = document.querySelectorAll('.bar-column .bar');
+    bars.forEach((bar, index) => {
+      const height = bar.getAttribute('data-height') || '0%';
+      gsap.fromTo(
+        bar,
+        { height: '0%' },
+        { 
+          height: height, 
+          duration: 1,
+          delay: index * 0.2,
+          ease: 'power3.out'
+        }
+      );
+    });
+  };
+  
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
@@ -240,7 +228,7 @@ const Advertisers: React.FC = () => {
       </section>
       
       {/* Section 2: Our Reach & Impact */}
-      <section className="py-16 bg-napptix-dark" ref={sectionRefs.stats}>
+      <section className="py-16 bg-napptix-dark">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Our Reach & Impact</h2>
           
@@ -475,84 +463,150 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 6: Analytics Breakdown */}
-      <section className="py-16 bg-napptix-dark" ref={sectionRefs.chart}>
+      {/* Section 6: Analytics Breakdown - Using custom CSS-based chart instead of recharts */}
+      <section className="py-16 bg-napptix-dark">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Analytics Breakdown</h2>
           <p className="text-napptix-light-grey font-roboto-mono text-center mb-12 max-w-2xl mx-auto">
             Performance comparison between Napptix and traditional ad platforms
           </p>
           
-          <div className="relative h-[300px] md:h-[400px] p-6 border border-napptix-grey/20 rounded-xl bg-black">
-            <div className="absolute bottom-0 w-full max-w-4xl mx-auto left-0 right-0 px-8 pb-8">
-              <div className="relative h-[280px] flex items-end justify-around gap-4">
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-napptix-grey/20"></div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    ref={el => chartBarsRef.current[0] = el}
-                    data-target-height="60%"
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: "0%" }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
-                  <p className="text-white font-bold">Traditional</p>
+          <div ref={barChartRef} className="bg-black p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-bold text-white mb-6">Performance Comparison</h3>
+            
+            <div className="flex flex-col">
+              <div className="h-[400px] relative">
+                {/* Chart background grid */}
+                <div className="absolute left-0 right-0 bottom-0 top-0">
+                  {[0, 25, 50, 75, 100].map((value, i) => (
+                    <div 
+                      key={i}
+                      className="absolute left-0 right-0 border-t border-napptix-grey/10"
+                      style={{ bottom: `${value}%` }}
+                    >
+                      <span className="absolute -left-6 -translate-y-1/2 text-xs text-napptix-light-grey">
+                        {value}%
+                      </span>
+                    </div>
+                  ))}
                 </div>
                 
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    ref={el => chartBarsRef.current[1] = el}
-                    data-target-height="85%"
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: "0%" }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
-                  <p className="text-white font-bold">Napptix</p>
+                {/* Actual chart bars */}
+                <div className="absolute left-0 right-0 bottom-0 top-0 flex justify-around items-end pt-8 pb-16">
+                  <div className="bar-column flex flex-col items-center">
+                    <div className="relative w-10 md:w-16 group">
+                      <div 
+                        className="bar bg-gray-500 w-full rounded-t-md transition-all duration-1000" 
+                        data-height="60%"
+                        style={{ height: '0%' }}
+                      ></div>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
+                        60% CTR
+                      </div>
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-napptix-light-grey text-xs md:text-sm">CTR</p>
+                      <p className="text-white text-xs md:text-sm">Traditional</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bar-column flex flex-col items-center">
+                    <div className="relative w-10 md:w-16 group">
+                      <div 
+                        className="bar bg-[#29dd3b] w-full rounded-t-md transition-all duration-1000" 
+                        data-height="85%"
+                        style={{ height: '0%' }}
+                      ></div>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
+                        85% CTR
+                      </div>
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-napptix-light-grey text-xs md:text-sm">CTR</p>
+                      <p className="text-white text-xs md:text-sm">Napptix</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bar-column flex flex-col items-center">
+                    <div className="relative w-10 md:w-16 group">
+                      <div 
+                        className="bar bg-gray-500 w-full rounded-t-md transition-all duration-1000" 
+                        data-height="40%"
+                        style={{ height: '0%' }}
+                      ></div>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
+                        40% Engagement
+                      </div>
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-napptix-light-grey text-xs md:text-sm">Engagement</p>
+                      <p className="text-white text-xs md:text-sm">Traditional</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bar-column flex flex-col items-center">
+                    <div className="relative w-10 md:w-16 group">
+                      <div 
+                        className="bar bg-[#29dd3b] w-full rounded-t-md transition-all duration-1000" 
+                        data-height="90%"
+                        style={{ height: '0%' }}
+                      ></div>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
+                        90% Engagement
+                      </div>
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-napptix-light-grey text-xs md:text-sm">Engagement</p>
+                      <p className="text-white text-xs md:text-sm">Napptix</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bar-column flex flex-col items-center">
+                    <div className="relative w-10 md:w-16 group">
+                      <div 
+                        className="bar bg-gray-500 w-full rounded-t-md transition-all duration-1000" 
+                        data-height="45%"
+                        style={{ height: '0%' }}
+                      ></div>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
+                        45% Recall
+                      </div>
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-napptix-light-grey text-xs md:text-sm">Recall</p>
+                      <p className="text-white text-xs md:text-sm">Traditional</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bar-column flex flex-col items-center">
+                    <div className="relative w-10 md:w-16 group">
+                      <div 
+                        className="bar bg-[#29dd3b] w-full rounded-t-md transition-all duration-1000" 
+                        data-height="80%"
+                        style={{ height: '0%' }}
+                      ></div>
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
+                        80% Recall
+                      </div>
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-napptix-light-grey text-xs md:text-sm">Recall</p>
+                      <p className="text-white text-xs md:text-sm">Napptix</p>
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    ref={el => chartBarsRef.current[2] = el}
-                    data-target-height="40%"
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: "0%" }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    ref={el => chartBarsRef.current[3] = el}
-                    data-target-height="90%"
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: "0%" }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    ref={el => chartBarsRef.current[4] = el}
-                    data-target-height="45%"
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: "0%" }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    ref={el => chartBarsRef.current[5] = el}
-                    data-target-height="80%"
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: "0%" }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
+              </div>
+            </div>
+            
+            {/* Legend */}
+            <div className="flex justify-center mt-8 space-x-8">
+              <div className="flex items-center">
+                <div className="w-4 h-4 bg-gray-500 rounded-sm mr-2"></div>
+                <span className="text-white text-sm">Traditional</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-4 h-4 bg-[#29dd3b] rounded-sm mr-2"></div>
+                <span className="text-white text-sm">Napptix</span>
               </div>
             </div>
           </div>
@@ -588,103 +642,10 @@ const Advertisers: React.FC = () => {
               </motion.div>
             ))}
           </div>
-          
-          <div className="flex justify-center items-center mt-12 gap-8">
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 1" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 2" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 3" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 4" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-          </div>
         </div>
       </section>
       
-      {/* Section 8: Explainer Video */}
-      <section className="py-16 bg-napptix-dark">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="relative aspect-video rounded-xl overflow-hidden border border-napptix-grey/20">
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
-                <Button variant="outline" size="lg" className="rounded-full w-16 h-16 p-0 border-white/50 hover:border-[#29dd3b]/80 hover:bg-black/60 transition-all">
-                  <Play className="h-8 w-8 text-white" />
-                </Button>
-              </div>
-              <img 
-                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-                alt="Explainer Video" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">How Napptix Works</h2>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
-                    <div className="w-2 h-2"></div>
-                  </div>
-                  <p className="text-napptix-light-grey font-roboto-mono">
-                    Simple API integration with your existing ad stack
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
-                    <div className="w-2 h-2"></div>
-                  </div>
-                  <p className="text-napptix-light-grey font-roboto-mono">
-                    Advanced audience targeting based on gameplay data
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
-                    <div className="w-2 h-2"></div>
-                  </div>
-                  <p className="text-napptix-light-grey font-roboto-mono">
-                    Real-time analytics dashboard with actionable insights
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1">
-                    <div className="w-2 h-2"></div>
-                  </div>
-                  <p className="text-napptix-light-grey font-roboto-mono">
-                    Average onboarding time of less than 7 days
-                  </p>
-                </li>
-              </ul>
-              
-              <Button className="mt-8 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
-                Schedule a Demo
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Section 9: Call to Action */}
+      {/* Section 8: Call to Action */}
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Power Your Next Campaign?</h2>

@@ -69,7 +69,7 @@ const ServiceCard: React.FC<ServiceProps & {
         style={{
           transformStyle: 'preserve-3d',
           transform: `rotateY(${flipProgress * 180}deg)`,
-          transition: 'transform 0.8s ease', // Added smoother transition
+          transition: 'transform 1.2s ease', // Slower transition
         }}
         onAnimationEnd={onFlipComplete}
       >
@@ -124,6 +124,7 @@ const ServiceCards: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [flippedCards, setFlippedCards] = useState<boolean[]>([false, false, false, false]);
   const [flipProgress, setFlipProgress] = useState<number[]>([0, 0, 0, 0]);
+  const [activeCardIndex, setActiveCardIndex] = useState(-1);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -155,45 +156,62 @@ const ServiceCards: React.FC = () => {
       anticipatePin: 1,
     });
 
-    // Create individual triggers for each card flip animation with slower timing
+    // Create sequential card flip animations
+    const totalScrollDistance = 1;
+    const cardDelay = 0.25; // Percent of scroll progress to delay between cards
+    
+    // Increased segment size for slower animations
+    const segmentSize = totalScrollDistance / (serviceData.length + 1);
+
     const triggers = serviceData.map((_, index) => {
-      const progressStart = index / serviceData.length;
-      const progressEnd = (index + 1) / serviceData.length;
+      // Calculate start and end points for each card with delay
+      const progressStart = index * segmentSize;
+      const progressEnd = progressStart + segmentSize;
       
       return ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1, // Increased from 0.5 to 1 for slower animations
+        scrub: 2, // Much slower scrub for smoother animations (increased from 1 to 2)
         onUpdate: (self) => {
           if (!sectionRef.current) return;
           
           const overallProgress = self.progress;
           
-          // Map the overall scroll progress to individual card flip progress
-          const normalizedCardProgress = gsap.utils.mapRange(
-            progressStart, 
-            progressEnd, 
-            0, 
-            1, 
-            overallProgress
-          );
+          // Only proceed with this card if previous card has completed or it's the first card
+          const shouldAnimate = index === 0 || (index > 0 && flipProgress[index-1] >= 0.99);
           
-          const clampedProgress = gsap.utils.clamp(0, 1, normalizedCardProgress);
-          
-          // Update flip progress for individual cards
-          setFlipProgress(prev => {
-            const newProgress = [...prev];
-            newProgress[index] = clampedProgress;
-            return newProgress;
-          });
-          
-          // Update flipped state for individual cards
-          setFlippedCards(prev => {
-            const newFlipped = [...prev];
-            newFlipped[index] = clampedProgress > 0.5;
-            return newFlipped;
-          });
+          if (shouldAnimate) {
+            // Map the overall scroll progress to individual card flip progress
+            const normalizedCardProgress = gsap.utils.mapRange(
+              progressStart, 
+              progressEnd, 
+              0, 
+              1, 
+              overallProgress
+            );
+            
+            const clampedProgress = gsap.utils.clamp(0, 1, normalizedCardProgress);
+            
+            // Update flip progress for this card
+            setFlipProgress(prev => {
+              const newProgress = [...prev];
+              newProgress[index] = clampedProgress;
+              return newProgress;
+            });
+            
+            // Set active card index for sequential animation
+            if (clampedProgress > 0 && clampedProgress < 1) {
+              setActiveCardIndex(index);
+            }
+            
+            // Update flipped state
+            setFlippedCards(prev => {
+              const newFlipped = [...prev];
+              newFlipped[index] = clampedProgress > 0.5;
+              return newFlipped;
+            });
+          }
         }
       });
     });
@@ -205,7 +223,7 @@ const ServiceCards: React.FC = () => {
         if (trigger) trigger.kill();
       });
     };
-  }, []);
+  }, [flipProgress]); // Added flipProgress dependency to react to changes
 
   const handleFlipComplete = (index: number) => {
     console.log(`Card ${index} flip completed`);
@@ -249,7 +267,7 @@ const ServiceCards: React.FC = () => {
               key={index}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }} // Increased duration for smoother animations
+              transition={{ duration: 1.2, delay: index * 0.2 }} // Increased duration for smoother animations
             >
               <ServiceCard 
                 {...service}
