@@ -26,6 +26,12 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -150,8 +156,46 @@ const Advertisers: React.FC = () => {
   };
   const [barsAnimated, setBarsAnimated] = useState(false);
 
+  const performanceData = [
+    {
+      name: 'CTR',
+      traditional: 1.5,
+      napptix: 7.8,
+    },
+    {
+      name: 'Engagement',
+      traditional: 25.4,
+      napptix: 58.9,
+    },
+    {
+      name: 'Recall',
+      traditional: 34.2,
+      napptix: 72.6,
+    },
+    {
+      name: 'Completion',
+      traditional: 42.1,
+      napptix: 81.3,
+    },
+    {
+      name: 'Conversion',
+      traditional: 2.8,
+      napptix: 9.7,
+    }
+  ];
+
+  const chartConfig = {
+    traditional: {
+      label: "Traditional Ads",
+      color: "#6b7280",
+    },
+    napptix: {
+      label: "Napptix",
+      color: "#29dd3b",
+    },
+  };
+
   useEffect(() => {
-    // Animation for the performance chart
     if (sectionRefs.chart.current) {
       const ctx = gsap.context(() => {
         const trigger = ScrollTrigger.create({
@@ -193,7 +237,6 @@ const Advertisers: React.FC = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       
-      {/* Section 1: Hero Section */}
       <section className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -228,7 +271,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 2: Our Reach & Impact */}
       <section className="py-16 bg-napptix-dark" ref={sectionRefs.stats}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Our Reach & Impact</h2>
@@ -334,7 +376,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 3: Ad Format Showcase */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Ad Format Showcase</h2>
@@ -372,7 +413,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 4: Why Choose Napptix */}
       <section className="py-16 bg-napptix-dark">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Why Choose Napptix?</h2>
@@ -405,7 +445,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 5: Case Study Highlights */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Case Study Highlights</h2>
@@ -464,7 +503,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 6: Analytics Breakdown */}
       <section className="py-16 bg-napptix-dark" ref={sectionRefs.chart}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Analytics Breakdown</h2>
@@ -472,71 +510,60 @@ const Advertisers: React.FC = () => {
             Performance comparison between Napptix and traditional ad platforms
           </p>
           
-          <div className="relative h-[300px] md:h-[400px] p-6 border border-napptix-grey/20 rounded-xl bg-black">
-            <div className="absolute bottom-0 w-full max-w-4xl mx-auto left-0 right-0 px-8 pb-8">
-              <div className="relative h-[280px] flex items-end justify-around gap-4">
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-napptix-grey/20"></div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '60%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '85%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '40%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '90%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '45%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
-                  <p className="text-white font-bold">Traditional</p>
-                </div>
-                
-                <div className="w-16 flex flex-col items-center">
-                  <div 
-                    className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '80%' }}
-                  ></div>
-                  <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
-                  <p className="text-white font-bold">Napptix</p>
-                </div>
-              </div>
+          <div className="bg-black p-6 border border-napptix-grey/20 rounded-xl">
+            <h3 className="text-xl font-bold text-white mb-6">Performance Metrics</h3>
+            
+            <div className="h-[400px]">
+              <ChartContainer config={chartConfig}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={performanceData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    barGap={10}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                    <XAxis 
+                      dataKey="name" 
+                      stroke="#999" 
+                      tick={{ fill: '#f1f1f1' }}
+                    />
+                    <YAxis 
+                      stroke="#999"
+                      tick={{ fill: '#f1f1f1' }}
+                      unit="%"
+                    />
+                    <Tooltip content={<ChartTooltipContent />} />
+                    <Legend wrapperStyle={{ paddingTop: "20px" }} />
+                    <Bar 
+                      dataKey="traditional" 
+                      name="Traditional Ads" 
+                      fill="#6b7280" 
+                      radius={[4, 4, 0, 0]}
+                      animationDuration={1500}
+                    />
+                    <Bar 
+                      dataKey="napptix" 
+                      name="Napptix" 
+                      fill="#29dd3b"
+                      radius={[4, 4, 0, 0]} 
+                      animationDuration={1500}
+                      animationBegin={300}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </div>
+            
+            <div className="mt-8 max-w-2xl mx-auto text-center">
+              <p className="text-napptix-light-grey">
+                Napptix consistently outperforms traditional advertising methods across all key performance indicators, 
+                with particularly strong results in audience recall and engagement metrics.
+              </p>
             </div>
           </div>
         </div>
       </section>
       
-      {/* Section 7: Testimonials */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">What Our Partners Say</h2>
@@ -599,7 +626,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 8: Explainer Video */}
       <section className="py-16 bg-napptix-dark">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -661,7 +687,6 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 9: Call to Action */}
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Power Your Next Campaign?</h2>

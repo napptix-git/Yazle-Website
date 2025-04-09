@@ -120,7 +120,7 @@ const WorldMap: React.FC = () => {
   }, [offices]);
 
   return (
-    <div className="relative w-full max-w-1xl mx-auto mb-20">
+    <div className="relative w-full max-w-xl mx-auto mb-20">
       <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
       
       <div className="relative w-full">
@@ -130,9 +130,9 @@ const WorldMap: React.FC = () => {
             className="absolute top-0 left-0 w-full h-full z-10"
           ></canvas>
           <img 
-            src="/lovable-uploads/c44c513c-827e-4b0f-a98a-2f1fba1c6e8c.png" 
+            src="/lovable-uploads/05862179-4388-4de5-ac40-81484c8be7f3.png" 
             alt="World Map" 
-            className="w-full h-full object-cover brightness-[0.9] opacity-95"
+            className="w-full h-full object-cover"
           />
           
           {offices.map((office, index) => (

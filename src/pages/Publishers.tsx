@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CountUpMetric from '@/components/CountUpMetric';
 import { Button } from '@/components/ui/button';
-import { Code, ChevronDown, ChevronUp, Check, Server, Globe, Code2 } from 'lucide-react';
+import { Code, Server, Globe, Code2 } from 'lucide-react';
 import { 
   Accordion,
   AccordionContent,
@@ -169,7 +169,7 @@ async function reportImpression(adId, userId) {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black font-manrope">
       <Navbar />
       
       {/* Section 1: Hero - Built for Game Developers */}
@@ -372,7 +372,7 @@ async function reportImpression(adId, userId) {
         {/* Section 5: Performance in Action (Live Charts) */}
         <h2 className="text-3xl font-bold text-white mt-24 mb-10">Performance in Action</h2>
         
-        <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 mb-20">
+        <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 mb-32">
           <h3 className="text-xl font-bold text-white mb-6">Revenue Growth After Integration</h3>
           
           <div className="h-[400px]">
@@ -445,7 +445,7 @@ async function reportImpression(adId, userId) {
               <div className="flex items-center space-x-4 mb-4">
                 <div className="bg-[#29dd3b]/20 p-3 rounded-full">
                   <svg className="w-6 h-6 text-[#29dd3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 012-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white">Real-Time Revenue Reporting</h3>
