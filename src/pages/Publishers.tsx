@@ -394,7 +394,7 @@ async function reportImpression(adId, userId) {
             </ChartContainer>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-6 mt-12">
+          <div className="flex flex-wrap justify-center gap-6 mt-16">
             <div className="bg-napptix-grey/20 p-3 px-6 rounded-full text-sm text-white flex items-center">
               <div className="w-4 h-4 mr-2">
                 <img src="/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png" alt="Unity" className="w-full h-full object-contain" />

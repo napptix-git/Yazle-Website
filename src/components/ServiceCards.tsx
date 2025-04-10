@@ -45,46 +45,61 @@ interface ServiceProps {
 const ServiceCard: React.FC<ServiceProps & { 
   progress: number;
   stacked: boolean;
+  active: boolean;
 }> = ({ 
   title, 
   description, 
   icon,
   index,
   progress,
-  stacked
+  stacked,
+  active
 }) => {
   const flipThreshold = 0.5;
   const isFlipped = progress > flipThreshold;
   
+  // Enhanced animation calculations
   const stackOffset = stacked ? (3 - index) * 10 : 0;
+  const scale = active ? 1.1 : stacked ? 1 - (index * 0.05) : 1;
   
   const cardVariants = {
     stacked: {
       x: stackOffset,
       y: stackOffset,
-      scale: 1,
+      scale: 1 - (index * 0.05),
       rotateY: 0,
       transition: { duration: 0.5 }
     },
     flipping: {
       x: 0,
       y: 0,
-      scale: 1,
+      scale: scale,
       rotateY: progress * 180,
       transition: { duration: 0, ease: "linear" }
+    },
+    stretched: {
+      x: 0,
+      y: 0,
+      scaleY: 1.1,
+      scaleX: 1,
+      rotateY: progress * 180,
+      transition: { duration: 0.3, ease: "easeOut" }
     }
   };
+  
+  // Use the stretched variant if card is active and not stacked
+  const currentVariant = active && !stacked ? "stretched" : (stacked ? "stacked" : "flipping");
   
   return (
     <motion.div
       className="service-card absolute top-0 left-0 w-[280px] h-[400px]"
       style={{ 
-        zIndex: stacked ? 4 - index : (isFlipped ? 10 : 4 - index),
+        zIndex: active ? 20 : stacked ? 4 - index : (isFlipped ? 10 : 4 - index),
         transformStyle: "preserve-3d",
         transformOrigin: "center center"
       }}
       variants={cardVariants}
-      animate={stacked ? "stacked" : "flipping"}
+      animate={currentVariant}
     >
       <div 
         className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
@@ -108,7 +123,15 @@ const ServiceCard: React.FC<ServiceProps & {
           transform: 'rotateY(180deg)',
         }}
       >
-        <div className="p-6 flex flex-col h-full justify-between">
+        <motion.div 
+          className="p-6 flex flex-col h-full justify-between"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ 
+            opacity: isFlipped ? 1 : 0, 
+            y: isFlipped ? 0 : 20 
+          }}
+          transition={{ delay: 0.1, duration: 0.3 }}
+        >
           <div className="flex flex-col items-center">
             <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
               {icon}
@@ -119,12 +142,14 @@ const ServiceCard: React.FC<ServiceProps & {
             <p className="text-gray-600 text-center font-roboto-mono">{description}</p>
           </div>
           
-          <button 
+          <motion.button 
             className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Learn more
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -136,6 +161,7 @@ const ServiceCards: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [cardProgress, setCardProgress] = useState<number[]>([0, 0, 0, 0]);
   const [isStacked, setIsStacked] = useState(true);
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   
   useEffect(() => {
     const checkMobile = () => {
@@ -186,6 +212,15 @@ const ServiceCards: React.FC = () => {
             gsap.utils.mapRange(cardStartPoint, cardEndPoint, 0, 1, progress)
           );
           newProgress[i] = normalizedProgress;
+          
+          // Set active card based on which card is currently flipping
+          if (normalizedProgress > 0 && normalizedProgress < 1 && !isStacked) {
+            setActiveCardIndex(i);
+          } else if (progress > 0.75 && i === 3) {
+            setActiveCardIndex(3); // Keep the last card active at end of scroll
+          } else if (progress < 0.15) {
+            setActiveCardIndex(null);
+          }
         });
         
         setCardProgress(newProgress);
@@ -240,6 +275,22 @@ const ServiceCards: React.FC = () => {
               index={index}
               progress={cardProgress[index]}
               stacked={isStacked}
+              active={activeCardIndex === index}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Visual scroll indicator */}
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <div className="flex gap-2">
+          {serviceData.map((_, i) => (
+            <div 
+              key={i} 
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                activeCardIndex === i ? 'bg-[#29dd3b] w-4' : 
+                cardProgress[i] >= 1 ? 'bg-gray-400' : 'bg-gray-700'
+              }`}
             />
           ))}
         </div>
