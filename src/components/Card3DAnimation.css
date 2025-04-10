@@ -3,11 +3,13 @@
   transform-style: preserve-3d;
   transition: transform 0.1s ease;
   will-change: transform, opacity;
+  backface-visibility: visible;
 }
 
 .card-container {
   transform-style: preserve-3d;
   perspective: 1500px;
+  pointer-events: none; /* Prevents interaction during animation */
 }
 
 /* Ensure GSAP has clean transforms to work with */
@@ -18,7 +20,7 @@
 
 /* Enhance shadow effects for depth */
 .shadow-3d {
-  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.9);
 }
 
 /* Prevent any FOUC (Flash of Unstyled Content) */
@@ -33,4 +35,37 @@
 /* Ensure content doesn't clip during rotation */
 .card-content-wrapper {
   backface-visibility: hidden;
+  transform: translateZ(1px); /* Prevents z-fighting */
+}
+
+/* Add a subtle glow effect to cards when they're in focus */
+.card-item.active .shadow-3d {
+  box-shadow: 0 25px 60px -20px rgba(41, 221, 59, 0.5);
+}
+
+/* Ensure smooth performance during animations */
+.card-item img {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Enhanced depth perception through subtle gradient overlays */
+.card-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.5;
 }

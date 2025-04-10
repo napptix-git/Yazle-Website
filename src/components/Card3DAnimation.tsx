@@ -62,7 +62,7 @@ const AnimatedCard: React.FC<{ card: CardData; index: number }> = ({ card, index
                 alt={card.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-6">
+              <div className="absolute inset-0 bg-black/60 flex flex-col justify-end p-6">
                 <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
                 <p className="text-white/80">{card.description}</p>
               </div>
@@ -111,67 +111,61 @@ export const Card3DAnimation = () => {
     
     gsap.set(cards, {
       rotateY: 0,
-      translateZ: 0,
-      opacity: 1,
-      scale: 1,
+      rotationX: 5,
+      translateZ: (i) => i * -30,
+      y: (i) => i * 5,
+      opacity: (i) => 1 - (i * 0.15),
+      scale: (i) => 1 - (i * 0.05),
       transformOrigin: 'center center',
+      transformPerspective: 1200,
       force3D: true,
-      transformPerspective: 1000
     });
-    
+
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top top",
-        end: "+=400%",
+        start: "top 20%",
+        end: "+=300%",
         scrub: 1,
         pin: true,
-        pinSpacing: true,
         anticipatePin: 1,
         markers: false,
       }
     });
-    
+
     cards.forEach((card, i) => {
-      const delay = i * 0.5;
-      
-      if (i > 0) {
-        gsap.set(card, {
-          z: -i * 50,
-          y: i * 10,
-          x: i * 5,
-          scale: 1 - (i * 0.05),
-          opacity: 1 - (i * 0.2)
-        });
-      }
-      
+      const progress = i / (cards.length - 1);
+      const startPosition = 0.1 + (i * 0.2);
+      const duration = 0.4;
+
       timeline.to(card, {
         rotateY: 360,
-        z: 250,
-        duration: 1,
+        translateZ: 200,
+        scale: 1.1,
+        opacity: 1,
+        duration: duration,
         ease: "power2.inOut",
-        opacity: 1
-      }, delay);
-      
+      }, startPosition);
+
       if (i < cards.length - 1) {
         timeline.to(card, {
           rotateY: 360 + 45,
-          z: -500,
-          x: (i % 2 === 0 ? 200 : -200),
+          translateZ: -400,
+          x: (i % 2 === 0 ? -600 : 600),
           scale: 0.8,
           opacity: 0,
-          duration: 0.8,
+          duration: duration,
           ease: "power1.in"
-        }, delay + 0.8);
+        }, startPosition + duration);
       } else {
         timeline.to(card, {
-          scale: 1.1,
-          duration: 0.5,
-          ease: "power1.out"
-        }, delay + 1.0);
+          scale: 1.15,
+          duration: 0.3,
+          ease: "power2.out"
+        }, startPosition + duration);
       }
     });
-    
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       timeline.kill();
@@ -181,17 +175,17 @@ export const Card3DAnimation = () => {
   return (
     <section 
       ref={sectionRef}
-      className={`cards-section h-screen w-full bg-black overflow-hidden relative ${loaded ? 'loaded' : ''}`}
+      className={`cards-section min-h-screen w-full bg-black overflow-hidden relative ${loaded ? 'loaded' : ''}`}
     >
       <div className="container mx-auto h-full flex items-center justify-center">
         <div className="text-center mb-8 absolute top-10 z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">3D Card Animation</h2>
-          <p className="text-gray-400">Scroll to explore our services</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Our Services</h2>
+          <p className="text-gray-400 max-w-lg mx-auto">Explore our specialized gaming advertising solutions</p>
         </div>
         
         <div 
           ref={cardsContainerRef}
-          className="card-container relative w-[320px] h-[450px] md:w-[400px] md:h-[500px]"
+          className="card-container relative w-[300px] h-[400px] md:w-[400px] md:h-[550px] mt-24"
         >
           {cardData.map((card, index) => (
             <AnimatedCard 
