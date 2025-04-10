@@ -1,41 +1,20 @@
 
+/* Enable 3D transformations */
 .card-item {
   transform-style: preserve-3d;
   transition: transform 0.1s ease;
-  will-change: transform, opacity;
-  backface-visibility: visible;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .card-container {
   transform-style: preserve-3d;
   perspective: 1500px;
-  pointer-events: none; /* Prevents interaction during animation */
-}
-
-/* Ensure GSAP has clean transforms to work with */
-.gsap-3d-card {
-  backface-visibility: visible;
-  transform-style: preserve-3d;
 }
 
 /* Enhance shadow effects for depth */
 .shadow-3d {
   box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.9);
-}
-
-/* Prevent any FOUC (Flash of Unstyled Content) */
-.cards-section {
-  visibility: hidden;
-}
-
-.cards-section.loaded {
-  visibility: visible;
-}
-
-/* Ensure content doesn't clip during rotation */
-.card-content-wrapper {
-  backface-visibility: hidden;
-  transform: translateZ(1px); /* Prevents z-fighting */
 }
 
 /* Add a subtle glow effect to cards when they're in focus */
