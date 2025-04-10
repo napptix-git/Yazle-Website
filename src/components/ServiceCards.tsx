@@ -1,214 +1,234 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useAnimation, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
 import { 
   Gamepad, 
   MonitorPlay, 
   Globe, 
   Trophy,
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import './ServiceCardsAnimation.css';
 
 const serviceData = [
   {
+    id: 'in-game',
     title: "In-Game",
     description: "Native ad placements within the gaming environment that feel like a natural part of the experience.",
     icon: <Gamepad className="h-10 w-10 text-[#29dd3b]" />,
   },
   {
+    id: 'on-game',
     title: "On-Game",
     description: "Strategic ad placements around the game interface, loading screens, and menus.",
     icon: <MonitorPlay className="h-10 w-10 text-[#29dd3b]" />,
   },
   {
+    id: 'off-game',
     title: "Off-Game",
     description: "Extend your reach beyond gameplay through our network of gaming content platforms.",
     icon: <Globe className="h-10 w-10 text-[#29dd3b]" />,
   },
   {
+    id: 'pro-game',
     title: "Pro Game",
     description: "Specialized solutions for esports events, tournaments, and professional gaming streams.",
     icon: <Trophy className="h-10 w-10 text-[#29dd3b]" />,
   },
 ];
 
-interface ServiceProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  index: number;
-}
+const CardStack = () => {
+  const [activeCard, setActiveCard] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const controls = useAnimation();
 
-const ServiceCard: React.FC<ServiceProps & { 
-  progress: number;
-  stacked: boolean;
-}> = ({ 
-  title, 
-  description, 
-  icon,
-  index,
-  progress,
-  stacked
-}) => {
-  const flipThreshold = 0.5;
-  const isFlipped = progress > flipThreshold;
-  
-  const stackOffset = stacked ? (3 - index) * 10 : 0;
-  
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setInView(true);
+        controls.start("visible");
+      } else {
+        setInView(false);
+      }
+    }, { threshold: 0.3 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, [controls]);
+
+  // Handle next card
+  const handleNext = () => {
+    setDirection(1);
+    setActiveCard((prev) => (prev + 1) % serviceData.length);
+  };
+
+  // Handle previous card
+  const handlePrev = () => {
+    setDirection(-1);
+    setActiveCard((prev) => (prev - 1 + serviceData.length) % serviceData.length);
+  };
+
+  // Card variants for animation
   const cardVariants = {
-    stacked: {
-      x: stackOffset,
-      y: stackOffset,
+    initial: (custom: number) => ({
+      x: custom > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.5,
+      rotateY: custom > 0 ? 45 : -45
+    }),
+    animate: {
+      x: 0,
+      opacity: 1,
       scale: 1,
       rotateY: 0,
-      transition: { duration: 0.5 }
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 20
+      }
     },
-    flipping: {
-      x: 0,
-      y: 0,
-      scale: 1,
-      rotateY: progress * 180,
-      transition: { duration: 0, ease: "linear" }
+    exit: (custom: number) => ({
+      x: custom > 0 ? -1000 : 1000,
+      opacity: 0,
+      scale: 0.5,
+      rotateY: custom > 0 ? -45 : 45,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 20
+      }
+    }),
+    hover: {
+      y: -10,
+      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      transition: { duration: 0.2 }
     }
   };
-  
+
+  // Container variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  // Indicator dot variants
+  const dotVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  // Current card data
+  const currentCard = serviceData[activeCard];
+
   return (
-    <motion.div
-      className="service-card absolute top-0 left-0 w-[280px] h-[400px]"
-      style={{ 
-        zIndex: stacked ? 4 - index : (isFlipped ? 10 : 4 - index),
-        transformStyle: "preserve-3d",
-        transformOrigin: "center center"
-      }}
-      variants={cardVariants}
-      animate={stacked ? "stacked" : "flipping"}
+    <motion.div 
+      ref={containerRef}
+      className="card-stack-container relative"
+      variants={containerVariants}
+      initial="hidden"
+      animate={controls}
     >
-      <div 
-        className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
-          bg-white ${progress > flipThreshold ? 'invisible' : 'visible'}`}
-        style={{
-          backfaceVisibility: 'hidden',
-        }}
-      >
-        <div className="flex flex-col justify-center items-center h-full">
-          <div className="text-black text-xl font-bold tracking-tight">
-            {title}
-          </div>
-        </div>
+      <div className="card-viewport relative w-full h-[500px] flex items-center justify-center">
+        <AnimatePresence initial={false} mode="wait" custom={direction}>
+          <motion.div
+            key={currentCard.id}
+            className="card-item bg-white text-black rounded-2xl p-8 flex flex-col absolute w-[300px] md:w-[400px] shadow-2xl"
+            custom={direction}
+            variants={cardVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            whileHover="hover"
+          >
+            <div className="flex flex-col items-center justify-between h-full">
+              <div className="flex flex-col items-center">
+                <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mb-6">
+                  {currentCard.icon}
+                </div>
+                
+                <h3 className="text-2xl font-bold text-black mb-4">{currentCard.title}</h3>
+                
+                <p className="text-gray-600 text-center font-roboto-mono mb-8">
+                  {currentCard.description}
+                </p>
+              </div>
+              
+              <button 
+                className="mt-auto px-6 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
+              >
+                Learn more
+              </button>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        
+        {/* Navigation arrows */}
+        <button 
+          className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 z-10 transition-all"
+          onClick={handlePrev}
+          aria-label="Previous card"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        
+        <button 
+          className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 z-10 transition-all"
+          onClick={handleNext}
+          aria-label="Next card"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
       </div>
       
-      <div 
-        className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
-          ${progress > flipThreshold ? 'visible' : 'invisible'}`}
-        style={{
-          backfaceVisibility: 'hidden',
-          transform: 'rotateY(180deg)',
-        }}
-      >
-        <div className="p-6 flex flex-col h-full justify-between">
-          <div className="flex flex-col items-center">
-            <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
-              {icon}
-            </div>
-            
-            <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
-            
-            <p className="text-gray-600 text-center font-roboto-mono">{description}</p>
-          </div>
-          
-          <button 
-            className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
-          >
-            Learn more
-          </button>
-        </div>
+      {/* Card indicators */}
+      <div className="flex justify-center mt-8 space-x-2">
+        {serviceData.map((_, index) => (
+          <motion.button
+            key={index}
+            className={`w-3 h-3 rounded-full ${activeCard === index ? 'bg-[#29dd3b]' : 'bg-white/30'}`}
+            onClick={() => {
+              setDirection(index > activeCard ? 1 : -1);
+              setActiveCard(index);
+            }}
+            variants={dotVariants}
+            whileHover={{ scale: 1.5 }}
+            whileTap={{ scale: 0.9 }}
+          />
+        ))}
       </div>
     </motion.div>
   );
 };
 
 const ServiceCards: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [cardProgress, setCardProgress] = useState<number[]>([0, 0, 0, 0]);
-  const [isStacked, setIsStacked] = useState(true);
-  
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    // Clean up existing ScrollTrigger instances
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    
-    const sectionTrigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-    });
-
-    // Create overall scroll progress tracker
-    const mainTrigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 0.5,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        // Unstack cards when scroll reaches 15%
-        setIsStacked(progress < 0.15);
-        
-        // Calculate individual card progress
-        const newProgress = [...cardProgress];
-        serviceData.forEach((_, i) => {
-          // Normalize progress for each card - staggered flipping
-          const cardStartPoint = 0.15 + (i * 0.15); // Start at 15%, then 30%, 45%, 60%
-          const cardEndPoint = cardStartPoint + 0.15;
-          const normalizedProgress = gsap.utils.clamp(0, 1, 
-            gsap.utils.mapRange(cardStartPoint, cardEndPoint, 0, 1, progress)
-          );
-          newProgress[i] = normalizedProgress;
-        });
-        
-        setCardProgress(newProgress);
-      }
-    });
-
-    return () => {
-      sectionTrigger.kill();
-      mainTrigger.kill();
-    };
-  }, [cardProgress]);
-
   return (
     <section 
       id="solutions" 
       className="py-32 bg-black relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      ref={sectionRef}
     >
       <div className="container mx-auto text-center mb-16 z-10">
         <motion.h2 
           className="text-3xl md:text-4xl font-bold mb-4 text-white"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
@@ -226,23 +246,7 @@ const ServiceCards: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 flex-1 flex items-center justify-center z-10">
-        <div 
-          ref={cardsContainerRef}
-          className="relative w-[280px] h-[400px]"
-          style={{
-            perspective: "1200px"
-          }}
-        >
-          {serviceData.map((service, index) => (
-            <ServiceCard 
-              key={index}
-              {...service}
-              index={index}
-              progress={cardProgress[index]}
-              stacked={isStacked}
-            />
-          ))}
-        </div>
+        <CardStack />
       </div>
     </section>
   );
