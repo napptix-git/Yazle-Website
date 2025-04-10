@@ -73,7 +73,7 @@ const WorldMap: React.FC = () => {
         {offices.map((office) => (
           <div key={office.city} className="border-b border-white/20 pb-8">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full">
-              <h3 className="text-4xl md:text-6xl font-syne font-extrabold mb-3 md:mb-0">{office.city}</h3>
+              <h3 className="text-4xl md:text-6xl font-syne font-extrabold mb-4 md:mb-0">{office.city}</h3>
               <p className="text-xl">{office.address}</p>
             </div>
           </div>
@@ -84,3 +84,4 @@ const WorldMap: React.FC = () => {
 };
 
 export default WorldMap;
+
