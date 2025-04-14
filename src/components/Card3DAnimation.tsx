@@ -44,7 +44,7 @@ export const Card3DAnimation = () => {
       // First, create the pin for the container
       ScrollTrigger.create({
         trigger: containerRef.current,
-        start: "top top",
+        start: "top+=120 top",
         end: "+=300%", // Make it long enough for the scrolling effect
         pin: true,
         pinSpacing: true,
