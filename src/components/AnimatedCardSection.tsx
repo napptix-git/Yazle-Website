@@ -34,7 +34,7 @@ const AnimatedCardSection: React.FC = () => {
     // Pin the cards section during scroll
     const pinTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top+=80px top", // Adjust start position to account for navbar
+      start: "top+=120px top", // Adjust start position to account for navbar
       end: `+=${totalScrollHeight}px`,
       pin: true,
       pinSpacing: true,
