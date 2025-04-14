@@ -34,8 +34,8 @@ const AnimatedCardSection: React.FC = () => {
     // Pin the cards section during scroll
     const pinTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top-=120px top", // Adjust start position to account for navbar
-      end: `+=${totalScrollHeight}px`,
+      start: "top-=200px top", // Adjust start position to account for navbar
+      end: `+=${totalScrollHeight * 2}px`,
       pin: true,
       pinSpacing: true,
     });
@@ -50,7 +50,7 @@ const AnimatedCardSection: React.FC = () => {
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top-=120px top", // Adjust start position to account for navbar
+            start: "top-=200px top", // Adjust start position to account for navbar
             end: `+=${window.innerHeight * 0.8}px`,
             scrub: 0.5,
             id: `spread-${index}`,
