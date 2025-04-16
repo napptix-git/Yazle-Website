@@ -1,20 +1,15 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-} from "@/components/ui/navigation-menu";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeProductsMenu, setActiveProductsMenu] = useState(false);
+  const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
   
   useEffect(() => {
@@ -42,11 +37,25 @@ const Navbar: React.FC = () => {
   };
   
   const handleDropdownMouseEnter = (dropdownName: string) => {
+    if (dropdownTimerRef.current) {
+      clearTimeout(dropdownTimerRef.current);
+    }
     setActiveDropdown(dropdownName);
   };
 
   const handleDropdownMouseLeave = () => {
-    setActiveDropdown(null);
+    dropdownTimerRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+      setActiveProductsMenu(false);
+    }, 300); // 300ms delay before closing
+  };
+
+  const handleProductsMouseEnter = () => {
+    setActiveProductsMenu(true);
+  };
+
+  const handleProductsMouseLeave = () => {
+    setActiveProductsMenu(false);
   };
   
   return (
@@ -75,7 +84,7 @@ const Navbar: React.FC = () => {
                 onMouseEnter={() => handleDropdownMouseEnter('advertisers')}
                 onMouseLeave={handleDropdownMouseLeave}
               >
-                <button className={`flex items-center text-white py-2 px-1 focus:outline-none ${
+                <button className={`flex items-center text-white py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors ${
                   activeDropdown === 'advertisers' || location.pathname.includes('/advertisers') 
                     ? 'border-b-2 border-[#29dd3b]' 
                     : ''
@@ -87,27 +96,38 @@ const Navbar: React.FC = () => {
                   <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
                     <div className="p-4 bg-[#1A1F2C]">
                       <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Advertiser Solution</h3>
+                      <p className="text-gray-400 mt-1 text-sm">Maximize your advertising reach with our comprehensive solutions</p>
                     </div>
                     <div className="p-6">
-                      <Link to="/advertisers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                      <Link to="/advertisers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Overview
                       </Link>
-                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Case Studies
                       </Link>
                       
-                      <div className="pt-2 border-t border-napptix-grey/20">
-                        <h4 className="text-white text-lg font-semibold mb-3">Products</h4>
-                        <div className="space-y-3 pl-2">
-                          <Link to="/advertisers/products/wizora" onClick={scrollToTop} className="block text-gray-300 hover:text-white">
-                            Wizora
-                          </Link>
-                          <Link to="/advertisers/products/questmap" onClick={scrollToTop} className="block text-gray-300 hover:text-white">
-                            QuestMap
-                          </Link>
-                          <Link to="/advertisers/products/perfnxt" onClick={scrollToTop} className="block text-gray-300 hover:text-white">
-                            PerfNXT
-                          </Link>
+                      <div 
+                        className="relative"
+                        onMouseEnter={handleProductsMouseEnter}
+                        onMouseLeave={handleProductsMouseLeave}
+                      >
+                        <div className="pt-2 border-t border-napptix-grey/20">
+                          <h4 className="text-white text-lg font-semibold mb-3 flex items-center justify-between cursor-pointer hover:text-[#29dd3b] transition-colors">
+                            Products <ChevronDown className="ml-1 h-4 w-4" />
+                          </h4>
+                          {activeProductsMenu && (
+                            <div className="space-y-3 pl-2">
+                              <Link to="/advertisers/products/wizora" onClick={scrollToTop} className="block text-gray-300 hover:text-[#29dd3b] transition-colors">
+                                Wizora
+                              </Link>
+                              <Link to="/advertisers/products/questmap" onClick={scrollToTop} className="block text-gray-300 hover:text-[#29dd3b] transition-colors">
+                                QuestMap
+                              </Link>
+                              <Link to="/advertisers/products/perfnxt" onClick={scrollToTop} className="block text-gray-300 hover:text-[#29dd3b] transition-colors">
+                                PerfNXT
+                              </Link>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -121,7 +141,7 @@ const Navbar: React.FC = () => {
                 onMouseEnter={() => handleDropdownMouseEnter('publishers')}
                 onMouseLeave={handleDropdownMouseLeave}
               >
-                <button className={`flex items-center text-white py-2 px-1 focus:outline-none ${
+                <button className={`flex items-center text-white py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors ${
                   activeDropdown === 'publishers' || location.pathname.includes('/publishers') 
                     ? 'border-b-2 border-[#29dd3b]' 
                     : ''
@@ -133,15 +153,16 @@ const Navbar: React.FC = () => {
                   <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
                     <div className="p-4 bg-[#1A1F2C]">
                       <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Publisher Solution</h3>
+                      <p className="text-gray-400 mt-1 text-sm">Optimize your content monetization and analytics</p>
                     </div>
                     <div className="p-6">
-                      <Link to="/publishers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                      <Link to="/publishers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Overview
                       </Link>
-                      <Link to="/publishers/monetization" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                      <Link to="/publishers/monetization" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Monetization
                       </Link>
-                      <Link to="/publishers/analytics" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5]">
+                      <Link to="/publishers/analytics" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] hover:text-[#29dd3b] transition-colors">
                         Analytics
                       </Link>
                     </div>
@@ -149,24 +170,55 @@ const Navbar: React.FC = () => {
                 )}
               </div>
 
-              <Link 
-                to="/about"
-                onClick={scrollToTop}
-                className={`text-white relative pb-1 ${
-                  isActive('/about') ? 'after:scale-x-100' : 'after:scale-x-0'
-                } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transition-transform after:duration-300 hover:after:scale-x-100 after:origin-left`}
+              {/* About Link with new hover effect */}
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownMouseEnter('about')}
+                onMouseLeave={handleDropdownMouseLeave}
               >
-                About
-              </Link>
-              <Link 
-                to="/contact"
-                onClick={scrollToTop}
-                className={`text-white relative pb-1 ${
-                  isActive('/contact') ? 'after:scale-x-100' : 'after:scale-x-0'
-                } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transition-transform after:duration-300 hover:after:scale-x-100 after:origin-left`}
+                <Link 
+                  to="/about"
+                  onClick={scrollToTop}
+                  className={`flex items-center text-white py-2 px-1 hover:text-[#29dd3b] transition-colors ${
+                    isActive('/about') ? 'border-b-2 border-[#29dd3b]' : ''
+                  }`}
+                >
+                  About
+                </Link>
+                {activeDropdown === 'about' && (
+                  <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
+                    <div className="p-4 bg-[#1A1F2C]">
+                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">About Us</h3>
+                      <p className="text-gray-400 mt-1 text-sm">Learn more about our mission and vision</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Contact Link with new hover effect */}
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownMouseEnter('contact')}
+                onMouseLeave={handleDropdownMouseLeave}
               >
-                Contact
-              </Link>
+                <Link 
+                  to="/contact"
+                  onClick={scrollToTop}
+                  className={`flex items-center text-white py-2 px-1 hover:text-[#29dd3b] transition-colors ${
+                    isActive('/contact') ? 'border-b-2 border-[#29dd3b]' : ''
+                  }`}
+                >
+                  Contact
+                </Link>
+                {activeDropdown === 'contact' && (
+                  <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
+                    <div className="p-4 bg-[#1A1F2C]">
+                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Contact Us</h3>
+                      <p className="text-gray-400 mt-1 text-sm">Get in touch with our team</p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </nav>
             
             <button 
