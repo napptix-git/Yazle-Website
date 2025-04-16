@@ -8,6 +8,7 @@ import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
+import GameIntelligence from '@/components/GameIntelligence';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -65,9 +66,10 @@ const Index = () => {
         <AudienceCards />
       </section>
 
-      <div className='height h-[100px]'></div>
-
-      
+      {/* Game Intelligence Platform Section */}
+      <section id="game-intelligence" className="bg-black">
+        <GameIntelligence />
+      </section>
       
       {/* Footer */}
       <section>
