@@ -394,7 +394,7 @@ async function reportImpression(adId, userId) {
             </ChartContainer>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-6 mt-12">
+          <div className="flex flex-wrap justify-center gap-6 mt-12 pt-[220px]">
             <div className="bg-napptix-grey/20 p-3 px-6 rounded-full text-sm text-white flex items-center">
               <div className="w-4 h-4 mr-2">
                 <img src="/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png" alt="Unity" className="w-full h-full object-contain" />
@@ -423,7 +423,7 @@ async function reportImpression(adId, userId) {
         </div>
         
         {/* Section 6: Why Publishers Choose Napptix */}
-        <h2 className="text-3xl font-bold text-white mt-32 mb-14 text-center">Why Publishers Choose Napptix</h2>
+        <h2 className="text-3xl font-bold text-white mt-32 mb-14 text-center ">Why Publishers Choose Napptix</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
           <Card className="bg-napptix-dark border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300">

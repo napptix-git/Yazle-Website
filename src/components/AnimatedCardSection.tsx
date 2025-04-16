@@ -34,8 +34,8 @@ const AnimatedCardSection: React.FC = () => {
     // Pin the cards section during scroll
     const pinTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top center", // Adjust start position to account for navbar
-      end: `+=${totalScrollHeight * 2}px`,
+      start: "top top", // Adjust start position to account for navbar
+      end: () =>`+=${totalScrollHeight}px`,
       pin: true,
       pinSpacing: true,
     });
@@ -50,7 +50,7 @@ const AnimatedCardSection: React.FC = () => {
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top-=200px top", // Adjust start position to account for navbar
+            start: "top top", // Adjust start position to account for navbar
             end: `+=${window.innerHeight * 0.8}px`,
             scrub: 0.5,
             id: `spread-${index}`,
@@ -73,7 +73,7 @@ const AnimatedCardSection: React.FC = () => {
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top center", // Adjust start position to account for navbar
+        start: "center bottom", // Adjust start position to account for navbar
         end: `+=${totalScrollHeight}px`,
         scrub: 1,
         id: `flip-${index}`,
@@ -105,10 +105,19 @@ const AnimatedCardSection: React.FC = () => {
   }, [cardsRef.current.length]);
 
   return (
-    <div className="relative h-[300vh]" ref={containerRef}>
+    
+    <div className="relative h-[350vh]" ref={containerRef}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black" ref={sectionRef}>
-        <h2 className="absolute top-24 left-0 w-full text-center text-3xl md:text-4xl font-bold text-white">Our Services</h2>
+      <div className="absolute top-[130px] w-full text-center z-20">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
+          Our Services
+        </h2>
+          <p className="text-gray-400 pt-3 max-w-2xl mx-auto">
+            Seamless brand integration across every layer of the gaming journey.
+          </p>
+      </div>
         
+      <div className="relative w-full h-full flex items-center justify-center z-10">  
         <div className="cards-container relative w-full h-[80%] flex items-center justify-center">
           {serviceData.map((service, index) => (
             <FlipCard
@@ -122,17 +131,7 @@ const AnimatedCardSection: React.FC = () => {
             />
           ))}
         </div>
-
-        <div className="absolute bottom-12 left-0 w-full z-10">
-          <div className="progress-indicator">
-            {serviceData.map((_, index) => (
-              <div 
-                key={index} 
-                className={`progress-dot ${index === 0 ? 'active' : ''}`}
-              ></div>
-            ))}
-          </div>
-        </div>
+       </div>
       </div>
     </div>
   );

@@ -193,9 +193,9 @@ const About: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6">
-          <p>
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">About Us</h1>
+        <div className="text-napptix-light-grey font-roboto-mono space-y-6 text-center ">
+          <p className='max-w-3xl mx-auto'> 
             Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
@@ -203,13 +203,8 @@ const About: React.FC = () => {
           <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
             <p className="text-2xl text-white/80 mb-12">
-              Ideas shape the world,<br />
-              our people shape <span className="gamer-text glow-green" style={{ 
-                background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
-                WebkitBackgroundClip: 'text',
-                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
-                animation: 'text-flicker 4s linear infinite'
-              }}>ideas</span>
+              Creativity opens doors,<br />
+              our people walk through them.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">

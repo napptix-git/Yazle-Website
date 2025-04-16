@@ -54,7 +54,7 @@ const Index = () => {
       <section id="partners" className="bg-black py-12">
         <PartnersCarousel />
       </section>
-      
+
       {/* Animated Card Section */}
       <section id="services" className="bg-black">
         <AnimatedCardSection />
@@ -64,6 +64,10 @@ const Index = () => {
       <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
       </section>
+
+      <div className='height h-[100px]'></div>
+
+      
       
       {/* Footer */}
       <section>

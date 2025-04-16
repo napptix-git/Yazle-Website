@@ -55,7 +55,9 @@ const Footer: React.FC = () => {
               <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+              <a href="https://www.linkedin.com/company/napptix/"
+                 className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors"
+                 target='_blank'>
                 <Linkedin size={18} />
               </a>
               <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">

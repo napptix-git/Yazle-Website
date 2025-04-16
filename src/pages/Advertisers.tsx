@@ -553,41 +553,11 @@ const Advertisers: React.FC = () => {
             ))}
           </div>
           
-          <div className="flex justify-center items-center mt-12 gap-8">
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 1" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 2" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 3" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-            <div className="p-4 bg-black/50 rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80" 
-                alt="Partner 4" 
-                className="h-10 w-auto filter grayscale hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-          </div>
         </div>
       </section>
       
       {/* Section 8: Explainer Video */}
-      <section className="py-16 bg-napptix-dark">
+      <section className="py-16 bg-napptix-dark top-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="relative aspect-video rounded-xl overflow-hidden border border-napptix-grey/20">
