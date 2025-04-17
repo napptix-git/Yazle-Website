@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
-// Define a type for the hoveredItem to avoid type comparison errors
+// Update the HoveredItemType to include all possible values
 type HoveredItemType = 'advertisers' | 'developers' | 'about' | 'contact' | 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
 const Navbar: React.FC = () => {
@@ -79,48 +80,48 @@ const Navbar: React.FC = () => {
                   <div className="p-4">
                     <p className="text-gray-400 text-sm font-semibold mb-2">Our Advertisers</p>
                     <div className="space-y-3">
-                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
-                        <div className="bg-blue-100 p-2 rounded-full">
+                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                        <div className="bg-gray-800 p-2 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M3 8l7 4 7-4m-7 4v12" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">Wizora</p>
-                          <p className="text-xs text-gray-500">Interactive ad platform for gaming audiences</p>
+                          <p className="text-sm font-medium text-gray-200">Wizora</p>
+                          <p className="text-xs text-gray-400">Interactive ad platform for gaming audiences</p>
                         </div>
                       </Link>
-                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
-                        <div className="bg-blue-100 p-2 rounded-full">
+                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                        <div className="bg-gray-800 p-2 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16l-4-4 4-4m8 8l4-4-4-4M4 12h16" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">Case Studies</p>
-                          <p className="text-xs text-gray-500">Success stories from our advertisers</p>
+                          <p className="text-sm font-medium text-gray-200">Case Studies</p>
+                          <p className="text-xs text-gray-400">Success stories from our advertisers</p>
                         </div>
                       </Link>
-                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
-                        <div className="bg-blue-100 p-2 rounded-full">
+                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                        <div className="bg-gray-800 p-2 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16l-4-4 4-4m8 8l4-4-4-4M4 12h16" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">Ad Gallery</p>
-                          <p className="text-xs text-gray-500">Explore our interactive ad formats</p>
+                          <p className="text-sm font-medium text-gray-200">Ad Gallery</p>
+                          <p className="text-xs text-gray-400">Explore our interactive ad formats</p>
                         </div>
                       </Link>
-                      <Link to="/advertisers/contact" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
-                        <div className="bg-blue-100 p-2 rounded-full">
+                      <Link to="/advertisers/contact" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                        <div className="bg-gray-800 p-2 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">Contact</p>
-                          <p className="text-xs text-gray-500">Get in touch with our ad team</p>
+                          <p className="text-sm font-medium text-gray-200">Contact</p>
+                          <p className="text-xs text-gray-400">Get in touch with our ad team</p>
                         </div>
                       </Link>
                     </div>
@@ -144,26 +145,26 @@ const Navbar: React.FC = () => {
                   <div className="p-4">
                     <p className="text-gray-400 text-sm font-semibold mb-2">For Game Developers</p>
                     <div className="space-y-3">
-                      <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
-                        <div className="bg-blue-100 p-2 rounded-full">
+                      <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                        <div className="bg-gray-800 p-2 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M3 8l7 4 7-4m-7 4v12" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">Overview</p>
-                          <p className="text-xs text-gray-500">Discover developer solutions</p>
+                          <p className="text-sm font-medium text-gray-200">Overview</p>
+                          <p className="text-xs text-gray-400">Discover developer solutions</p>
                         </div>
                       </Link>
-                      <Link to="/developers/contact" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
-                        <div className="bg-blue-100 p-2 rounded-full">
+                      <Link to="/developers/contact" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                        <div className="bg-gray-800 p-2 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-800">Contact</p>
-                          <p className="text-xs text-gray-500">Reach our developer support team</p>
+                          <p className="text-sm font-medium text-gray-200">Contact</p>
+                          <p className="text-xs text-gray-400">Reach our developer support team</p>
                         </div>
                       </Link>
                     </div>
@@ -220,11 +221,18 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {hoveredItem === 'mobile-menu' && (
-        <div className="md:hidden bg-black/95 shadow-lg">
+        <div className="md:hidden bg-black shadow-lg">
           <div className="container mx-auto px-4 py-4 space-y-4">
             <div>
               <button 
-                onClick={() => setHoveredItem(hoveredItem === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers')}
+                onClick={() => {
+                  // Fix type comparison issue by using conditional logic
+                  if (hoveredItem === 'mobile-advertisers') {
+                    setHoveredItem('mobile-menu');
+                  } else {
+                    setHoveredItem('mobile-advertisers');
+                  }
+                }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
                 ADVERTISERS
@@ -242,7 +250,14 @@ const Navbar: React.FC = () => {
             
             <div>
               <button 
-                onClick={() => setHoveredItem(hoveredItem === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers')}
+                onClick={() => {
+                  // Fix type comparison issue by using conditional logic
+                  if (hoveredItem === 'mobile-developers') {
+                    setHoveredItem('mobile-menu');
+                  } else {
+                    setHoveredItem('mobile-developers');
+                  }
+                }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
                 DEVELOPERS
