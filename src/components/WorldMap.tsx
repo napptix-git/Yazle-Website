@@ -5,7 +5,7 @@ import { MapPin } from 'lucide-react';
 
 interface Office {
   city: string;
-  address: string | React.ReactNode;
+  country: string;
   x: number;
   y: number;
 }
@@ -14,30 +14,25 @@ const WorldMap: React.FC = () => {
   const offices: Office[] = [
     { 
       city: "Mumbai",  
-      address: (
-        <>
-          7th & 8th Floor, Times Square, next to Sai Service,<br />
-          Andheri East, Mumbai, Maharashtra 400069
-        </>
-      ),
+      country: "India",
       x: 70, 
       y: 58
     },
     { 
       city: "Dubai", 
-      address: "302, Building 08, Media City, Dubai",
+      country: "United Arab Emirates",
       x: 62, 
       y: 52
     },
     { 
       city: "Delhi", 
-      address: "Coming Soon",
+      country: "India",
       x: 72, 
       y: 48
     },
     { 
       city: "Singapore", 
-      address: "Coming Soon",
+      country: "Singapore",
       x: 78, 
       y: 65
     }
@@ -52,7 +47,8 @@ const WorldMap: React.FC = () => {
           <img 
             src="/lovable-uploads/Asia-Map-Contact.png" 
             alt="World Map" 
-            className="w-full h-[1050px] object-cover filter brightness-150 contrast-125 saturate-50 opacity-90"
+            className="w-full h-[1050px] object-cover filter brightness-200 contrast-125 saturate-50 opacity-90"
+            style={{ imageRendering: 'pixelated' }}
           />
         </div>
       </div>
@@ -62,7 +58,7 @@ const WorldMap: React.FC = () => {
           <div key={office.city} className="border-b border-white/20 pb-8">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full">
               <h3 className="text-4xl md:text-6xl font-syne font-extrabold mb-4 md:mb-0 md:mr-8 first:md:mr-16">{office.city}</h3>
-              <p className="text-xl">{office.address}</p>
+              <p className="text-xl">{office.country}</p>
             </div>
           </div>
         ))}
@@ -72,4 +68,3 @@ const WorldMap: React.FC = () => {
 };
 
 export default WorldMap;
-

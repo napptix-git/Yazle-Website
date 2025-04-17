@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
-// Update the HoveredItemType to include all possible values
+// Update the HoveredItemType to include all possible values as a unified type
 type HoveredItemType = 'advertisers' | 'developers' | 'about' | 'contact' | 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
 const Navbar: React.FC = () => {
@@ -64,19 +64,19 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
           
-          <nav className="hidden md:flex space-x-8 ml-auto">
+          <nav className="hidden md:flex space-x-8 ml-auto items-center">
             {/* Advertisers Dropdown */}
             <div 
               className="relative group"
               onMouseEnter={() => handleMouseEnter('advertisers')}
               onMouseLeave={handleMouseLeave}
             >
-              <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors`}>
+              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors">
                 ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               
               {hoveredItem === 'advertisers' && (
-                <div className="absolute top-full left-0 w-64 mt-2 bg-black/90 rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute top-full left-0 w-80 mt-2 bg-black/90 rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="p-4">
                     <p className="text-gray-400 text-sm font-semibold mb-2">Our Advertisers</p>
                     <div className="space-y-3">
@@ -136,12 +136,12 @@ const Navbar: React.FC = () => {
               onMouseEnter={() => handleMouseEnter('developers')}
               onMouseLeave={handleMouseLeave}
             >
-              <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors`}>
+              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors">
                 DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               
               {hoveredItem === 'developers' && (
-                <div className="absolute top-full left-0 w-64 mt-2 bg-black/90 rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute top-full left-0 w-80 mt-2 bg-black/90 rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="p-4">
                     <p className="text-gray-400 text-sm font-semibold mb-2">For Game Developers</p>
                     <div className="space-y-3">
@@ -173,30 +173,22 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* About and Contact Links */}
-            <div
-              className="relative group"
+            {/* About and Contact Links - Fixed alignment by adding them to the same flex container */}
+            <Link 
+              to="/about"
+              onClick={scrollToTop}
+              className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
             >
-              <Link 
-                to="/about"
-                onClick={scrollToTop}
-                className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
-              >
-                ABOUT US
-              </Link>
-            </div>
+              ABOUT US
+            </Link>
 
-            <div
-              className="relative group"
+            <Link 
+              to="/contact"
+              onClick={scrollToTop}
+              className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
             >
-              <Link 
-                to="/contact"
-                onClick={scrollToTop}
-                className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
-              >
-                CONTACT
-              </Link>
-            </div>
+              CONTACT
+            </Link>
           </nav>
           
           {/* Mobile Menu Button */}
@@ -226,12 +218,8 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => {
-                  // Fix type comparison issue by using conditional logic
-                  if (hoveredItem === 'mobile-advertisers') {
-                    setHoveredItem('mobile-menu');
-                  } else {
-                    setHoveredItem('mobile-advertisers');
-                  }
+                  // Properly handle the mobile menu states with correct type checking
+                  setHoveredItem(hoveredItem === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers');
                 }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
@@ -251,12 +239,8 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => {
-                  // Fix type comparison issue by using conditional logic
-                  if (hoveredItem === 'mobile-developers') {
-                    setHoveredItem('mobile-menu');
-                  } else {
-                    setHoveredItem('mobile-developers');
-                  }
+                  // Properly handle the mobile menu states with correct type checking
+                  setHoveredItem(hoveredItem === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers');
                 }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
