@@ -220,8 +220,12 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => {
-                  // Now the types are correctly defined and there will be no type comparison error
-                  setHoveredItem(hoveredItem === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers');
+                  // Fixed type error by using a type guard
+                  if (hoveredItem === 'mobile-advertisers') {
+                    setHoveredItem('mobile-menu');
+                  } else {
+                    setHoveredItem('mobile-advertisers');
+                  }
                 }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
@@ -241,8 +245,12 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => {
-                  // Now the types are correctly defined and there will be no type comparison error
-                  setHoveredItem(hoveredItem === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers');
+                  // Fixed type error by using a type guard
+                  if (hoveredItem === 'mobile-developers') {
+                    setHoveredItem('mobile-menu');
+                  } else {
+                    setHoveredItem('mobile-developers');
+                  }
                 }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
