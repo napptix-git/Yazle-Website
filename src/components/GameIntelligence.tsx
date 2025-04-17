@@ -8,23 +8,23 @@ const GameIntelligence: React.FC = () => {
   const features = [
     {
       icon: <TrendingUp className="h-8 w-8 text-[#29dd3b]" />,
-      title: "Performance Analytics",
-      description: "Real-time insights into campaign performance across all gaming platforms."
+      title: "Rich Media Ads",
+      description: "Interactive, high-impact ad formats that drive higher engagement and CTRs."
     },
     {
       icon: <Layers className="h-8 w-8 text-[#29dd3b]" />,
-      title: "Audience Segmentation",
-      description: "Target specific gaming audiences based on detailed behavioral data."
+      title: "Multi-platform",
+      description: "Seamlessly deliver your ads across mobile, web, and in-game environments."
     },
     {
       icon: <Activity className="h-8 w-8 text-[#29dd3b]" />,
-      title: "Engagement Tracking",
-      description: "Measure how players interact with your brand across the gaming ecosystem."
+      title: "Real-time Analytics",
+      description: "Monitor campaign performance with detailed metrics and insights."
     },
     {
       icon: <Globe className="h-8 w-8 text-[#29dd3b]" />,
       title: "Global Reach",
-      description: "Access gaming inventory across multiple regions, platforms, and demographics."
+      description: "Connect with gaming audiences in over 190 countries worldwide."
     }
   ];
 
@@ -38,9 +38,9 @@ const GameIntelligence: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Game Intelligence Platform</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Wizora Ad Platform</h2>
           <p className="text-napptix-light-grey font-roboto-mono text-xl max-w-2xl mx-auto">
-            Our cutting-edge data platform delivers actionable insights for both advertisers and publishers.
+            Our powerful rich media ad technology for delivering captivating, interactive experiences to gaming audiences.
           </p>
         </motion.div>
 
@@ -77,7 +77,7 @@ const GameIntelligence: React.FC = () => {
               transition={{ delay: 0.4, duration: 0.5 }}
             >
               <Button className="mt-6 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
-                Explore Platform
+                Learn About Wizora
               </Button>
             </motion.div>
           </div>
@@ -92,8 +92,8 @@ const GameIntelligence: React.FC = () => {
             <div className="rounded-xl overflow-hidden border border-napptix-grey/20">
               <div className="aspect-4/3 relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-                  alt="Game Intelligence Platform" 
+                  src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                  alt="Wizora Ad Platform" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -105,8 +105,8 @@ const GameIntelligence: React.FC = () => {
                   <TrendingUp className="h-5 w-5 text-[#29dd3b]" />
                 </div>
                 <div>
-                  <p className="text-sm text-napptix-light-grey">User Engagement</p>
-                  <p className="text-lg font-bold text-white">+47%</p>
+                  <p className="text-sm text-napptix-light-grey">Engagement Rate</p>
+                  <p className="text-lg font-bold text-white">+63%</p>
                 </div>
               </div>
             </div>

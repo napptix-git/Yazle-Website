@@ -36,18 +36,35 @@ const Contact: React.FC = () => {
     }, 1500);
   };
 
+  const offices = [
+    { city: "Mumbai", country: "India" },
+    { city: "Dubai", country: "United Arab Emirates" },
+    { city: "Delhi", country: "India" },
+    { city: "Singapore", country: "Singapore" }
+  ];
+
   return (
     <div className="min-h-screen bg-black font-manrope">
       <Navbar />
       
       <div className="container mx-auto pt-24 pb-20 px-4">
         <div className="mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">Global Presence</h2>
           <div className="w-full mx-auto max-w-5xl">
             <img 
               src="/lovable-uploads/de1f01a3-c2a1-49bf-89d7-0f5535044663.png" 
               alt="Global Map" 
-              className="w-full h-auto object-cover rounded-xl brightness-125 contrast-125"
+              className="w-full h-auto object-cover rounded-xl brightness-150 contrast-125 saturate-110"
             />
+          </div>
+          
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {offices.map((office) => (
+              <div key={office.city} className="text-center p-4 border border-napptix-grey/20 rounded-lg">
+                <h3 className="text-2xl font-bold text-white mb-2">{office.city}</h3>
+                <p className="text-napptix-light-grey">{office.country}</p>
+              </div>
+            ))}
           </div>
         </div>
         

@@ -21,8 +21,6 @@ import AdvertiserContactPage from "./pages/advertisers/ContactPage";
 
 // Developer pages (formerly Publisher)
 import Developers from "./pages/Developers";
-import MonetizationPage from "./pages/developers/MonetizationPage";
-import AnalyticsPage from "./pages/developers/AnalyticsPage";
 import DeveloperContactPage from "./pages/developers/ContactPage";
 
 // Create a client
@@ -57,8 +55,6 @@ const App = () => {
               
               {/* Developer routes (formerly Publisher) */}
               <Route path="/developers" element={<Developers />} />
-              <Route path="/developers/monetization" element={<MonetizationPage />} />
-              <Route path="/developers/analytics" element={<AnalyticsPage />} />
               <Route path="/developers/contact" element={<DeveloperContactPage />} />
               
               <Route path="/about" element={<About />} />
