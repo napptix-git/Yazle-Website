@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -7,7 +8,6 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [activeProductsMenu, setActiveProductsMenu] = useState(false);
   const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
   
@@ -45,16 +45,7 @@ const Navbar: React.FC = () => {
   const handleDropdownMouseLeave = () => {
     dropdownTimerRef.current = setTimeout(() => {
       setActiveDropdown(null);
-      setActiveProductsMenu(false);
     }, 300); // 300ms delay before closing
-  };
-
-  const handleProductsMouseEnter = () => {
-    setActiveProductsMenu(true);
-  };
-
-  const handleProductsMouseLeave = () => {
-    setActiveProductsMenu(false);
   };
   
   return (
@@ -94,67 +85,51 @@ const Navbar: React.FC = () => {
                 {activeDropdown === 'advertisers' && (
                   <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
                     <div className="p-6">
-                      <Link to="/advertisers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
-                        Overview
+                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
+                        Wizora
                       </Link>
                       <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Case Studies
                       </Link>
-                      
-                      <div 
-                        className="relative"
-                        onMouseEnter={handleProductsMouseEnter}
-                        onMouseLeave={handleProductsMouseLeave}
-                      >
-                        <div className="pt-2 border-t border-napptix-grey/20">
-                          <h4 className="text-white text-lg font-semibold mb-3 flex items-center justify-between cursor-pointer hover:text-[#29dd3b] transition-colors">
-                            Products <ChevronDown className="ml-1 h-4 w-4" />
-                          </h4>
-                          {activeProductsMenu && (
-                            <div className="space-y-3 pl-2">
-                              <Link to="/advertisers/products/wizora" onClick={scrollToTop} className="block text-gray-300 hover:text-[#29dd3b] transition-colors">
-                                Wizora
-                              </Link>
-                              <Link to="/advertisers/products/questmap" onClick={scrollToTop} className="block text-gray-300 hover:text-[#29dd3b] transition-colors">
-                                QuestMap
-                              </Link>
-                              <Link to="/advertisers/products/perfnxt" onClick={scrollToTop} className="block text-gray-300 hover:text-[#29dd3b] transition-colors">
-                                PerfNXT
-                              </Link>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
+                        Ad Gallery
+                      </Link>
+                      <Link to="/advertisers/contact" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] hover:text-[#29dd3b] transition-colors">
+                        Contact
+                      </Link>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Publishers Dropdown */}
+              {/* Publishers (now Developers) Dropdown */}
               <div 
                 className="relative group"
-                onMouseEnter={() => handleDropdownMouseEnter('publishers')}
+                onMouseEnter={() => handleDropdownMouseEnter('developers')}
                 onMouseLeave={handleDropdownMouseLeave}
               >
                 <button className={`flex items-center text-white py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors ${
-                  activeDropdown === 'publishers' || location.pathname.includes('/publishers') 
+                  activeDropdown === 'developers' || location.pathname.includes('/developers') 
                     ? 'border-b-2 border-[#29dd3b]' 
                     : ''
                 }`}>
-                  Publishers <ChevronDown className="ml-1 h-4 w-4" />
+                  Developers <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 
-                {activeDropdown === 'publishers' && (
+                {activeDropdown === 'developers' && (
                   <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
                     <div className="p-6">
-                      <Link to="/publishers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
+                      <Link to="/developers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Overview
                       </Link>
-                      <Link to="/publishers/monetization" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
+                      <Link to="/developers/monetization" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Monetization
                       </Link>
-                      <Link to="/publishers/analytics" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] hover:text-[#29dd3b] transition-colors">
+                      <Link to="/developers/analytics" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Analytics
+                      </Link>
+                      <Link to="/developers/contact" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] hover:text-[#29dd3b] transition-colors">
+                        Contact
                       </Link>
                     </div>
                   </div>
@@ -165,8 +140,8 @@ const Navbar: React.FC = () => {
               <Link 
                 to="/about"
                 onClick={scrollToTop}
-                className={`text-white py-2 px-1 hover:text-[#29dd3b] transition-colors border-b-2 border-transparent hover:border-[#29dd3b] ${
-                  isActive('/about') ? 'border-[#29dd3b]' : ''
+                className={`text-white py-2 px-1 hover:text-[#29dd3b] transition-colors hover:border-b-2 hover:border-[#29dd3b] ${
+                  isActive('/about') ? 'border-b-2 border-[#29dd3b]' : 'border-b-2 border-transparent'
                 }`}
               >
                 About
@@ -176,8 +151,8 @@ const Navbar: React.FC = () => {
               <Link 
                 to="/contact"
                 onClick={scrollToTop}
-                className={`text-white py-2 px-1 hover:text-[#29dd3b] transition-colors border-b-2 border-transparent hover:border-[#29dd3b] ${
-                  isActive('/contact') ? 'border-[#29dd3b]' : ''
+                className={`text-white py-2 px-1 hover:text-[#29dd3b] transition-colors hover:border-b-2 hover:border-[#29dd3b] ${
+                  isActive('/contact') ? 'border-b-2 border-[#29dd3b]' : 'border-b-2 border-transparent'
                 }`}
               >
                 Contact
@@ -207,11 +182,11 @@ const Navbar: React.FC = () => {
               <div className="flex flex-col space-y-2">
                 <div className="text-white text-xl font-medium py-2">Advertisers</div>
                 <Link 
-                  to="/advertisers"
+                  to="/advertisers/wizora"
                   className="text-white text-lg pl-4 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Overview
+                  Wizora
                 </Link>
                 <Link 
                   to="/advertisers/case-studies"
@@ -220,52 +195,51 @@ const Navbar: React.FC = () => {
                 >
                   Case Studies
                 </Link>
-                <div className="text-white text-lg pl-4 py-1 font-medium">Products</div>
                 <Link 
-                  to="/advertisers/products/wizora"
-                  className="text-white text-lg pl-8 py-1"
+                  to="/advertisers/ad-gallery"
+                  className="text-white text-lg pl-4 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Wizora
+                  Ad Gallery
                 </Link>
                 <Link 
-                  to="/advertisers/products/questmap"
-                  className="text-white text-lg pl-8 py-1"
+                  to="/advertisers/contact"
+                  className="text-white text-lg pl-4 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  QuestMap
-                </Link>
-                <Link 
-                  to="/advertisers/products/perfnxt"
-                  className="text-white text-lg pl-8 py-1"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  PerfNXT
+                  Contact
                 </Link>
               </div>
 
               <div className="flex flex-col space-y-2">
-                <div className="text-white text-xl font-medium py-2">Publishers</div>
+                <div className="text-white text-xl font-medium py-2">Developers</div>
                 <Link 
-                  to="/publishers"
+                  to="/developers"
                   className="text-white text-lg pl-4 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Overview
                 </Link>
                 <Link 
-                  to="/publishers/monetization"
+                  to="/developers/monetization"
                   className="text-white text-lg pl-4 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Monetization
                 </Link>
                 <Link 
-                  to="/publishers/analytics"
+                  to="/developers/analytics"
                   className="text-white text-lg pl-4 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Analytics
+                </Link>
+                <Link 
+                  to="/developers/contact"
+                  className="text-white text-lg pl-4 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
                 </Link>
               </div>
 

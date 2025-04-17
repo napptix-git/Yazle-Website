@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import WorldMap from '@/components/WorldMap';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -42,14 +42,19 @@ const Contact: React.FC = () => {
       
       <div className="container mx-auto pt-24 pb-20 px-4">
         <div className="mb-16">
-          <WorldMap />
+          <div className="w-full mx-auto max-w-5xl">
+            <img 
+              src="/lovable-uploads/de1f01a3-c2a1-49bf-89d7-0f5535044663.png" 
+              alt="Global Map" 
+              className="w-full h-auto object-cover rounded-xl brightness-125 contrast-125"
+            />
+          </div>
         </div>
         
-        <h1 className="text-4xl md:text-5xl font-syne font-extrabold text-white mb-8 text-center">Get In Touch</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">Get In Touch</h1>
         <div className="text-napptix-light-grey space-y-6 max-w-2xl mx-auto text-lg">
           <p className="text-center">
-            Have questions about our advertising solutions? Interested in partnering with us?
-            Fill out the form below and our team will get back to you shortly.
+            Have questions about our solutions? Fill out the form below and our team will get back to you shortly.
           </p>
           
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

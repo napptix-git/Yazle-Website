@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,22 +7,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Solutions from "./pages/Solutions";
 import Advertisers from "./pages/Advertisers";
-import Publishers from "./pages/Publishers";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import React from 'react';
 
-// Advertiser product pages
+// Advertiser pages
 import WizoraPage from "./pages/advertisers/WizoraPage";
-import QuestMapPage from "./pages/advertisers/QuestMapPage";
-import PerfNXTPage from "./pages/advertisers/PerfNXTPage";
 import CaseStudiesPage from "./pages/advertisers/CaseStudiesPage";
 import CaseStudyDetailPage from "./pages/advertisers/CaseStudyDetailPage";
+import AdGalleryPage from "./pages/advertisers/AdGalleryPage";
+import AdvertiserContactPage from "./pages/advertisers/ContactPage";
 
-// Publisher pages
-import MonetizationPage from "./pages/publishers/MonetizationPage";
-import AnalyticsPage from "./pages/publishers/AnalyticsPage";
+// Developer pages (formerly Publisher)
+import Developers from "./pages/Developers";
+import MonetizationPage from "./pages/developers/MonetizationPage";
+import AnalyticsPage from "./pages/developers/AnalyticsPage";
+import DeveloperContactPage from "./pages/developers/ContactPage";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -47,16 +49,17 @@ const App = () => {
               
               {/* Advertiser routes */}
               <Route path="/advertisers" element={<Advertisers />} />
+              <Route path="/advertisers/wizora" element={<WizoraPage />} />
               <Route path="/advertisers/case-studies" element={<CaseStudiesPage />} />
               <Route path="/advertisers/case-studies/:slug" element={<CaseStudyDetailPage />} />
-              <Route path="/advertisers/products/wizora" element={<WizoraPage />} />
-              <Route path="/advertisers/products/questmap" element={<QuestMapPage />} />
-              <Route path="/advertisers/products/perfnxt" element={<PerfNXTPage />} />
+              <Route path="/advertisers/ad-gallery" element={<AdGalleryPage />} />
+              <Route path="/advertisers/contact" element={<AdvertiserContactPage />} />
               
-              {/* Publisher routes */}
-              <Route path="/publishers" element={<Publishers />} />
-              <Route path="/publishers/monetization" element={<MonetizationPage />} />
-              <Route path="/publishers/analytics" element={<AnalyticsPage />} />
+              {/* Developer routes (formerly Publisher) */}
+              <Route path="/developers" element={<Developers />} />
+              <Route path="/developers/monetization" element={<MonetizationPage />} />
+              <Route path="/developers/analytics" element={<AnalyticsPage />} />
+              <Route path="/developers/contact" element={<DeveloperContactPage />} />
               
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
