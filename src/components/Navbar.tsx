@@ -4,13 +4,7 @@ import { ChevronDown, Gamepad, BookOpen, Image, BookCheck, BookOpenCheck } from 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Updated type definition to ensure type safety
-type MobileMenuType = 
-  | 'mobile-menu' 
-  | 'mobile-advertisers' 
-  | 'mobile-developers' 
-  | null;
-
+type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type HoveredItemType = {
   mobile: MobileMenuType;
