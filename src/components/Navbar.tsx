@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
   // Update the toggleMobileMenu function to correctly handle state
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
-      // For strict type comparison, first check if the values are exactly equal
+      // For strict type comparison, compare the exact values
       if (prev.mobile === menuType) {
         return { ...prev, mobile: null };
       }
