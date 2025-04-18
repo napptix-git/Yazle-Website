@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import WorldMap from '@/components/WorldMap';
 
 type ContactType = 'general' | 'advertiser' | 'developer';
 
@@ -110,20 +111,22 @@ const Contact: React.FC = () => {
     <div className="min-h-screen bg-black font-manrope">
       <Navbar />
       
-      <div className="container mx-auto pt-28 pb-20 px-4">
-        <div className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">Global Presence</h2>
+      <div className="container mx-auto pt-20 pb-20 px-4">
+        <div className="mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">Global Presence</h2>
           <div className="space-y-8">
             {offices.map((office) => (
               <div key={office.city} className="border-b border-white/20 pb-8">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full">
-                  <h3 className="text-4xl md:text-6xl font-syne font-extrabold mb-4 md:mb-0 md:mr-8">{office.city}</h3>
+                  <h3 className="text-4xl md:text-6xl font-syne font-extrabold mb-4 md:mb-0 md:mr-8 first:md:mr-16">{office.city}</h3>
                   <p className="text-xl text-napptix-light-grey">{office.country}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
+        <WorldMap />
         
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">Get In Touch</h1>
         
