@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck, BookOpenCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Define the mobile menu types as a proper union type
+// Define the mobile menu types as a union type for better TypeScript support
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type HoveredItemType = {
