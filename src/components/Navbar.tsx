@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 type DesktopMenuType = 'advertisers' | 'developers' | null;
@@ -16,6 +17,7 @@ const Navbar: React.FC = () => {
   const [hoveredItem, setHoveredItem] = useState<HoveredItemType>({ mobile: null, desktop: null });
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const location = useLocation();
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +52,15 @@ const Navbar: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+
+  const toggleMobileMenu = (menuType: MobileMenuType | null) => {
+    setHoveredItem(prev => {
+      if (prev.mobile === menuType) {
+        return { ...prev, mobile: null };
+      }
+      return { ...prev, mobile: menuType };
+    });
+  };
   
   return (
     <header 
@@ -60,7 +71,7 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-2">
           <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl">
-            <div className="h-20 md:h-24 lg:h-24">
+            <div className="h-16 md:h-20 lg:h-24">
               <img 
                 src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                 alt="Napptix" 
@@ -184,10 +195,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden">
             <button 
               className="text-white"
-              onClick={() => setHoveredItem(prev => ({
-                ...prev,
-                mobile: prev.mobile === 'mobile-menu' ? null : 'mobile-menu'
-              }))}
+              onClick={() => toggleMobileMenu('mobile-menu')}
             >
               {hoveredItem.mobile === 'mobile-menu' ? (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -215,10 +223,7 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto px-4 py-4 space-y-4">
               <div>
                 <button 
-                  onClick={() => setHoveredItem(prev => ({
-                    ...prev,
-                    mobile: prev.mobile === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers'
-                  }))}
+                  onClick={() => toggleMobileMenu('mobile-advertisers')}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Advertisers
@@ -243,10 +248,7 @@ const Navbar: React.FC = () => {
               
               <div>
                 <button 
-                  onClick={() => setHoveredItem(prev => ({
-                    ...prev,
-                    mobile: prev.mobile === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers'
-                  }))}
+                  onClick={() => toggleMobileMenu('mobile-developers')}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Developers

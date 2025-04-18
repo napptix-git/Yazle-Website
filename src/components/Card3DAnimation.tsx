@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Card3DAnimation.css';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -33,6 +34,7 @@ const cards = [
 export const Card3DAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -52,15 +54,20 @@ export const Card3DAnimation = () => {
         scrub: true,
       });
       
+      // Calculate offsets based on screen size
+      const verticalOffset = isMobile ? -5 : -10;
+      const scaleDecrement = isMobile ? 0.03 : 0.05;
+      const opacityDecrement = isMobile ? 0.1 : 0.15;
+      
       // Set initial position of cards - stacked with slight offset
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         
         gsap.set(card, {
-          y: i * -10, // Slight vertical offset for stacked appearance
-          rotateX: 5, // Slight tilt for 3D effect
-          scale: 1 - (i * 0.05), // Slightly decreasing size for depth
-          opacity: 1 - (i * 0.15), // Decreasing opacity for cards in back
+          y: i * verticalOffset, // Slight vertical offset for stacked appearance
+          rotateX: isMobile ? 3 : 5, // Slight tilt for 3D effect
+          scale: 1 - (i * scaleDecrement), // Slightly decreasing size for depth
+          opacity: 1 - (i * opacityDecrement), // Decreasing opacity for cards in back
           transformOrigin: "center bottom",
           zIndex: cards.length - i,
         });
@@ -94,7 +101,7 @@ export const Card3DAnimation = () => {
               end: `+=${window.innerHeight * 0.4}`,
               scrub: 0.5,
             },
-            y: -200, // Move up and out
+            y: isMobile ? -150 : -200, // Move up and out
             opacity: 0,
             ease: "power2.in",
           });
@@ -122,14 +129,14 @@ export const Card3DAnimation = () => {
       ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []);
+  }, [isMobile]);
   
   return (
     <section 
       className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 overflow-hidden"
     >
       <div className="text-center mb-12 z-10">
-        <h2 className="text-4xl font-bold mb-2">Our Services</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-2">Our Services</h2>
         <p className="text-lg text-slate-400 text-center max-w-xl">
           Comprehensive advertising solutions across the gaming ecosystem
         </p>
@@ -143,12 +150,12 @@ export const Card3DAnimation = () => {
           <div
             key={index}
             ref={(el) => (cardRefs.current[index] = el)}
-            className="card-item absolute max-w-lg w-full aspect-[2/3] rounded-3xl overflow-hidden"
+            className="card-item absolute max-w-lg w-full sm:w-[90%] md:w-[80%] aspect-auto md:aspect-[2/3] rounded-3xl overflow-hidden"
           >
-            <div className="relative w-full h-full bg-white text-black flex flex-col items-center justify-center p-8">
-              <h3 className="text-3xl font-bold mb-6 text-center">{card.title}</h3>
-              <p className="text-lg text-center text-gray-700 mb-8">{card.content}</p>
-              <button className="mt-6 bg-black text-white px-6 py-3 rounded-full hover:bg-black/80 transition-colors">
+            <div className="relative w-full h-full bg-white text-black flex flex-col items-center justify-center p-4 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6 text-center">{card.title}</h3>
+              <p className="text-base md:text-lg text-center text-gray-700 mb-4 md:mb-8">{card.content}</p>
+              <button className="mt-3 md:mt-6 bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-black/80 transition-colors text-sm md:text-base">
                 Learn more
               </button>
             </div>

@@ -89,5 +89,14 @@
   .card-item {
     width: 90%;
     max-width: 320px;
+    height: 400px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .card-item {
+    height: 350px;
+    max-width: 280px;
   }
 }
