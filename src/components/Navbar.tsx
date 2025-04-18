@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck, BookOpenCheck } from 'lucide-react';
@@ -54,7 +53,6 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  // Update the toggleMobileMenu function for proper type handling
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
       if (prev.mobile === menuType) {
