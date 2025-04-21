@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useIsMobile } from '../hooks/use-mobile';
+import { ChevronDown } from 'lucide-react';
+import DesktopMenu from './NavbarDesktopMenu';
+import MobileMenu from './NavbarMobileMenu';
 
-// Define a single type for all mobile menu states
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
@@ -17,8 +18,9 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<HoveredItemType>({ mobile: null, desktop: null });
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+
   const location = useLocation();
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -28,13 +30,13 @@ const Navbar: React.FC = () => {
         setScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
+
   const handleMouseEnter = (menu: DesktopMenuType) => {
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -48,23 +50,21 @@ const Navbar: React.FC = () => {
     }, 200);
     setTimeoutId(id);
   };
-  
+
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
 
-  // Fixed toggleMobileMenu function with proper type handling
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
-      // If clicking on the same submenu that's already open, go back to main menu
+      // Toggle between mobile-menu and submenu
       if (prev.mobile === menuType) {
         return { ...prev, mobile: 'mobile-menu' };
       }
-      // Otherwise, open the selected submenu
       return { ...prev, mobile: menuType };
     });
   };
-  
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -82,110 +82,13 @@ const Navbar: React.FC = () => {
               />
             </div>
           </Link>
-          
-          <nav className="hidden md:flex items-center space-x-8 flex-grow justify-center">
-            <div 
-              className="relative group"
-              onMouseEnter={() => handleMouseEnter('advertisers')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
-                ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
-              
-              <AnimatePresence>
-                {hoveredItem.desktop === 'advertisers' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10, height: 0 }}
-                    animate={{ opacity: 1, y: 0, height: 'auto' }}
-                    exit={{ opacity: 0, y: -10, height: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
-                  >
-                    <div className="py-8 px-6">
-                      <p className="text-gray-400 text-sm font-semibold mb-6 uppercase">Our Solutions</p>
-                      <div className="space-y-6">
-                        <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                          <div className="p-2 bg-gray-800 rounded-lg">
-                            <Gamepad className="h-5 w-5 text-[#29dd3b]" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-200 uppercase">Wizora</p>
-                            <p className="text-xs text-gray-400">Interactive ad platform</p>
-                          </div>
-                        </Link>
-                        
-                        <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                          <div className="p-2 bg-gray-800 rounded-lg">
-                            <BookOpen className="h-5 w-5 text-[#29dd3b]" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-200 uppercase">Case Studies</p>
-                            <p className="text-xs text-gray-400">Success stories</p>
-                          </div>
-                        </Link>
-                        
-                        <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                          <div className="p-2 bg-gray-800 rounded-lg">
-                            <Image className="h-5 w-5 text-[#29dd3b]" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-200 uppercase">Ad Gallery</p>
-                            <p className="text-xs text-gray-400">Explore ad formats</p>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
-            <div 
-              className="relative group"
-              onMouseEnter={() => handleMouseEnter('developers')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
-                DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
-              
-              <AnimatePresence>
-                {hoveredItem.desktop === 'developers' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10, height: 0 }}
-                    animate={{ opacity: 1, y: 0, height: 'auto' }}
-                    exit={{ opacity: 0, y: -10, height: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-72 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
-                  >
-                    <div className="py-8 px-6">
-                      <p className="text-gray-400 text-sm font-semibold mb-6 uppercase">For Game Developers</p>
-                      <div className="space-y-6">
-                        <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                          <div className="p-2 bg-gray-800 rounded-lg">
-                            <BookCheck className="h-5 w-5 text-[#29dd3b]" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-200 uppercase">Overview</p>
-                            <p className="text-xs text-gray-400">Discover solutions</p>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <Link 
-              to="/about"
-              onClick={scrollToTop}
-              className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase"
-            >
-              ABOUT US
-            </Link>
-          </nav>
+          <DesktopMenu
+            hoveredItem={hoveredItem}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            scrollToTop={scrollToTop}
+          />
 
           <Link 
             to="/contact"
@@ -217,75 +120,11 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {hoveredItem.mobile === 'mobile-menu' && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-black/95 shadow-lg"
-          >
-            <div className="container mx-auto px-4 py-4 space-y-4">
-              <div>
-                <button 
-                  onClick={() => toggleMobileMenu('mobile-advertisers')}
-                  className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
-                >
-                  Advertisers
-                  <ChevronDown className={`transition-transform ${hoveredItem.mobile === 'mobile-advertisers' ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {hoveredItem.mobile === 'mobile-advertisers' && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="mt-2 pl-4 space-y-2"
-                    >
-                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
-                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
-                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              
-              <div>
-                <button 
-                  onClick={() => toggleMobileMenu('mobile-developers')}
-                  className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
-                >
-                  Developers
-                  <ChevronDown className={`transition-transform ${hoveredItem.mobile === 'mobile-developers' ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {hoveredItem.mobile === 'mobile-developers' && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="mt-2 pl-4 space-y-2"
-                    >
-                      <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300">Overview</Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              
-              <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
-                About Us
-              </Link>
-              
-              <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
-                Let's Talk
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenu
+        hoveredItem={hoveredItem}
+        toggleMobileMenu={toggleMobileMenu}
+        scrollToTop={scrollToTop}
+      />
     </header>
   );
 };
