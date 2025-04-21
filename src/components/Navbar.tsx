@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
@@ -53,9 +52,10 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  // Fix the toggle mobile menu function to handle string comparison properly
+  // Fix the toggle mobile menu function to properly handle the types
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
+      // Compare string values directly rather than type comparisons
       if (prev.mobile === menuType) {
         return { ...prev, mobile: 'mobile-menu' };
       } 
