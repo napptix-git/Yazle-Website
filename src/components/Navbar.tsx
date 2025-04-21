@@ -1,11 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 type DesktopMenuType = 'advertisers' | 'developers' | null;
+type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
+
 type HoveredItemType = {
   mobile: MobileMenuType;
   desktop: DesktopMenuType;
@@ -49,6 +49,15 @@ const Navbar: React.FC = () => {
   
   const scrollToTop = () => {
     window.scrollTo(0, 0);
+  };
+
+  const toggleMobileMenu = (menuType: MobileMenuType) => {
+    setHoveredItem(prev => {
+      if (prev.mobile === menuType) {
+        return { ...prev, mobile: 'mobile-menu' };
+      } 
+      return { ...prev, mobile: menuType };
+    });
   };
   
   return (
@@ -215,10 +224,7 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto px-4 py-4 space-y-4">
               <div>
                 <button 
-                  onClick={() => setHoveredItem(prev => ({
-                    ...prev,
-                    mobile: prev.mobile === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers'
-                  }))}
+                  onClick={() => toggleMobileMenu('mobile-advertisers')}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Advertisers
@@ -243,10 +249,7 @@ const Navbar: React.FC = () => {
               
               <div>
                 <button 
-                  onClick={() => setHoveredItem(prev => ({
-                    ...prev,
-                    mobile: prev.mobile === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers'
-                  }))}
+                  onClick={() => toggleMobileMenu('mobile-developers')}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Developers
