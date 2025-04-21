@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '../hooks/use-mobile';
 
 // Define a single type for all mobile menu states
 type DesktopMenuType = 'advertisers' | 'developers' | null;
@@ -52,13 +53,14 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  // Fix the toggle mobile menu function to properly handle the types
+  // Fixed toggleMobileMenu function with proper type handling
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
-      // Compare string values directly rather than type comparisons
+      // If clicking on the same submenu that's already open, go back to main menu
       if (prev.mobile === menuType) {
         return { ...prev, mobile: 'mobile-menu' };
-      } 
+      }
+      // Otherwise, open the selected submenu
       return { ...prev, mobile: menuType };
     });
   };
