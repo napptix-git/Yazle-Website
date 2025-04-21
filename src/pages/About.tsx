@@ -68,7 +68,6 @@ const About: React.FC = () => {
     }
   ];
 
-  // Add more team members to reach 15 total
   const additionalMembers = [
     {
       name: "James Wilson",
@@ -87,7 +86,7 @@ const About: React.FC = () => {
     {
       name: "Christopher Lee",
       position: "Head of Marketing",
-      imageSrc: "https://images.unsplash.com/photo-1543132220-3ec99c6094dc?q=80&w=1374&auto=format&fit=crop",
+      imageSrc: "https://images.unsplash.com/photo-1543132220-3ec99c6094dc?q=80&w=1374&auto=format=crop",
       linkedinUrl: "https://linkedin.com/in/example11",
       bgColor: "bg-gradient-to-br from-amber-100/20 via-orange-100/20 to-red-100/20"
     },
@@ -121,12 +120,16 @@ const About: React.FC = () => {
     }
   ];
 
-  // Combine the two arrays
   const allTeamMembers = [...teamMembers, ...additionalMembers];
 
-  // Add animation for the team member cards with reduced delay
+  const offices = [
+    { city: "Mumbai", country: "India" },
+    { city: "Dubai", country: "United Arab Emirates" },
+    { city: "Delhi", country: "India" },
+    { city: "Singapore", country: "Singapore" }
+  ];
+
   useEffect(() => {
-    // Initialize smooth scroll with GSAP
     const smoother = gsap.from(document.documentElement, {
       scrollTrigger: {
         trigger: document.body,
@@ -137,7 +140,6 @@ const About: React.FC = () => {
       ease: "power2.out",
     });
 
-    // Add revealing animation to each team member card with reduced delay
     const teamCards = document.querySelectorAll('.team-member-card');
     teamCards.forEach((card, index) => {
       gsap.fromTo(
@@ -149,18 +151,17 @@ const About: React.FC = () => {
         { 
           opacity: 1, 
           y: 0,
-          duration: 0.5, // Faster duration
-          delay: index * 0.05, // Much smaller delay between cards
+          duration: 0.5,
+          delay: index * 0.05,
           scrollTrigger: {
             trigger: card,
-            start: "top bottom-=50", // Trigger earlier
+            start: "top bottom-=50",
             toggleActions: "play none none reverse"
           },
-          ease: "power1.out" // Smoother easing
+          ease: "power1.out"
         }
       );
 
-      // Add glow animation similar to the "Gamer" text
       const nameElement = card.querySelector('.member-name');
       if (nameElement) {
         gsap.to(nameElement, {
@@ -175,59 +176,47 @@ const About: React.FC = () => {
     });
 
     return () => {
-      // Clean up
       if (smoother) {
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       }
     };
   }, []);
 
-  // Ensure navigation links scroll to top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Offices for global presence
-  const offices = [
-    { city: "Mumbai", country: "India" },
-    { city: "Dubai", country: "United Arab Emirates" },
-    { city: "Delhi", country: "India" },
-    { city: "Singapore", country: "Singapore" }
-  ];
 
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
-        {/* --- Global presence section with world map & cities --- */}
-        <div className="mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-10 text-center">Global Presence</h2>
-          <div className="relative w-full max-w-5xl mx-auto mb-8 flex flex-col items-center">
-            <img 
-              src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a"
+        <div className="mb-12">
+          <div className="relative w-full max-w-5xl mx-auto mb-6 flex flex-col items-center">
+            <img
+              src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png"
               alt="Bright World Map"
-              className="w-full h-[420px] object-cover rounded-lg shadow-xl brightness-110 contrast-125 saturate-125"
-              style={{maxWidth: 1000}}
+              className="w-full h-[340px] object-cover rounded-lg shadow-xl brightness-125 contrast-125 saturate-125"
+              style={{maxWidth: 1000, background: '#000'}}
             />
           </div>
-          <div className="max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {offices.map((office) => (
-                <div key={office.city} className="border-b border-white/20 pb-4">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full">
-                    <h3 className="text-3xl md:text-4xl font-syne font-extrabold mb-2 md:mb-0">{office.city}</h3>
-                    <p className="text-lg text-napptix-light-grey">{office.country}</p>
-                  </div>
+          <div className="max-w-4xl mx-auto">
+            {offices.map((office, idx) => (
+              <div key={office.city} className="w-full">
+                <div className="flex justify-between items-center py-6">
+                  <span className="text-[3.2rem] md:text-[4.25rem] font-syne font-extrabold leading-none text-white">{office.city}</span>
+                  <span className="text-[1.55rem] md:text-2xl text-[#8E9196] font-manrope font-medium">{office.country}</span>
                 </div>
-              ))}
-            </div>
+                {idx !== offices.length - 1 && (
+                  <div className="border-b border-[#242424] w-full"></div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* --- Our People section --- */}
         <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
-          <p className="text-2xl text-white/80 mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
+          <p className="text-2xl text-white/80 mb-12 text-center">
             Creativity opens doors,<br />
             our people walk through them.
           </p>
@@ -246,7 +235,6 @@ const About: React.FC = () => {
           </div>
         </div>
         
-        {/* Our Values section */}
         <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
