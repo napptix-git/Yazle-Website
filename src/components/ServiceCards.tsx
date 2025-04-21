@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import { 
   Gamepad, 
   MonitorPlay, 
@@ -36,65 +36,32 @@ const serviceData = [
   },
 ];
 
-const FloatingMobileCard = ({ card, active }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isTouching, setIsTouching] = useState(false);
-  const tiltX = useMotionValue(0);
-  const tiltY = useMotionValue(0);
-
+// NEW: Card component for mobile
+const MobileFlipCard = ({ card, index }: { card: typeof serviceData[0], index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  // useInView returns true when the card is in the viewport
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  // Animate as soon as it enters view
   const controls = useAnimation();
 
   useEffect(() => {
-    let anim: ReturnType<typeof setTimeout>;
-
-    const loop = () => {
-      controls.start({
-        y: [0, -14, 0, 14, 0],
-        rotate: [0, -2, 0, 2, 0],
-        transition: { duration: 6, ease: "easeInOut", repeat: Infinity }
+    if (inView) {
+      controls.start({ 
+        rotateY: 0,
+        opacity: 1,
+        transition: { duration: 0.8, delay: index * 0.1, ease: [0.23,1,0.32,1] }
       });
-    };
-    loop();
-    return () => {
-      controls.stop();
-      clearTimeout(anim);
-    };
-  }, [controls]);
+    }
+  }, [inView, controls, index]);
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const midX = rect.width / 2;
-    const midY = rect.height / 2;
-    const maxTilt = 12;
-    tiltX.set(-((y - midY) / midY) * maxTilt);
-    tiltY.set(((x - midX) / midX) * maxTilt);
-    setIsTouching(true);
-  };
-
-  const handlePointerLeave = () => {
-    tiltX.set(0);
-    tiltY.set(0);
-    setIsTouching(false);
-  };
-
+  // Start flipped and hidden
   return (
     <motion.div
-      ref={cardRef}
-      className="card-item bg-white text-black rounded-2xl p-8 flex flex-col w-[90vw] max-w-[360px] mx-auto shadow-2xl relative"
-      style={{
-        rotateX: tiltX,
-        rotateY: tiltY,
-        boxShadow: isTouching
-          ? "0 20px 40px -10px rgba(0,0,0,0.20)"
-          : "0 10px 20px -5px rgba(0,0,0,0.20)",
-      }}
+      ref={ref}
+      initial={{ rotateY: 75, opacity: 0 }}
       animate={controls}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-      onPointerUp={handlePointerLeave}
+      className="bg-white text-black rounded-2xl p-8 flex flex-col w-full max-w-md mx-auto shadow-2xl relative mb-12"
+      style={{ perspective: '1200px', backfaceVisibility: 'hidden' }}
     >
       <div className="flex flex-col items-center justify-between h-full">
         <div className="flex flex-col items-center">
@@ -113,7 +80,7 @@ const FloatingMobileCard = ({ card, active }) => {
         </button>
       </div>
     </motion.div>
-  );
+  )
 };
 
 const CardStack = () => {
@@ -125,134 +92,44 @@ const CardStack = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setInView(true);
-        controls.start("visible");
-      } else {
-        setInView(false);
-      }
-    }, { threshold: 0.3 });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
+    if (!isMobile) {
+      const observer = new window.IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          controls.start("visible");
+        } else {
+          setInView(false);
+        }
+      }, { threshold: 0.3 });
+      
       if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+        observer.observe(containerRef.current);
       }
-    };
-  }, [controls]);
-
-  const handleNext = () => {
-    setDirection(1);
-    setActiveCard((prev) => (prev + 1) % serviceData.length);
-  };
-
-  const handlePrev = () => {
-    setDirection(-1);
-    setActiveCard((prev) => (prev - 1 + serviceData.length) % serviceData.length);
-  };
-
-  const cardVariants = {
-    initial: (custom: number) => ({
-      x: custom > 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.5,
-      rotateY: custom > 0 ? 45 : -45
-    }),
-    animate: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      rotateY: 0,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20
-      }
-    },
-    exit: (custom: number) => ({
-      x: custom > 0 ? -1000 : 1000,
-      opacity: 0,
-      scale: 0.5,
-      rotateY: custom > 0 ? -45 : 45,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20
-      }
-    }),
-    hover: {
-      y: -10,
-      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      transition: { duration: 0.2 }
+  
+      return () => {
+        if (containerRef.current) {
+          observer.unobserve(containerRef.current);
+        }
+      };
     }
-  };
+  }, [controls, isMobile]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const dotVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const currentCard = serviceData[activeCard];
-
+  // --- MOBILE: FLIP CARDS ON SCROLL ---
   if (isMobile) {
     return (
       <div
         ref={containerRef}
         className="w-full flex flex-col items-center justify-center"
       >
-        <FloatingMobileCard card={currentCard} active={true} />
-        <div className="flex justify-center gap-3 mt-8">
-          <button 
-            className="rounded-full bg-black/20 p-3 text-black hover:bg-black/30 transition-colors"
-            onClick={() => {
-              setDirection(-1);
-              setActiveCard((prev) => (prev - 1 + serviceData.length) % serviceData.length);
-            }}
-            aria-label="Previous"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          {serviceData.map((_, idx) => (
-            <button
-              key={idx}
-              className={`w-2.5 h-2.5 rounded-full ${activeCard === idx ? 'bg-[#29dd3b]' : 'bg-black/10'}`}
-              onClick={() => { setDirection(idx > activeCard ? 1 : -1); setActiveCard(idx); }}
-              aria-label={`Select card ${idx + 1}`}
-            />
-          ))}
-          <button 
-            className="rounded-full bg-black/20 p-3 text-black hover:bg-black/30 transition-colors"
-            onClick={() => {
-              setDirection(1);
-              setActiveCard((prev) => (prev + 1) % serviceData.length);
-            }}
-            aria-label="Next"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
+        {serviceData.map((card, idx) => (
+          <MobileFlipCard card={card} key={card.id} index={idx} />
+        ))}
       </div>
     );
   }
+
+  // --- DESKTOP: Original stack/slide animation ---
+  const currentCard = serviceData[activeCard];
 
   return (
     <motion.div 
@@ -338,7 +215,10 @@ const CardStack = () => {
         
         <button 
           className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 z-10 transition-all"
-          onClick={handlePrev}
+          onClick={() => {
+            setDirection(-1);
+            setActiveCard((prev) => (prev - 1 + serviceData.length) % serviceData.length);
+          }}
           aria-label="Previous card"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -348,7 +228,10 @@ const CardStack = () => {
         
         <button 
           className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 z-10 transition-all"
-          onClick={handleNext}
+          onClick={() => {
+            setDirection(1);
+            setActiveCard((prev) => (prev + 1) % serviceData.length);
+          }}
           aria-label="Next card"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
