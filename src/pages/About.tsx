@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -122,6 +123,7 @@ const About: React.FC = () => {
 
   const allTeamMembers = [...teamMembers, ...additionalMembers];
 
+  // Moved offices here to show on about page before people section
   const offices = [
     { city: "Mumbai", country: "India" },
     { city: "Dubai", country: "United Arab Emirates" },
@@ -191,29 +193,35 @@ const About: React.FC = () => {
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <div className="mb-12">
-          <div className="relative w-full max-w-5xl mx-auto mb-6 flex flex-col items-center">
+          <div className="relative w-full max-w-5xl mx-auto mb-12 flex flex-col items-center">
+            {/* Use the provided bright map image */}
             <img
               src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png"
-              alt="Bright World Map"
+              alt="Global Presence Map"
               className="w-full h-[340px] object-cover rounded-lg shadow-xl brightness-125 contrast-125 saturate-125"
-              style={{maxWidth: 1000, background: '#000'}}
+              style={{ maxWidth: 1000, background: '#000' }}
             />
           </div>
-          <div className="max-w-4xl mx-auto">
+          {/* Global Presence cities and countries listing */}
+          <div className="max-w-4xl mx-auto mb-16">
             {offices.map((office, idx) => (
               <div key={office.city} className="w-full">
-                <div className="flex justify-between items-center py-6">
-                  <span className="text-[3.2rem] md:text-[4.25rem] font-syne font-extrabold leading-none text-white">{office.city}</span>
-                  <span className="text-[1.55rem] md:text-2xl text-[#8E9196] font-manrope font-medium">{office.country}</span>
+                <div className="flex justify-between items-center py-6 border-b border-[#242424]">
+                  {/* City styled as large bold with green shade */}
+                  <span className="text-[4rem] font-syne font-extrabold leading-none text-green-400">
+                    {office.city}
+                  </span>
+                  {/* Country styled as smaller, uppercase, muted */}
+                  <span className="text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide">
+                    {office.country}
+                  </span>
                 </div>
-                {idx !== offices.length - 1 && (
-                  <div className="border-b border-[#242424] w-full"></div>
-                )}
               </div>
             ))}
           </div>
         </div>
 
+        {/* Our People Section with centered text */}
         <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
           <p className="text-2xl text-white/80 mb-12 text-center">
