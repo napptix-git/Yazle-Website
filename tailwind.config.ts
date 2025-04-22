@@ -29,7 +29,6 @@ export default {
         'roboto-mono': ['Roboto Mono', 'monospace'],
         'dela-gothic': ['Dela Gothic One', 'sans-serif'],
         'manrope': ['Manrope', 'sans-serif'],
-        'granivor-display': ['Granivor Display', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

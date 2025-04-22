@@ -4,14 +4,19 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-const mobileMenuTypes = ['mobile-menu', 'mobile-advertisers', 'mobile-developers', null] as const;
-type MobileMenuType = typeof mobileMenuTypes[number];
+// Union of all possible mobile menu values
+type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
-interface Props {
-  hoveredItem: { mobile: MobileMenuType; desktop: unknown };
+type HoveredItemType = {
+  mobile: MobileMenuType;
+  desktop: unknown;
+};
+
+type Props = {
+  hoveredItem: HoveredItemType;
   toggleMobileMenu: (menuType: MobileMenuType) => void;
   scrollToTop: () => void;
-}
+};
 
 const NavbarMobileMenu: React.FC<Props> = ({
   hoveredItem,
@@ -31,10 +36,12 @@ const NavbarMobileMenu: React.FC<Props> = ({
           <div>
             <button
               onClick={() => toggleMobileMenu('mobile-advertisers')}
-              className="flex justify-between items-center w-full py-2 text-white font-granivor-display font-extrabold uppercase"
+              className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
             >
               Advertisers
-              <ChevronDown className="transition-transform" />
+              <ChevronDown
+                className={`transition-transform ${hoveredItem.mobile === 'mobile-advertisers' ? 'rotate-180' : ''}`}
+              />
             </button>
             <AnimatePresence>
               {hoveredItem.mobile === 'mobile-advertisers' && (
@@ -45,9 +52,9 @@ const NavbarMobileMenu: React.FC<Props> = ({
                   transition={{ duration: 0.2 }}
                   className="mt-2 pl-4 space-y-2"
                 >
-                  <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Wizora</Link>
-                  <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Case Studies</Link>
-                  <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Ad Gallery</Link>
+                  <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
+                  <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
+                  <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -56,10 +63,12 @@ const NavbarMobileMenu: React.FC<Props> = ({
           <div>
             <button
               onClick={() => toggleMobileMenu('mobile-developers')}
-              className="flex justify-between items-center w-full py-2 text-white font-granivor-display font-extrabold uppercase"
+              className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
             >
               Developers
-              <ChevronDown className="transition-transform" />
+              <ChevronDown
+                className={`transition-transform ${hoveredItem.mobile === 'mobile-developers' ? 'rotate-180' : ''}`}
+              />
             </button>
             <AnimatePresence>
               {hoveredItem.mobile === 'mobile-developers' && (
@@ -70,17 +79,17 @@ const NavbarMobileMenu: React.FC<Props> = ({
                   transition={{ duration: 0.2 }}
                   className="mt-2 pl-4 space-y-2"
                 >
-                  <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Overview</Link>
+                  <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300">Overview</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-granivor-display font-extrabold uppercase">
+          <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
             About Us
           </Link>
 
-          <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-granivor-display font-extrabold uppercase">
+          <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
             Let's Talk
           </Link>
         </div>
