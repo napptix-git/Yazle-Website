@@ -1,22 +1,15 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-// Union of all possible mobile menu values
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
-type HoveredItemType = {
-  mobile: MobileMenuType;
-  desktop: unknown;
-};
-
-type Props = {
-  hoveredItem: HoveredItemType;
+interface Props {
+  hoveredItem: { mobile: MobileMenuType; desktop: unknown };
   toggleMobileMenu: (menuType: MobileMenuType) => void;
   scrollToTop: () => void;
-};
+}
 
 const NavbarMobileMenu: React.FC<Props> = ({
   hoveredItem,
@@ -36,12 +29,10 @@ const NavbarMobileMenu: React.FC<Props> = ({
           <div>
             <button
               onClick={() => toggleMobileMenu('mobile-advertisers')}
-              className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
+              className="flex justify-between items-center w-full py-2 text-white font-syne font-extrabold uppercase"
             >
               Advertisers
-              <ChevronDown
-                className={`transition-transform ${hoveredItem.mobile === 'mobile-advertisers' ? 'rotate-180' : ''}`}
-              />
+              <ChevronDown className="transition-transform" />
             </button>
             <AnimatePresence>
               {hoveredItem.mobile === 'mobile-advertisers' && (
@@ -63,12 +54,10 @@ const NavbarMobileMenu: React.FC<Props> = ({
           <div>
             <button
               onClick={() => toggleMobileMenu('mobile-developers')}
-              className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
+              className="flex justify-between items-center w-full py-2 text-white font-syne font-extrabold uppercase"
             >
               Developers
-              <ChevronDown
-                className={`transition-transform ${hoveredItem.mobile === 'mobile-developers' ? 'rotate-180' : ''}`}
-              />
+              <ChevronDown className="transition-transform" />
             </button>
             <AnimatePresence>
               {hoveredItem.mobile === 'mobile-developers' && (
@@ -85,11 +74,11 @@ const NavbarMobileMenu: React.FC<Props> = ({
             </AnimatePresence>
           </div>
 
-          <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
+          <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-syne font-extrabold uppercase">
             About Us
           </Link>
 
-          <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
+          <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-syne font-extrabold uppercase">
             Let's Talk
           </Link>
         </div>
