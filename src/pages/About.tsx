@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -216,12 +215,12 @@ const About: React.FC = () => {
             {offices.map((office, idx) => (
               <div key={office.city} className="w-full">
                 <div className="flex justify-between items-center py-6 border-b border-[#242424]">
-                  {/* City: white, Syne extrabold, large */}
-                  <span className="text-[4rem] font-syne font-extrabold leading-none text-white">
+                  {/* City: extreme left, white, Syne extrabold, large */}
+                  <span className="text-[4rem] font-syne font-extrabold leading-none text-white text-left">
                     {office.city}
                   </span>
-                  {/* Country: uppercase, muted */}
-                  <span className="text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide">
+                  {/* Country: extreme right, uppercase, muted */}
+                  <span className="text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide text-right">
                     {office.country}
                   </span>
                 </div>
@@ -273,4 +272,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-
