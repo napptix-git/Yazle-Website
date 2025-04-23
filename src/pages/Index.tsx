@@ -51,7 +51,7 @@ const Index = () => {
       </section>
       
       {/* Partners Carousel */}
-      <section id="partners" className="bg-black py-12">
+      <section id="partners" className="bg-black py-12 mt-32 md:mt-56">
         <PartnersCarousel />
       </section>
 

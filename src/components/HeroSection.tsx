@@ -122,17 +122,17 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-[83vh] flex items-center justify-center">
+    <div className="relative flex min-h-[85vh] w-full items-center justify-center">
       {/* Particle Canvas */}
       <canvas 
         ref={canvasRef} 
         className="absolute inset-0 z-0 pointer-events-none"
       />
       {/* Main Content */}
-      <div className="relative z-10 w-full flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center w-full mt-20 md:mt-24 lg:mt-28">
+      <div className="relative z-10 flex w-full h-full items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full">
           <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6"
+            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 text-center"
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -141,7 +141,7 @@ const HeroSection: React.FC = () => {
             Reach Every <span className="text-[#29dd3b]">Gamer</span>
           </motion.h1>
           <motion.p 
-            className="text-lg md:text-2xl text-napptix-light-grey max-w-2xl md:max-w-3xl mx-auto mb-10 font-roboto-mono font-normal"
+            className="text-lg md:text-2xl text-napptix-light-grey max-w-2xl md:max-w-3xl mx-auto mb-10 font-roboto-mono font-normal text-center"
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.13 }}
