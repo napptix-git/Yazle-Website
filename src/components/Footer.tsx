@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Github, Youtube, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -6,16 +7,20 @@ const Footer: React.FC = () => {
   const location = useLocation();
   
   const getNextPageInfo = () => {
+    // Updated next page flow:
+    // Home > Wizora > Case Studies > Ad Gallery > Developers(Overview) > About Us > Contact
     const routes = [
-      { path: "/", name: "Advertisers", to: "/advertisers" },
-      { path: "/advertisers", name: "Publishers", to: "/publishers" },
-      { path: "/publishers", name: "About", to: "/about" },
-      { path: "/about", name: "Contact", to: "/contact" },
-      { path: "/contact", name: "Home", to: "/" },
-      { path: "/solutions", name: "Advertisers", to: "/advertisers" }
+      { path: "/", name: "Wizora", to: "/advertisers/wizora" },
+      { path: "/advertisers/wizora", name: "Case Studies", to: "/advertisers/case-studies" },
+      { path: "/advertisers/case-studies", name: "Ad Gallery", to: "/advertisers/ad-gallery" },
+      { path: "/advertisers/ad-gallery", name: "Developers (Overview)", to: "/developers" },
+      { path: "/developers", name: "About Us", to: "/about" },
+      { path: "/about", name: "Contact (Let's Talk)", to: "/contact" },
+      { path: "/contact", name: "Home", to: "/" }
     ];
-    
+    // Try to find the matching route for current location or fallback
     const currentIndex = routes.findIndex(route => route.path === location.pathname);
+    // if not found, use first. If found use the current or next.
     return currentIndex >= 0 ? routes[currentIndex] : routes[0];
   };
   
@@ -65,7 +70,9 @@ const Footer: React.FC = () => {
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-napptix-light-grey">
               <li><Link to="/" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Home</Link></li>
-              <li><Link to="/advertisers" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Advertisers</Link></li>
+              <li><Link to="/advertisers/wizora" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Wizora</Link></li>
+              <li><Link to="/advertisers/case-studies" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Case Studies</Link></li>
+              <li><Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Ad Gallery</Link></li>
               <li><Link to="/developers" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Developers</Link></li>
               <li><Link to="/about" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">About Us</Link></li>
               <li><Link to="/contact" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Contact</Link></li>
@@ -78,8 +85,8 @@ const Footer: React.FC = () => {
               <li><Link to="/advertisers/wizora" className="hover:text-[#29dd3b] transition-colors">Wizora Platform</Link></li>
               <li><Link to="/advertisers/case-studies" className="hover:text-[#29dd3b] transition-colors">Case Studies</Link></li>
               <li><Link to="/advertisers/ad-gallery" className="hover:text-[#29dd3b] transition-colors">Ad Gallery</Link></li>
-              <li><Link to="/developers/analytics" className="hover:text-[#29dd3b] transition-colors">Analytics</Link></li>
-              <li><Link to="/developers/monetization" className="hover:text-[#29dd3b] transition-colors">Monetization</Link></li>
+              <li><Link to="/developers" className="hover:text-[#29dd3b] transition-colors">Developers Overview</Link></li>
+              <li><Link to="/about" className="hover:text-[#29dd3b] transition-colors">About Napptix</Link></li>
             </ul>
           </div>
           
@@ -114,3 +121,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+

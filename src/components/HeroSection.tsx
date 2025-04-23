@@ -1,6 +1,7 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface Particle {
   x: number;
@@ -121,7 +122,6 @@ const HeroSection: React.FC = () => {
     };
   }, [mousePosition, mounted]);
   
-  // For smoother animation without dependencies on mouse position
   const getParallaxStyle = () => {
     if (!mounted) return {};
     
@@ -132,7 +132,7 @@ const HeroSection: React.FC = () => {
   };
   
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="flex flex-col items-center justify-center w-full pt-32 pb-20 relative">
       <canvas 
         ref={canvasRef} 
         className="absolute inset-0 z-0"
@@ -163,12 +163,11 @@ const HeroSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <a 
-            href="#solutions" 
-            className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-3 px-8 rounded-full inline-block transition-all font-roboto-mono"
-          >
-            Discover Our Solutions
-          </a>
+          <Link to="/advertisers/wizora">
+            <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90 font-bold">
+              Discover Our Solution
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </div>

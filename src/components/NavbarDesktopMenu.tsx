@@ -28,7 +28,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('advertisers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
+      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview">
         ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -38,17 +38,17 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
+            className="absolute top-full left-0 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"  // SHIFTED left
           >
             <div className="py-8 px-6">
-              <p className="text-gray-400 text-sm font-semibold mb-6 uppercase">Our Solutions</p>
+              <p className="text-gray-400 text-sm font-bold mb-6 uppercase font-bold">Our Solutions</p>
               <div className="space-y-6">
                 <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <Gamepad className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-200 uppercase">Wizora</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Wizora</p>
                     <p className="text-xs text-gray-400">Interactive ad platform</p>
                   </div>
                 </Link>
@@ -57,7 +57,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
                     <BookOpen className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-200 uppercase">Case Studies</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Case Studies</p>
                     <p className="text-xs text-gray-400">Success stories</p>
                   </div>
                 </Link>
@@ -66,7 +66,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
                     <Image className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-200 uppercase">Ad Gallery</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Ad Gallery</p>
                     <p className="text-xs text-gray-400">Explore ad formats</p>
                   </div>
                 </Link>
@@ -81,7 +81,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('developers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
+      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview">
         DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -91,17 +91,17 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 w-72 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
+            className="absolute top-full left-0 w-72 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
           >
             <div className="py-8 px-6">
-              <p className="text-gray-400 text-sm font-semibold mb-6 uppercase">For Game Developers</p>
+              <p className="text-gray-400 text-sm font-bold mb-6 uppercase font-bold">For Game Developers</p>
               <div className="space-y-6">
                 <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <BookCheck className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-200 uppercase">Overview</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Overview</p>
                     <p className="text-xs text-gray-400">Discover solutions</p>
                   </div>
                 </Link>
@@ -114,7 +114,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
     <Link 
       to="/about"
       onClick={scrollToTop}
-      className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase"
+      className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase font-granview"
     >
       ABOUT US
     </Link>
@@ -122,3 +122,4 @@ const NavbarDesktopMenu: React.FC<Props> = ({
 );
 
 export default NavbarDesktopMenu;
+
