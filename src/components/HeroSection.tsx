@@ -1,7 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 interface Particle {
@@ -70,7 +69,7 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     if (!canvasRef.current || !mounted) return;
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext(' '2d');
     if (!ctx) return;
 
     const animate = () => {
@@ -124,55 +123,57 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full pt-32 pb-20 relative">
+    <div className="relative min-h-[83vh] flex items-center justify-center">
+      {/* Particle Canvas */}
       <canvas 
         ref={canvasRef} 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 pointer-events-none"
       />
-      
-      <div className="container relative z-10 mx-auto px-4 text-center">
-        <motion.h1 
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          style={getParallaxStyle()}
-        >
-          Reach Every <span className="text-[#29dd3b]">Gamer</span>
-        </motion.h1>
-        
-        <motion.p 
-          className="text-xl md:text-2xl text-napptix-light-grey max-w-3xl mx-auto mb-8 font-roboto-mono"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Innovative advertising solutions connecting brands with the gaming world
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex justify-center"
-        >
-          <Link to="/advertisers/wizora">
-            <button
-              className="px-8 py-3 rounded-full font-bold text-white text-lg"
-              style={{
-                background: "#8B5CF6",
-                fontFamily: 'Roboto Mono, monospace', // consistent w/ sample and site fonts
-                letterSpacing: '0.01em',
-                boxShadow: "0 2px 16px 0 rgba(139,92,246,0.16)"
-              }}
-            >
-              Discover Our Solutions
-            </button>
-          </Link>
-        </motion.div>
+      {/* Main Content */}
+      <div className="relative z-10 w-full flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full mt-20 md:mt-24 lg:mt-28">
+          <motion.h1 
+            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6"
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={getParallaxStyle()}
+          >
+            Reach Every <span className="text-[#29dd3b]">Gamer</span>
+          </motion.h1>
+          <motion.p 
+            className="text-lg md:text-2xl text-napptix-light-grey max-w-2xl md:max-w-3xl mx-auto mb-10 font-roboto-mono font-normal"
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.13 }}
+          >
+            Innovative advertising solutions connecting brands with the gaming world
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.22 }}
+            className="flex justify-center"
+          >
+            <Link to="/advertisers/wizora">
+              <button
+                className="px-8 py-3 rounded-full font-bold text-white text-lg"
+                style={{
+                  background: "#8B5CF6",
+                  fontFamily: 'Roboto Mono, monospace',
+                  letterSpacing: '0.01em',
+                  boxShadow: "0 2px 16px 0 rgba(139,92,246,0.16)"
+                }}
+              >
+                Discover Our Solutions
+              </button>
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default HeroSection;
+
