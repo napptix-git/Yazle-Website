@@ -14,25 +14,25 @@ const serviceData = [
     id: 'in-game',
     title: "In-Game",
     description: "Native ad placements within the gaming environment that feel like a natural part of the experience.",
-    icon: <Gamepad className="h-10 w-10 text-[#29dd3b]" />,
+    icon: <Gamepad className="h-8 w-8 text-[#29dd3b]" />,
   },
   {
     id: 'on-game',
     title: "On-Game",
     description: "Strategic ad placements around the game interface, loading screens, and menus.",
-    icon: <MonitorPlay className="h-10 w-10 text-[#29dd3b]" />,
+    icon: <MonitorPlay className="h-8 w-8 text-[#29dd3b]" />,
   },
   {
     id: 'off-game',
     title: "Off-Game",
     description: "Extend your reach beyond gameplay through our network of gaming content platforms.",
-    icon: <Globe className="h-10 w-10 text-[#29dd3b]" />,
+    icon: <Globe className="h-8 w-8 text-[#29dd3b]" />,
   },
   {
     id: 'pro-game',
     title: "Pro Game",
     description: "Specialized solutions for esports events, tournaments, and professional gaming streams.",
-    icon: <Trophy className="h-10 w-10 text-[#29dd3b]" />,
+    icon: <Trophy className="h-8 w-8 text-[#29dd3b]" />,
   },
 ];
 
@@ -48,45 +48,43 @@ const ResponsiveFlipCard = ({ card, index }: { card: typeof serviceData[0], inde
   }, [isInView, index]);
 
   return (
-    <div
+    <motion.div 
       ref={ref}
-      className={`vertical-flip-card w-full max-w-md mx-auto mb-12 ${flipped ? 'flipped' : ''}`}
-      style={{
-        minHeight: 240,
+      className={`w-full rounded-xl overflow-hidden shadow-lg cursor-pointer relative ${
+        flipped ? 'border border-[#29dd3b]/30 shadow-[0_0_30px_rgba(41,221,59,0.15)]' : 'border border-white/10'
+      }`}
+      whileHover={{ 
+        scale: 1.03,
+        transition: { duration: 0.3 }
       }}
     >
-      <div className="vertical-flip-card__inner">
-        {/* FRONT */}
-        <div className="vertical-flip-card__front p-8">
-          <div className="flex flex-col items-center">
-            <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mb-6">
-              {card.icon}
-            </div>
-            <h3 className="text-2xl font-bold text-black mb-4">{card.title}</h3>
+      <div className="p-8 md:p-10">
+        <div className="mb-4 flex justify-center">
+          <div className={`w-16 h-16 rounded-full ${flipped ? 'bg-[#29dd3b]/10' : 'bg-black/10'} flex items-center justify-center`}>
+            {card.icon}
           </div>
         </div>
-        {/* BACK */}
-        <div className="vertical-flip-card__back p-8">
-          <div className="flex flex-col items-center">
-            <h3 className="text-2xl font-bold text-white mb-4">{card.title}</h3>
-            <p className="text-white/90 text-center font-roboto-mono mb-8">
-              {card.description}
-            </p>
-            <button 
-              className="mt-auto px-6 py-2 rounded-full bg-black text-white hover:bg-black/70 transition-colors font-roboto-mono"
-            >
-              Learn more
-            </button>
-          </div>
-        </div>
+        <h3 className={`text-2xl font-bold mb-4 ${flipped ? 'text-white' : 'text-black'}`}>{card.title}</h3>
+        {flipped && (
+          <p className={`mb-6 ${flipped ? 'text-white/80' : 'text-gray-600'}`}>
+            {card.description}
+          </p>
+        )}
+        {flipped && (
+          <button 
+            className={`${flipped ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-6 py-2 rounded-full transition-all`}
+          >
+            Learn More
+          </button>
+        )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const MobileFlipCards = () => {
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center space-y-6">
       {serviceData.map((card, idx) => (
         <ResponsiveFlipCard card={card} key={card.id} index={idx} />
       ))}
