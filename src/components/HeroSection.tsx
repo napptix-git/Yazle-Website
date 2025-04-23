@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 interface Particle {
@@ -113,74 +114,56 @@ const HeroSection: React.FC = () => {
       cancelAnimationFrame(animationFrameId.current);
     };
   }, [mousePosition, mounted]);
-  
+
+  const getParallaxStyle = () => {
+    if (!mounted) return {};
+    return {
+      transform: `translate(${(mousePosition.x - window.innerWidth / 2) / 50}px, ${(mousePosition.y - window.innerHeight / 2) / 50}px)`,
+      transition: "transform 0.1s ease-out"
+    };
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center w-full pt-32 pb-20 min-h-[80vh] relative select-none">
-      {/* Particle canvas */}
+    <div className="flex flex-col items-center justify-center w-full pt-32 pb-20 relative">
       <canvas 
         ref={canvasRef} 
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{ width: "100vw", height: "100vh" }}
+        className="absolute inset-0 z-0"
       />
-      <div className="container relative z-10 mx-auto px-4 text-center flex flex-col items-center">
-        {/* Giant heading */}
-        <motion.h1
-          className="font-dela-gothic text-white mb-4 hero-grad-heading tracking-tighter"
-          style={{
-            fontSize: "clamp(2.75rem,10vw,5.5rem)",
-            fontWeight: 900,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.14,
-            marginBottom: "0.75em",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+      
+      <div className="container relative z-10 mx-auto px-4 text-center">
+        <motion.h1 
+          className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
+          style={getParallaxStyle()}
         >
-          <span className="text-white mr-3" style={{fontWeight:900}}>Reach Every</span>
-          <span
-            className="ml-2"
-            style={{
-              color: "#29dd3b",
-              fontWeight: 900,
-              textShadow: "0 0 30px #29dd3b99, 0 0 8px #29dd3b44"
-            }}
-          >
-            Gamer
-          </span>
+          Reach Every <span className="text-[#29dd3b]">Gamer</span>
         </motion.h1>
-        {/* Subheading */}
-        <motion.p
-          className="text-xl md:text-2xl text-napptix-light-grey max-w-3xl mx-auto mb-10 font-roboto-mono"
+        
+        <motion.p 
+          className="text-xl md:text-2xl text-napptix-light-grey max-w-3xl mx-auto mb-8 font-roboto-mono"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          style={{
-            fontWeight: 500,
-            letterSpacing: "0.01em",
-            textShadow: "none"
-          }}
         >
           Innovative advertising solutions connecting brands with the gaming world
         </motion.p>
-        {/* Big purple button */}
+        
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center"
         >
           <Link to="/advertisers/wizora">
             <button
-              className="px-12 py-4 rounded-full font-bold text-lg md:text-2xl bg-[#8B5CF6] hover:bg-[#a084fc] text-white transition-all duration-200 shadow-lg"
+              className="px-8 py-3 rounded-full font-bold text-white text-lg"
               style={{
-                fontFamily: 'Roboto Mono, monospace',
-                letterSpacing: "0.02em",
-                boxShadow: "0 4px 36px 0 rgba(139,92,246,0.31)"
+                background: "#8B5CF6",
+                fontFamily: 'Roboto Mono, monospace', // consistent w/ sample and site fonts
+                letterSpacing: '0.01em',
+                boxShadow: "0 2px 16px 0 rgba(139,92,246,0.16)"
               }}
             >
               Discover Our Solutions
@@ -193,4 +176,3 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-
