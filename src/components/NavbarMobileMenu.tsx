@@ -108,6 +108,10 @@ const NavbarMobileMenu: React.FC<Props> = ({
                     transition={{ duration: 0.2 }}
                     className="mt-2 pl-4 space-y-2"
                   >
+                    <Link to="/about" onClick={scrollToTop} className="block py-2 text-gray-300 flex items-center gap-2">
+                      <Building className="h-4 w-4" />
+                      About Us
+                    </Link>
                     <Link to="/careers" onClick={scrollToTop} className="block py-2 text-gray-300 flex items-center gap-2">
                       <Briefcase className="h-4 w-4" />
                       Careers

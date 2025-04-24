@@ -130,6 +130,15 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             <div className="py-8 px-6">
               <p className="text-gray-400 text-sm font-bold mb-6 uppercase">Company</p>
               <div className="space-y-6">
+                <Link to="/about" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                  <div className="p-2 bg-gray-800 rounded-lg">
+                    <Building className="h-5 w-5 text-[#29dd3b]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-200 uppercase">About Us</p>
+                    <p className="text-xs text-gray-400">Our story and mission</p>
+                  </div>
+                </Link>
                 <Link to="/careers" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <Briefcase className="h-5 w-5 text-[#29dd3b]" />
