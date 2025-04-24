@@ -1,14 +1,15 @@
+
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Robot, Puzzle, Globe, Check, Zap } from 'lucide-react';
+import { Bot, Puzzle, Globe, Check, Zap } from 'lucide-react';
 
 const features = [
   {
     title: "AI-Powered Game Creation",
-    icon: <Robot className="h-8 w-8 text-[#29dd3b]" />,
+    icon: <Bot className="h-8 w-8 text-[#29dd3b]" />,
     description: "From concept to playable in record time. Wizora uses AI to rapidly generate branded mini-games, adapting mechanics and visuals to match your campaign goals—so you get custom engagement without the custom dev time."
   },
   {
