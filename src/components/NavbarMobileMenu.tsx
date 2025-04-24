@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -38,7 +39,6 @@ const NavbarMobileMenu: React.FC<Props> = ({
           className="md:hidden bg-black/95 shadow-lg"
         >
           <div className="container mx-auto px-4 py-4 space-y-4">
-
             {/* Advertisers */}
             <div>
               <button
@@ -58,8 +58,10 @@ const NavbarMobileMenu: React.FC<Props> = ({
                     className="mt-2 pl-4 space-y-2"
                   >
                     <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
+                    {/* Temporarily removed:
                     <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
                     <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
+                    */}
                   </motion.div>
                 )}
               </AnimatePresence>

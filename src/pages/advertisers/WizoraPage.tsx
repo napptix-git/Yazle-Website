@@ -1,38 +1,32 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Check, Code, Monitor, Bot, BarChart3, Zap } from 'lucide-react';
+import { Robot, Puzzle, Globe, Check, Zap } from 'lucide-react';
+
+const features = [
+  {
+    title: "AI-Powered Game Creation",
+    icon: <Robot className="h-8 w-8 text-[#29dd3b]" />,
+    description: "From concept to playable in record time. Wizora uses AI to rapidly generate branded mini-games, adapting mechanics and visuals to match your campaign goals—so you get custom engagement without the custom dev time."
+  },
+  {
+    title: "Effortless Integration",
+    icon: <Puzzle className="h-8 w-8 text-[#29dd3b]" />,
+    description: "Plug into play—no heavy lifting needed. Wizora embeds seamlessly into popular game engines and frameworks, letting you launch branded mini-games without disrupting development flow."
+  },
+  {
+    title: "Cross-Platform Reach",
+    icon: <Globe className="h-8 w-8 text-[#29dd3b]" />,
+    description: "Built for mobile, desktop, and console alike. Deliver lightweight branded game experiences anywhere your players are—with optimized performance across all environments."
+  }
+];
 
 const WizoraPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const features = [
-    {
-      title: "AI-Powered Targeting",
-      icon: <Bot className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Intelligent audience segmentation based on play style and preferences"
-    },
-    {
-      title: "Real-Time Metrics",
-      icon: <BarChart3 className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Live performance tracking with actionable insights"
-    },
-    {
-      title: "Seamless Integration",
-      icon: <Code className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Quick implementation across major game engines and platforms"
-    },
-    {
-      title: "Cross-Platform Support",
-      icon: <Monitor className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Reach gamers across mobile, desktop, and console environments"
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -48,10 +42,10 @@ const WizoraPage: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                Wizora
+                Turn ads into mini-games. Turn players into fans.
               </h1>
               <p className="text-xl text-napptix-light-grey mb-8">
-                The intelligent ad placement engine for immersive gaming experiences.
+                Wizora makes every brand moment playable.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
@@ -82,7 +76,7 @@ const WizoraPage: React.FC = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Key Features</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -107,49 +101,26 @@ const WizoraPage: React.FC = () => {
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">How Wizora Works</h2>
-          <p className="text-center text-napptix-light-grey font-roboto-mono mb-16 max-w-2xl mx-auto">
-            Our intelligent platform places your ads for maximum impact
-          </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-1/2 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-transparent via-[#29dd3b] to-transparent"></div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">1</div>
-              <h3 className="text-xl font-bold text-white mb-3">Analysis</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">Our AI analyzes gameplay patterns to identify optimal placement opportunities.</p>
+              <h3 className="text-xl font-bold text-white mb-3">Creative Brief</h3>
+              <p className="text-napptix-light-grey font-roboto-mono">You bring the vision. We translate it into gameplay. Provide your brand goals, message, and style—our system uses that input to kickstart concept generation with AI.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">2</div>
-              <h3 className="text-xl font-bold text-white mb-3">Placement</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">Intelligent ad placement that integrates naturally with the gaming experience.</p>
+              <h3 className="text-xl font-bold text-white mb-3">Game Generation</h3>
+              <p className="text-napptix-light-grey font-roboto-mono">AI turns concepts into customized, playable micro-games. Wizora builds fun-first ad experiences, tailored to audience behavior and platform specs—no dev hours needed.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">3</div>
-              <h3 className="text-xl font-bold text-white mb-3">Optimization</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">Continuous performance optimization based on engagement metrics.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Testimonial Section */}
-      <section className="py-20 bg-napptix-dark">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-black p-10 rounded-xl border border-napptix-grey/20 text-center">
-            <div className="mb-8">
-              <svg className="w-12 h-12 mx-auto text-[#29dd3b]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-            </div>
-            <p className="text-xl md:text-2xl text-white mb-6">
-              "Wizora helped us achieve a 42% increase in engagement rates while maintaining a seamless player experience. The platform's intelligent targeting has transformed our approach to in-game advertising."
-            </p>
-            <div>
-              <p className="font-bold text-white">Amanda Chen</p>
-              <p className="text-napptix-light-grey">Chief Marketing Officer, GameVerse Studios</p>
+              <h3 className="text-xl font-bold text-white mb-3">Launch & Optimize</h3>
+              <p className="text-napptix-light-grey font-roboto-mono">We deploy, test, and evolve for engagement at scale. Our managed service ensures games run smoothly, track interactions, and iterate to keep performance high.</p>
             </div>
           </div>
         </div>
@@ -160,47 +131,25 @@ const WizoraPage: React.FC = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Why Choose Wizora</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
               <h3 className="text-xl font-bold text-white mb-4">For Advertisers</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Precision targeting based on player behavior and preferences</span>
+                  <span className="text-napptix-light-grey">Branded mini-games that boost awareness through play, not push</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Higher engagement rates compared to traditional digital ads</span>
+                  <span className="text-napptix-light-grey">Engagement rates that outperform banners, videos, and static ads</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Brand-safe environments with content controls</span>
+                  <span className="text-napptix-light-grey">Tailored gameplay experiences built around your brand narrative</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Detailed analytics on campaign performance</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">For Game Developers</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Non-intrusive ad experiences that maintain player satisfaction</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Higher revenue per user compared to standard ad networks</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Simple integration with major game engines</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Customizable ad formats that match your game's style</span>
+                  <span className="text-napptix-light-grey">Hands-off delivery with strategic support from concept to campaign</span>
                 </li>
               </ul>
             </div>
