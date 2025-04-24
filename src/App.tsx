@@ -9,6 +9,8 @@ import Advertisers from "./pages/Advertisers";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Careers from "./pages/Careers";
+import News from "./pages/News";
 import React from 'react';
 
 // Advertiser pages
