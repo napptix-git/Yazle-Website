@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -16,32 +16,41 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const Index = () => {
-  // Initialize GSAP smooth scrolling
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  // Initialize GSAP on component mount
   useEffect(() => {
     // Scroll to top when page loads
     window.scrollTo(0, 0);
     
-    // Initialize smooth scroll with GSAP
-    const smoother = gsap.from(document.documentElement, {
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.2,
-      },
-      ease: "power2.out",
-    });
-
+    // Create a context to scope GSAP animations
+    const ctx = gsap.context(() => {
+      // Simple scroll animation instead of smoother
+      gsap.fromTo(
+        ".gsap-animate",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".gsap-animate",
+            start: "top bottom",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    }, pageRef);
+    
+    // Clean up all GSAP animations on unmount
     return () => {
-      // Clean up
-      if (smoother) {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      }
+      ctx.revert(); // This properly cleans up all animations
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black" ref={pageRef}>
       {/* Navbar */}
       <Navbar />
       
@@ -51,24 +60,19 @@ const Index = () => {
       </section>
       
       {/* Partners Carousel */}
-      <section id="partners" className="bg-black py-12 mt-32 md:mt-56">
+      <section id="partners" className="bg-black py-12 mt-32 md:mt-56 gsap-animate">
         <PartnersCarousel />
       </section>
 
       {/* Animated Card Section */}
-      <section id="services" className="bg-black">
+      <section id="services" className="bg-black gsap-animate">
         <AnimatedCardSection />
       </section>
       
       {/* Advertisers and Publishers Section */}
-      <section id="audience" className="mt-36 md:mt-48 bg-black">
+      <section id="audience" className="mt-36 md:mt-48 bg-black gsap-animate">
         <AudienceCards />
       </section>
-
-      {/* Game Intelligence Platform Section */}
-      {/* <section id="game-intelligence" className="bg-black">
-        <GameIntelligence />
-      </section> */}
       
       {/* Footer */}
       <section>
