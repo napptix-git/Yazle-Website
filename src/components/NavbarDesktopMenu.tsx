@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from "lucide-react";
+import { ChevronDown, Building, Briefcase, Newspaper, Gamepad, BookCheck } from "lucide-react";
 
-type DesktopMenuType = 'advertisers' | 'developers' | null;
+type DesktopMenuType = 'advertisers' | 'developers' | 'company' | null;
 type HoveredItemType = {
   mobile: unknown;
   desktop: DesktopMenuType;
@@ -111,15 +110,60 @@ const NavbarDesktopMenu: React.FC<Props> = ({
         )}
       </AnimatePresence>
     </div>
-    <Link 
-      to="/about"
-      onClick={scrollToTop}
-      className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase font-granview"
+    <div 
+      className="relative group"
+      onMouseEnter={() => handleMouseEnter('company')}
+      onMouseLeave={handleMouseLeave}
     >
-      ABOUT US
-    </Link>
+      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview">
+        COMPANY <ChevronDown className="ml-1 h-4 w-4" />
+      </button>
+      <AnimatePresence>
+        {hoveredItem.desktop === 'company' && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -10, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 w-72 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
+          >
+            <div className="py-8 px-6">
+              <p className="text-gray-400 text-sm font-bold mb-6 uppercase">Company</p>
+              <div className="space-y-6">
+                <Link to="/about" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                  <div className="p-2 bg-gray-800 rounded-lg">
+                    <Building className="h-5 w-5 text-[#29dd3b]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-200 uppercase">About Us</p>
+                    <p className="text-xs text-gray-400">Our story and mission</p>
+                  </div>
+                </Link>
+                <Link to="/careers" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                  <div className="p-2 bg-gray-800 rounded-lg">
+                    <Briefcase className="h-5 w-5 text-[#29dd3b]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-200 uppercase">Careers</p>
+                    <p className="text-xs text-gray-400">Join our team</p>
+                  </div>
+                </Link>
+                <Link to="/news" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                  <div className="p-2 bg-gray-800 rounded-lg">
+                    <Newspaper className="h-5 w-5 text-[#29dd3b]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-200 uppercase">News</p>
+                    <p className="text-xs text-gray-400">Latest updates</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   </nav>
 );
 
 export default NavbarDesktopMenu;
-

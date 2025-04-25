@@ -5,8 +5,8 @@ import { ChevronDown } from 'lucide-react';
 import DesktopMenu from './NavbarDesktopMenu';
 import MobileMenu from './NavbarMobileMenu';
 
-type DesktopMenuType = 'advertisers' | 'developers' | null;
-type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
+type DesktopMenuType = 'advertisers' | 'developers' | 'company' | null;
+type MobileMenuType = 'mobile-menu' | null;
 
 type HoveredItemType = {
   mobile: MobileMenuType;
