@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -43,7 +44,7 @@ const News: React.FC = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 text-center">Latest News</h1>
+        <h1 className="text-4xl md:text-6xl font-syne font-bold text-white mb-16 text-center">Latest News</h1>
         
         <div className="relative overflow-hidden py-8 mb-16">
           <div 
@@ -55,15 +56,18 @@ const News: React.FC = () => {
               {duplicatedNews.map((item, index) => (
                 <div 
                   key={index}
-                  className="min-w-[300px] mx-4 flex-shrink-0"
+                  className="min-w-[400px] mx-4 flex-shrink-0"
                 >
-                  <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20 min-h-[400px]">
+                  <div className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 min-h-[320px] hover:border-[#29dd3b] transition-colors duration-300">
                     <div className="mb-4">
-                      <span className="text-[#29dd3b] text-sm">{item.date}</span>
+                      <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
-                    <p className="text-gray-300 mb-6 font-grandview">{item.content}</p>
-                    <button className="text-[#29dd3b] hover:underline">Read Full Article →</button>
+                    <h2 className="text-2xl font-bold text-white mb-4 font-syne">{item.title}</h2>
+                    <p className="text-gray-300 mb-6 font-grandview text-base leading-relaxed">{item.content}</p>
+                    <button className="text-[#29dd3b] hover:underline font-syne flex items-center">
+                      Read More 
+                      <span className="ml-2">→</span>
+                    </button>
                   </div>
                 </div>
               ))}
@@ -73,13 +77,16 @@ const News: React.FC = () => {
 
         <div className="grid grid-cols-1 gap-8">
           {newsItems.map((item, index) => (
-            <article key={index} className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
+            <article key={index} className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b] transition-colors duration-300">
               <div className="mb-4">
-                <span className="text-[#29dd3b] text-sm">{item.date}</span>
+                <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
               </div>
-              <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
-              <p className="text-gray-300 mb-4 font-grandview">{item.content}</p>
-              <button className="text-[#29dd3b] hover:underline">Read Full Article →</button>
+              <h2 className="text-2xl font-bold text-white mb-4 font-syne">{item.title}</h2>
+              <p className="text-gray-300 mb-4 font-grandview text-base leading-relaxed">{item.content}</p>
+              <button className="text-[#29dd3b] hover:underline font-syne flex items-center">
+                Read More 
+                <span className="ml-2">→</span>
+              </button>
             </article>
           ))}
         </div>
