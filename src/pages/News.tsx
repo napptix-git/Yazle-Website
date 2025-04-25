@@ -59,7 +59,7 @@ const News: React.FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-300`}>
+            <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-10`}>
               {duplicatedNews.map((item, index) => (
                 <div 
                   key={index}
