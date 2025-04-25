@@ -1,13 +1,13 @@
 
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
-import GameIntelligence from '@/components/GameIntelligence';
+import WizoraSection from '@/components/WizoraSection';
+import NewsCarousel from '@/components/NewsCarousel';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -40,6 +40,16 @@ const Index = () => {
       {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
+      </section>
+      
+      {/* Wizora Section */}
+      <section id="wizora" className="mt-36 md:mt-48 bg-black">
+        <WizoraSection />
+      </section>
+
+      {/* News Section with Carousel */}
+      <section id="news" className="mt-36 md:mt-48 bg-black">
+        <NewsCarousel />
       </section>
       
       {/* Footer */}
