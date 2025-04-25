@@ -1,5 +1,4 @@
-
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import {
@@ -38,7 +37,12 @@ const newsItems = [
   }
 ];
 
+// Duplicate the items for continuous scrolling
+const duplicatedNews = [...newsItems, ...newsItems];
+
 const News: React.FC = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -47,27 +51,32 @@ const News: React.FC = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-8">Latest News</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 text-center">Latest News</h1>
         
-        <div className="mb-16">
-          <Carousel className="w-full max-w-5xl mx-auto">
-            <CarouselContent>
-              {newsItems.map((item, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20 h-full">
+        <div className="relative overflow-hidden py-4 mb-16">
+          <div 
+            className="relative overflow-hidden"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-300`}>
+              {duplicatedNews.map((item, index) => (
+                <div 
+                  key={index}
+                  className="min-w-[600px] mx-4 flex-shrink-0"
+                >
+                  <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
                     <div className="mb-4">
                       <span className="text-[#29dd3b] text-sm">{item.date}</span>
                     </div>
                     <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
                     <p className="text-gray-300 mb-4">{item.content}</p>
-                    <button className="text-[#29dd3b] hover:underline">Read More →</button>
+                    <button className="text-[#29dd3b] hover:underline">Read Full Article →</button>
                   </div>
-                </CarouselItem>
+                </div>
               ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-8">
