@@ -1,11 +1,10 @@
+
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Bot, Puzzle, Globe, Check, Zap } from 'lucide-react';
-
-
 
 const features = [
   {
@@ -30,32 +29,6 @@ const WizoraPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-<<<<<<< HEAD
-  const features = [
-    {
-      title: "AI-Powered Game Creation",
-      icon: <Bot className="h-8 w-8 text-[#29dd3b]" />,
-      description: "From concept to playable in record time."
-    },
-    {
-      title: "Effortless Integration",
-      icon: <BarChart3 className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Plug into play—no heavy lifting needed."
-    },
-    {
-      title: "Cross-Platform Reach",
-      icon: <Code className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Built for mobile, desktop, and console alike."
-    },
-    {
-      title: "Managed Delivery & Optimization",
-      icon: <Monitor className="h-8 w-8 text-[#29dd3b]" />,
-      description: "We run the game behind your game."
-    }
-  ];
-
-=======
->>>>>>> manual-dev
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
@@ -70,18 +43,10 @@ const WizoraPage: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-<<<<<<< HEAD
-                Wizora Turn ads into mini-games. Turn players into fans.
-              </h1>
-              <p className="text-xl text-napptix-light-grey mb-8">
-                Turn ads into mini-games. Turn players into fans.
-                
-=======
                 Wizora
               </h1>
               <p className="text-xl text-napptix-light-grey mb-8">
                 Turn ads into mini-games. Turn players into fans.
->>>>>>> manual-dev
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 {/* <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
@@ -144,31 +109,19 @@ const WizoraPage: React.FC = () => {
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">1</div>
               <h3 className="text-xl font-bold text-white mb-3">Creative Brief</h3>
-<<<<<<< HEAD
-              <p className="text-napptix-light-grey font-roboto-mono">You bring the vision. We translate it into gameplay.</p>
-=======
               <p className="text-napptix-light-grey font-grandview-display">You bring the vision. We translate it into gameplay. Provide your brand goals, message, and style—our system uses that input to kickstart concept generation with AI.</p>
->>>>>>> manual-dev
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">2</div>
               <h3 className="text-xl font-bold text-white mb-3">Game Generation</h3>
-<<<<<<< HEAD
-              <p className="text-napptix-light-grey font-roboto-mono">AI turns concepts into customized, playable micro-games.</p>
-=======
               <p className="text-napptix-light-grey font-grandview-display">AI turns concepts into customized, playable micro-games. Wizora builds fun-first ad experiences, tailored to audience behavior and platform specs—no dev hours needed.</p>
->>>>>>> manual-dev
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">3</div>
               <h3 className="text-xl font-bold text-white mb-3">Launch & Optimize</h3>
-<<<<<<< HEAD
-              <p className="text-napptix-light-grey font-roboto-mono">We deploy, test, and evolve for engagement at scale.</p>
-=======
               <p className="text-napptix-light-grey font-grandview-display">We deploy, test, and evolve for engagement at scale. Our managed service ensures games run smoothly, track interactions, and iterate to keep performance high.</p>
->>>>>>> manual-dev
             </div>
           </div>
         </div>
