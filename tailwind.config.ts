@@ -125,8 +125,8 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'spin-slow': 'spin-slow 15s linear infinite',
         'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-        'carousel-left': 'carousel-left 40s linear infinite',
-        'carousel-right': 'carousel-right 40s linear infinite',
+        'carousel-left': 'carousel-left 0.5s linear infinite',
+        'carousel-right': 'carousel-right 0.5s linear infinite',
       }
     }
   },

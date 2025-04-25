@@ -7,52 +7,38 @@ import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import WizoraSection from '@/components/WizoraSection';
-import NewsCarousel from '@/components/NewsCarousel';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
-      {/* Navbar */}
       <Navbar />
       
-      {/* Hero Section */}
       <section id="hero">
         <HeroSection />
       </section>
       
-      {/* Partners Carousel */}
       <section id="partners" className="bg-black py-12 mt-32 md:mt-56">
         <PartnersCarousel />
       </section>
 
-      {/* Animated Card Section */}
       <section id="services" className="bg-black">
         <AnimatedCardSection />
       </section>
       
-      {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
       </section>
       
-      {/* Wizora Section */}
       <section id="wizora" className="mt-36 md:mt-48 bg-black">
         <WizoraSection />
       </section>
-
-      {/* News Section with Carousel */}
-      <section id="news" className="mt-36 md:mt-48 bg-black">
-        <NewsCarousel />
-      </section>
       
-      {/* Footer */}
       <section>
         <Footer />
       </section>

@@ -53,7 +53,7 @@ const News: React.FC = () => {
       <div className="container mx-auto pt-32 pb-20 px-4">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 text-center">Latest News</h1>
         
-        <div className="relative overflow-hidden py-4 mb-16">
+        <div className="relative overflow-hidden py-8 mb-16">
           <div 
             className="relative overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
@@ -65,12 +65,12 @@ const News: React.FC = () => {
                   key={index}
                   className="min-w-[600px] mx-4 flex-shrink-0"
                 >
-                  <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
+                  <div className="bg-napptix-dark p-12 rounded-xl border border-napptix-grey/20 min-h-[300px]">
                     <div className="mb-4">
                       <span className="text-[#29dd3b] text-sm">{item.date}</span>
                     </div>
                     <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
-                    <p className="text-gray-300 mb-4">{item.content}</p>
+                    <p className="text-gray-300 mb-6">{item.content}</p>
                     <button className="text-[#29dd3b] hover:underline">Read Full Article →</button>
                   </div>
                 </div>
