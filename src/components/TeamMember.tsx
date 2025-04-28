@@ -52,7 +52,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         <img 
           src={imageSrc} 
           alt={name} 
-          className="w-full  md:h-[650px] h-[400px] object-cover transition-transform duration-300 hover:scale-105" 
+          className="w-full  md:h-[650px] h-[500px] object-cover transition-transform duration-300 hover:scale-105" 
         />
       </div>
     </div>
