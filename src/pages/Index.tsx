@@ -31,9 +31,9 @@ const Index = () => {
         <PartnersCarousel />
       </section>
 
-      <section id="services" className="bg-black">
+      <div id="services" className="bg-black">
         <AnimatedCardSection />
-      </section>
+      </div>
       
       <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
