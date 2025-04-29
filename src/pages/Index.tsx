@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
@@ -6,7 +7,7 @@ import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import WizoraSection from '@/components/WizoraSection';
-import AnnouncementBar from '@/components/AnnouncementBar';
+import NewsCarousel from '@/components/NewsCarousel';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -15,15 +16,8 @@ const Index = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
-
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
-
-      <div className=''>
-        <AnnouncementBar />
-      </div>
-
       <div className="">
         <Navbar />
       </div>
@@ -42,6 +36,10 @@ const Index = () => {
       
       <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
+      </section>
+      
+      <section id="news" className="mt-36 md:mt-48 bg-black">
+        <NewsCarousel />
       </section>
       
       <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
