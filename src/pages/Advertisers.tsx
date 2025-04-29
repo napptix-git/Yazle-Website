@@ -464,8 +464,8 @@ const Advertisers: React.FC = () => {
               ))}
             </CarouselContent>
             <div className="flex justify-center mt-8 gap-4">
-              <CarouselPrevious className="relative static left-0 translate-y-0 bg-black/60 hover:bg-black/80 border-napptix-grey/30 text-white" />
-              <CarouselNext className="relative static right-0 translate-y-0 bg-black/60 hover:bg-black/80 border-napptix-grey/30 text-white" />
+              <CarouselPrevious className=" static left-0 translate-y-0 bg-black/60 hover:bg-black/80 border-napptix-grey/30 text-white" />
+              <CarouselNext className=" static right-0 translate-y-0 bg-black/60 hover:bg-black/80 border-napptix-grey/30 text-white" />
             </div>
           </Carousel>
         </div>

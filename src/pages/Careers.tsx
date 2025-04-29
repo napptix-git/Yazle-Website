@@ -87,7 +87,9 @@ const Careers: React.FC = () => {
                 <span className="text-gray-400 text-sm">{job.location}</span>
               </div>
               <p className="text-gray-300 mb-4 font-grandview-display">{job.description}</p>
-              <button className="bg-[#29dd3b] text-black px-6 py-2 rounded-full font-bold hover:bg-[#29dd3b]/80 transition-colors">
+              <button
+                 onClick={() => window.location.href = "mailto:hr@napptix.com"}
+                 className="bg-[#29dd3b] text-black px-6 py-2 rounded-full font-bold hover:bg-[#29dd3b]/80 transition-colors">
                 Apply Now
               </button>
             </motion.div>
@@ -97,8 +99,8 @@ const Careers: React.FC = () => {
         <div className="mt-12 text-center">
           <p className="text-gray-300">
             Don't see a position that matches your skills? Send your resume to{" "}
-            <a href="mailto:careers@napptix.com" className="text-[#29dd3b] hover:underline">
-              careers@napptix.com
+            <a href="mailto:hr@napptix.com" className="text-[#29dd3b] hover:underline">
+              hr@napptix.com
             </a>
           </p>
         </div>

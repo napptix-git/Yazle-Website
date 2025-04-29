@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
         scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 lg:mt-[20px] pl-[-100px]">
+      <div className="container mx-auto px-4 lg:mt-[20px] pl-[-100px] pt-1">
         <div className="flex justify-between items-center">
           <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl ">
             <div className="h-20 md:h-24 lg:h-30 lg:w-[200px] ">
@@ -91,10 +91,10 @@ const Navbar: React.FC = () => {
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn"
+            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn "
             style={{ fontWeight: 800, letterSpacing: 1.2 }}
           >
-            <span className="relative z-10">LET'S TALK</span>
+            <span className="relative z-10 ">LET'S TALK</span>
             <span className="absolute inset-0 rounded-full border-2 border-[#29dd3b] pointer-events-none"></span>
             <span className="absolute shimmer-effect inset-0 pointer-events-none"></span>
           </Link>

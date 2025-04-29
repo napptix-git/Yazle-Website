@@ -42,7 +42,7 @@ const WizoraPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 ">
                 Wizora
               </h1>
               <p className="text-xl text-napptix-light-grey mb-8">

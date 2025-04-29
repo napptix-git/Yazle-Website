@@ -4,10 +4,14 @@ import Footer from '@/components/Footer';
 import TeamMember from '@/components/TeamMember';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About: React.FC = () => {
+
+  const isMobile = useIsMobile();
+
   // Team members data with consistent image formats
   const teamMembers = [
     {
@@ -131,6 +135,10 @@ const About: React.FC = () => {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const smoother = gsap.from(document.documentElement, {
       scrollTrigger: {
         trigger: document.body,
@@ -183,44 +191,38 @@ const About: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+ 
 
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <div className="mb-12">
-          {/* Global Presence Heading */}
           <div className="w-full flex flex-col items-center mb-10">
             <span
-              className="block text-[3rem] md:text-[4rem] font-syne font-extrabold text-white leading-none text-center"
-              style={{ textShadow: "0 0 10px #222" }}
+              className="block text-[2.5rem] md:text-[4rem] font-syne font-extrabold text-white leading-none text-center"
+              style={{ textShadow: '0 0 10px #222' }}
             >
               Global Presence
             </span>
           </div>
-          {/* Map image */}
           <div className="relative w-full max-w-5xl mx-auto mb-12 flex flex-col items-center">
             <img
-              src="/lovable-uploads/world-map.png"
+              src={isMobile ? "/lovable-uploads/small-screen-map.png" : "/lovable-uploads/world-map.png"}
               alt="Global Presence Map"
-              className="w-full h-[500px] object-cover rounded-lg shadow-xl brightness-500 contrast-1000 saturate-125"
+              className="w-full h-[300px] md:h-[500px] object-cover rounded-lg shadow-xl brightness-500 contrast-1000 saturate-125"
               style={{ maxWidth: 1000, background: '#000' }}
             />
           </div>
-          {/* Office cities and countries */}
+
           <div className="max-w-7xl mx-auto mb-16">
-            {offices.map((office, idx) => (
+            {offices.map((office) => (
               <div key={office.city} className="w-full">
-                <div className="flex justify-between items-center py-6 border-b border-[#242424]">
-                  {/* City: extreme left, white, Syne extrabold, large */}
-                  <span className="text-[4rem] font-syne font-extrabold leading-none text-white text-left">
+                <div className="flex justify-between items-center py-4 md:py-12 md:px-[-400px] border-b border-[#242424]">
+                  <span className="text-[2rem] md:text-[4.2rem] font-syne font-extrabold text-white text-left">
                     {office.city}
                   </span>
-                  {/* Country: extreme right, uppercase, muted */}
-                  <span className="text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide text-right">
+                  <span className="text-[0.65rem] md:text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide text-right">
                     {office.country}
                   </span>
                 </div>
@@ -228,30 +230,9 @@ const About: React.FC = () => {
             ))}
           </div>
         </div>
-        {/* Our People Section with centered text */}
-        {/* <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
-          <p className="text-2xl text-white/80 mb-12 text-center">
-            Creativity opens doors,<br />
-            our people walk through them.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            {allTeamMembers.map((member, index) => (
-              <div key={index} className="team-member-card">
-                <TeamMember 
-                  name={member.name}
-                  position={member.position}
-                  imageSrc={member.imageSrc}
-                  linkedinUrl={member.linkedinUrl}
-                  bgColor={member.bgColor}
-                />
-              </div>
-            ))}
-          </div>
-        </div> */}
-        
-        <h2 className="text-3xl font-bold text-white mt-20 mb-6 text-center">Our Values</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <h2 className="text-3xl font-bold text-white mt-[100px] md:mt-[200px] mb-6 text-center">Our Values</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[30px] md:mt-[50px]">
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
             <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
             <p>We constantly push the boundaries of what's possible in gaming advertising.</p>

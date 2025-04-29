@@ -6,6 +6,7 @@ import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import WizoraSection from '@/components/WizoraSection';
+import AnnouncementBar from '@/components/AnnouncementBar';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
+
+      <div className=''>
+        <AnnouncementBar />
+      </div>
+
       <div className="">
         <Navbar />
       </div>
@@ -38,7 +44,7 @@ const Index = () => {
         <AudienceCards />
       </section>
       
-      <section id="wizora" className="mt-36 md:mt-48 bg-black">
+      <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
         <WizoraSection />
       </section>
       

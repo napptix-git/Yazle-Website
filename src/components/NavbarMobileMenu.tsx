@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,10 +57,8 @@ const NavbarMobileMenu: React.FC<Props> = ({
                     className="mt-2 pl-4 space-y-2"
                   >
                     <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
-                    {/* Temporarily removed:
-                    <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
-                    <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
-                    */}
+                    {/* <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
+                    <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link> */}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -109,15 +106,15 @@ const NavbarMobileMenu: React.FC<Props> = ({
                     transition={{ duration: 0.2 }}
                     className="mt-2 pl-4 space-y-2"
                   >
-                    <Link to="/about" onClick={scrollToTop} className="block py-2 text-gray-300 flex items-center gap-2">
+                    <Link to="/about" onClick={scrollToTop} className=" py-2 text-gray-300 flex items-center gap-2">
                       <Building className="h-4 w-4" />
                       About Us
                     </Link>
-                    <Link to="/careers" onClick={scrollToTop} className="block py-2 text-gray-300 flex items-center gap-2">
+                    <Link to="/careers" onClick={scrollToTop} className=" py-2 text-gray-300 flex items-center gap-2">
                       <Briefcase className="h-4 w-4" />
                       Careers
                     </Link>
-                    <Link to="/news" onClick={scrollToTop} className="block py-2 text-gray-300 flex items-center gap-2">
+                    <Link to="/news" onClick={scrollToTop} className=" py-2 text-gray-300 flex items-center gap-2">
                       <Newspaper className="h-4 w-4" />
                       News
                     </Link>
