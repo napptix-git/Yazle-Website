@@ -39,18 +39,7 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
                 <div className="relative z-20 flex flex-col h-full p-6 justify-between">
                   <h3 className="text-3xl font-bold mb-4 text-white">{backText}</h3>
                   
-                  {/* GIF in the middle */}
-                  <div className="flex-1 flex items-center justify-center my-4">
-                    <div className="w-24 h-24 rounded-full overflow-hidden bg-black/30 p-1">
-                      <img 
-                        src={gifUrl} 
-                        alt={`${backText} animation`} 
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    </div>
-                  </div>
-                  
-                  <p className="text-white/90 text-sm">
+                  <p className="text-white/90 text-sm mt-auto">
                     Click to learn more about {backText}
                   </p>
                 </div>
@@ -59,6 +48,16 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
             <div className="flip-card-back">
               <div className="flex flex-col items-center justify-center h-full">
                 <h3 className="text-3xl font-bold mb-4">{backText}</h3>
+                
+                {/* GIF in the middle of the back card */}
+                <div className="w-24 h-24 rounded-full overflow-hidden bg-black/30 p-1 mb-4">
+                  <img 
+                    src={gifUrl} 
+                    alt={`${backText} animation`} 
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                
                 <p className="text-lg text-center px-6">
                   {backText === "In-Game" && "Native ad placements within the gaming environment."}
                   {backText === "On-Game" && "Strategic ad placements around the game interface."}
