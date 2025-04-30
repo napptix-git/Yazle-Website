@@ -41,9 +41,9 @@ const Index = () => {
         <AudienceCards />
       </section>
       
-      <section id="news" className="mt-36 md:mt-48 bg-black">
+      {/* <section id="news" className="mt-36 md:mt-48 bg-black">
         <NewsCarousel />
-      </section>
+      </section> */}
       
       <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
         <WizoraSection />
