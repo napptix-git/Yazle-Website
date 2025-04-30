@@ -32,16 +32,12 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
                   className="w-full h-full object-cover absolute inset-0 z-0"
                 />
                 
-                {/* Semi-transparent overlay for better text readability */}
+                {/* Semi-transparent overlay for better visibility */}
                 <div className="absolute inset-0 bg-black/50 z-10"></div>
                 
-                {/* Content container */}
-                <div className="relative z-20 flex flex-col h-full p-6 justify-between">
-                  <h3 className="text-3xl font-bold mb-4 text-white">{backText}</h3>
-                  
-                  <p className="text-white/90 text-sm mt-auto">
-                    Click to learn more about {backText}
-                  </p>
+                {/* Only showing the title */}
+                <div className="relative z-20 flex flex-col h-full p-6 justify-center">
+                  <h3 className="text-3xl font-bold text-white text-center">{backText}</h3>
                 </div>
               </div>
             </div>
@@ -49,12 +45,12 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
               <div className="flex flex-col items-center justify-center h-full">
                 <h3 className="text-3xl font-bold mb-4">{backText}</h3>
                 
-                {/* GIF in the middle of the back card */}
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-black/30 p-1 mb-4">
+                {/* Larger rectangular GIF in the back */}
+                <div className="w-48 h-36 overflow-hidden bg-black/30 p-1 mb-4 rounded-md">
                   <img 
                     src={gifUrl} 
                     alt={`${backText} animation`} 
-                    className="w-full h-full object-cover rounded-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 

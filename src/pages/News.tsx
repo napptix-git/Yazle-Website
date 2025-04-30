@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const newsItems = [
   {
@@ -46,10 +53,43 @@ const newsItems = [
 const News: React.FC = () => {
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
   const isMobile = useIsMobile();
-
+  const [isHovered, setIsHovered] = useState(false);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Render card for both grid and carousel views
+  const renderNewsCard = (item: typeof newsItems[0], index: number) => (
+    <article 
+      key={item.id} 
+      className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b] transition-colors duration-300 h-full"
+      onMouseEnter={() => setHoveredCardIndex(index)}
+      onMouseLeave={() => setHoveredCardIndex(null)}
+    >
+      {item.image && (
+        <div className="mb-6 overflow-hidden rounded-lg">
+          <img 
+            src={item.image} 
+            alt={item.title} 
+            className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      )}
+      <div className="mb-4">
+        <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
+      </div>
+      <h2 className="text-2xl font-bold text-white mb-4 font-syne">{item.title}</h2>
+      <p className="text-gray-300 mb-4 font-grandview text-base leading-relaxed">{item.content}</p>
+      <Link 
+        to={`/news/${item.id}`}
+        className="text-[#29dd3b] hover:underline font-syne flex items-center"
+      >
+        Read More 
+        <span className="ml-2">→</span>
+      </Link>
+    </article>
+  );
 
   return (
     <div className="min-h-screen bg-black">
@@ -58,39 +98,36 @@ const News: React.FC = () => {
         <h1 className="text-4xl md:text-6xl font-syne font-bold text-white mb-16 text-center">
           Latest News
         </h1>
-
-        <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-8`}>
-          {newsItems.map((item, index) => (
-            <article 
-              key={index} 
-              className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b] transition-colors duration-300"
-              onMouseEnter={() => setHoveredCardIndex(index)}
-              onMouseLeave={() => setHoveredCardIndex(null)}
+        
+        {/* Mobile view with regular grid */}
+        {isMobile ? (
+          <div className="grid grid-cols-1 gap-8">
+            {newsItems.map((item, index) => renderNewsCard(item, index))}
+          </div>
+        ) : (
+          /* Medium and large screens use carousel */
+          <div className="relative">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
             >
-              {item.image && (
-                <div className="mb-6 overflow-hidden rounded-lg">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              )}
-              <div className="mb-4">
-                <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
+              <CarouselContent>
+                {newsItems.map((item, index) => (
+                  <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 pl-6">
+                    {renderNewsCard(item, index)}
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center mt-8">
+                <CarouselPrevious className="relative static translate-y-0 mx-2" />
+                <CarouselNext className="relative static translate-y-0 mx-2" />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-4 font-syne">{item.title}</h2>
-              <p className="text-gray-300 mb-4 font-grandview text-base leading-relaxed">{item.content}</p>
-              <Link 
-                to={`/news/${item.id}`}
-                className="text-[#29dd3b] hover:underline font-syne flex items-center"
-              >
-                Read More 
-                <span className="ml-2">→</span>
-              </Link>
-            </article>
-          ))}
-        </div>
+            </Carousel>
+          </div>
+        )}
       </div>
       <Footer />
     </div>
