@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -7,7 +8,6 @@ import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import WizoraSection from '@/components/WizoraSection';
 import NewsCarousel from '@/components/NewsCarousel';
-import AnnouncementBar from '@/components/AnnouncementBar';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -18,9 +18,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
-      <div>
-        <AnnouncementBar />
-      </div>
       <div className="">
         <Navbar />
       </div>
@@ -41,9 +38,9 @@ const Index = () => {
         <AudienceCards />
       </section>
       
-      {/* <section id="news" className="mt-36 md:mt-48 bg-black">
+      <section id="news" className="mt-36 md:mt-48 bg-black">
         <NewsCarousel />
-      </section> */}
+      </section>
       
       <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
         <WizoraSection />

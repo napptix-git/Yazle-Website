@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -13,6 +14,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Careers from "./pages/Careers";
 import News from "./pages/News";
+import NewsArticle from "./pages/NewsArticle";
 
 import WizoraPage from "./pages/advertisers/WizoraPage";
 import CaseStudiesPage from "./pages/advertisers/CaseStudiesPage";
@@ -58,6 +60,7 @@ const App = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/news" element={<News />} />
+              <Route path="/news/:id" element={<NewsArticle />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

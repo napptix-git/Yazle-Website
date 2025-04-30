@@ -190,6 +190,20 @@ html.lenis-smooth {
   .glow-green {
     filter: drop-shadow(0 0 10px rgba(41, 221, 59, 0.7));
   }
+  
+  /* Add new animation for news carousel */
+  .animate-carousel-left {
+    animation: carousel-scroll-left 20s linear infinite;
+  }
+  
+  @keyframes carousel-scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @keyframes border-glow {

@@ -1,35 +1,41 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const newsItems = [
   {
+    id: "news-1",
     date: "April 28, 2025",
     title: "Napptix Acquires Yezel Technologies 🚀",
     content: "In a groundbreaking move, Napptix has acquired Yezel Technologies, combining our innovative ad platform with Yezel's cutting-edge AI capabilities. This strategic merger promises to transform the gaming advertising landscape.",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1470&fit=crop"
   },
   {
+    id: "news-2",
     date: "April 20, 2025",
     title: "Expanding Our Global Presence 🌎",
     content: "We're excited to announce the opening of our new offices in Singapore and Dubai, strengthening our presence in key gaming markets across Asia and the Middle East.",
     image: "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?q=80&w=1471&fit=crop"
   },
   {
+    id: "news-3",
     date: "April 15, 2025",
     title: "Partnership with Major Game Studios 🎯",
     content: "Napptix has secured partnerships with five major game studios, expanding our reach to over 100 million active players worldwide.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1470&fit=crop"
   },
   {
+    id: "news-4",
     date: "April 10, 2025",
     title: "Revolutionary AI Technology Integration 🤖",
     content: "Our new AI-powered targeting system has shown a 300% improvement in ad engagement rates across all gaming platforms.",
     image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=1470&fit=crop"
   },
   {
+    id: "news-5",
     date: "April 5, 2025",
     title: "Industry Award Recognition 🏆",
     content: "Napptix has been recognized as the 'Most Innovative Ad Tech Company' at the Global Gaming Awards 2025.",
@@ -37,9 +43,7 @@ const newsItems = [
   }
 ];
 
-// Don't duplicate the news items, just use them directly
 const News: React.FC = () => {
-  // Use state only for the hover effect, not for rendering conditional elements
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
   const isMobile = useIsMobile();
 
@@ -55,7 +59,6 @@ const News: React.FC = () => {
           Latest News
         </h1>
 
-        {/* Simplified rendering approach based on mobile vs desktop */}
         <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-8`}>
           {newsItems.map((item, index) => (
             <article 
@@ -78,10 +81,13 @@ const News: React.FC = () => {
               </div>
               <h2 className="text-2xl font-bold text-white mb-4 font-syne">{item.title}</h2>
               <p className="text-gray-300 mb-4 font-grandview text-base leading-relaxed">{item.content}</p>
-              <button className="text-[#29dd3b] hover:underline font-syne flex items-center">
+              <Link 
+                to={`/news/${item.id}`}
+                className="text-[#29dd3b] hover:underline font-syne flex items-center"
+              >
                 Read More 
                 <span className="ml-2">→</span>
-              </button>
+              </Link>
             </article>
           ))}
         </div>
