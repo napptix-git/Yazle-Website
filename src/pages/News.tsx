@@ -122,8 +122,8 @@ const News: React.FC = () => {
                 ))}
               </CarouselContent>
               <div className="flex justify-center mt-8">
-                <CarouselPrevious className="relative static translate-y-0 mx-2" />
-                <CarouselNext className="relative static translate-y-0 mx-2" />
+                <CarouselPrevious className=" static translate-y-0 mx-2" />
+                <CarouselNext className=" static translate-y-0 mx-2" />
               </div>
             </Carousel>
           </div>

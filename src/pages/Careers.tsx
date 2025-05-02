@@ -6,28 +6,28 @@ import { motion } from 'framer-motion';
 
 const jobOpenings = [
   {
-    title: "Gaming AI Architect",
-    department: "Engineering",
-    location: "Remote",
-    description: "Join us in creating the next generation of AI-powered gaming experiences. You'll work on cutting-edge machine learning models to enhance player engagement.",
-  },
-  {
-    title: "Creative Ad Designer",
+    title: "Junior Graphic Designer",
     department: "Creative",
-    location: "Singapore",
-    description: "Transform gaming spaces with stunning interactive advertisements. Looking for someone who can blend artistry with technological innovation.",
+    location: "Mumbai",
+    description: "Collaborate with our creative team to design visually stunning assets for gaming advertisements. Bring your creativity to life in a fast-paced, innovative environment.",
   },
   {
-    title: "Game Analytics Guru",
-    department: "Data Science",
-    location: "Remote / Dubai",
-    description: "Help gaming companies make data-driven decisions. You'll analyze player behavior and advertising performance across multiple platforms.",
+    title: "Data Operations Specialist",
+    department: "Operations",
+    location: "Mumbai",
+    description: "Manage and optimize data pipelines to ensure seamless delivery of insights. Work closely with cross-functional teams to drive operational excellence.",
   },
   {
-    title: "Mobile Gaming Specialist",
-    department: "Product",
-    location: "Remote",
-    description: "Lead our mobile gaming initiatives and help create seamless advertising experiences for mobile players worldwide.",
+    title: "Sales Executive",
+    department: "Sales",
+    location: "Mumbai/Delhi",
+    description: "Engage with clients to showcase our cutting-edge gaming advertising solutions. Build strong relationships and drive revenue growth in a dynamic industry.",
+  },
+  {
+    title: "Sales Operations Specialist",
+    department: "Sales & Operations",
+    location: "Mumbai",
+    description: "Streamline sales processes and support the team in delivering exceptional client experiences. Be the backbone of our sales operations with your organizational skills.",
   }
 ];
 
