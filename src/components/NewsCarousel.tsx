@@ -62,13 +62,13 @@ const NewsCarousel = () => {
   const renderNewsCard = (item: typeof newsItems[0], index: number) => (
     <div 
       key={`news-item-${item.id}-${index}`}
-      className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20 h-full"
+      className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl h-full"
     >
       <div className="mb-4">
         <span className="text-[#29dd3b] text-sm">{item.date}</span>
       </div>
-      <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-      <p className="text-gray-300 mb-4">{item.content}</p>
+      <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
+      <p className="text-gray-700 mb-4">{item.content}</p>
       <Link to={`/news/${item.id}`} className="text-[#29dd3b] hover:underline">
         Read More →
       </Link>
@@ -78,44 +78,43 @@ const NewsCarousel = () => {
   // Mobile and medium screens use the old scrolling layout
   if (isMobile || isMediumScreen) {
     return (
-      <div className="container mx-auto px-4">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Latest News</h2>
-          <p className="text-napptix-light-grey font-roboto-mono text-xl max-w-2xl mx-auto">
-            Stay updated with our latest announcements and achievements
-          </p>
-        </motion.div>
+      <div className="bg-[#4c3bff] py-16">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">LATEST NEWS</h2>
+          </motion.div>
 
-        <div 
-          className="relative overflow-hidden py-4"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-300`}>
-            {/* Render each news item once */}
-            {newsItems.map((item, index) => (
-              <div 
-                key={`original-${item.id}-${index}`}
-                className="min-w-[600px] mx-4 flex-shrink-0"
-              >
-                {renderNewsCard(item, index)}
-              </div>
-            ))}
-            
-            {/* Add copies of the same items for the continuous effect */}
-            {newsItems.map((item, index) => (
-              <div 
-                key={`duplicate-${item.id}-${index}`}
-                className="min-w-[600px] mx-4 flex-shrink-0"
-              >
-                {renderNewsCard(item, index)}
-              </div>
-            ))}
+          <div 
+            className="relative overflow-hidden py-4"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-300`}>
+              {/* Render each news item once */}
+              {newsItems.map((item, index) => (
+                <div 
+                  key={`original-${item.id}-${index}`}
+                  className="min-w-[600px] mx-4 flex-shrink-0"
+                >
+                  {renderNewsCard(item, index)}
+                </div>
+              ))}
+              
+              {/* Add copies of the same items for the continuous effect */}
+              {newsItems.map((item, index) => (
+                <div 
+                  key={`duplicate-${item.id}-${index}`}
+                  className="min-w-[600px] mx-4 flex-shrink-0"
+                >
+                  {renderNewsCard(item, index)}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -124,47 +123,46 @@ const NewsCarousel = () => {
 
   // Large screens use the Carousel component
   return (
-    <div className="container mx-auto px-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-16"
-      >
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Latest News</h2>
-        <p className="text-napptix-light-grey font-roboto-mono text-xl max-w-2xl mx-auto">
-          Stay updated with our latest announcements and achievements
-        </p>
-      </motion.div>
+    <div className="bg-[#4c3bff] py-16">
+      <div className="container mx-auto px-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">LATEST NEWS</h2>
+        </motion.div>
 
-      <Carousel 
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        className="w-full"
-      >
-        <CarouselContent>
-          {newsItems.map((item, index) => (
-            <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 pl-6">
-              <div className="h-full bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b] transition-colors duration-300">
-                <div className="mb-4">
-                  <span className="text-[#29dd3b] text-sm">{item.date}</span>
+        <Carousel 
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {newsItems.map((item, index) => (
+              <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 pl-6">
+                <div className="h-full bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl">
+                  <div className="mb-4">
+                    <span className="text-[#29dd3b] text-sm">{item.date}</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
+                  <p className="text-gray-700 mb-4">{item.content}</p>
+                  <Link to={`/news/${item.id}`} className="text-[#29dd3b] hover:underline">
+                    Read More →
+                  </Link>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-                <p className="text-gray-300 mb-4">{item.content}</p>
-                <Link to={`/news/${item.id}`} className="text-[#29dd3b] hover:underline">
-                  Read More →
-                </Link>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="flex justify-center mt-8">
-          <CarouselPrevious className="relative static translate-y-0 mx-2" />
-          <CarouselNext className="relative static translate-y-0 mx-2" />
-        </div>
-      </Carousel>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-center mt-8">
+            <CarouselPrevious className="relative static translate-y-0 mx-2 bg-white text-black hover:bg-white/80" />
+            <CarouselNext className="relative static translate-y-0 mx-2 bg-white text-black hover:bg-white/80" />
+          </div>
+        </Carousel>
+      </div>
     </div>
   );
 };
