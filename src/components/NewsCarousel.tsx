@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -47,18 +47,7 @@ const newsItems = [
 const NewsCarousel = () => {
   const [isHovered, setIsHovered] = useState(false);
   const isMobile = useIsMobile();
-  const [isMediumScreen, setIsMediumScreen] = useState(false);
   
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMediumScreen(window.innerWidth > 768 && window.innerWidth < 1024);
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const renderNewsCard = (item: typeof newsItems[0], index: number) => (
     <div 
       key={`news-item-${item.id}-${index}`}
@@ -75,8 +64,8 @@ const NewsCarousel = () => {
     </div>
   );
 
-  // Mobile and medium screens use the old scrolling layout
-  if (isMobile || isMediumScreen) {
+  // Mobile uses the scrolling layout
+  if (isMobile) {
     return (
       <div className="bg-[#4c3bff] py-16">
         <div className="container mx-auto px-4">
@@ -99,7 +88,7 @@ const NewsCarousel = () => {
               {newsItems.map((item, index) => (
                 <div 
                   key={`original-${item.id}-${index}`}
-                  className="min-w-[600px] mx-4 flex-shrink-0"
+                  className="min-w-[300px] md:min-w-[400px] mx-4 flex-shrink-0"
                 >
                   {renderNewsCard(item, index)}
                 </div>
@@ -109,7 +98,7 @@ const NewsCarousel = () => {
               {newsItems.map((item, index) => (
                 <div 
                   key={`duplicate-${item.id}-${index}`}
-                  className="min-w-[600px] mx-4 flex-shrink-0"
+                  className="min-w-[300px] md:min-w-[400px] mx-4 flex-shrink-0"
                 >
                   {renderNewsCard(item, index)}
                 </div>
@@ -121,7 +110,7 @@ const NewsCarousel = () => {
     );
   }
 
-  // Large screens use the Carousel component
+  // Desktop uses the Carousel component
   return (
     <div className="bg-[#4c3bff] py-16">
       <div className="container mx-auto px-4">
@@ -137,23 +126,13 @@ const NewsCarousel = () => {
         <Carousel 
           opts={{
             align: "start",
-            loop: true,
           }}
           className="w-full"
         >
           <CarouselContent>
-            {newsItems.map((item, index) => (
+            {newsItems.map((item) => (
               <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 pl-6">
-                <div className="h-full bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl">
-                  <div className="mb-4">
-                    <span className="text-[#29dd3b] text-sm">{item.date}</span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
-                  <p className="text-gray-700 mb-4">{item.content}</p>
-                  <Link to={`/news/${item.id}`} className="text-[#29dd3b] hover:underline">
-                    Read More →
-                  </Link>
-                </div>
+                {renderNewsCard(item, 0)}
               </CarouselItem>
             ))}
           </CarouselContent>

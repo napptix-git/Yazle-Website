@@ -50,6 +50,7 @@ export const Card3DAnimation = () => {
         pinSpacing: true,
         anticipatePin: 1,
         scrub: true,
+        id: "card3d-main-pin", // Add unique ID to avoid conflicts
       });
       
       // Set initial position of cards - stacked with slight offset
@@ -77,6 +78,7 @@ export const Card3DAnimation = () => {
             start: `top+=${i * 100} top`,
             end: `+=${window.innerHeight * 0.4}`,
             scrub: 0.5,
+            id: `card3d-card-enter-${i}`, // Add unique ID to avoid conflicts
           },
           y: 0, // Move to center position
           rotateX: 0, // Remove tilt
@@ -93,6 +95,7 @@ export const Card3DAnimation = () => {
               start: `top+=${(i + 1) * 100} top`,
               end: `+=${window.innerHeight * 0.4}`,
               scrub: 0.5,
+              id: `card3d-card-exit-${i}`, // Add unique ID to avoid conflicts
             },
             y: -200, // Move up and out
             opacity: 0,
@@ -100,27 +103,14 @@ export const Card3DAnimation = () => {
           });
         }
       });
-      
-      // Loop back to beginning when reaching the end
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: `top+=${cards.length * 100} top`,
-        onEnter: () => {
-          ScrollTrigger.getAll().forEach(trigger => {
-            if (trigger.vars.trigger === containerRef.current) {
-              gsap.to(window, {
-                scrollTo: { y: trigger.start, autoKill: false },
-                duration: 0.5,
-              });
-            }
-          });
-        },
-      });
     }, containerRef);
     
+    // Cleanup function
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll()
+        .filter(trigger => trigger.vars.id?.toString().startsWith('card3d-'))
+        .forEach(trigger => trigger.kill());
     };
   }, []);
   

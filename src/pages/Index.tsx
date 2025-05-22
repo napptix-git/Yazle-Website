@@ -6,9 +6,8 @@ import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
-import WizoraSection from '@/components/WizoraSection';
-import AnnouncementBar from '@/components/AnnouncementBar';
 import NewsCarousel from '@/components/NewsCarousel';
+import AnnouncementBar from '@/components/AnnouncementBar';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -19,9 +18,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
-
       <div className="">
-          <AnnouncementBar />
+        <AnnouncementBar />
       </div>
       
       <div className="">
@@ -44,13 +42,9 @@ const Index = () => {
         <AudienceCards />
       </section>
       
-      <section id="news" className="mt-32 md:mt-48 bg-black pb-16">
+      <section id="news" className="bg-black">
         <NewsCarousel />
       </section>
-      
-      {/* <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
-        <WizoraSection />
-      </section> */}
       
       <section>
         <Footer />
