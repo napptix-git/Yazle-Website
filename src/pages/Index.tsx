@@ -43,9 +43,9 @@ const Index = () => {
         <AudienceCards />
       </section>
       
-      <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
+      {/* <section id="wizora" className="mt-36 md:mt-48 bg-black pb-20">
         <WizoraSection />
-      </section>
+      </section> */}
       
       <section>
         <Footer />
