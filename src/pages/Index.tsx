@@ -40,11 +40,11 @@ const Index = () => {
         <AnimatedCardSection />
       </div>
       
-      <section id="audience" className="mt-32 md:mt-1 bg-black">
+      <section id="audience" className="bg-black">
         <AudienceCards />
       </section>
       
-      <section id="news" className="mt-32 md:mt-48 bg-black pb-16">
+      <section id="news" className="bg-black">
         <NewsCarousel />
       </section>
       
