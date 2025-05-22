@@ -14,31 +14,31 @@ const AnimatedCardSection: React.FC = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(false); // New state for large screens
 
   const serviceData = [
-    { id: "in-game", title: "In-Game" },
-    { id: "on-game", title: "On-Game" },
-    { id: "off-game", title: "Off-Game" },
-    { id: "pro-game", title: "Pro-Game" }
+    { id: "in-game", title: "IN-GAME" },
+    { id: "on-game", title: "ON-GAME" },
+    { id: "off-game", title: "OFF-GAME" },
+    { id: "pro-game", title: "PRO-GAME" }
   ];
 
   const serviceCards = [
     { 
       id: "in-game", 
-      title: "In-Game",
+      title: "IN-GAME",
       frontImage: "/lovable-uploads/Card1.png" // 👈 specific image
     },
     { 
       id: "on-game", 
-      title: "On-Game",
+      title: "ON-GAME",
       frontImage: "/lovable-uploads/Card2.png"
     },
     { 
       id: "off-game", 
-      title: "Off-Game",
+      title: "OFF-GAME",
       frontImage: "/lovable-uploads/Card3.png"
     },
     { 
       id: "pro-game", 
-      title: "Pro-Game",
+      title: "PRO-GAME",
       frontImage: "/lovable-uploads/Card4.png"
     }
   ];
@@ -162,7 +162,7 @@ const AnimatedCardSection: React.FC = () => {
       {/* Render heading and description only if not on large screens */}
       {!isLargeScreen && (
         <div className="bg-black px-4 text-center ">
-          <h2 className="text-3xl md:text-4xl font-bold text-white ">
+          <h2 className="text-3xl md:text-4xl font-bold text-white font-disket">
             Our Services
           </h2>
           <p className="text-gray-400 pt-3 max-w-2xl mx-auto">
@@ -178,7 +178,7 @@ const AnimatedCardSection: React.FC = () => {
         {/* Render heading and description for large screens */}
         {isLargeScreen && (
           <div className="absolute top-[130px] w-full text-center z-20 pointer-events-none">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
+            <h2 className="text-3xl md:text-4xl font-bold text-white font-disket">
               Our Services
             </h2>
             <p className="text-gray-400 pt-3 max-w-2xl mx-auto ">
@@ -192,7 +192,7 @@ const AnimatedCardSection: React.FC = () => {
             {serviceData.map((service, index) => (
               <section
                 key={service.id}
-                className="h-[80vh] flex items-center justify-center px-4 py-5"
+                className="h-[80vh] flex items-center justify-center px-4 py-5 "
               >
                 <FlipCard
                   id={`card-${index + 1}`}

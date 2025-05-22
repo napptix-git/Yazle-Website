@@ -32,7 +32,7 @@ const WizoraSection = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Wizora Ad Platform</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-disket">Wizora Ad Platform</h2>
         <p className="text-napptix-light-grey font-grandvuew-display text-xl max-w-2xl mx-auto">
           Our powerful rich media ad technology for delivering captivating, interactive experiences to gaming audiences.
         </p>

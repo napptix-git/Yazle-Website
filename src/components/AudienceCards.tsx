@@ -10,7 +10,7 @@ const AudienceCards: React.FC = () => {
   return (
     <section id="audience" className="py-24 bg-black">
       <div className="container mx-auto text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Who We Serve</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white font-disket">Who We Serve</h2>
         <p className="text-gray-400 max-w-2xl mx-auto">
           Tailored solutions for both sides of the gaming advertising ecosystem
         </p>
@@ -22,7 +22,7 @@ const AudienceCards: React.FC = () => {
           <motion.div 
             className={`w-full md:w-1/2 rounded-xl overflow-hidden shadow-lg cursor-pointer relative ${
               activeCard === 'advertisers' 
-                ? 'bg-black border border-[#29dd3b]/30 shadow-[0_0_30px_rgba(41,221,59,0.15)]'
+                ? 'bg-[#4c36ff] border border-[#29dd3b]/30 shadow-[0_0_30px_rgba(41,221,59,0.15)]'
                 : 'bg-white border border-white/10'
             }`}
             whileHover={{ 
@@ -34,15 +34,15 @@ const AudienceCards: React.FC = () => {
           >
             <div className="p-8 md:p-10">
               <div className="mb-4 flex justify-center">
-                <div className={`w-16 h-16 rounded-full ${activeCard === 'advertisers' ? 'bg-[#29dd3b]/10' : 'bg-black/10'} flex items-center justify-center`}>
-                  <Building2 className={`h-8 w-8 ${activeCard === 'advertisers' ? 'text-[#29dd3b]' : 'text-black'}`} />
+                <div className={` ${activeCard === 'advertisers' ? 'bg-[#29dd3b]/10' : 'bg-black/10'} flex items-center justify-center`}>
+                
                 </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-4 ${activeCard === 'advertisers' ? 'text-white' : 'text-black'}`}>Advertisers</h3>
-              <p className={`mb-6 ${activeCard === 'advertisers' ? 'text-white/80' : 'text-gray-600'}`}>
-                Reach millions of engaged gamers through innovative in-game, on-game, and off-game advertising solutions.
+              <h3 className={`text-3xl font-disket mb-4 text-center ${activeCard === 'advertisers' ? 'text-white' : 'text-black'}`}>ADVERTISERS</h3>
+              <p className={`mb-6 font-productSans ${activeCard === 'advertisers' ? 'text-white/80' : 'text-gray-600'}`}>
+                Reach millions of gamers with targeted, high-impact ads across in-game, on-game, and off-game channels.Leverage non-intrusive formats, deep analytics, and smart optimization to boost engagement.
               </p>
-              <ul className="text-left space-y-3 mb-8">
+              {/* <ul className="text-left space-y-3 mb-8">
                 <li className="flex items-start">
                   <div className={`rounded-full ${activeCard === 'advertisers' ? 'bg-[#29dd3b]/20' : 'bg-black/10'} p-1 mr-3 mt-1`}>
                     <svg className={`h-3 w-3 ${activeCard === 'advertisers' ? 'text-[#29dd3b]' : 'text-black'}`} fill="currentColor" viewBox="0 0 20 20">
@@ -67,11 +67,11 @@ const AudienceCards: React.FC = () => {
                   </div>
                   <span className={`${activeCard === 'advertisers' ? 'text-white/80' : 'text-gray-600'}`}>Advanced analytics and campaign optimization</span>
                 </li>
-              </ul>
-              <div className="flex flex-wrap gap-3">
+              </ul> */}
+              <div className="flex flex-wrap gap-3 justify-center">
                 <Link to="/advertisers">
                   <Button 
-                    className={`${activeCard === 'advertisers' ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-4 py-2 rounded-full transition-all`}
+                    className={`${activeCard === 'advertisers' ? 'bg-[#edebff]  text-black hover:bg-[#d6d3fa]' : 'bg-black hover:bg-black/90 text-white'} px-3 py-2 rounded-full transition-all`}
                   >
                     Learn More
                   </Button>
@@ -84,7 +84,7 @@ const AudienceCards: React.FC = () => {
           <motion.div 
             className={`w-full md:w-1/2 rounded-xl overflow-hidden shadow-lg cursor-pointer relative ${
               activeCard === 'developers' 
-                ? 'bg-black border border-[#29dd3b]/30 shadow-[0_0_30px_rgba(41,221,59,0.15)]'
+                ? 'bg-[#4c36ff] border border-[#29dd3b]/30 shadow-[0_0_30px_rgba(41,221,59,0.15)]'
                 : 'bg-white border border-white/10'
             }`}
             whileHover={{ 
@@ -96,15 +96,15 @@ const AudienceCards: React.FC = () => {
           >
             <div className="p-8 md:p-10">
               <div className="mb-4 flex justify-center">
-                <div className={`w-16 h-16 rounded-full ${activeCard === 'developers' ? 'bg-[#29dd3b]/10' : 'bg-black/10'} flex items-center justify-center`}>
-                  <Gamepad2 className={`h-8 w-8 ${activeCard === 'developers' ? 'text-[#29dd3b]' : 'text-black'}`} />
+                <div className={` ${activeCard === 'developers' ? 'bg-[#29dd3b]/10' : 'bg-black/10'} flex items-center justify-center`}>
+                 
                 </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-4 ${activeCard === 'developers' ? 'text-white' : 'text-black'}`}>Developers</h3>
-              <p className={`mb-6 ${activeCard === 'developers' ? 'text-white/80' : 'text-gray-600'}`}>
-                Maximize your game's revenue potential with seamless advertising integration that respects the player experience.
+              <h3 className={`text-3xl mb-4 text-center font-disket ${activeCard === 'developers' ? 'text-white' : 'text-black'}`}>DEVELOPERS</h3>
+              <p className={`mb-6 font-productSans ${activeCard === 'developers' ? 'text-white/80' : 'text-gray-600'}`}>
+               Boost game revenue with seamless, player-friendly ad integration and top-tier payouts. Choose from flexible monetization models, easy SDK setup, and clear performance insights.
               </p>
-              <ul className="text-left space-y-3 mb-8">
+              {/* <ul className="text-left space-y-3 mb-8">
                 <li className="flex items-start">
                   <div className={`rounded-full ${activeCard === 'developers' ? 'bg-[#29dd3b]/20' : 'bg-black/10'} p-1 mr-3 mt-1`}>
                     <svg className={`h-3 w-3 ${activeCard === 'developers' ? 'text-[#29dd3b]' : 'text-black'}`} fill="currentColor" viewBox="0 0 20 20">
@@ -129,14 +129,16 @@ const AudienceCards: React.FC = () => {
                   </div>
                   <span className={`${activeCard === 'developers' ? 'text-white/80' : 'text-gray-600'}`}>Transparent reporting and industry-leading payouts</span>
                 </li>
-              </ul>
+              </ul> */}
+              <div className="flex flex-wrap gap-3 justify-center">
               <Link to="/developers">
                 <Button 
-                  className={`${activeCard === 'developers' ? 'bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90' : 'bg-black hover:bg-black/90 text-white'} px-6 py-2 rounded-full transition-all`}
+                  className={`${activeCard === 'developers' ? 'bg-[#edebff] text-black hover:bg-[#d6d3fa]' : 'bg-black hover:bg-black/90 text-white'} px-4 py-2 rounded-full transition-all `}
                 >
                   Learn More
                 </Button>
               </Link>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -6,6 +6,8 @@
     <title>Napptix</title>
     <meta name="description" content="Napptix connects brands with the gaming world through innovative advertising solutions. Reach every gamer with our in-game, on-game, and off-game advertising options." />
     <meta name="author" content="Napptix" />
+    <link href="https://fonts.googleapis.com/css2?family=Disket+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
 
     <meta property="og:title" content="Napptix - Innovative Gaming Advertising Solutions" />
     <meta property="og:description" content="Napptix connects brands with the gaming world through innovative advertising solutions. Reach every gamer with our in-game, on-game, and off-game advertising options." />
@@ -17,6 +19,55 @@
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <link href="https://fonts.cdnfonts.com/css/grandview-display" rel="stylesheet">
+
+    <!-- Random favicon script -->
+    <script>
+      // List your favicon paths here (relative to public folder)
+      const favicons = [
+        '/Public/favicon/1.png',
+        '/Public/favicon/2.png',
+        '/Public/favicon/3.png',
+        '/Public/favicon/4.png',
+        '/Public/favicon/5.png',
+      ];
+        // Helper to shuffle array
+      function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+      }
+
+      // Get or create favicon queue in localStorage
+      function getFaviconQueue() {
+        let queue = [];
+        try {
+          queue = JSON.parse(localStorage.getItem('faviconQueue') || '[]');
+        } catch {}
+        if (!Array.isArray(queue) || queue.length === 0) {
+          queue = shuffle([...favicons]);
+        }
+        return queue;
+      }
+
+      function setFaviconQueue(queue) {
+        localStorage.setItem('faviconQueue', JSON.stringify(queue));
+      }
+
+      // Main logic
+      let queue = getFaviconQueue();
+      const favicon = queue.shift();
+      setFaviconQueue(queue.length === 0 ? shuffle([...favicons]) : queue);
+
+      const link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/png';
+      link.href = favicon;
+      document.head.appendChild(link);
+    </script>
   </head>
 
   <body>
