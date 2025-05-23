@@ -62,7 +62,7 @@ const WizoraSection = () => {
           </div>
 
           <motion.div 
-            className="mt-8"
+            className="mt-8 flex space-x-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -70,6 +70,11 @@ const WizoraSection = () => {
             <Link to="/advertisers/wizora">
               <Button className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
                 Learn About Wizora
+              </Button>
+            </Link>
+            <Link to="/wizora-soon">
+              <Button variant="outline" className="border-[#29dd3b] text-white hover:bg-[#29dd3b]/10">
+                Coming Soon
               </Button>
             </Link>
           </motion.div>

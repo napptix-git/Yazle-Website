@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Careers from "./pages/Careers";
 import News from "./pages/News";
 import NewsArticle from "./pages/NewsArticle";
+import WizoraSoonPage from "./pages/WizoraSoonPage";
 
 import WizoraPage from "./pages/advertisers/WizoraPage";
 import CaseStudiesPage from "./pages/advertisers/CaseStudiesPage";
@@ -48,6 +49,7 @@ const App = () => {
               
               <Route path="/advertisers" element={<Advertisers />} />
               <Route path="/advertisers/wizora" element={<WizoraPage />} />
+              <Route path="/wizora-soon" element={<WizoraSoonPage />} />
               <Route path="/advertisers/case-studies" element={<CaseStudiesPage />} />
               <Route path="/advertisers/case-studies/:slug" element={<CaseStudyDetailPage />} />
               <Route path="/advertisers/ad-gallery" element={<AdGalleryPage />} />

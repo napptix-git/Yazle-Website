@@ -1,10 +1,10 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Bot, Puzzle, Globe, Check, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const features = [
   {
@@ -49,12 +49,14 @@ const WizoraPage: React.FC = () => {
                 Turn ads into mini-games. Turn players into fans.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
-                  Schedule Demo
-                </Button> */}
                 <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-white hover:bg-[#4c36ff]/40 bg-[#4c36ff]">
                   Learn More
                 </Button>
+                <Link to="/wizora-soon">
+                  <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
+                    Coming Soon
+                  </Button>
+                </Link>
               </div>
             </motion.div>
             
@@ -211,18 +213,17 @@ const WizoraPage: React.FC = () => {
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to transform your gaming ad strategy?</h2>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center ">
-            <Button size="lg" className="bg-white text-black hover:bg-[#edebff]/90">
-              <Zap className="mr-2 h-5 w-5" /> Get Started
-            </Button>
-            {/* <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-[#29dd3b] hover:bg-[#29dd3b]/10">
-              Request Demo
-            </Button> */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/wizora-soon">
+              <Button size="lg" className="bg-white text-black hover:bg-[#edebff]/90">
+                <Zap className="mr-2 h-5 w-5" /> Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
       
-      <Footer className='bg-white  ' headingColor='text-black' />
+      <Footer className='bg-white' headingColor='text-black' />
     </div>
   );
 };
