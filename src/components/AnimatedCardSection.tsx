@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FlipCard from './FlipCard';
 import './FlipCardAnimation.css';
+import StaticParticleCanvas from './StaticParticle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -159,13 +160,14 @@ const AnimatedCardSection: React.FC = () => {
       className={`relative ${isMobile ? 'h-[340vh]' : 'h-[350vh]'}`}
       ref={containerRef}
     >
+    
       {/* Render heading and description only if not on large screens */}
       {!isLargeScreen && (
         <div className="bg-black px-4 text-center ">
           <h2 className="text-3xl md:text-4xl font-bold text-white font-disket">
             Our Services
           </h2>
-          <p className="text-gray-400 pt-3 max-w-2xl mx-auto">
+          <p className="text-gray-400 pt-3 max-w-2xl mx-auto font-productSans">
             Seamless brand integration across every layer of the gaming journey.
           </p>
         </div>
@@ -176,12 +178,13 @@ const AnimatedCardSection: React.FC = () => {
         ref={sectionRef}
       >
         {/* Render heading and description for large screens */}
+        <StaticParticleCanvas />
         {isLargeScreen && (
           <div className="absolute top-[130px] w-full text-center z-20 pointer-events-none">
             <h2 className="text-3xl md:text-4xl font-bold text-white font-disket">
               Our Services
             </h2>
-            <p className="text-gray-400 pt-3 max-w-2xl mx-auto ">
+            <p className="text-gray-400 pt-3 max-w-2xl mx-auto font-productSans">
               Seamless brand integration across every layer of the gaming journey.
             </p>
           </div>

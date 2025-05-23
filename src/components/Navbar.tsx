@@ -14,7 +14,11 @@ type HoveredItemType = {
   desktop: DesktopMenuType;
 };
 
-const Navbar: React.FC = () => {
+type NavbarProps = {
+  linkClassName?: string;
+};
+
+const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<HoveredItemType>({ mobile: null, desktop: null });
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
@@ -66,14 +70,14 @@ const Navbar: React.FC = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`absolute top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 lg:mt-[20px] pl-[-100px] pt-1">
-        <div className="flex justify-between items-center">
+      <div className="container mx-auto px-0">
+        <div className="flex justify-between items-center w-full">
           <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl ">
-            <div className="h-20 md:h-24 lg:h-30 lg:w-[200px] ">
+            <div className="h-20 md:h-40 lg:h-30 lg:w-[200px] -ml-2 ">
               <img 
                 src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                 alt="Napptix" 
@@ -87,11 +91,12 @@ const Navbar: React.FC = () => {
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             scrollToTop={scrollToTop}
+            linkClassName={linkClassName}
           />
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn "
+            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn -mr-2 "
             style={{ fontWeight: 800, letterSpacing: 1.2 }}
           >
             <span className="relative z-10 ">LET'S TALK</span>

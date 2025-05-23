@@ -15,28 +15,28 @@ const newsItems = [
   {
     id: "news-1",
     date: "April 24, 2025",
-    title: "Napptix Launches New Interactive Ad Platform"
+    title: "Break the Bottleneck in Interactive Ad Creation"
   },
   {
     id: "news-2",
     date: "April 20, 2025",
-    title: "Expanding Our Global Presence"
+    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom"
   },
   {
     id: "news-3",
     date: "April 15, 2025",
-    title: "Partnership with Major Game Studios"
+    title: "Interactive by Design: Why the Future of Advertising Is Built for Play"
   },
   {
     id: "news-4",
     date: "April 10, 2025",
-    title: "Revolutionary AI Technology Integration"
+    title: "Beyond the Arena: How Brands Can Win Across the Competitive Gaming Ecosystem"
   },
-  {
-    id: "news-5",
-    date: "April 5, 2025",
-    title: "Industry Award Recognition"
-  }
+  // {
+  //   id: "news-5",
+  //   date: "April 5, 2025",
+  //   title: "Industry Award Recognition"
+  // }
 ];
 
 const NewsCarousel = () => {
@@ -51,9 +51,11 @@ const NewsCarousel = () => {
       <div className="mb-4">
         <span className="text-[#4c3bff] text-sm">{item.date}</span>
       </div>
-      <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
-      <Link to={`/news/${item.id}`} className="text-[#4c3bff] hover:underline">
-        Read More →
+      <h3 className="text-2xl font-bold text-black mb-4 font-productSans uppercase">{item.title}</h3>
+      <Link
+       to={`/news/${item.id}`}
+       className="inline-block px-[12px] py-[6px] rounded-full bg-[#4c3bff] text-white font-semibold hover:bg-[#372bb3] transition-colors duration-200 text-sm ">
+        Read More
       </Link>
     </div>
   );
@@ -69,8 +71,8 @@ const NewsCarousel = () => {
             viewport={{ once: true }}
             className="text-center mb-4"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">LATEST NEWS</h2>
-            <p className="text-white text-lg mb-8 opacity-90">Stay updated with the latest advancements and announcements from Napptix.</p>
+            <h2 className=" font-disket text-3xl md:text-5xl text-white mb-2">LATEST NEWS</h2>
+            <p className="text-white text-lg mb-8 opacity-90 font-productSans">Stay updated with the latest advancements and announcements from Napptix.</p>
           </motion.div>
 
           <div 
@@ -115,8 +117,8 @@ const NewsCarousel = () => {
           viewport={{ once: true }}
           className="text-center mb-4"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">LATEST NEWS</h2>
-          <p className="text-white text-lg mb-8 opacity-90">Stay updated with the latest advancements and announcements from Napptix.</p>
+          <h2 className="text-3xl md:text-5xl font-disket text-white mb-2">LATEST NEWS</h2>
+          <p className="text-white font-productSans text-lg mb-8 opacity-90">Stay updated with the latest advancements and announcements from Napptix.</p>
         </motion.div>
 
         <Carousel 
@@ -133,8 +135,8 @@ const NewsCarousel = () => {
             ))}
           </CarouselContent>
           <div className="flex justify-center mt-8">
-            <CarouselPrevious className="relative static translate-y-0 mx-2 bg-white text-black hover:bg-white/80" />
-            <CarouselNext className="relative static translate-y-0 mx-2 bg-white text-black hover:bg-white/80" />
+            <CarouselPrevious className=" static translate-y-0 mx-2 bg-white text-black hover:bg-white/80" />
+            <CarouselNext className=" static translate-y-0 mx-2 bg-white text-black hover:bg-white/80" />
           </div>
         </Carousel>
       </div>

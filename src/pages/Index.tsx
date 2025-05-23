@@ -18,9 +18,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
-      <div className="">
+      {/* <div className="">
         <AnnouncementBar />
-      </div>
+      </div> */}
       
       <div className="">
         <Navbar />
@@ -38,11 +38,11 @@ const Index = () => {
         <AnimatedCardSection />
       </div>
       
-      <section id="audience" className="mt-32 md:mt-1 bg-black">
+      <section id="audience" className="mt-32 md:mt-1 bg-black pb-[200px]">
         <AudienceCards />
       </section>
       
-      <section id="news" className="bg-black">
+      <section id="news" className="bg-black pb-[100px]">
         <NewsCarousel />
       </section>
       

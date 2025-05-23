@@ -5,6 +5,7 @@ import TeamMember from '@/components/TeamMember';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useIsMobile } from '@/hooks/use-mobile';
+import StaticParticleCanvas from '@/components/StaticParticle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,6 +197,7 @@ const About: React.FC = () => {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
+      <StaticParticleCanvas />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <div className="mb-12">
           <div className="w-full flex flex-col items-center mb-10">

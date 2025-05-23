@@ -1,10 +1,12 @@
 
+
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Code, Users, Globe } from 'lucide-react';
+import StaticParticleCanvas from '@/components/StaticParticle';
 
 const Developers: React.FC = () => {
   useEffect(() => {
@@ -17,6 +19,7 @@ const Developers: React.FC = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20">
+        <StaticParticleCanvas />
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -24,10 +27,10 @@ const Developers: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-disket">
                 For Game Developers
               </h1>
-              <p className="text-napptix-light-grey font-grandview-display text-xl mb-8">
+              <p className="text-napptix-light-grey font-grandview-display text-xl mb-8 font-productSans">
                 Add branded fun without breaking your game loop.
                 Wizora makes monetization feel like part of the experience.
               </p>
@@ -68,8 +71,8 @@ const Developers: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Game Developers Choose Us</h2>
-            <p className="text-napptix-light-grey font-grandview-display max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-disket">Why Game Developers Choose Us</h2>
+            <p className="text-napptix-light-grey font-grandview-display max-w-2xl mx-auto font-productSans">
               Build smarter. Monetize faster. Join a global network of devs redefining ad play.
             </p>
           </motion.div>
@@ -85,9 +88,9 @@ const Developers: React.FC = () => {
               <div className="bg-[#29dd3b]/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                 <Code className="text-[#29dd3b] h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Fast & Flexible Integration
+              <h3 className="text-2xl font-bold text-white mb-4 font-disket">Fast & Flexible Integration
               </h3>
-              <p className="text-napptix-light-grey font-grandview-display">
+              <p className="text-napptix-light-grey font-productSans">
                 Drop-in SDKs for major engines with minimal coding required—so you can go live without slowing down.
               </p>
             </motion.div>
@@ -102,8 +105,8 @@ const Developers: React.FC = () => {
               <div className="bg-[#29dd3b]/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                 <Users className="text-[#29dd3b] h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Player-First Ad Design </h3>
-              <p className="text-napptix-light-grey font-grandview-display">
+              <h3 className="text-2xl font-bold text-white mb-4 font-disket">Player-First Ad Design </h3>
+              <p className="text-napptix-light-grey font-productSans">
                 Playable formats that blend with your gameplay—not interrupt it—so you keep players happy and immersed.
               </p>
             </motion.div>
@@ -118,8 +121,8 @@ const Developers: React.FC = () => {
               <div className="bg-[#29dd3b]/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                 <Globe className="text-[#29dd3b] h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Monetize at Global Scale</h3>
-              <p className="text-napptix-light-grey font-grandview-display">
+              <h3 className="text-2xl font-bold text-white mb-4 font-disket">Monetize at Global Scale</h3>
+              <p className="text-napptix-light-grey font-productSans">
                 Tap into worldwide campaigns and premium brands seeking next-gen ad experiences inside games like yours.
                </p>
             </motion.div>
@@ -137,8 +140,8 @@ const Developers: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
-            <p className="text-napptix-light-grey font-grandview-display mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-disket">Ready to Get Started?</h2>
+            <p className="text-napptix-light-grey font-grandview-display mb-8 font-productSans">
               Join our developer community and start monetizing your games today
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -151,13 +154,13 @@ const Developers: React.FC = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-[#29dd3b] text-[#29dd3b] hover:bg-[#29dd3b]/10"
+                className="border-[#29dd3b] text-[#29dd3b] hover:bg-[#29dd3b]/50"
               >
                 Contact Us
               </Button>
             </div>
           </motion.div>
-        </div>
+        </div>  
       </section>
       
       <Footer />

@@ -30,41 +30,45 @@ const WizoraPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
+    <div className="min-h-screen bg-[#edebff]">
+      <Navbar linkClassName ="text-[#4c36ff] hover:text-[#29dd3b]" />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20">
-        <div className="container mx-auto px-4">
+      <section className="pt-60 pb-32 min-h-screen ">
+        <div className="container mx-auto px-1">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 ">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#4c36ff] mb-6 ">
                 Wizora
               </h1>
-              <p className="text-xl text-napptix-light-grey mb-8">
+              <p className="text-xl text-black mb-8">
                 Turn ads into mini-games. Turn players into fans.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 {/* <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
                   Schedule Demo
                 </Button> */}
-                <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-[#29dd3b] hover:bg-[#29dd3b]/10">
+                <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-white hover:bg-[#4c36ff]/40 bg-[#4c36ff]">
                   Learn More
                 </Button>
               </div>
             </motion.div>
             
-            <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#29dd3b] to-purple-600 rounded-lg blur opacity-30"></div>
-              <div className="relative bg-napptix-dark rounded-lg overflow-hidden border border-napptix-grey/20">
+           <div className="relative flex justify-center items-center w-full">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#4c36ff] to-purple-600 rounded-lg blur opacity-30"></div>
+              <div
+                className="relative bg-napptix-dark rounded-lg overflow-hidden border border-[#4c36ff]"
+                style={{ aspectRatio: "2106 / 1366", width: "100%", maxWidth: 700 }}
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                  src="/lovable-uploads/wizora_2.png"
                   alt="Wizora Platform"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
+                  style={{ aspectRatio: "2106 / 1366" }}
                 />
               </div>
             </div>
@@ -73,25 +77,25 @@ const WizoraPage: React.FC = () => {
       </section>
       
       {/* Features Grid */}
-      <section className="py-20 bg-napptix-dark">
+      <section className="py-20 bg-[#edebff]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Key Features</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center font-disket">Key Features</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-black p-6 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300"
+                className="bg-[#4e36ff] p-6 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <div className="bg-napptix-dark/50 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-napptix-light-grey font-grandview-display">{feature.description}</p>
+                <p className="text-white font-grandview-display">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -101,27 +105,27 @@ const WizoraPage: React.FC = () => {
       {/* How It Works */}
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">How Wizora Works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center font-disket">How Wizora Works</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-1/2 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-transparent via-[#29dd3b] to-transparent"></div>
             
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
-              <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">1</div>
+            <div className="bg-[#4e36ff] p-6 rounded-xl border border-napptix-grey/20 relative z-10">
+              <div className="bg-white w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">1</div>
               <h3 className="text-xl font-bold text-white mb-3">Creative Brief</h3>
-              <p className="text-napptix-light-grey font-grandview-display">You bring the vision. We translate it into gameplay. Provide your brand goals, message, and style—our system uses that input to kickstart concept generation with AI.</p>
+              <p className="text-white font-grandview-display">You bring the vision. We translate it into gameplay. Provide your brand goals, message, and style—our system uses that input to kickstart concept generation with AI.</p>
             </div>
             
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
-              <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">2</div>
+            <div className="bg-[#4e36ff] p-6 rounded-xl border border-napptix-grey/20 relative z-10">
+              <div className="bg-white w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">2</div>
               <h3 className="text-xl font-bold text-white mb-3">Game Generation</h3>
-              <p className="text-napptix-light-grey font-grandview-display">AI turns concepts into customized, playable micro-games. Wizora builds fun-first ad experiences, tailored to audience behavior and platform specs—no dev hours needed.</p>
+              <p className="text-white font-grandview-display">AI turns concepts into customized, playable micro-games. Wizora builds fun-first ad experiences, tailored to audience behavior and platform specs—no dev hours needed.</p>
             </div>
             
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
-              <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">3</div>
+            <div className="bg-[#4e36ff] p-6 rounded-xl border border-napptix-grey/20 relative z-10">
+              <div className="bg-white w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">3</div>
               <h3 className="text-xl font-bold text-white mb-3">Launch & Optimize</h3>
-              <p className="text-napptix-light-grey font-grandview-display">We deploy, test, and evolve for engagement at scale. Our managed service ensures games run smoothly, track interactions, and iterate to keep performance high.</p>
+              <p className="text-white font-grandview-display">We deploy, test, and evolve for engagement at scale. Our managed service ensures games run smoothly, track interactions, and iterate to keep performance high.</p>
             </div>
           </div>
         </div>
@@ -148,31 +152,31 @@ const WizoraPage: React.FC = () => {
       </section>
        */}
       {/* Benefits Section */}
-      <section className="py-20  bg-napptix-dark">
+      <section className="py-20  bg-[#edebff]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Why Choose Wizora</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center font-disket">Why Choose Wizora</h2>
           
           <div className="flex justify-center items-center ">
-            <div className=" p-6 rounded-xl border  bg-black">
+            <div className=" p-6 rounded-xl border  bg-[#4c36ff]">
               <h3 className="text-xl font-bold text-white mb-4">For Advertisers</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Branded mini-games that boost awareness through play, not push.</span>
+                  <span className="text-white">Branded mini-games that boost awareness through play, not push.</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">
+                  <span className="text-white">
                        Engagement rates that outperform banners, videos, and static ads.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Tailored gameplay experiences built around your brand narrative.</span>
+                  <span className="text-white">Tailored gameplay experiences built around your brand narrative.</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey"> Hands-off delivery with strategic support from concept to campaign.</span>
+                  <span className="text-white"> Hands-off delivery with strategic support from concept to campaign.</span>
                 </li>
               </ul>
             </div>
@@ -203,12 +207,12 @@ const WizoraPage: React.FC = () => {
       </section>
       
       {/* CTA Section */}
-      <section className="py-20  bg-black">
+      <section className="py-20  bg-[#4c36ff]">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to transform your gaming ad strategy?</h2>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-napptix-dark text-white hover:bg-[#29dd3b]/90">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center ">
+            <Button size="lg" className="bg-white text-black hover:bg-[#edebff]/90">
               <Zap className="mr-2 h-5 w-5" /> Get Started
             </Button>
             {/* <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-[#29dd3b] hover:bg-[#29dd3b]/10">
@@ -218,7 +222,7 @@ const WizoraPage: React.FC = () => {
         </div>
       </section>
       
-      <Footer />
+      <Footer className='bg-white  ' headingColor='text-black' />
     </div>
   );
 };

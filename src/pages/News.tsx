@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
+import StaticParticleCanvas from '@/components/StaticParticle';
 import {
   Carousel,
   CarouselContent,
@@ -16,38 +17,38 @@ const newsItems = [
   {
     id: "news-1",
     date: "April 28, 2025",
-    title: "Napptix Acquires Yezel Technologies 🚀",
-    content: "In a groundbreaking move, Napptix has acquired Yezel Technologies, combining our innovative ad platform with Yezel's cutting-edge AI capabilities. This strategic merger promises to transform the gaming advertising landscape.",
+    title: "Break the Bottleneck in Interactive Ad Creation🚀",
+    content: "Traditional interactive ad production requires third-party vendors, coordination with developers, and strict templates that stifle creativity. Every tweak - whether it is changing an asset for a regional holiday or adjusting reward mechanics - can trigger a new round of tickets and approvals. Those delays cost time, budget, and often miss shifting market moments.",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1470&fit=crop"
   },
   {
     id: "news-2",
     date: "April 20, 2025",
-    title: "Expanding Our Global Presence 🌎",
-    content: "We're excited to announce the opening of our new offices in Singapore and Dubai, strengthening our presence in key gaming markets across Asia and the Middle East.",
+    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom🌎",
+    content: "India’s gaming scene is taking off beyond the big cities. Across tier 2 and tier 3 towns, a surge of new players is redefining how entertainment, culture and commerce come together. Here, gaming is no longer just a pastime, it’s a daily ritual, a way to connect and a vibrant piece of the digital economy.",
     image: "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?q=80&w=1471&fit=crop"
   },
   {
     id: "news-3",
     date: "April 15, 2025",
-    title: "Partnership with Major Game Studios 🎯",
-    content: "Napptix has secured partnerships with five major game studios, expanding our reach to over 100 million active players worldwide.",
+    title: "Interactive by Design: Why the Future of Advertising Is Built for Play 🎯",
+    content: "At Napptix, we believe the future of brand engagement isn’t just about showing up in games. It’s about showing up in ways that feel native to gameplay, interactive, rewarding and story driven. This is the era of playable marketing.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1470&fit=crop"
   },
   {
     id: "news-4",
     date: "April 10, 2025",
-    title: "Revolutionary AI Technology Integration 🤖",
-    content: "Our new AI-powered targeting system has shown a 300% improvement in ad engagement rates across all gaming platforms.",
+    title: "Beyond the Arena: How Brands Can Win Across the Competitive Gaming Ecosystem🤖",
+    content: "The rise of esports has changed global entertainment over the last decade. What began as small LAN gatherings now fills stadiums, features celebrity players and draws millions of live viewers. For brands, esports goes far beyond jerseys and logo placement. It’s a vibrant world where fans play, stream, shop and share - and where brands can join the fun at every turn.",
     image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=1470&fit=crop"
   },
-  {
-    id: "news-5",
-    date: "April 5, 2025",
-    title: "Industry Award Recognition 🏆",
-    content: "Napptix has been recognized as the 'Most Innovative Ad Tech Company' at the Global Gaming Awards 2025.",
-    image: "https://images.unsplash.com/photo-1643101452019-bc00c9bba76b?q=80&w=1498&fit=crop"
-  }
+  // {
+  //   id: "news-5",
+  //   date: "April 5, 2025",
+  //   title: "Ready to Play? ",
+  //   content: "Playable ads are no longer an exclusive club for high-budget studios. With Wizora, every marketer gains the power to create immersive, measurable, game-like experiences that cut through the noise and drive real results.",
+  //   image: "https://images.unsplash.com/photo-1643101452019-bc00c9bba76b?q=80&w=1498&fit=crop"
+  // }
 ];
 
 const News: React.FC = () => {
@@ -79,8 +80,8 @@ const News: React.FC = () => {
       <div className="mb-4">
         <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
       </div>
-      <h2 className="text-2xl font-bold text-white mb-4 font-syne">{item.title}</h2>
-      <p className="text-gray-300 mb-4 font-grandview text-base leading-relaxed">{item.content}</p>
+      <h2 className="text-2xl font-bold text-white mb-4 font-disket">{item.title}</h2>
+      <p className="text-gray-300 mb-4 font-productSans text-base leading-relaxed">{item.content}</p>
       <Link 
         to={`/news/${item.id}`}
         className="text-[#29dd3b] hover:underline font-syne flex items-center"
@@ -94,6 +95,7 @@ const News: React.FC = () => {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
+      <StaticParticleCanvas />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <h1 className="text-4xl md:text-6xl font-syne font-bold text-white mb-16 text-center">
           Latest News

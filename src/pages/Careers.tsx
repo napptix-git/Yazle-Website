@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
+import StaticParticleCanvas from '@/components/StaticParticle';
 
 const jobOpenings = [
   {
@@ -38,7 +39,9 @@ const Careers: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      <StaticParticleCanvas />
       <Navbar />
+      
       <div className="container mx-auto pt-32 pb-20 px-4">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 text-center">Careers at Napptix</h1>
         <p className="text-xl text-gray-300 mb-12 text-center">Join us in revolutionizing gaming advertising</p>

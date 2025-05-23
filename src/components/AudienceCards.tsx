@@ -11,7 +11,7 @@ const AudienceCards: React.FC = () => {
     <section id="audience" className="py-24 bg-black">
       <div className="container mx-auto text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white font-disket">Who We Serve</h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-400 max-w-2xl mx-auto font-productSans">
           Tailored solutions for both sides of the gaming advertising ecosystem
         </p>
       </div>

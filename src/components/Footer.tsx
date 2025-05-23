@@ -2,18 +2,26 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Github, Youtube, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Footer: React.FC = () => {
+
+ type FooterProps = {
+  className?: string;
+  headingColor?: string;
+  // ...other props
+  };
+const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
   const location = useLocation();
   
   const getNextPageInfo = () => {
     const routes = [
       { path: "/", name: "Wizora", to: "/advertisers/wizora" },
-      { path: "/advertisers/wizora", name: "Case Studies", to: "/advertisers/case-studies" },
-      { path: "/advertisers/case-studies", name: "Ad Gallery", to: "/advertisers/ad-gallery" },
-      { path: "/advertisers/ad-gallery", name: "Developers", to: "/developers" },
-      { path: "/developers", name: "About Us", to: "/about" },
-      { path: "/about", name: "Let's talk", to: "/contact" },
-      { path: "/contact", name: "Home", to: "/" }
+       { path: "/advertisers/wizora", name: "Developers", to: "/developers" },
+      { path: "/developers", name: "About", to: "/about" },
+      { path: "/about", name: "Careers", to: "/careers" },
+      { path: "/careers", name: "News", to: "/news" },
+      // { path: "/news", name: "About Us", to: "/about" },
+      { path: "/news", name: "Let's talk", to: "/contact" },
+      { path: "/contact", name: "Home", to: "/" },
+      // { path: "/contact", name: "Home", to: "/" }
     ];
     const currentIndex = routes.findIndex(route => route.path === location.pathname);
     return currentIndex >= 0 ? routes[currentIndex] : routes[0];
@@ -24,16 +32,18 @@ const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+
+ 
   
   return (
-    <footer className="relative bg-black py-12 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-black opacity-50"></div>
+    <footer className={`relative ${className ? className : " "}  py-12 overflow-hidden`}>
+      <div className="absolute inset-0 bg-gradient-to-t "></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-white text-xl font-bold mb-4">Napptix</h3>
-            <p className="text-napptix-light-grey text-sm mb-4">
+            <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Napptix</h3>
+            <p className="text-napptix-light-grey text-sm mb-4 font-productSans">
               Innovative advertising solutions connecting brands with the gaming world.
               Our mission is to enhance the gaming ecosystem through effective advertising.
             </p>
@@ -62,35 +72,35 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
+            <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Quick Links</h3>
             <ul className="space-y-2 text-napptix-light-grey">
-              <li><Link to="/" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Home</Link></li>
-              <li><Link to="/advertisers/wizora" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Wizora</Link></li>
-              <li><Link to="/advertisers/case-studies" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Case Studies</Link></li>
-              <li><Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Ad Gallery</Link></li>
-              <li><Link to="/developers" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Developers</Link></li>
-              <li><Link to="/about" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">About Us</Link></li>
-              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Let's talk</Link></li>
+              <li><Link to="/" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors font-productSans">Home</Link></li>
+              {/* <li><Link to="/advertisers/wizora" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Wizora</Link></li> */}
+              {/* <li><Link to="/advertisers/case-studies" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Case Studies</Link></li> */}
+              {/* <li><Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors">Ad Gallery</Link></li> */}
+              <li><Link to="/developers" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors font-productSans">Developers</Link></li>
+              <li><Link to="/about" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors font-productSans">About Us</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors font-productSans">Let's talk</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-white text-xl font-bold mb-4">Resources</h3>
+            <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Privacy Policy</h3>
             <ul className="space-y-2 text-napptix-light-grey">
-              <li><Link to="/advertisers/wizora" className="hover:text-[#29dd3b] transition-colors">Wizora Platform</Link></li>
-              <li><Link to="/advertisers/case-studies" className="hover:text-[#29dd3b] transition-colors">Case Studies</Link></li>
-              <li><Link to="/advertisers/ad-gallery" className="hover:text-[#29dd3b] transition-colors">Ad Gallery</Link></li>
+              <li><Link to="/advertisers/wizora" className="hover:text-[#29dd3b] transition-colors font-productSans">Terms & Conditions</Link></li>
+              <li><Link to="/advertisers/case-studies" className="hover:text-[#29dd3b] transition-colors"></Link></li>
+              <li><Link to="/advertisers/ad-gallery" className="hover:text-[#29dd3b] transition-colors"></Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-white text-xl font-bold mb-4">Contact Us</h3>
+            <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Contact Us</h3>
             <address className="not-italic text-napptix-light-grey text-sm">
-              <p className="mb-2">123 Gaming Street</p>
-              <p className="mb-2">Tech Valley, CA 94043</p>
-              <p className="mb-2">United States</p>
-              <p className="mb-2">Email: info@napptix.com</p>
-              <p>Phone: +1 (555) 123-4567</p>
+              <p className="mb-2 font-productSans">123 Gaming Street</p>
+              <p className="mb-2 font-productSans">Tech Valley, CA 94043</p>
+              <p className="mb-2 font-productSans">United States</p>
+              <p className="mb-2 font-productSans">Email: info@napptix.com</p>
+              <p className='font-productSans'>Phone: +1 (555) 123-4567</p>
             </address>
           </div>
         </div>

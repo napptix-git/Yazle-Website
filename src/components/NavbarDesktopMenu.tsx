@@ -13,6 +13,7 @@ type Props = {
   handleMouseEnter: (menu: DesktopMenuType) => void;
   handleMouseLeave: () => void;
   scrollToTop: () => void;
+  linkClassName: string;
 };
 
 const NavbarDesktopMenu: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
   handleMouseEnter,
   handleMouseLeave,
   scrollToTop,
+  linkClassName,
 }) => (
   <nav className="hidden md:flex items-center space-x-8 flex-grow justify-center">
     <div 
@@ -27,7 +29,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('advertisers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview">
+      <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
         ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -42,7 +44,11 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             <div className="py-8 px-6">
               <p className="text-gray-400 text-sm font-bold mb-6 uppercase ">Our Solutions</p>
               <div className="space-y-6">
-                <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                <Link to="/advertisers/wizora" 
+                onClick={scrollToTop}
+                className={`flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800 
+                ${linkClassName ? linkClassName : ""}`}
+                >
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <Gamepad className="h-5 w-5 text-[#29dd3b]" />
                   </div>
@@ -80,7 +86,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('developers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview">
+      <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
         DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -115,7 +121,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('company')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview">
+      <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
         COMPANY <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -153,7 +159,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
                     <Newspaper className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-200 uppercase">News</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase">News & Articles</p>
                     <p className="text-xs text-gray-400">Latest updates</p>
                   </div>
                 </Link>

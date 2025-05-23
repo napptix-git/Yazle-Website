@@ -244,6 +244,15 @@ html.lenis-smooth {
       transform: translateX(-50%);
     }
   }
+
+  .animate-carousel-right {
+  animation: carousel-scroll-right 20s linear infinite;
+  }
+  @keyframes carousel-scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
 }
 
 @keyframes border-glow {

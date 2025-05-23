@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import StaticParticleCanvas from '@/components/StaticParticle';
 
 type ContactType = 'general' | 'advertiser' | 'developer';
 
@@ -72,6 +73,7 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-black font-manrope">
       <Navbar />
+      <StaticParticleCanvas />
       <div className="container mx-auto pt-28 pb-20 px-4">
 
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">Get In Touch</h1>

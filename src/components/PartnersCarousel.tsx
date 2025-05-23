@@ -94,7 +94,7 @@ const PartnersCarousel: React.FC = () => {
 
       <div className="container mx-auto mb-10 text-center">
         <h2 className="text-3xl md:text-4xl text-white mb-2 font-disket">OUR CLIENTS & PARTNERS</h2>
-        <p className="text-napptix-light-grey max-w-2xl mx-auto">
+        <p className="text-napptix-light-grey max-w-2xl mx-auto font-productSans">
           Trusted by industry leaders in gaming and advertising
         </p>
       </div>
@@ -103,17 +103,17 @@ const PartnersCarousel: React.FC = () => {
       <div className="relative overflow-hidden py-4 mb-8">
         <div className="flex animate-carousel-left">
           {clients.map((client, index) => (
-            <Card 
-              key={`${client.id}-${index}`} 
-              className=" mx-4 w-40 h-24 flex-shrink-0 flex items-center justify-center bg-napptix-grey/30 border-napptix-grey/20 cursor-pointer transition-all duration-300 hover:bg-napptix-grey/50"
+            <div
+              key={`${client.id}-${index}`}
+              className="w-40 h-24 flex-shrink-0 flex items-center justify-center mx-4 first:ml-0 last:mr-0"
             >
               <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-h-16 max-w-[120px] object-contain"
-                  title={client.name}
-                />
-            </Card>
+                src={client.logo}
+                alt={client.name}
+                className="max-h-16 max-w-[120px] object-contain"
+                title={client.name}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -122,9 +122,9 @@ const PartnersCarousel: React.FC = () => {
       <div className="relative overflow-hidden py-4">
         <div className="flex animate-carousel-right">
           {clients.map((client, index) => (
-            <Card 
+            <div 
               key={`${client.id}-${index}`}
-              className=" mx-4 w-40 h-24 flex-shrink-0 flex items-center justify-center bg-napptix-grey/30 border-napptix-grey/20 cursor-pointer transition-all duration-300 hover:bg-napptix-grey/50"
+              className=" w-40 h-24 flex-shrink-0 flex items-center justify-center last:mr-0 "
             >
               <img
                   src={client.logo}
@@ -132,7 +132,7 @@ const PartnersCarousel: React.FC = () => {
                   className="max-h-16 max-w-[120px] object-contain"
                   title={client.name}
                 />
-            </Card>
+            </div>
           ))}
         </div>
       </div>
