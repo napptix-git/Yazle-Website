@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -56,7 +57,7 @@ const NewsCarousel = () => {
       <div className="mt-auto">
         <Link
          to={`/news/${item.id}`}
-         className="inline-flex items-center px-6 py-3 rounded-lg bg-black text-white font-semibold hover:bg-gray-800 transition-all duration-200 text-sm group">
+         className="inline-flex items-center px-6 py-3 rounded-lg bg-[#4c36ff] text-white font-semibold hover:bg-[#372bb3] transition-all duration-200 text-sm group">
           Read More
           <svg 
             className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" 
