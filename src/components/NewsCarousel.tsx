@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -46,17 +45,29 @@ const NewsCarousel = () => {
   const renderNewsCard = (item: typeof newsItems[0], index: number) => (
     <div 
       key={`news-item-${item.id}-${index}`}
-      className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl h-full"
+      className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl h-full flex flex-col justify-between"
     >
-      <div className="mb-4">
-        <span className="text-[#4c3bff] text-sm">{item.date}</span>
+      <div>
+        <div className="mb-4">
+          <span className="text-[#4c3bff] text-sm">{item.date}</span>
+        </div>
+        <h3 className="text-2xl font-bold text-black mb-4 font-productSans uppercase">{item.title}</h3>
       </div>
-      <h3 className="text-2xl font-bold text-black mb-4 font-productSans uppercase">{item.title}</h3>
-      <Link
-       to={`/news/${item.id}`}
-       className="inline-block px-[12px] py-[6px] rounded-full bg-[#4c3bff] text-white font-semibold hover:bg-[#372bb3] transition-colors duration-200 text-sm ">
-        Read More
-      </Link>
+      <div className="mt-auto">
+        <Link
+         to={`/news/${item.id}`}
+         className="inline-flex items-center px-6 py-3 rounded-lg bg-black text-white font-semibold hover:bg-gray-800 transition-all duration-200 text-sm group">
+          Read More
+          <svg 
+            className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
     </div>
   );
 
