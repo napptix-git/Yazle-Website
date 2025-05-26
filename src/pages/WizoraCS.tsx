@@ -107,7 +107,11 @@ return (
   <div className="min-h-screen w-full flex flex-col relative overflow-hidden" style={{ background: "transparent" }}>
     <ParticleBackground />
     <FloatingConsole />
-    <Navbar linkClassName="text-[#4c36ff] hover:text-[#fff]" />
+    <Navbar 
+      linkClassName="text-[#4c36ff] hover:text-[#fff]" 
+      dropdownBgColor="#4c36ff"
+      dropdownTextColor="white"
+    />
     <div className="flex-1 flex flex-col items-center justify-center z-10 text-center min-h-screen">
       <img
         src="/lovable-uploads/wizora_w_logo.png"
@@ -132,4 +136,3 @@ return (
 };
 
 export default WizoraCS;
-

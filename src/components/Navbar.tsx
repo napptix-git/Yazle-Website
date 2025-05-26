@@ -16,10 +16,12 @@ type HoveredItemType = {
 
 type NavbarProps = {
   linkClassName?: string;
+  dropdownBgColor?: string;
+  dropdownTextColor?: string;
 };
 
 
-const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
+const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdownTextColor}) => {
   const location = useLocation();
   const isWizoraPage = location.pathname.includes("/pages/WizoraCS");
   const [scrolled, setScrolled] = useState(false);
@@ -94,6 +96,8 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
             handleMouseLeave={handleMouseLeave}
             scrollToTop={scrollToTop}
             linkClassName={linkClassName}
+            dropdownBgColor={dropdownBgColor}
+            dropdownTextColor={dropdownTextColor}
           />
 
           <Link 
@@ -137,6 +141,8 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
         hoveredItem={hoveredItem}
         toggleMobileMenu={toggleMobileMenu}
         scrollToTop={scrollToTop}
+        dropdownBgColor={dropdownBgColor}
+        dropdownTextColor={dropdownTextColor}
       />
       <style>{`
         .shimmer-glow-btn {
