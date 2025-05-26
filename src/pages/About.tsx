@@ -235,20 +235,38 @@ const About: React.FC = () => {
 
         <h2 className="text-3xl font-disket text-white mt-[100px] md:mt-[200px] mb-6 text-center">Our Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[30px] md:mt-[50px]">
-          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 overflow-hidden">
+            <div className="mb-4">
+              <img 
+                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1374&auto=format&fit=crop" 
+                alt="Innovation" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+            </div>
             <h3 className="text-xl font-disket text-white mb-4">Innovation</h3>
-            <p className='font-productSans' 
-            >We constantly push the boundaries of what's possible in gaming advertising.</p>
+            <p className='font-productSans text-gray-300'>We constantly push the boundaries of what's possible in gaming advertising.</p>
           </div>
-          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 overflow-hidden">
+            <div className="mb-4">
+              <img 
+                src="https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1374&auto=format&fit=crop" 
+                alt="Integrity" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+            </div>
             <h3 className="text-xl font-disket text-white mb-4">Integrity</h3>
-            <p className='font-productSans' 
-            >We prioritize transparency and ethical practices in all our operations.</p>
+            <p className='font-productSans text-gray-300'>We prioritize transparency and ethical practices in all our operations.</p>
           </div>
-          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 overflow-hidden">
+            <div className="mb-4">
+              <img 
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1374&auto=format&fit=crop" 
+                alt="Player-First" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+            </div>
             <h3 className="text-xl font-disket text-white mb-4">Player-First</h3>
-            <p className='font-productSans' 
-            >We believe that advertising should enhance, not detract from, the gaming experience.</p>
+            <p className='font-productSans text-gray-300'>We believe that advertising should enhance, not detract from, the gaming experience.</p>
           </div>
         </div>
       </div>
