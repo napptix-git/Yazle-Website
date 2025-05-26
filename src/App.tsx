@@ -16,6 +16,7 @@ import Careers from "./pages/Careers";
 import News from "./pages/News";
 import NewsArticle from "./pages/NewsArticle";
 import WizoraSoonPage from "./pages/WizoraSoonPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 import WizoraPage from "./pages/advertisers/WizoraPage";
 import CaseStudiesPage from "./pages/advertisers/CaseStudiesPage";
@@ -66,6 +67,7 @@ const App = () => {
               <Route path="/careers" element={<Careers />} />
               <Route path="/news" element={<News />} />
               <Route path="/news/:id" element={<NewsArticle />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

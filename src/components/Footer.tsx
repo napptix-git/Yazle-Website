@@ -92,9 +92,7 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
           <div>
             <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Privacy Policy</h3>
             <ul className="space-y-2 text-napptix-light-grey">
-              <li><Link to="/advertisers/wizora" className="hover:text-[#29dd3b] transition-colors font-productSans">Terms & Conditions</Link></li>
-              <li><Link to="/advertisers/case-studies" className="hover:text-[#29dd3b] transition-colors"></Link></li>
-              <li><Link to="/advertisers/ad-gallery" className="hover:text-[#29dd3b] transition-colors"></Link></li>
+              <li><Link to="/privacy-policy" onClick={scrollToTop} className="hover:text-[#29dd3b] transition-colors font-productSans">Privacy Policy</Link></li>
             </ul>
           </div>
           
