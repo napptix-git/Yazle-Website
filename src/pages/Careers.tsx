@@ -43,13 +43,13 @@ const Careers: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 text-center">Careers at Napptix</h1>
-        <p className="text-xl text-gray-300 mb-12 text-center">Join us in revolutionizing gaming advertising</p>
+        <h1 className="text-4xl md:text-6xl font-disket text-white mb-8 text-center">Careers at Napptix</h1>
+        <p className="text-xl text-gray-300 mb-12 text-center font-productSans">Join us in revolutionizing gaming advertising</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
-            <h2 className="text-2xl font-bold text-white mb-4">Why Join Us?</h2>
-            <ul className="space-y-4 text-gray-300 font-grandview-display">
+            <h2 className="text-2xl font-disket text-white mb-4">Why Join Us?</h2>
+            <ul className="space-y-4 text-gray-300 font-productSans">
               <li>• Innovative technology environment</li>
               <li>• Global impact in gaming industry</li>
               <li>• Competitive compensation</li>
@@ -60,8 +60,8 @@ const Careers: React.FC = () => {
           </div>
           
           <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
-            <h2 className="text-2xl font-bold text-white mb-4">Our Values</h2>
-            <ul className="space-y-4 text-gray-300 font-grandview-display">
+            <h2 className="text-2xl font-disket text-white mb-4">Our Values</h2>
+            <ul className="space-y-4 text-gray-300 font-productSans">
               <li>• Innovation First</li>
               <li>• Player-Centric Approach</li>
               <li>• Global Mindset</li>
@@ -72,7 +72,7 @@ const Careers: React.FC = () => {
           </div>
         </div>
 
-        <h2 className="text-3xl font-bold text-white mb-8 text-center pt-[100px]">Open Positions</h2>
+        <h2 className="text-3xl font-disket text-white mb-8 text-center pt-[100px]">Open Positions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {jobOpenings.map((job, index) => (
             <motion.div
@@ -84,12 +84,12 @@ const Careers: React.FC = () => {
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">{job.title}</h3>
+                  <h3 className="text-xl text-white font-disket">{job.title}</h3>
                   <p className="text-[#29dd3b]">{job.department}</p>
                 </div>
                 <span className="text-gray-400 text-sm">{job.location}</span>
               </div>
-              <p className="text-gray-300 mb-4 font-grandview-display">{job.description}</p>
+              <p className="text-gray-300 mb-4 font-productSans">{job.description}</p>
               <button
                  onClick={() => window.location.href = "mailto:hr@napptix.com"}
                  className="bg-[#29dd3b] text-black px-6 py-2 rounded-full font-bold hover:bg-[#29dd3b]/80 transition-colors">
@@ -100,7 +100,7 @@ const Careers: React.FC = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-300">
+          <p className="text-gray-300 font-productSans">
             Don't see a position that matches your skills? Send your resume to{" "}
             <a href="mailto:hr@napptix.com" className="text-[#29dd3b] hover:underline">
               hr@napptix.com

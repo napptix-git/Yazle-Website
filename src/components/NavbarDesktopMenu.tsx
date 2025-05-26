@@ -29,7 +29,8 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('advertisers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
+      <button className={`flex items-center font-medium py-2 px-1 focus:outline-none  transition-colors uppercase font-disket ${linkClassName ? linkClassName : " text-white hover:text-[#29dd3b]"}`}
+      >
         ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -44,7 +45,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             <div className="py-8 px-6">
               <p className="text-gray-400 text-sm font-bold mb-6 uppercase ">Our Solutions</p>
               <div className="space-y-6">
-                <Link to="/advertisers/wizora" 
+                <Link to="/pages/WizoraCS" 
                 onClick={scrollToTop}
                 className={`flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800 
                 ${linkClassName ? linkClassName : ""}`}
@@ -86,7 +87,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('developers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
+      <button className={`flex items-center  font-medium py-2 px-1 focus:outline-none  transition-colors uppercase font-disket ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
         DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -121,7 +122,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('company')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase font-granview ${linkClassName ? linkClassName : "text-white hover:text-[#29dd3b]"}`}>
+      <button className={`flex items-center  font-medium py-2 px-1 focus:outline-none  transition-colors uppercase font-disket ${linkClassName ? linkClassName : " text-white hover:text-[#29dd3b]"}`}>
         COMPANY <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>

@@ -97,7 +97,7 @@ const News: React.FC = () => {
       <Navbar />
       <StaticParticleCanvas />
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-6xl font-syne font-bold text-white mb-16 text-center">
+        <h1 className="text-4xl md:text-6xl font-disket text-white mb-16 text-center">
           Latest News
         </h1>
         

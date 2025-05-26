@@ -18,11 +18,13 @@ type NavbarProps = {
   linkClassName?: string;
 };
 
+
 const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
+  const location = useLocation();
+  const isWizoraPage = location.pathname.includes("/pages/WizoraCS");
   const [scrolled, setScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<HoveredItemType>({ mobile: null, desktop: null });
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
           <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl ">
             <div className="h-20 md:h-40 lg:h-30 lg:w-[200px] -ml-2 ">
               <img 
-                src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
+                src={isWizoraPage ? "/lovable-uploads/napptix_black_logo.png" : "/lovable-uploads/napptix_white_logo.png"} 
                 alt="Napptix" 
                 className="h-full w-auto object-contain" 
               />
@@ -96,12 +98,17 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName}) => {
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn -mr-2 "
-            style={{ fontWeight: 800, letterSpacing: 1.2 }}
+            className={`hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300
+              ${isWizoraPage ? "bg-[#4c36ff] text-white " : "bg-[#29dd3b] text-black border-[#29dd3b] shimmer-glow-btn"}
+              overflow-hidden  -mr-2`}
+            style={{
+               backgroundColor: isWizoraPage ? "#4c36ff" : "#29dd3b",               fontWeight: 800,
+               letterSpacing: 1.2
+               }}
           >
-            <span className="relative z-10 ">LET'S TALK</span>
-            <span className="absolute inset-0 rounded-full border-2 border-[#29dd3b] pointer-events-none"></span>
-            <span className="absolute shimmer-effect inset-0 pointer-events-none"></span>
+            <span className="relative z-10">LET'S TALK</span>
+            <span className={`absolute inset-0 rounded-full border-2 pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
+          
           </Link>
           
           <div className="md:hidden">

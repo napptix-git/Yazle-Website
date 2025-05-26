@@ -7,8 +7,10 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Code, Users, Globe } from 'lucide-react';
 import StaticParticleCanvas from '@/components/StaticParticle';
+import { useNavigate } from 'react-router-dom';
 
 const Developers: React.FC = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,7 +38,8 @@ const Developers: React.FC = () => {
               </p>
               <Button
                 size="lg"
-                className="bg-[#29dd3b] hover:bg-[#29dd3b]/90 text-black font-grandview-display"
+                className="bg-[#29dd3b] hover:bg-[#29dd3b]/90 text-black font-productSans"
+                onClick={() => navigate('/contact')}
               >
                 Get Started
               </Button>
@@ -154,7 +157,8 @@ const Developers: React.FC = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-[#29dd3b] text-[#29dd3b] hover:bg-[#29dd3b]/50"
+                className="border-[#29dd3b] bg-[#29dd3b]  text-black hover:bg-[#29dd3b]/90 font-productSans"
+                onClick={() => navigate('/contact')}
               >
                 Contact Us
               </Button>

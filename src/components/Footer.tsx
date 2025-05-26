@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Instagram, Linkedin, Github, Youtube, ArrowRight } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Github, Youtube, ArrowRight, Mail } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 
@@ -48,7 +48,7 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
               Our mission is to enhance the gaming ecosystem through effective advertising.
             </p>
             <div className="flex space-x-3 items-center mt-4">
-              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+              {/* <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
                 <Facebook size={18} />
               </a>
               <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
@@ -56,18 +56,23 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
               </a>
               <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
                 <Instagram size={18} />
-              </a>
+              </a> */}
               <a href="https://www.linkedin.com/company/napptix/"
                  className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors"
                  target='_blank'>
                 <Linkedin size={18} />
               </a>
-              <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
+              <a href="mailto:divyansh@napptix.com"
+                 className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors"
+                 target='_blank'>
+                <Mail  size={18} />
+              </a>
+              {/* <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
                 <Github size={18} />
               </a>
               <a href="#" className="text-napptix-light-grey hover:text-[#29dd3b] transition-colors">
-                <Youtube size={18} />
-              </a>
+                <Youtube size={18} /> */}
+              {/* </a> */}
             </div>
           </div>
           
@@ -96,11 +101,11 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
           <div>
             <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Contact Us</h3>
             <address className="not-italic text-napptix-light-grey text-sm">
-              <p className="mb-2 font-productSans">123 Gaming Street</p>
-              <p className="mb-2 font-productSans">Tech Valley, CA 94043</p>
-              <p className="mb-2 font-productSans">United States</p>
-              <p className="mb-2 font-productSans">Email: info@napptix.com</p>
-              <p className='font-productSans'>Phone: +1 (555) 123-4567</p>
+              <p className="mb-2 font-productSans">HD21 B, First Floor</p>
+              <p className="mb-2 font-productSans">In5 Tech, Dubai Inernet City</p>
+              <p className="mb-2 font-productSans">Dubai,</p>
+              <p className="mb-2 font-productSans">United Arab Emirates</p>
+              
             </address>
           </div>
         </div>

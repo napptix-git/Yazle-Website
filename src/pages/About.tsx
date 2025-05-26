@@ -221,10 +221,10 @@ const About: React.FC = () => {
             {offices.map((office) => (
               <div key={office.city} className="w-full">
                 <div className="flex justify-between items-center py-4 md:py-12 md:px-[-400px] border-b border-[#242424]">
-                  <span className="text-[2rem] md:text-[4.2rem] font-syne font-extrabold text-white text-left">
+                  <span className="text-[2rem] md:text-[5.5rem] font-disket font-bold text-white text-left">
                     {office.city}
                   </span>
-                  <span className="text-[0.65rem] md:text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide text-right">
+                  <span className="text-[0.65rem] md:text-[1.35rem] uppercase font-productrSans font-semibold text-gray-300 tracking-wide text-right">
                     {office.country}
                   </span>
                 </div>
@@ -233,19 +233,22 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        <h2 className="text-3xl font-bold text-white mt-[100px] md:mt-[200px] mb-6 text-center">Our Values</h2>
+        <h2 className="text-3xl font-disket text-white mt-[100px] md:mt-[200px] mb-6 text-center">Our Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[30px] md:mt-[50px]">
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
-            <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
+            <h3 className="text-xl font-disket text-white mb-4">Innovation</h3>
+            <p className='font-productSans' 
+            >We constantly push the boundaries of what's possible in gaming advertising.</p>
           </div>
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-xl font-bold text-white mb-4">Integrity</h3>
-            <p>We prioritize transparency and ethical practices in all our operations.</p>
+            <h3 className="text-xl font-disket text-white mb-4">Integrity</h3>
+            <p className='font-productSans' 
+            >We prioritize transparency and ethical practices in all our operations.</p>
           </div>
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-xl font-bold text-white mb-4">Player-First</h3>
-            <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
+            <h3 className="text-xl font-disket text-white mb-4">Player-First</h3>
+            <p className='font-productSans' 
+            >We believe that advertising should enhance, not detract from, the gaming experience.</p>
           </div>
         </div>
       </div>

@@ -80,12 +80,12 @@ const Contact: React.FC = () => {
         <div className="bg-napptix-dark p-8 rounded-xl max-w-2xl mx-auto">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-2">
-              <label htmlFor="who" className="text-white mb-2 text-lg font-semibold">Who are you?</label>
+              <label htmlFor="who" className="text-white mb-2 text-lg font-disket ">Who are you?</label>
               <select
                 id="who"
                 value={contactType}
                 onChange={handleTypeChange}
-                className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
+                className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b] font-productSans"
               >
                 <option value="general">General</option>
                 <option value="advertiser">Advertiser</option>
@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label htmlFor="name" className="text-white mb-2">Name</label>
+                    <label htmlFor="name" className="text-white mb-2 font-disket">Name</label>
                     <input
                       type="text"
                       id="name"
@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label htmlFor="email" className="text-white mb-2">Email</label>
+                    <label htmlFor="email" className="text-white mb-2 font-disket">Email</label>
                     <input
                       type="email"
                       id="email"
@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="company" className="text-white mb-2">Company</label>
+                  <label htmlFor="company" className="text-white mb-2 font-disket">Company</label>
                   <input
                     type="text"
                     id="company"
@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="message" className="text-white mb-2">Message</label>
+                  <label htmlFor="message" className="text-white mb-2 font-disket">Message</label>
                   <textarea
                     id="message"
                     rows={4}
@@ -152,7 +152,7 @@ const Contact: React.FC = () => {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label htmlFor="name" className="text-white mb-2">Name</label>
+                    <label htmlFor="name" className="text-white mb-2 font-disket">Name</label>
                     <input
                       type="text"
                       id="name"
@@ -164,7 +164,7 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label htmlFor="email" className="text-white mb-2">Email</label>
+                    <label htmlFor="email" className="text-white mb-2 font-disket">Email</label>
                     <input
                       type="email"
                       id="email"
@@ -178,7 +178,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label htmlFor="company" className="text-white mb-2">Company</label>
+                    <label htmlFor="company" className="text-white mb-2 font-disket">Company</label>
                     <input
                       type="text"
                       id="company"
@@ -190,12 +190,12 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label htmlFor="budget" className="text-white mb-2">Monthly Ad Budget</label>
+                    <label htmlFor="budget" className="text-white mb-2 font-disket">Monthly Ad Budget</label>
                     <select
                       id="budget"
                       value={advertiserFormData.budget}
                       onChange={handleAdvertiserChange}
-                      className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
+                      className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b] font-productSans"
                       required
                     >
                       <option value="" disabled>Select budget range</option>
@@ -207,7 +207,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="message" className="text-white mb-2">Message</label>
+                  <label htmlFor="message" className="text-white mb-2 font-disket">Message</label>
                   <textarea
                     id="message"
                     rows={4}
@@ -225,7 +225,7 @@ const Contact: React.FC = () => {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label htmlFor="name" className="text-white mb-2">Your Name</label>
+                    <label htmlFor="name" className="text-white mb-2 font-disket">Your Name</label>
                     <input
                       type="text"
                       id="name"
@@ -236,7 +236,7 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label htmlFor="email" className="text-white mb-2">Email</label>
+                    <label htmlFor="email" className="text-white mb-2 font-disket">Email</label>
                     <input
                       type="email"
                       id="email"
@@ -249,7 +249,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col">
-                    <label htmlFor="appName" className="text-white mb-2">Game/App Name</label>
+                    <label htmlFor="appName" className="text-white mb-2 font-disket">Game/App Name</label>
                     <input
                       type="text"
                       id="appName"
@@ -259,7 +259,7 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label htmlFor="platform" className="text-white mb-2">Platform</label>
+                    <label htmlFor="platform" className="text-white mb-2 font-disket">Platform</label>
                     <select
                       id="platform"
                       value={developerFormData.platform}
@@ -276,7 +276,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="message" className="text-white mb-2">How can we help?</label>
+                  <label htmlFor="message" className="text-white mb-2 font-disket">How can we help?</label>
                   <textarea
                     id="message"
                     rows={4}
