@@ -49,13 +49,8 @@ const App = () => {
               <Route path="/solutions" element={<Solutions />} />
               
               <Route path="/advertisers" element={<Advertisers />} />
-<<<<<<< HEAD
-              
-              {/* <Route path="/advertisers/wizora" element={<WizoraPage />} /> */}
-=======
               <Route path="/advertisers/wizora" element={<WizoraPage />} />
               <Route path="/wizora-soon" element={<WizoraSoonPage />} />
->>>>>>> 5259214b7767db244ce70b641c569cd62decafd8
               <Route path="/advertisers/case-studies" element={<CaseStudiesPage />} />
               <Route path="/advertisers/case-studies/:slug" element={<CaseStudyDetailPage />} />
               <Route path="/advertisers/ad-gallery" element={<AdGalleryPage />} />
