@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -253,7 +252,7 @@ const NewsArticle = () => {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      <div className="container mx-auto pt-32 pb-20 px-4 max-w-4xl">
+      <div className="container mx-auto pt-32 pb-20 px-6">
         <button 
           onClick={handleBackToNews}
           className="text-[#29dd3b] hover:underline flex items-center mb-8 font-productSans cursor-pointer bg-transparent border-none"
@@ -262,14 +261,12 @@ const NewsArticle = () => {
           Back to News
         </button>
         
-        <article className="mx-auto">
+        <h1 className="text-4xl md:text-6xl font-disket text-white mb-8 text-center">{article.title}</h1>
+        
+        <div className="max-w-4xl mx-auto bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
           <div className="mb-6">
             <span className="text-[#29dd3b] text-sm font-syne uppercase tracking-wider">{article.date}</span>
           </div>
-          
-          <h1 className="text-4xl md:text-5xl font-disket text-white mb-12 leading-tight">
-            {article.title}
-          </h1>
           
           {article.image && (
             <div className="mb-12 overflow-hidden rounded-lg">
@@ -281,13 +278,13 @@ const NewsArticle = () => {
             </div>
           )}
           
-          <div className="text-white font-productSans text-lg leading-relaxed space-y-8">
+          <div className="text-gray-300 space-y-6 font-productSans">
             <div 
-              className="prose prose-invert prose-lg max-w-none [&>p]:text-gray-300 [&>p]:mb-6 [&>p]:leading-relaxed [&>p]:text-justify [&>h1]:text-white [&>h1]:font-disket [&>h1]:text-3xl [&>h1]:mb-6 [&>h1]:mt-8 [&>h2]:text-white [&>h2]:font-disket [&>h2]:text-2xl [&>h2]:mb-4 [&>h2]:mt-8 [&>h3]:text-[#29dd3b] [&>h3]:font-productSans [&>h3]:text-xl [&>h3]:mb-4 [&>h3]:mt-6 [&>ul]:space-y-2 [&>ul]:mb-6 [&>li]:text-gray-300 [&>li]:leading-relaxed"
+              className="prose prose-invert prose-lg max-w-none [&>p]:text-gray-300 [&>p]:mb-6 [&>p]:leading-relaxed [&>h1]:text-4xl [&>h1]:font-disket [&>h1]:text-white [&>h1]:mb-6 [&>h1]:mt-8 [&>h2]:text-2xl [&>h2]:font-disket [&>h2]:text-white [&>h2]:mb-4 [&>h2]:mt-8 [&>h3]:text-xl [&>h3]:text-[#29dd3b] [&>h3]:font-productSans [&>h3]:mb-3 [&>h3]:mt-6 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>ul]:mb-6 [&>li]:text-gray-300 [&>li]:leading-relaxed [&>strong]:text-white [&>strong]:font-semibold"
               dangerouslySetInnerHTML={{ __html: article.fullContent }}
             />
           </div>
-        </article>
+        </div>
       </div>
       <Footer />
     </div>
