@@ -111,7 +111,6 @@ return (
       linkClassName="text-[#4c36ff] hover:text-[#fff]" 
       dropdownBgColor="#4c36ff"
       dropdownTextColor="text-[#4c36ff]"
-      subTextClass="text-black"
     />
     <div className="flex-1 flex flex-col items-center justify-center z-10 text-center min-h-screen">
       <img

@@ -154,9 +154,9 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.22 }}
             className="flex justify-center"
           >
-            <Link to="/advertisers/wizora">
+            <a href="#services">
               <button
-                className="px-8 py-3 rounded-full font-bold text-white text-lg "
+                className="px-8 py-3 rounded-full font-bold text-white text-lg"
                 style={{
                   background: "#4c36ff",
                   fontFamily: 'Disket mono, monospace',
@@ -166,7 +166,7 @@ const HeroSection: React.FC = () => {
               >
                 Discover Our Solutions
               </button>
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>

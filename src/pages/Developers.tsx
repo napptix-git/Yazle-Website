@@ -49,14 +49,14 @@ const Developers: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-napptix-dark rounded-xl p-6 border border-napptix-grey/30"
+              className="bg-napptix-dark rounded-xl pt-3 border border-napptix-grey/30"
             >
-              <div className="aspect-video relative overflow-hidden rounded-lg">
+              <div className="aspect-video relative overflow-hidden rounded-lg bg-black">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#29dd3b]/20 to-transparent z-10"></div>
                 <img 
                   src="/lovable-uploads/igdc.png" 
                   alt="Game Developer" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </motion.div>
