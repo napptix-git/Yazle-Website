@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import { submitContactForm } from '@/services/contactService';
 
 const DeveloperContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,12 +20,21 @@ const DeveloperContactPage: React.FC = () => {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const submissionData = {
+        contact_type: 'developer' as const,
+        name: formData.name,
+        email: formData.email,
+        app_name: formData.appName || null,
+        platform: formData.platform || null,
+        message: formData.message
+      };
+
+      await submitContactForm(submissionData);
       toast.success('Message sent successfully! Our developer relations team will get back to you soon.');
       setFormData({
         name: '',
@@ -34,8 +43,12 @@ const DeveloperContactPage: React.FC = () => {
         platform: '',
         message: ''
       });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
       setSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

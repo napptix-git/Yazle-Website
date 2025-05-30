@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import StaticParticleCanvas from '@/components/StaticParticle';
+import { submitContactForm } from '@/services/contactService';
 
 type ContactType = 'general' | 'advertiser' | 'developer';
 
@@ -59,15 +59,50 @@ const Contact: React.FC = () => {
     setDeveloperFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      let submissionData;
+
+      if (contactType === 'general') {
+        submissionData = {
+          contact_type: contactType,
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || null,
+          message: formData.message
+        };
+      } else if (contactType === 'advertiser') {
+        submissionData = {
+          contact_type: contactType,
+          name: advertiserFormData.name,
+          email: advertiserFormData.email,
+          company: advertiserFormData.company,
+          budget: advertiserFormData.budget,
+          message: advertiserFormData.message
+        };
+      } else {
+        submissionData = {
+          contact_type: contactType,
+          name: developerFormData.name,
+          email: developerFormData.email,
+          app_name: developerFormData.appName || null,
+          platform: developerFormData.platform || null,
+          message: developerFormData.message
+        };
+      }
+
+      await submitContactForm(submissionData);
       toast.success('Message sent successfully! We will get back to you soon.');
       resetAll();
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
       setSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

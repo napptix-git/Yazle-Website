@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Building, Users, BarChart3, Mail, Phone } from 'lucide-react';
+import { submitContactForm } from '@/services/contactService';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,12 +21,21 @@ const ContactPage: React.FC = () => {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const submissionData = {
+        contact_type: 'advertiser' as const,
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        budget: formData.budget,
+        message: formData.message
+      };
+
+      await submitContactForm(submissionData);
       toast.success('Your message has been sent! An advertising specialist will contact you shortly.');
       setFormData({
         name: '',
@@ -35,8 +44,12 @@ const ContactPage: React.FC = () => {
         budget: '',
         message: ''
       });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
       setSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
