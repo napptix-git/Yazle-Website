@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -20,7 +19,6 @@ type NavbarProps = {
   dropdownTextColor?: string;
 };
 
-
 const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdownTextColor}) => {
   const location = useLocation();
   const isWizoraPage = location.pathname.includes("/pages/WizoraCS");
@@ -39,7 +37,6 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
     };
 
     window.addEventListener('scroll', handleScroll);
-    
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -78,16 +75,14 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
         scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-0">
-        <div className="flex justify-between items-center w-full">
-          <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl ">
-            <div className="h-20 md:h-40 lg:h-30 lg:w-[200px] -ml-2 ">
-              <img 
-                src={isWizoraPage ? "/lovable-uploads/napptix_black_logo.png" : "/lovable-uploads/napptix_white_logo.png"} 
-                alt="Napptix" 
-                className="h-full w-auto object-contain " 
-              />
-            </div>
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center w-full h-14 md:h-20 lg:h-24">
+          <Link to="/" onClick={scrollToTop} className="flex items-center h-full">
+            <img 
+              src={isWizoraPage ? "/lovable-uploads/napptix_black_logo.png" : "/lovable-uploads/napptix_white_logo.png"} 
+              alt="Napptix" 
+              className="h-20 md:h-12 lg:h-32 w-auto object-contain transition-all duration-300"
+            />
           </Link>
 
           <DesktopMenu
@@ -112,10 +107,9 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
           >
             <span className="relative font-disket z-10">LET'S TALK</span>
             <span className={`absolute shimmer-effect inset-0 rounded-full border-2 pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
-          
           </Link>
           
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center h-full">
             <button 
               className="text-white"
               onClick={() => setHoveredItem(prev => ({
