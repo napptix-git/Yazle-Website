@@ -180,7 +180,7 @@ const AnimatedCardSection: React.FC = () => {
         {/* Render heading and description for large screens */}
         <StaticParticleCanvas />
         {isLargeScreen && (
-          <div className="absolute top-[130px] w-full text-center z-20 pointer-events-none">
+          <div className="absolute w-full text-center z-20 pointer-events-none">
             <h2 className="text-3xl md:text-4xl font-bold text-white font-disket">
               Our Services
             </h2>
@@ -195,7 +195,7 @@ const AnimatedCardSection: React.FC = () => {
             {serviceData.map((service, index) => (
               <section
                 key={service.id}
-                className="h-[80vh] flex items-center justify-center px-4 py-5 "
+                className="h-[80vh] flex items-center justify-center px-4 py-5 mt-32 "
               >
                 <FlipCard
                   id={`card-${index + 1}`}
