@@ -42,34 +42,41 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
               </div>
             </div>
             <div className="flip-card-back">
-              <div className="flex flex-col items-center justify-center h-full">
-                {/* <h3 className="text-3xl font-bold mb-4 z-20">{backText}</h3> */}
-                
-                {/* Larger rectangular GIF in the back */}
-                <div className=" overflow-hidden bg-black/30 p-1 mb-4 rounded-md">
-                {gifUrl.match(/\.(mp4|mov)$/i) ? (
+              <div className="flex flex-col items-center justify-center h-full relative">
+                {/* Video container with proper dimensions */}
+                <div className="relative w-full h-64 overflow-hidden bg-black/30 mb-4 rounded-md">
+                  {gifUrl.match(/\.(mp4|mov)$/i) ? (
                     <video
                       src={gifUrl}
-                      className="absolute inset-0 w-full h-full object-cover z-0"
+                      className="w-full h-full object-cover"
                       autoPlay
                       loop
                       muted
                       playsInline
+                      onError={(e) => {
+                        console.error('Video failed to load:', gifUrl, e);
+                      }}
+                      onLoadStart={() => {
+                        console.log('Video loading started:', gifUrl);
+                      }}
+                      onCanPlay={() => {
+                        console.log('Video can play:', gifUrl);
+                      }}
                     />
                   ) : (
                     <img
                       src={gifUrl}
                       alt={`${backText} animation`}
-                      className="absolute inset-0 w-full h-full object-cover z-0"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        console.error('Image failed to load:', gifUrl, e);
+                      }}
                     />
                   )}
                 </div>
                 
-                <p className="text-lg text-center px-6 z-20">
-                  {/* {backText === "In-Game" && "Native ad placements within the gaming environment."} */}
-                  {/* {backText === "On-Game" && "Strategic ad placements around the game interface."}
-                  {backText === "Off-Game" && "Extend your reach beyond gameplay through our network."}
-                  {backText === "Pro-Game" && "Specialized solutions for esports events and tournaments."} */}
+                <p className="text-lg text-center px-6 z-20 text-white">
+                  {/* Add descriptions if needed */}
                 </p>
               </div>
             </div>
