@@ -151,18 +151,31 @@ const HeroSection: React.FC = () => {
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-disket">
               360 GAMING
             </h2>
-            <div className="inline-block bg-[#4c36ff] px-6 py-3 rounded">
-              <HyperText
-                text="EVERY PLATFORM. EVERY PLAYER."
-                className="text-white text-lg md:text-xl font-bold"
-                duration={1000}
-                animateOnLoad={true}
-                framerProps={{
-                  initial: { opacity: 0 },
-                  animate: { opacity: 1 },
-                  exit: { opacity: 0 },
-                }}
-              />
+            <div className="inline-block bg-[#4c36ff]/30 px-6 py-4 rounded">
+              <div className="flex flex-col items-center text-center">
+                <HyperText
+                  text="EVERY PLATFORM."
+                  className="text-white text-lg md:text-xl font-bold font-retropix mb-1"
+                  duration={2000}
+                  animateOnLoad={true}
+                  framerProps={{
+                    initial: { opacity: 0 },
+                    animate: { opacity: 1 },
+                    exit: { opacity: 0 },
+                  }}
+                />
+                <HyperText
+                  text="EVERY PLAYER."
+                  className="text-white text-lg md:text-xl font-bold font-retropix"
+                  duration={2000}
+                  animateOnLoad={true}
+                  framerProps={{
+                    initial: { opacity: 0 },
+                    animate: { opacity: 1 },
+                    exit: { opacity: 0 },
+                  }}
+                />
+              </div>
             </div>
           </motion.div>
 
