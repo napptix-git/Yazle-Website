@@ -34,6 +34,7 @@ export default {
       fontFamily: {
         productSans : ['Product Sans'],
         disket: ['"Disket Mono"', 'monospace'],
+        retropix: ['Retropix', 'monospace'],
         montserrat: ['Montserrat', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
         'syne': ['Syne', 'sans-serif'],

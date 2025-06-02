@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
+import HyperText from '@/components/ui/hyper-text';
 
 interface Particle {
   x: number;
