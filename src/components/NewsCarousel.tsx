@@ -67,7 +67,7 @@ const NewsCarousel = () => {
     </div>
   );
 
-  // Mobile uses the scrolling layout
+  // Mobile uses the scroll snap layout
   if (isMobile) {
     return (
       <div className="bg-[#4c3bff] py-8 sm:py-12 md:py-16">
@@ -82,34 +82,58 @@ const NewsCarousel = () => {
             <p className="text-white text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 opacity-90 font-productSans px-2">Stay updated with the latest advancements and announcements from Napptix.</p>
           </motion.div>
 
-          <div 
-            className="relative overflow-hidden py-4"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <div className={`flex gap-4 ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-300`}>
-              {/* Render each news item once */}
-              {newsItems.map((item, index) => (
-                <div 
-                  key={`original-${item.id}-${index}`}
-                  className="min-w-[280px] sm:min-w-[320px] md:min-w-[400px] flex-shrink-0"
-                >
-                  {renderNewsCard(item, index)}
-                </div>
-              ))}
-              
-              {/* Add copies of the same items for the continuous effect */}
-              {newsItems.map((item, index) => (
-                <div 
-                  key={`duplicate-${item.id}-${index}`}
-                  className="min-w-[280px] sm:min-w-[320px] md:min-w-[400px] flex-shrink-0"
-                >
-                  {renderNewsCard(item, index)}
-                </div>
-              ))}
-            </div>
+          {/* Navigation dots */}
+          <div className="text-center mb-4 space-x-2">
+            {newsItems.map((_, index) => (
+              <a
+                key={index}
+                href={`#slide-${index + 1}`}
+                className="inline-flex w-6 h-6 bg-white/70 text-[#4c3bff] text-xs font-bold rounded-full items-center justify-center hover:bg-white transition-colors duration-200"
+              >
+                {index + 1}
+              </a>
+            ))}
+          </div>
+
+          {/* Slides container */}
+          <div className="slides overflow-x-auto flex scroll-snap-type-x-mandatory scroll-smooth">
+            {newsItems.map((item, index) => (
+              <div
+                key={item.id}
+                id={`slide-${index + 1}`}
+                className="scroll-snap-align-start flex-shrink-0 w-[280px] sm:w-[320px] mr-4 last:mr-0"
+              >
+                {renderNewsCard(item, index)}
+              </div>
+            ))}
           </div>
         </div>
+
+        <style jsx>{`
+          .slides {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+          }
+          .slides::-webkit-scrollbar {
+            height: 8px;
+          }
+          .slides::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+          }
+          .slides::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .scroll-snap-align-start {
+            scroll-snap-align: start;
+          }
+          .scroll-snap-type-x-mandatory {
+            scroll-snap-type: x mandatory;
+          }
+          .scroll-smooth {
+            scroll-behavior: smooth;
+          }
+        `}</style>
       </div>
     );
   }
