@@ -41,7 +41,7 @@ const NewsCarousel = () => {
   const renderNewsCard = (item: typeof newsItems[0], index: number) => (
     <div 
       key={`news-item-${item.id}-${index}`}
-      className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-4 sm:p-6 md:p-8 rounded-xl h-full flex flex-col justify-between min-h-[280px] sm:min-h-[320px]"
+      className="relative bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-4 sm:p-6 md:p-8 rounded-xl h-full flex flex-col justify-between min-h-[280px] sm:min-h-[320px]"
     >
       <div>
         <div className="mb-3 sm:mb-4">
@@ -83,7 +83,7 @@ const NewsCarousel = () => {
           </motion.div>
 
           {/* Navigation dots */}
-          <div className="text-center mb-4 space-x-2">
+          {/* <div className="text-center mb-4 space-x-2">
             {newsItems.map((_, index) => (
               <a
                 key={index}
@@ -93,7 +93,7 @@ const NewsCarousel = () => {
                 {index + 1}
               </a>
             ))}
-          </div>
+          </div> */}
 
           {/* Slides container */}
           <div className="slides overflow-x-auto flex scroll-snap-type-x-mandatory scroll-smooth">
