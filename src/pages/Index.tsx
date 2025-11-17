@@ -59,7 +59,7 @@ const Index = () => {
         <AudienceCards />
       </section>
       
-      <section id="news" className="bg-black pb-[100px]">
+      <section id="news" className="bg-black pb-[50px]">
         <NewsCarousel />
       </section>
 
