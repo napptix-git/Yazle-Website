@@ -1,0 +1,206 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.interstitial-ad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.ad-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ad-content video {
+    width: 90%;
+    height: 50%;
+    z-index: 5;
+    position: absolute;
+    top: 5%;
+}
+#logo{
+    width: 150px;
+    height:68px;
+    z-index: 10;
+    top: 2%; 
+    left:0%;
+    position: absolute;
+}
+#audioButton {
+    position: absolute;
+    top: 31%; /* Position relative to the video container */
+    right: 5%; /* Position relative to the video container */
+    z-index: 10; /* Ensure the button appears above the video */
+    background: none; /* No background for the button */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#audioButton img {
+    width: 30px; /* Adjust icon size */
+    height: 30px;
+    border-radius: 50%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* When the image is hidden */
+#audioButton img.hidden {
+    opacity: 0; /* Fades out */
+    pointer-events: none; /* Prevents interaction with the hidden image */
+}
+
+/* Styles for the carousel */
+/* Styles for the carousel */
+.wrapper {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 36vh;
+  }
+  
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: auto; /* 👈 No animation */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 16px;
+    touch-action: pan-x
+    
+  }
+  
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .carousel.dragging {
+    cursor: grabbing;
+    scroll-snap-type: none; /* disable snap while dragging */
+  }
+  
+  .card {
+    flex: 0 0 100%; /* 👈 One full slide at a time */
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card .img {
+    width: 100%;
+    max-width: 300px;
+    padding: 16px;
+  }
+  
+  
+  .card .img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transform: scale(0.9);
+    transform-origin: center;
+    user-select: none;
+    
+  }
+
+  #gesture {
+    width: 18%;
+    height: 13%;
+    position: absolute;
+    z-index: 10;
+    top: 85%; 
+    display: block; 
+    pointer-events: none;
+    border-radius: 50%;
+    
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: grey;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+.slider-button {
+    position: absolute;
+    top: 67%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 63px;
+    background-color: red;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.slider-button span {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.slider-button.left {
+    left: 10px; /* Adjust position for left button */
+}
+
+.slider-button.right {
+    right: 10px; /* Adjust position for right button */
+}
+#mute{
+    display: none;
+}
+/* Media query for devices with a width of up to 768px */
+@media (max-width: 768px) {
+    .ad-content video {
+        width: 95%;
+       
+    }
+}
+
+/* Media query for devices with a width of up to 480px */
+@media (max-width: 480px) {
+    .ad-content video {
+        width: 95%;
+        height: 35%;
+    }
+}
+@media (max-width: 400px) {
+    .wrapper {
+        margin-top: 32vh;
+      }
+}

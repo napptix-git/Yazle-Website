@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Candy Crush</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js"></script>
+    </head>
+
+    <body>
+      
+        <div class="game-container">
+         <div class="start-card" id="startCard">
+            <h1>Welcome to McDonald's Match Mania!</h1>
+            <p>Swap and match delicious McD treats!</p>
+            <ul>
+              <li>Swap two adjacent McD treats to create a match.</li>
+              <li>Match 3 or more identical treats in a row or column to score points.</li>
+              <li>Score 3000 points to win, or play for 30 seconds to set your high score!</li>
+              <li>Chain matches quickly to boost your score. Ready, set, match!</li>
+            </ul>
+            <button class="play-button start-play-button">Play</button>
+        </div>
+           <div class="status-bar">
+      <div class="status-info left">
+        <span class="score-label">SCORE</span>
+        <span class="score-text" id="score">0</span>
+      </div>
+      <img src="./assets/logo.png" alt="Logo" class="top-logo" />
+      <div class="status-info right">
+        <span class="timer-label">TIME</span>
+        <span class="timer-text" id="timer">30</span>
+      </div>
+    </div>
+          
+        <div id="board"></div>
+         <div class="bottom-label-bar">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+        <!-- <button class="play-button">Play</button> -->
+        </div>
+    </body>
+</html>

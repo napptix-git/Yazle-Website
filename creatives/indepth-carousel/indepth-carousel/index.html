@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Carousel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ad-content">
+    <img src="./assets/Logo.png" id="logo" alt="Brand Logo">
+    <img src="./assets/overlay.png" id="overlay">
+    <section id="slider">
+        <input type="radio" name="slider" id="s1" checked>
+        <input type="radio" name="slider" id="s2">
+        <input type="radio" name="slider" id="s3">
+        <label for="s1" id="slide1">
+          <div class="overlay">
+             <img src="./assets/overlay1.png" alt="Overlay Image 1">
+          </div>
+          <div class="img" id="img1"></div>
+          <img src="./assets/cta-btn.png"  class="cta-btn">
+        </label>
+        <label for="s2" id="slide2">
+          <div class="overlay">
+             <img src="./assets/overlay2.png" alt="Overlay Image 2">
+          </div>
+          <div class="img" id="img2"></div>
+           <img src="./assets/cta-btn.png"  class="cta-btn">
+        </label>
+        <label for="s3" id="slide3">
+          <div class="overlay">
+             <img src="./assets/overlay3.png" alt="Overlay Image 3">
+             
+          </div>
+          <div class="img" id="img3"></div>
+          <img src="./assets/cta-btn.png"  class="cta-btn">
+        </label>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

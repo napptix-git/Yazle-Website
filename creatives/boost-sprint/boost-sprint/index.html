@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" /> -->
+   <link href="https://fonts.googleapis.com/css2?family=Disket+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Start Screen -->
+    <div id="startScreen" class="screens">
+      <button id="playButton" class="start-button">Play</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-info">
+        <div class="score-box">
+          <div class="label">Score</div>
+          <div class="score-value" id="score">0</div>
+        </div>
+        <div class="time-box">
+          <div class="label">Time</div>
+          <div class="time-value" id="time">30s</div>
+        </div>
+        <div class="speed-box">
+          <div class="label">Speed</div>
+          <div class="speed-value" id="speed">4.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Card -->
+    <div id="endCard" class="end-card">
+      <!-- <img src="./assets/endcard.jpeg" alt="End Card Image" class="end-card-img" /> -->
+    </div>
+
+    <!-- End Screen -->
+    <div id="endScreen" class="screens">
+    </div>
+
+    <!-- Game Canvas -->
+    <canvas id="board"></canvas>
+
+    <!-- Character -->
+    <img id="charachter" src="./assets/char_1.png" alt="character" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

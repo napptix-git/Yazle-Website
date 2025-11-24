@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Scratch Reveal</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="container">
+        <button class="close-btn" onclick="closeAd()">×</button>
+        <img id="bottomImg">
+        <video id="topVideo" src="assets/video.mp4" playsinline autoplay loop style="visibility:hidden; position:absolute; width:100%; height:100%; top:0; left:0;" muted></video>
+        <canvas id="topCanvas"></canvas>
+        <!-- <img id="Logo" src="./assets/Logo.png">
+        <img id="Overlay" src="./assets/Overlay.png"> -->
+        <button class="mute-btn" id="muteBtn">🔇</button>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

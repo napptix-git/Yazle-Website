@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ad.size" content="width=640,height=1280">
+  <title>Boost Runner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <div class="start-screen">
+      <!-- <div class="logo">BOOST</div>
+      <h1 class="game-title">TAP TO RUN!</h1>
+      <p class="instructions">GRAB BOOST, <br>AVOID OBSTACLES!</p> -->
+      <button class="start-btn">START SPRINT</button>
+    </div>
+    <div class="game-area" style="display:none;">
+      <div class="game-ui">
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="speed">Speed: <span id="speed">x1.0</span></div>
+        <div class="timer">Time: <span id="timer">30.0</span>s</div>
+      </div>
+      <div class="game-canvas">
+        <img src="assets/bg.jpg" alt="Background" class="lane-bg" />
+        <img src="assets/character_re.png" alt="character" class="character"></img>
+      </div>
+    </div>
+    <div class="end-screen" style="display:none;">
+      <div class="end-content">
+        <!-- <div class="logo">BOOST</div>
+        <h1 class="end-title">YOU CRUSHED IT!</h1>
+        <p class="end-sub">BOOST POWERS YOU THROUGH!</p> -->
+        <button class="end-btn">GET YOUR BOOST!</button>
+        <div class="end-score">
+          <span id="final-score">SCORE: 0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html> 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ad.size" content="width=360, height=640">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Delivery Game</title>
+    <link rel="apple-touch-icon" href="../assets/favicon.png">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <body>
+
+  <!-- Fullscreen Intro Screen (Scene Image) -->
+  <div class="start-sec" id="start-screen">
+      <img src="./assets/scene.png" alt="Scene" id="scene-image">
+  </div>
+
+  <!-- Actual Game UI -->
+  <div class="game-container">
+      <div class="header">
+          <img src="./assets/logo.png" alt="Logo" class="header-logo">
+          <div class="header-info">
+             <div class="score-box">
+                <div class="label">Score</div>
+                <div class="score-value">
+                    <div class="digit-box" id="digit1">0</div>
+                    <div class="digit-box" id="digit2">0</div>
+                </div>
+                </div>
+              <div class="clock-container">
+                  <canvas id="canvas" width="90" height="90"></canvas>
+              </div>
+              
+          </div>
+      </div>
+
+      <!-- Game items -->
+      <div class="shelf">
+          <img src="./assets/shelf.png" alt="">
+          <div class="row1">
+              <img src="./assets/item1.png" class="items">
+              <img src="./assets/item2.png" class="items">
+              <img src="./assets/item3.png" class="items">
+          </div>
+          <div class="row2">
+              <img src="./assets/item4.png" class="items1">
+              <img src="./assets/item5.png" class="items1">
+              <img src="./assets/item6.png" class="items1">
+          </div>
+          <div class="row3">
+              <img src="./assets/item7.png" class="items2">
+              <img src="./assets/item8.png" class="items2">
+              <img src="./assets/item9.png" class="items2">
+          </div>
+          <div class="row4">
+              <img src="./assets/item10.png" class="items3">
+              <img src="./assets/item11.png" class="items3">
+              <img src="./assets/item12.png" class="items3">
+          </div>
+      </div>
+      <img src="./assets/cart.png" id="cart">
+  </div>
+<!-- Final Screen -->
+<div id="final-screen" class="final-screen">
+  <img src="./assets/finalscreen.png" alt="Final Screen" />
+</div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

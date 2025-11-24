@@ -1,0 +1,159 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent horizontal scrolling on the body */
+}
+
+.navbar {
+    display: flex;
+    background-color: #29dd3b; /* Green background color */
+    width: 100%; /* Full width of the screen */
+    height: 33px; /* Set a fixed height for the navbar */
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Ensure it's on top of other content */
+    padding: 5px 0; /* Add some padding */
+    color: white; /* Text color for better visibility */
+}
+
+.mobile-frame {
+    width: 220px; /* Default width for desktop view */
+    height: 405px; /* Default height for desktop view */
+    border: 4px solid #e0e0e0; /* Frame border */
+    border-radius: 30px; /* Rounded corners for phone frame */
+    background-color: white; /* Inner background of phone */
+    position: relative;
+    padding-top: 50px; /* Space for the notch */
+    overflow: hidden;
+    display: flex;
+    margin: 0 auto; /* Center on larger screens */
+    top: -5%;
+    transform: translateY(0%);
+}
+
+/* Top section for the notch */
+.notch {
+    width: 80px;
+    height: 10px;
+    background-color: #e0e0e0; /* Similar color as the phone frame */
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 15px; /* Rounded notch corners */
+}
+
+/* Mock preview iframe styling */
+.iframe-wrapper {
+    width: 100%; /* Set wrapper to full width of mobile-frame */
+    height: 100%; /* Set wrapper to full height of mobile-frame */
+    overflow: hidden; /* Hide any overflowing content */
+    position: relative;
+    display: flex;
+    justify-content: center; /* Center content */
+    align-items: center;
+}
+
+.mock-preview {
+    width: calc(100% / 0.58); /* Compensate for the scaling factor */
+    height: 155%; /* Maintain aspect ratio */
+    transform: scale(0.58); /* Adjust scale to fit the iframe dimensions */
+    transform-origin: top left; /* Scale from the top-left corner */
+    border: none; /* Remove iframe borders */
+    position: absolute; /* Position absolutely within the wrapper */
+    top: 0;
+    left: 0%;
+    overflow: hidden;}
+
+
+/* Virtual buttons container */
+.virtual-buttons {
+    width: 100%;
+    height: 45px;
+    background-color: #f0f0f0; /* Color of the virtual button area */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Virtual button icon styling */
+.virtual-buttons i {
+    font-size: 10px; /* Adjust the size of the icons */
+    color: #666; /* Darker color to ensure visibility */
+    visibility: visible; /* Ensure icons are visible */
+}
+
+.container {
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Center the main container */
+    align-items: center; /* Centers the divs vertically */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    padding: 10px;
+}
+
+.navbar img {
+    width: 100px;
+    height: 100px;
+    margin-top: -32px;
+    padding-left: 30px;
+}
+
+/* Responsive styling */
+@media (max-width: 1024px) {
+    .mobile-frame {
+        width: 180px;
+        height: 340px;
+        padding-top: 40px;
+        transform: translateX(-50%);
+    }
+
+    .iframe-wrapper {
+        width: 178px;
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-frame {
+        width: 160px;
+        height: 300px;
+        padding-top: 35px;
+        transform: translateX(-50%);
+    }
+
+    .iframe-wrapper {
+        width: 158px;
+        height: 280px;
+    }
+}
+
+@media (max-width: 576px) {
+    .mobile-frame {
+        width: 180px;
+        height: 339px;
+        padding-top: 30px;
+        transform: translateX(-5%);
+        margin-top: -50px;
+    }
+
+    .iframe-wrapper {
+        width: 190px;
+        height: 310px;
+    }
+    .mock-preview {
+        width: calc(100% / 0.58); /* Compensate for the scaling factor */
+        height: 166%; /* Maintain aspect ratio */
+        transform: scale(0.58); /* Adjust scale to fit the iframe dimensions */
+        transform-origin: top left; /* Scale from the top-left corner */
+        border: none; /* Remove iframe borders */
+        position: absolute; /* Position absolutely within the wrapper */
+        top: 0;
+        /* left: 1%; */
+        overflow: hidden;}
+}

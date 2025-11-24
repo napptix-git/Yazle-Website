@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Responsive Game Scene</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Start Card -->
+   <div class="start-card" id="startCard">
+    <div class="instruction">
+      <h2>Find All the Hidden Items!</h2>
+      <div class="instruction-images">
+        <img src="./assets/1.png" alt="Hint 1">
+        <img src="./assets/2.png" alt="Hint 2">
+        <img src="./assets/3.png" alt="Hint 3">
+      </div>
+      <p>Search the scene carefully and tap all hidden items before time runs out!</p>
+      <button id="playButton">Play</button>
+    </div>
+  </div>
+  <div class="game-container">
+  <div class="game-scene">
+    <!-- ✅ HUD -->
+    <div class="hud">
+      <div class="score-box">
+        <span class="label">Score </span>
+        <div class="score-value" id="score">0</div>
+      </div>
+      <div class="time-box">
+        <span class="label">Time</span>
+        <div class="time-value"><span id="time">15</span>s</div>
+      </div>
+    </div>
+    <!-- Logo Placeholder -->
+    <img src="./assets/Logo.png" id="logo" alt="Brand Logo">
+
+    <!-- Overlay Placeholder -->
+    <img src="./assets/overlay.png" id="overlay" alt="Overlay">
+
+    <!-- ✅ GAME OBJECTS — must be inside game-scene -->
+    <img src="./assets/obj1.png" class="game-object1" id="obj1" alt="Object 1">
+    <img src="./assets/obj2.png" class="game-object2" id="obj2" alt="Object 2">
+    <img src="./assets/obj3.png" class="game-object3" id="obj3" alt="Object 3">
+
+    <img src="./assets/1.png" class="game-item" id="item1" alt="Item 1">
+    <img src="./assets/2.png" class="game-item" id="item2" alt="Item 2">
+    <img src="./assets/3.png" class="game-item" id="item3" alt="Item 3">
+    <img src="./assets/1.png" class="game-item" id="item4" alt="Item 4">
+    <img src="./assets/2.png" class="game-item" id="item5" alt="Item 5">
+  </div>
+</div>
+<div id="endCard" class="end-card" style="display: none;">
+  <div class="end-content">
+    <h2>Well Done!</h2>
+    <h3>You found all the hidden items!</h3>
+    <h3 class="final-score-text">Your Score: <span id="finalScore">0</span></h3>
+    <button class="cta-button">Shop Now</button>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

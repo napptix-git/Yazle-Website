@@ -1,0 +1,112 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+#container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+#bottomImg, #topCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure canvas and bottom image are at the base layer */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    background-color: grey;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000; /* Higher z-index to keep the button on top */
+}
+
+.mute-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 1001;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.mute-btn:hover {
+    background: #eee;
+}
+
+#Logo {
+    position: absolute;
+    width: auto;
+    max-width: 30%;
+    height: auto;
+    top: 10%; /* 30% gap from the top of the container */
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: contain; /* Prevent distortion */
+    z-index: 100; /* Higher z-index to place it above the canvas */
+    
+}
+
+#Overlay {
+    position: absolute;
+    width: auto;
+    max-width: 30%;
+    height: auto;
+    bottom: 10%; /* 30% gap from the bottom of the container */
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: contain; /* Prevent distortion */
+    z-index: 100; /* Higher z-index to place it above the canvas */
+    
+}
+#gestureImg {
+        position: absolute;
+        z-index: 100; /* Ensure it is above the canvas */
+        width: 30%;
+        height: 30%;
+
+}
+
+
+@media (max-width: 480px) {
+    .close-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 40px;
+    }
+    #Logo, #Overlay {
+        max-width: 65%; /* Make sure the images are responsive */
+        height: 30%;
+    }
+}

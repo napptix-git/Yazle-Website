@@ -1,0 +1,587 @@
+/* Reset styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  font-family: 'Comic Neue', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+#intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100; /* Ensure it appears on top */
+  transition: opacity 1s ease-in-out;
+}
+
+#intro-image {
+  width: 100%; /* Adjust size as needed */
+ height: 100%;
+ user-select: none;
+}
+
+/* Canvas board */
+#board {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+  margin: 0 auto;
+}
+
+#ad-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+#instruction {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  min-height: 300px;
+  padding: 10px;
+  background: linear-gradient(to bottom, #6FCF97, #27AE60);
+  color: #FFFFFF;
+  font-family: 'Comic Neue', cursive;
+  font-size: 5vw;
+  font-weight: bolder;
+  text-align: center;
+  border: 6px solid #FFB800;
+  border-radius: 10px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.8), 0 0 20px #FFB800;
+  z-index: 20;
+  display: none;
+  opacity: 0;
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+#p1 {
+  margin-top: 40px; /* Reduce margin */
+}
+#instruction p {
+  display: none; /* Hide all paragraphs initially */
+}
+
+/* Main character container (Consistent size) */
+#charachter {
+  position: absolute;
+  left: 5px;
+  bottom: 10%; /* Move higher */
+  width: 100px;
+  height: 120px;
+  z-index: 15;
+  background: url('./assets/sprite1.png') no-repeat;
+  background-size: 400px 120px;
+  animation: smoothJogging 1.2s steps(4) infinite;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: scale(1.2);
+}
+
+/*  Smooth jogging animation */
+@keyframes smoothJogging {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -400px 0;
+  }
+}
+
+#charachter.jumping{
+  background: url('./assets/jump1.png') no-repeat; /* Center the jumping image */
+  background-size: contain; /* Ensure the entire image is visible */
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  left: 5%;
+  position: absolute;
+  transform: scale(1.5);
+  transform-origin: center;
+  animation: none; /* Disable running animation during jump */
+
+}
+
+
+#charachter.phase2 {
+  position: absolute;
+  left: 5px;
+  bottom: 10%;
+  width: 100px;
+  height: 130px;
+  z-index: 15;
+  background: url('./assets/ramadan\ \(6\).png') no-repeat;
+  background-size: 400px 130px;
+  animation: smoothJogging 1s steps(4) infinite;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: scale(1.2);
+}
+
+/*  Smooth jogging animation */
+@keyframes smoothJogging {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -400px 0;
+  }
+}
+
+#charachter.phase2.jumping{
+  background: url('./assets/ramadan\ \(7\).png') no-repeat; /* Center the jumping image */
+  background-size: contain; /* Ensure the entire image is visible */
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  transform: scale(1.5);
+  left: 5%;
+  position: absolute;
+  transform-origin: center;
+  animation: none; /* Disable running animation during jump */
+
+}
+/*  Move right while keeping consistent size */
+#charachter.phase2.skating-right {
+  animation: smoothJogging 1s steps(4) infinite, moveRight 6s linear;
+}
+
+/*  Only translate, no scale during animation */
+@keyframes moveRight {
+  from {
+    transform: translateX(0) scale(1.2);  /*  Apply scaling here */
+  }
+  to {
+    transform: translateX(120vw) scale(1.2); /*  Keep scaling consistent */
+  }
+}
+/* Smooth Fade-Out */
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+/* Smooth Fade-In */
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+/* Start button */
+.start-button {
+  background-color: #ffcc00;
+    border: none;
+    color: white;
+    padding: 10px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-family: 'Comic Neue', cursive;
+    border-radius: 25px;
+    box-shadow: 0 5px #d4a017;
+    z-index: 15;
+    position: absolute; /* Changed from relative to absolute */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the button */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+/* Progress Container */
+.progress-container {
+  position: absolute;
+  top: 17px;
+  left: 10px;
+  width: 250px;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+}
+.progress-bar {
+  display: flex;
+  width: 100%;
+  height: 20px;
+  background: #003366; /* Dark blue background */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2);
+}
+.progress-segment {
+  width: calc(100% / 18);
+  height: 80%;
+  margin: auto 1px;
+  background: linear-gradient(to right, #ff4d4d, #ff1a1a); /* Initially Red */
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background 0.5s ease-in-out; /* Smooth transition */
+}
+.progress-segment.empty {
+  background: #003366;
+  box-shadow: none;
+}
+/* New class for filled green segments */
+.progress-segment.filled {
+  background: linear-gradient(to right, #4CAF50, #2E7D32); /* Green gradient */
+}
+/* Glow Effect */
+.glow-effect {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 0, 0.92) 0%, rgba(255, 255, 0, 0.541) 70%);
+  animation: glow-animation 1s ease-out;
+  pointer-events: none; /* Prevent blocking interactions */
+}
+/* Glow Animation */
+@keyframes glow-animation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.pop-up {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  min-height: 300px;
+  padding: 10px;
+  background: linear-gradient(to bottom, #6FCF97, #27AE60);
+  color: #FFFFFF;
+  font-family: 'Comic Neue', cursive;
+  font-size: 5vw;
+  font-weight: bolder;
+  text-align: center;
+  border: 6px solid #FFB800;
+  border-radius: 10px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.8), 0 0 20px #FFB800;
+  z-index: 15;
+  display: block; /* Change from flex to block */
+  opacity: 0;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+.pop-up p {
+  position: absolute;
+  top: 24%; /* Adjust to position the text higher */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  margin: 0;
+}
+/* Hide Pop-Up with fade-out */
+.pop-up.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+.footwear {
+  width: 60%;
+  height: auto;
+  position: absolute; /* Change to absolute positioning */
+  bottom: 10%; /* Position near the bottom of the pop-up */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  display: block;
+  border-radius: 8px;
+}
+#logo {
+  width: 70%; /* Adjust for better alignment */
+  height: auto; /* Maintain aspect ratio */
+  top: 6%;
+  left: 15%;
+  position: absolute;
+  display: block;
+  /* border-radius: 8px; Slightly rounded corners */
+  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); */
+}
+.pop-up.show {
+  transform: translate(-50%, -50%) scale(1); /* Expands smoothly */
+  opacity: 1;
+  display: block;
+}
+
+#game-over-div {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 320px;
+  height: auto;
+  min-height: 300px;
+  padding: 10px;
+  background: linear-gradient(to bottom, #6FCF97, #27AE60);
+  border: 6px solid #FFB800;
+  border-radius: 10px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.8), 0 0 20px #FFB800;
+  z-index: 20;
+  display: flex;
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+#game-over-text {
+    font-size: 25px;
+    font-family: 'Comic Neue', cursive; 
+    color: white;
+    text-align: center; /* Centers text horizontally */
+    display: block; /* Change from flex to block */
+    margin-top: 25px;
+    height: auto;
+    margin-left:auto;
+    margin-right:auto;
+    width: 90%; /* Prevents text from overflowing */
+    word-wrap: break-word; /* Ensures the text breaks properly */
+    line-height: 1.4; /* Improves readability */
+ }
+ 
+#face1{
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  width: 7%;
+  height: 5%;
+  border-radius: 60%;
+  overflow: hidden;
+  z-index: 15;
+}
+#face2{
+  position: absolute;
+  top: 11px;
+  left: 245px;
+  width: 7%;
+  height: 4.5%;
+  border-radius: 60%;
+  overflow: hidden;
+  z-index: 15;
+}
+/* Score and Logo Container */
+/* Score and Logo Container */
+.score-logo-container {
+  position: absolute;
+  top: 55px;
+  left: 15px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+
+  gap: 10px; /* Adjust spacing between elements */
+  z-index: 15;
+}
+
+/* Score Text */
+#score {
+  font-size: 22px;
+  color: #003366;
+  font-weight:bolder;
+  margin: 0;
+  font-family: 'Comic Neue', cursive;
+  
+}
+
+/* Logo Image */
+.logo {
+  width: 40%; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  background-color: #003366;
+}
+
+
+.next-button {
+  background-color: #ffcc00;
+    border: none;
+    color: white;
+    padding: 10px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 21px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-family: 'Comic Neue', cursive;
+    border-radius: 25px;
+    box-shadow: 0 5px #d4a017;
+    z-index: 15;
+    position: absolute; /* Changed from relative to absolute */
+    top: 80%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the button */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.next-buttons {
+  background-color: #ffcc00;
+    border: none;
+    color: white;
+    padding: 10px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 21px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-family: 'Comic Neue', cursive;
+    border-radius: 25px;
+    box-shadow: 0 5px #d4a017;
+    z-index: 15;
+    position: absolute; /* Changed from relative to absolute */
+    top: 90%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the button */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.nextButton {
+  background-color: #ffcc00;
+    border: none;
+    color: white;
+    padding: 10px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 21px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-family: 'Comic Neue', cursive;
+    border-radius: 25px;
+    box-shadow: 0 5px #d4a017;
+    z-index: 15;
+    position: absolute; /* Changed from relative to absolute */
+    top: 80%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the button */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+/* @media (max-height: 640px) {
+  #game-container {
+    height: 100%;
+    max-height: 100%;
+  }
+
+  #instruction {
+    top: 30%;
+    font-size: 18px;
+    width: 90%;
+    max-width: 280px;
+    min-height: 280px;
+  }
+
+  .pop-up {
+    top: 25%;
+    font-size: 18px;
+    width: 90%;
+    max-width: 280px;
+    min-height: 280px;
+  }
+
+  #game-over-div {
+    top: 30%;
+    font-size: 18px;
+    width: 90%;
+    max-width: 280px;
+    min-height: 280px;
+  }
+  #charachter {
+    bottom: 15%;
+  }
+
+  #charachter.phase2 {
+    bottom: 15%; 
+  }
+} */
+  
+
+@media (min-height: 641px) {
+  #game-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  #board {
+    width: 100%;
+    height: 100%;
+  }
+
+  #instruction {
+    top: 50%;
+    font-size: 5vw;
+    width: 80%;
+    max-width: 300px;
+    min-height: 300px;
+  }
+
+  .pop-up {
+    top: 50%;
+    font-size: 5vw;
+    width: 80%;
+    max-width: 300px;
+    min-height: 300px;
+  }
+
+  .pop-up p {
+    top: 25%;
+  }
+
+  .footwear {
+    bottom: 8%;
+  }
+
+  #game-over-div {
+    top: 50%;
+    font-size: 5vw;
+    width: 80%;
+    max-width: 320px;
+    min-height: 300px;
+  }
+
+  #game-over-text {
+    margin-top: 15px; /* Move the text higher to avoid overlap */
+  }
+
+  #charachter {
+    bottom: 18%;
+  }
+
+  #charachter.phase2 {
+    bottom: 18%;
+  }
+
+  .next-buttons {
+    top: 85%; /* Move the button downward */
+  }
+}

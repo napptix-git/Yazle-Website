@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tile Matching Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scene scene1" id="scene1">
+    <button class="play-button" id="playButton">Play</button>
+  </div>
+
+  <div class="scene scene2 hidden" id="scene2">
+    <div class="status-bar">
+      <div class="status-info left">
+        <span class="score-label">SCORE</span>
+        <span class="score-text" id="score">0</span>
+      </div>
+      <img src="./assets/logo.png" alt="Logo" class="top-logo" />
+      <div class="status-info right">
+        <span class="timer-label">TIME</span>
+        <span class="timer-text" id="timer">30</span>
+      </div>
+    </div>
+
+    <div class="game-board-wrapper">
+      <div class="game-board" id="gameBoard"></div>
+    </div>
+    <div class="bottom-label-bar">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="scene scene3 hidden" id="scene3"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="ad.size" content="width=360, height=640"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Skechers Ramadan Game</title>
+  <link href="./css2.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="./css2.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="intro-screen">
+    <img src="./assets/intro.png" id="intro-image">
+</div>
+<div id="ad-wrapper"></div>
+  <div id="game-container">
+    <canvas id="board"></canvas>
+    <div id="instruction">
+      <p id="p1">
+        فاطمة تحتاج مساعدتكم في شراء أحذية سكتشرز   خلال روتينها الرمضاني المزدحم<br> 
+          <button class="nextButton">Next</button>
+      </p>
+      <p id="p2">
+        انقر لجمع أكبر عدد ممكن من عملات <img src="./assets/coin.png" height="30" width="30"> وحقائب <img src="./assets/bag.png" height="50" width="50"> سكتشرز على طول طريقها.<br>
+        <button class="nextButton">Next</button>
+    </p>
+      <p id="p3">
+        كل نقرة لها أهميتها في مساعدتها على جمع الكنوز التي تحتاجها في رحلتها الاحتفالية
+          <button class="nextButton">Next</button> <!-- Added "Next" text -->
+      </p>
+  </div>
+  
+    <button class="start-button" id="playButton">Play</button>
+    <div id="charachter"></div>
+    <div class="score-logo-container">
+      <span id="score">Score: 0</span>
+      <img src="./assets/logo1.png" class="logo">
+  </div>
+    <img src="./assets/face1-removebg-preview.png" id="face1">
+    <img src="./assets/face2-removebg-preview.png" id="face2">
+    <div class="progress-container">
+      <div class="progress-bar">
+          <div class="progress-segment"></div>
+          <div class="progress-segment"></div>
+          <div class="progress-segment"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>
+          <div class="progress-segment empty"></div>     
+      </div>
+  </div>
+  <div class="pop-up">
+    <img src="assets/logo1.png" id="logo">
+    <p>اضغط على الشاشة لاختيار حذاء سكتشرز المريح والأنيق واستخدمه.
+    </p>
+    <img src="assets/sandal.png" class="footwear">
+  </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

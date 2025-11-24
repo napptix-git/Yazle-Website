@@ -1,0 +1,360 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    touch-action: manipulation;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.gamecontainer {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    overflow: hidden;
+    background: url('assets/bg.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#gameUI {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
+
+.pitch {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16/5;
+    min-height: 30vh;
+    margin: 0 auto;
+    z-index: 5;
+    background: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: absolute;
+    top: 42%;
+}
+
+img, .ball-img, .batsman-img, .stumps-img {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 253, 238, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    text-align: center;
+    padding: 0 4vw;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.mid-overlay {
+    background: url('assets/midscreen.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%; height: 100%;
+    position: absolute;
+}
+
+/* .end-overlay {
+    background: url('assets/endscreen.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100vw; height: 100vh;
+} */
+
+.hide { display: none !important; }
+
+.logo-img {
+    display: block;
+    width: clamp(120px, 28vw, 260px);
+    max-width: 90vw;
+    height: auto;
+    margin: 0 auto 2.5vh auto;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.13));
+    user-select: none;
+    pointer-events: none;
+    animation: logoPop 0.6s ease-out forwards;
+}
+
+@keyframes logoPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.title {
+    font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+    color: #111;
+    font-weight: 600;
+    margin-bottom: 2vh;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    position: relative;
+    left: -13px;
+}
+
+.subtext {
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    color: #e3223c;
+    margin-bottom: 2vh;
+    font-weight: 400;
+    position: relative;
+    left: -18px;
+}
+
+.start-batsman {
+    width: clamp(120px, 35vw, 220px);
+    margin-bottom: 2.5vh;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.balls-row, .score-row {
+    margin: 4vh 0 2.5vh 0;
+    display: flex;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 24px);
+    z-index: 12;
+    position: absolute;
+    top: 10%;
+}
+
+.ball-indicator {
+    width: clamp(24px, 9vw, 48px);
+    height: clamp(24px, 9vw, 48px);
+    border-radius: 50%;
+    border: 3px solid #e3223c;
+    background: #fff8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    color: #e3223c;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 2px 6px rgba(227, 34, 60, 0.2);
+    opacity: 1;
+    user-select: none;
+    transform: scale(1);
+}
+
+.ball-indicator.pop { animation: ballPop 0.6s cubic-bezier(.5,1.7,.5,1) forwards; }
+.ball-indicator.six { background: #ff8300; color: #fff; border-color: #ff8300; }
+.ball-indicator.miss { background: #e0e0e0; color: #999; border-color: #aaa; }
+.ball-indicator.run { background: #62d273; color: #fff; border-color: #62d273; }
+
+@keyframes ballPop {
+    0% { opacity: 0; transform: scale(0.7); }
+    60% { opacity: 1; transform: scale(1.2); }
+    80% { opacity: 1; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.pitch-img {
+   position: absolute;
+    left: 3%;
+    bottom:-54%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 132%;
+    z-index: 2;
+    transform: scale(1.2);
+    transform-origin: center;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.batsman {
+    position: absolute;
+    left: 50%;
+    bottom: 35%;
+    transform: translateX(-50%) scale(1);
+    width: clamp(60px, 28vw, 140px);
+    height: clamp(70px, 34vw, 160px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 4;
+    transition: transform 0.2s;
+    transform-style: preserve-3d;
+}
+
+.batsman-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+}
+
+.batsman.hit { animation: batPop 0.4s; }
+
+@keyframes batPop {
+    0% { transform: translateX(-50%) scale(1); }
+    60% { transform: translateX(-50%) scale(1.2); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+.ball-anim {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    width: clamp(24px, 10vw, 48px);
+    height: clamp(24px, 10vw, 48px);
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: none;
+    transition: all 0.5s cubic-bezier(.65,.03,.33,1.1);
+}
+
+.ball-anim.show { display: block !important; }
+
+.ball-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.ball-anim.hit {
+    box-shadow: 0 0 20px #62d273;
+    transform: translate(-50%, -30%) scale(1.2) rotate(-12deg);
+    animation: hitAnim 0.4s;
+}
+
+.ball-anim.miss {
+    box-shadow: 0 0 12px #e3223c;
+    transform: translate(-50%, 30%) scale(0.95) rotate(12deg);
+    animation: missAnim 0.4s;
+}
+
+@keyframes hitAnim {
+    0% { transform: translate(-50%, 0) scale(1); }
+    60% { transform: translate(-50%, -35%) scale(1.25); }
+    100% { transform: translate(-50%, -30%) scale(1.2); }
+}
+
+@keyframes missAnim {
+    0% { transform: translate(-50%, 0) scale(1); }
+    60% { transform: translate(-50%, 35%) scale(1.1); }
+    100% { transform: translate(-50%, 30%) scale(0.95); }
+}
+
+.stumps-img {
+    position: absolute;
+    left: 50%;
+    bottom: 43%;
+    width: clamp(24px, 12vw, 56px);
+    transform: translateX(-50%) scale(1);
+    z-index: 3;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.2));
+}
+#frontstumpsImg {
+    position: absolute;
+    left: 50%;
+    bottom: -30%;
+    width: clamp(24px, 12vw, 56px);
+    transform: translateX(-50%) scale(1.1);
+    z-index: 3;
+    transform-origin: center;
+    pointer-events: none;
+}
+.fixed-hit-btn {
+    position: fixed;
+    left: 50% !important;
+    bottom: clamp(12px, 3vh, 36px) !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    z-index: 20;
+    user-select: none;
+    padding-bottom: env(safe-area-inset-bottom, 14px);
+    transition: none !important; /* Remove any shifting effect */
+}
+
+.big-btn {
+    display: block;
+    width: clamp(100px, 60vw, 220px);
+    background: linear-gradient(90deg, #ffbf47, #e3223c 85%);
+    color: #fff;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-weight: 600;
+    border: none;
+    border-radius: 1.2em;
+    padding: 0.9em 0;
+    box-shadow: 0 3px 10px rgba(227, 34, 60, 0.3);
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    outline: none;
+    transition: all 0.15s;
+}
+
+.big-btn:active { transform: scale(0.97); }
+.big-btn.disabled { opacity: 0.5; pointer-events: none; }
+
+.hit-effect {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    animation: hitEffectAnim 0.7s ease-out forwards;
+}
+
+@keyframes hitEffectAnim {
+    0% { opacity: 0; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-20px); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-40px); }
+}
+/* End screen fade and scale animation */
+@keyframes fadeOutScale {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.9);}
+}
+@keyframes fadeInScale {
+    0% { opacity: 0; transform: scale(1.1);}
+    100% { opacity: 1; transform: scale(1);}
+}
+.score-animate {
+    animation: fadeOutScale 0.6s forwards;
+}
+.bg-animate {
+    animation: fadeInScale 1.2s forwards;
+}
+#batsman.batsman-anim img,
+#batsman.batsman-anim #batsmanImg {
+  transform: scale(1.22);  /* Slightly larger for hit/bowled effect */
+ transform-origin: center;
+  z-index: 10;
+}
+

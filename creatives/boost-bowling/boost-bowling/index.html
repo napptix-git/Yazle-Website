@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Cricket Game</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+    <div class="gamecontainer">
+        <div id="startScreen" class="overlay">
+            <img src="assets/logo.png" alt="Logo" class="logo-img">
+            <div class="title">Will your yorkers help you win the match?</div>
+            <div class="subtext">Tap BOWL button and knock down the stumps 
+                <br> Get your Boost!</div>
+            <button id="startBtn" class="big-btn">Play</button>
+        </div>
+
+        <div id="gameUI" class="hide">
+            <div class="balls-row" id="ballsRow"></div>
+            <div class="pitch">
+                <img src="assets/pitch.png" alt="Pitch" class="pitch-img">
+                <div class="batsman" id="batsman">
+                    <img src="assets/stand.png" alt="Batsman" class="batsman-img" id="batsmanImg">
+                </div>
+                <div class="ball-anim" id="ballAnim">
+                    <img src="assets/ball.png" alt="Ball" class="ball-img">
+                </div>
+                <img src="assets/stump.png" alt="Stumps" class="stumps-img" id="stumpsImg">
+                 <img src="assets/stump.png" alt="Stumps"  id="frontstumpsImg">
+            </div>
+           <button id="hitBtn" class="big-btn fixed-hit-btn ">BOWL</button>
+        </div>
+
+        <div id="boostPopup" class="overlay hide">
+            <img src="assets/logo.png" alt="Logo" class="logo-img">
+            <div class="title">Power Boost!</div>
+            <div class="subtext">3x runs unlocked.</div>
+            <button id="boostBtn" class="big-btn">Continue</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

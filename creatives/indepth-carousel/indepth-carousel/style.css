@@ -1,0 +1,209 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+   height: 100vh;
+  width: 100vw;
+  font-family: sans-serif;
+  background: white;
+  overflow: hidden;
+}
+
+.ad-content {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  background: url('./assets/bg.jpeg') no-repeat center ;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+#logo {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 200px;
+    max-height: 200px;
+    z-index: 10;
+    user-select: none;
+  }
+  #overlay {
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 200px;
+    max-height: 200px;
+    z-index: 10;
+    user-select: none;
+  }
+#slider {
+    margin-top: 5%;
+    height: 45vh;
+    width: 100vw;
+    position: absolute;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    top: 26%;
+}
+
+
+
+#slider input[type="radio"] {
+    display: none;
+}
+
+#slider label {
+    margin: auto;
+    width: 80%; /* Adjust slide width */
+    height: 500px;
+    border-radius: 6%;
+    position: absolute;
+    left: -45px;
+    right: 0;
+    cursor: pointer;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0; /* Hide slides initially */
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
+    right: 0;
+    width: 80%;
+    border-radius: 6%;
+    height: 25%;
+     user-select: none;
+    z-index: 2; /* Ensure overlay is above the image */
+    pointer-events: none; /* Allow clicks to pass through */
+}
+.overlay img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10%;
+    object-fit: contain; /* or 'cover' if you want it cropped */
+    display: block;
+    user-select: none;
+}
+
+.img
+{
+    margin: auto;
+    width: 94%; /* Adjust slide width */
+    height: 300px;
+    border-radius: 6%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25%;
+    z-index: 3;
+     user-select: none;
+   background-color: white;
+}
+#img1 {
+    background-image: url('./assets/1.png'); /* Path to your second image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     user-select: none;
+}
+#img2 {
+    background-image: url('./assets/3.jpeg'); /* Path to your second image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     user-select: none;
+}
+#img3 {
+    background-image: url('./assets/2.jpeg'); /* Path to your second image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     user-select: none;
+}
+
+.cta-btn {
+    margin: auto;
+    width: 70%; /* Adjust slide width */
+    height: auto;
+    position: absolute;
+    top: 87%;
+    left: -2%;
+    right: 0;
+     user-select: none;
+    z-index: 3;
+}
+/* Position and visibility for slides */
+#s1:checked ~ #slide1, #s2:checked ~ #slide2,
+#s3:checked ~ #slide3, #s4:checked ~ #slide4,
+#s5:checked ~ #slide5 {
+    transform: translate3d(0, 0, 0); /* Center the active slide */
+    opacity: 1; /* Make it fully visible */
+    z-index: 3; /* Ensure it's on top */
+}
+
+#s1:checked ~ #slide2, #s2:checked ~ #slide3,
+#s3:checked ~ #slide4, #s4:checked ~ #slide5,
+#s5:checked ~ #slide1 {
+    transform: translate3d(18%, 0, -170px);
+ /* Position to the right */
+    opacity: 0.9; 
+    z-index: 2;
+}
+
+#s1:checked ~ #slide5, #s2:checked ~ #slide1,
+#s3:checked ~ #slide2, #s4:checked ~ #slide3,
+#s5:checked ~ #slide4 {
+    transform: translate3d(-115%, 0, -140px); /* Position to the left */
+    opacity: 0.8; /* Slightly dimmed */
+    z-index: 2;
+}
+
+/* Hide slides outside the 3 visible ones */
+#s1:checked ~ #slide3, #s2:checked ~ #slide4,
+#s3:checked ~ #slide5, #s4:checked ~ #slide1,
+#s5:checked ~ #slide2 {
+    transform: translate3d(30%, 0, -240px); /* Far right (hidden) */
+    opacity: 0.8; 
+    z-index: 2;
+
+}
+
+#s1:checked ~ #slide4, #s2:checked ~ #slide5,
+#s3:checked ~ #slide1, #s4:checked ~ #slide2,
+#s5:checked ~ #slide3 {
+    transform: translate3d(-230%, 0, -280px); /* Far left (hidden) */
+    opacity: 0; /* Fully transparent */
+    z-index: 1;
+}
+
+/* Slide colors */
+#slide1 {
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    background-color: #fef9f5;
+   
+}
+
+#slide2 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #fef9f5;
+}
+
+#slide3 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #fef9f5;
+}
+

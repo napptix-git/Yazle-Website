@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Video Ad</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preload" href="./assets/1.png" as="image">
+<link rel="preload" href="./assets/2.png" as="image">
+<link rel="preload" href="./assets/3.png" as="image">
+<link rel="preload" href="./assets/gesture.png" as="image">
+<link rel="preload" href="./assets/volume.png" as="image">
+<link rel="preload" href="./assets/unmute.png" as="image">
+<link rel="preload" href="./assets/video.mp4" as="video" type="video/mp4">
+
+</head>
+<body>
+    <div id="interstitialAd" class="interstitial-ad">
+        <button class="close-btn" onclick="closeAd()">×</button>
+        <div class="ad-content">
+            <img src="./assets/logo.png" id="logo">
+            <video src="./assets/video.mp4" autoplay muted class="responsive-video"></video>
+            <button id="audioButton" type="button">
+                <img src="./assets/volume.png" alt="" srcset="">
+               <img src="./assets/unmute.png" id ="mute"alt="">
+            </button>
+            
+            <!-- Carousel Section -->
+            <section id="slider">
+                <input type="radio" name="slider" id="s1">
+                <input type="radio" name="slider" id="s2" checked>
+                <input type="radio" name="slider" id="s3">
+                <label for="s1" id="slide1"></label>
+                <label for="s2" id="slide2"></label>
+                <label for="s3" id="slide3"></label>
+            </section>
+            <img src="./assets/gesture.png" id="gesture">
+        </div>
+        <script src="./script.js"></script>
+     
+    </body>
+</html>

@@ -1,0 +1,395 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
+  /* background-color: black; */
+  overflow: hidden;
+
+  /* iPhone safe area support */
+  /* padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom); */
+}
+.hidden {
+  display: none;
+}
+.start-sec {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+background: linear-gradient(
+  to bottom,
+  #e1e0e7 0%,
+  #d7d4de 50%,
+  #e1e0e7 100%
+);
+
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+/* Fullscreen background image (1080x1920 works perfectly) */
+#scene-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  user-select: none;
+  pointer-events: auto;
+  
+}
+
+/* Responsive start button */
+#start-now{
+  position: absolute;
+  width: 40vw;
+  max-width: 180px;
+  left: 48%;
+  transform: translate(-50%, 20px);
+  bottom: clamp(20px, 4%, 60px);
+  z-index: 2;
+  user-select: none;
+  cursor: pointer;
+}
+.last-cta,
+.shop-cta {
+  position: absolute;
+  left: 50%;
+  top: 92%;
+  transform: translateX(-50%);
+  bottom: clamp(20px, 8%, 60px);
+  user-select: none;
+  cursor: pointer;
+  z-index: 50;
+  width: 50%;
+  height: auto;
+}
+.shop-cta{
+  display: none;
+  top: 87%;
+}
+.game-container {
+  width: 100vw;
+  height: 100dvh;
+  background: url('./assets/bg.jpeg') no-repeat center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+#game-overlay {
+  position: absolute;
+  inset: 0;
+  width: 70%;
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+  user-select: none;
+  left: 50%;
+  top:18%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.timer-wrapper {
+  position: absolute;
+  top: 11.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60vw;
+  max-width: 240px;
+  height: 40px;
+  background-color: #ff9999;
+  border-radius: 40px;
+  border: 3px solid white;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.timer-fill {
+  background-color: #ffc2c2;
+  height: 100%;
+  width: 100%;
+  border-radius: 40px;
+  transition: width 1s linear;
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  z-index: 6;
+  font-family: sans-serif;
+}
+
+/* Logo on top-center */
+#game-logo {
+  position: absolute;
+  top: 1.5%;
+  left: 83%;
+  transform: translateX(-50%);
+  width: 30vw;
+  max-width: 160px;
+  z-index: 2;
+  user-select: none;
+  pointer-events: none;
+}
+#end-logo {
+  position: absolute;
+  top: 1.5%;
+  left: 83%;
+  transform: translateX(-50%);
+  width: 30vw;
+  max-width: 160px;
+  z-index:50;
+  user-select: none;
+  pointer-events: none;
+}
+.character-wrapper {
+  position: absolute;
+  bottom: -5%;
+  left: 48%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 2;
+  transition: bottom 0.4s ease
+}
+#character {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  transform:scale(0.9);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* #character2 {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  margin-top: 33px;
+ margin-left: -5px;
+  transform:scale(0.97);
+  transform-origin: center;
+} */
+
+.character-wrapper .patch {
+  position: absolute;
+  aspect-ratio: 1 / 1;
+  z-index: 3;
+  /* REMOVED: opacity: 0.5; (we'll set opacity on the colored fill) */
+}
+
+/* Give sizes to patches so they render even after IMG is replaced */
+.patch.small  { width: 3.4vw; }   /* tweak to taste */
+.patch.medium { width: 4.2vw; }   /* tweak to taste */
+
+/* New: the color-filled shape, using the PNG’s alpha as a mask */
+.character-wrapper .patch .freckle-fill {
+  position: absolute;
+  inset: 0;
+  background-color: #b4775f;      /* exact requested color */
+  opacity: 0.7;                   /* same visibility as before; adjust if needed */
+  pointer-events: none;           /* taps still hit .patch */
+  -webkit-mask: var(--mask) no-repeat center / contain;
+  mask: var(--mask) no-repeat center / contain;
+}
+
+/* Sizes */
+
+/* .patch.small  { width: 2vw; }
+.patch.medium { width: 2.5vw; } */
+
+/* Colors */
+/* .patch.light {
+  background-color: #f4b482;
+}
+
+.patch.dark {
+  background-color: #e99653;
+} */
+#end-sequence {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 20;
+  background: url('./assets/bg.jpeg') no-repeat center;
+  background-size: cover;
+}
+#end-sequence.video-visible {
+  background: linear-gradient(to bottom, #f6f9f6, #edefed);
+}
+#end-video{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  top: -3%;
+  z-index: 21;
+  cursor: pointer;
+  user-select: none;
+}
+#end-card{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  top: 0%;
+  cursor: pointer;
+  user-select: none;
+}
+#reveal-ui {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.8s ease forwards;
+}
+#slider-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 10;
+  user-select: none;
+  pointer-events: none;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Slide-Up + Fade-In */
+.slide-fade {
+  animation: slideFadeIn 1.2s ease forwards; /* Increase from 1s to 1.2s for slower transition */
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.left-image, .right-image {
+    position: absolute;
+    inset: 0;                 /* fill parent */
+    width: 100%;
+    height: 100%;
+    top: 4%;
+    background-size: contain;   /* or 'contain' if you prefer */
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.2);
+    transform-origin: center;
+}
+
+
+.left-image {
+    background-image: url('assets/char1.png');
+    clip-path: inset(0 50% 0 0); /* Initially show from left 20% */
+    z-index: 1;
+    transform: scale(0.95);
+    transform-origin: center;
+}
+
+.right-image {
+    background-image: url('assets/before.png');
+    clip-path: inset(0 0 0 50%); /* Initially hide right image */
+    z-index: 2;
+    transform: scale(0.95);
+    transform-origin: center;
+}
+
+
+/* Overlay1 - always visible */
+
+.slider {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 2px;
+    height: 73%;
+    background:#b5b5b5;
+    cursor: ew-resize;
+    z-index: 15;
+}
+
+.handle {
+    position: absolute;
+    top: 91%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 25px;
+   background:#b5b5b5;              /* no black dot */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.25), inset 0 0 0 2px rgba(0,0,0,.05);
+}
+
+#audioButton {
+  position: absolute;
+  right: 10%;
+  bottom: 55%;          /* sits nicely above CTA */
+  z-index: 60;          /* above video and CTAs */
+ background: none; /* No background for the button */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#audioButton img {
+  width: 22px;
+  height: 22px;
+  user-select: none;
+  pointer-events: none;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* utility */
+
+/* show either on/off icon */
+#audioButton .icon-on.hidden,
+#audioButton .icon-off.hidden { display: none; }

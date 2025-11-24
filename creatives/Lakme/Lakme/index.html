@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ad.size" content="width=360, height=640">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Lakme Game</title>
+    <link rel="apple-touch-icon" href="../assets/favicon.png">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>  
+  <div class="start-sec" id="start-screen">
+      <img src="./assets/1.png" alt="Scene" id="scene-image">
+      <img src="./assets/start-now.png" alt="Scene" id="start-now">
+  </div>
+  <div class="game-container" id="game-container">
+    <div class="timer-wrapper">
+  <div class="timer-fill" id="timer-fill"></div>
+  <div class="timer-text" id="timer-text">15</div>
+</div>
+  <img src="./assets/overlay1.png" alt="Overlay" id="game-overlay">
+  <img src="./assets/logo.png" alt="Logo" id="game-logo">
+  <div class="character-wrapper">
+  <img src="./assets/char1.png" alt="Character" id="character">
+  <!-- <img src="./assets/glow-char.png" alt="Character" id="character2" style="display: none;"> -->
+  <!-- Forhead patches -->
+  <div class="patch small light" style="top: 46%; left: 43%;object-fit: contain;height: 5%;width: 5%;"><img src="./assets/freckle1.png"></div>
+  <div class="patch medium dark" style="top: 45%; left: 53%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+  <div class="patch medium light" style="top: 52%; left: 40%;object-fit: contain;height:5%;width: 5%"><img src="./assets/freckle1.png"></div>
+  <div class="patch small light" style="top: 48%; left: 32%;object-fit: contain;height: 5%;width: 5%;"><img src="./assets/freckle3.png"></div>
+   <div class="patch medium dark" style="top: 50%; left: 25%;object-fit: contain;height: 5%;width: 5%;rotate: 90deg"><img src="./assets/freckle1.png"></div>
+    <div class="patch medium dark" style="top: 45%; left: 56%;object-fit: contain;height: 5%;width: 5%;rotate: 90deg"><img src="./assets/freckle1.png"></div>
+<!-- Nose patches -->
+    <div class="patch small light" style="top:64%; left:40%; rotate: 90deg;object-fit: contain;height: 7%;width: 7%"><img src="./assets/freckle3.png"></div>
+  <div class="patch small dark" style="top: 67%; left: 41%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+  <!-- Left cheek patches -->
+   <div class="patch small light" style="top: 70%; left: 29%;object-fit: contain;height: 7%;width: 7%"><img src="./assets/freckle1.png"></div>
+  <div class="patch small dark" style="top: 73%; left: 28%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+  <div class="patch medium light" style="top: 65%; left: 23%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+   <div class="patch small dark" style="top: 65%; left: 31%;object-fit: contain;height: 5%;width: 5%; rotate: 90deg;"><img src="./assets/freckle1.png"></div>
+    <div class="patch small dark" style="top: 70%; left: 30%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+     <div class="patch small dark" style="top: 68%; left: 26%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+
+  <!-- Right cheek patches -->
+  <div class="patch small light" style="top: 69%; left: 53% ;object-fit: contain;height: 6%;width: 6%"><img src="./assets/freckle1.png"></div>
+  <div class="patch small dark" style="top: 73%; left: 56%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+  <div class="patch medium light" style="top: 65%; left: 59%;object-fit: contain;height:5%;width: 5%"><img src="./assets/freckle3.png"></div>
+  <div class="patch small dark" style="top: 71%; left: 59%;object-fit: contain;height: 5%;width: 5%"><img src="./assets/freckle3.png"></div>
+  <div class="patch small light" style="top: 73%; left: 53% ;object-fit: contain;height: 6%;width: 6%"><img src="./assets/freckle1.png"></div>
+  <div class="patch small light" style="top: 65%; left: 62% ;object-fit: contain;height: 6%;width: 6%;rotate: 90deg;"><img src="./assets/freckle1.png"></div>
+
+</div>
+</div>
+<div id="end-sequence" class="hidden">
+  <img src="./assets/logo.png" alt="Logo" id="end-logo">
+   <video id="end-video" autoplay muted playsinline preload="auto">
+    <source src="./assets/4.mp4" type="video/mp4">
+  </video>
+  <img id="end-cta-overlay" src="./assets/perfect-cta.png" class="last-cta">
+          <div id="reveal-ui" class="hidden">
+            <!-- <img src="./assets/logo.png" alt="Logo" id="game-logo"> -->
+            <img src="./assets/slider.png" id="slider-image">
+            <div class="left-image"></div>
+            <div class="right-image"></div>
+            <div class="slider">
+                <div class="handle">
+                    <span class="arrow left-arrow"></span>
+                    <span class="arrow right-arrow"></span>
+                </div>
+            </div>
+   <video id="end-card" class="hidden" autoplay muted playsinline>
+    <source src="./assets/endcard.mp4" type="endcard/mp4">
+  </video>
+  <button id="audioButton" type="button" class="hidden" aria-label="Toggle sound">
+  <img src="./assets/unmute.png" alt="Sound on icon" class="icon-on hidden">
+  <img src="./assets/volume.png" alt="Sound off icon" class="icon-off">
+</button>
+  <!-- <img  src="./assets/shop-now.png" class="shop-cta"> -->
+        </div>
+
+
+  <script src="./script.js"></script>
+</body>
+</html>

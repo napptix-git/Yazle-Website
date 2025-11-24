@@ -1,0 +1,282 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.interstitial-ad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.ad-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./assets/bg.jpeg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ad-content video {
+    width: 90%;
+    height: 40%;
+    z-index: 5;
+    position: absolute;
+    top: 7%;
+}
+#logo{
+    width: 25%;
+    height:auto;
+    z-index: 10;
+    top: 4%; 
+    left:4%;
+    position: absolute;
+    background-color: white;
+    user-select: none;
+}
+#audioButton {
+    position: absolute;
+    top: 35%; /* Position relative to the video container */
+    right: 5%; /* Position relative to the video container */
+    z-index: 10; /* Ensure the button appears above the video */
+    background: none; /* No background for the button */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#audioButton img {
+    width: 30px; /* Adjust icon size */
+    height: 30px;
+    border-radius: 50%;
+    user-select: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* When the image is hidden */
+#audioButton img.hidden {
+    opacity: 0;
+    user-select: none; /* Fades out */
+    pointer-events: none; /* Prevents interaction with the hidden image */
+}
+
+/* Styles for the carousel */
+#slider {
+    margin-top: 5%;
+    height: 45vh;
+    width: 270vw;
+    position: absolute;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    top: 45%;
+}
+
+#slider input[type="radio"] {
+    display: none;
+}
+
+#slider label {
+    margin: auto;
+    width: 25%;
+    height: 100%;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    cursor: grab;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.8);
+}
+
+/* Position and visibility for slides */
+#s1:checked ~ #slide1, #s2:checked ~ #slide2,
+#s3:checked ~ #slide3, #s4:checked ~ #slide4,
+#s5:checked ~ #slide5 {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    z-index: 3;
+}
+
+#s1:checked ~ #slide2, #s2:checked ~ #slide3,
+#s3:checked ~ #slide4, #s4:checked ~ #slide5,
+#s5:checked ~ #slide1 {
+    transform: translate3d(122%, 0, -140px);
+    opacity: 0.8;
+    z-index: 2;
+}
+
+#s1:checked ~ #slide5, #s2:checked ~ #slide1,
+#s3:checked ~ #slide2, #s4:checked ~ #slide3,
+#s5:checked ~ #slide4 {
+    transform: translate3d(-122%, 0, -140px);
+    opacity: 0.8;
+    z-index: 2;
+}
+
+#s1:checked ~ #slide3, #s2:checked ~ #slide4,
+#s3:checked ~ #slide5, #s4:checked ~ #slide1,
+#s5:checked ~ #slide2 {
+    transform: translate3d(230%, 0, -280px);
+    opacity: 0;
+    z-index: 1;
+}
+
+#s1:checked ~ #slide4, #s2:checked ~ #slide5,
+#s3:checked ~ #slide1, #s4:checked ~ #slide2,
+#s5:checked ~ #slide3 {
+    transform: translate3d(-230%, 0, -280px);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Slide colors */
+#slide1 {
+    background-image: url('./assets/1.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #eaebef;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+
+#slide3 {
+    background-image: url('./assets/2.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #d3d3d3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+
+#slide2{
+    background-image: url('./assets/3.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #e6e1e5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+#slide4 {
+    background-image: url('./assets/4.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ebebed;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+
+#slide5 {
+    background-image: url('./assets/5.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #e6e1e2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+@keyframes sideFloat {
+    0%   { transform: translateX(-60%); }
+    50%  { transform: translateX(-20%); }
+    100% { transform: translateX(-80%); }
+  }
+
+
+#gesture {
+    width: 17%;
+    height: 11%;
+    position: absolute;
+    z-index: 10;
+    top: 70%;
+    left: 50%;
+    border-radius: 50%;
+
+    /* ✅ Apply correct animation name */
+    animation: sideFloat 2s ease-in-out infinite;
+
+    
+}
+.slider-button {
+    position: absolute;
+    top: 71%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 63px;
+    background-color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.slider-button span {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.slider-button.left {
+    left: 10px; /* Adjust position for left button */
+}
+
+.slider-button.right {
+    right: 10px; /* Adjust position for right button */
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: grey;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100;
+    user-select: none;
+}
+
+/* Media query for devices with a width of up to 768px */
+@media (max-width: 768px) {
+    .ad-content video {
+        width: 95%;
+       
+    }
+}
+
+/* Media query for devices with a width of up to 480px */
+@media (max-width: 480px) {
+    .ad-content video {
+        width: 95%;
+        /* height: 35%; */
+    }
+}
