@@ -39,7 +39,7 @@ const newsItems = [
     date: "June 19, 2025",
     title: "Napptix Acquires Yazle to Revolutionize Gaming Advertising!",
     content: "Playable ads deliver results because they turn passive impressions into active participation. With Wizora’s built-in analytics, you capture first-party engagement metrics the moment your campaign goes live.",
-    image: "/public/lovable-uploads/nappYez.png",
+    image: "/lovable-uploads/nappYez.png",
     fullContent: `
       <p>Dubai, UAE – Napptix, the Dubai-based ad-tech innovator behind the Gaming 360° platform, has announced the successful acquisition of Yazle Marketing Management’s Middle East & North Africa (MENA) business. The deal includes Yazle’s commercial operations, client portfolio, and regional team across the Gulf and North Africa. Yazle’s businesses in Asia-Pacific, Europe, and the Americas remain under existing ownership.
       </p>

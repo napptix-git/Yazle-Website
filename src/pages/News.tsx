@@ -26,7 +26,7 @@ const newsItems = [
     date: "June 19, 2025",
     title: "Napptix Acquires Yazle to Revolutionize Gaming Advertising!",
     content: "Napptix, the Dubai-based Gaming 360° ad-tech company, has acquired Yazle Marketing Management’s MENA business, including its client portfolio, commercial operations, and regional team across the Gulf and North Africa.",
-    image: "/public/lovable-uploads/nappYez.png"
+    image: "/lovable-uploads/nappYez.png"
   },
   {
     id: "news-3",
