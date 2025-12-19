@@ -81,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
           <Link to="/" onClick={scrollToTop} className="flex items-center h-full">
             <img 
               src={isWizoraPage ? "/lovable-uploads/napptix_black_logo.png" : "/lovable-uploads/napptix_white_logo.png"} 
-              alt="Napptix" 
+              alt="Napptix mediaś" 
               className="h-20 md:h-12 lg:h-40 w-auto object-contain transition-all duration-300"
             />
           </Link>
