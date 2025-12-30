@@ -47,7 +47,7 @@ const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ onCancel }) => {
                 <p className="text-white font-disket truncate">
                   {isMobile
                     ? "Napptix Acquires Yazle!"
-                    : "Breaking News: Napptix Acquires Yazle to Revolutionize Gaming Advertising!"}
+                    : "Breaking News: Yazle is acquired by Napptix to revolutionize gaming advertising!"}
                 </p>
               </div>
 

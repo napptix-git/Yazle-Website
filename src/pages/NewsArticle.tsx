@@ -37,7 +37,7 @@ const newsItems = [
   {
     id: "news-2",
     date: "June 19, 2025",
-    title: "Napptix Acquires Yazle to Revolutionize Gaming Advertising!",
+    title: "Yazle is acquired by Napptix to revolutionize gaming advertising!",
     content: "Playable ads deliver results because they turn passive impressions into active participation. With Wizora’s built-in analytics, you capture first-party engagement metrics the moment your campaign goes live.",
     image: "/lovable-uploads/nappYez.png",
     fullContent: `

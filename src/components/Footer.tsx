@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Napptix</h3>
+            <h3 className={`text-xl font-bold mb-4 font-disket ${headingColor ? headingColor : "text-white"}`}>Yazle</h3>
             <p className="text-napptix-light-grey text-sm mb-4 font-productSans">
               Innovative advertising solutions connecting brands with the gaming world.
               Our mission is to enhance the gaming ecosystem through effective advertising.
@@ -106,7 +106,7 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
         
         <div className="flex justify-between items-center border-t border-napptix-grey/20 pt-6 mt-6">
           <p className="text-napptix-light-grey text-xs">
-            &copy; {new Date().getFullYear()} Napptix. All rights reserved.
+            &copy; {new Date().getFullYear()} Yazle. All rights reserved.
           </p>
           <Link 
             to={nextPage.to} 

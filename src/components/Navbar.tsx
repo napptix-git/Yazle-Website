@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
@@ -80,7 +80,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
         <div className="flex justify-between items-center w-full h-14 md:h-20 lg:h-24">
           <Link to="/" onClick={scrollToTop} className="flex items-center h-full">
             <img 
-              src={isWizoraPage ? "/lovable-uploads/napptix_black_logo.png" : "/lovable-uploads/napptix_white_logo.png"} 
+              src={isWizoraPage ? "/lovable-uploads/Yazle_black_logo.png" : "/lovable-uploads/Yazle_white_logo.png"} 
               alt="Napptix mediaś" 
               className="h-20 md:h-12 lg:h-40 w-auto object-contain transition-all duration-300"
             />
