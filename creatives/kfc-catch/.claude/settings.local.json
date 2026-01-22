@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start index.html)",
+      "Bash(git remote set-url:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nComplete rebrand from Lays to KFC theme\n\n- Replace all Lays branding with KFC (logo, colors, text)\n- Add KFC food items: Chizza, Double Down, Gold Burger\n- Replace cart with KFC bucket\n- Update color scheme to KFC red and white\n- Fix shelf positioning for all food items across all screen sizes\n- Adjust background images for proper visibility\n- Hide bucket on start screen, show only during gameplay\n- Reduce \"FULL-ON VARIETY, FULL-ON CHICKEN\" text size by 10%\n- Update game over messages to KFC branding\n- Change CTA link to KFC website\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

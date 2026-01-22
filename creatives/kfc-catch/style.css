@@ -1,0 +1,491 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2a2a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+
+.game-container {
+    max-width: 430px;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 90vh;
+    background-image: url('./assets/KFC bg.webp');
+    background-size: 100%;
+    background-position: center 35px;
+    background-repeat: no-repeat;
+    background-color: #4A1616;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 8px #1a1a1a, 0 0 0 10px #444;
+    z-index: 1;
+}
+
+/* Header Styling (KFC branding) */
+.header {
+    background-color: #FFFFFF; /* White header */
+    color: #2b2f33;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px 20px 0 0; /* Match container border radius */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+}
+
+/* Header logo styling */
+.header-logo {
+    height: 50px;
+    width: auto;
+    margin-left: 15px;
+    user-select: none;
+}
+
+/* Container for Score & Time */
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Keep gap small */
+    position: absolute;
+    left: 65%;
+}
+
+/* Score and Time Box Styling */
+.score-box, .time-box {
+    background-color: #F0F0F0; /* Light grey background */
+    color: #2b2f33; /* Dark text for contrast */
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 18px;
+    min-width: 50px; /* Prevent overflow issues */
+    height: 40px; /* Keep consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #E4002B; /* KFC red border for emphasis */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Labels for Score & Time */
+.label {
+    font-size: 14px;
+    display: block;
+    font-weight: normal;
+}
+
+/* Values inside Score & Time */
+.score-value, .time-value {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1; /* Remove extra space inside */
+}
+
+/* Move Time Box Slightly Left */
+.time-box {
+    margin-left: -5px; /* Shift left without affecting alignment */
+}
+
+/* Time styling to match the image */
+.time-value span {
+    font-weight: bold;
+    color: #2b2f33;
+}
+
+.start-sec {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('./assets/KFC catcher Intro screen.webp');
+    background-size: 85%;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-color: #4A1616;
+    border-radius: 20px;
+}
+
+#play-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: none;
+
+    /* Make completely transparent - invisible but clickable */
+    background: transparent;
+    color: transparent;
+    border: none;
+
+    /* MASSIVE tap area - entire lower third of screen */
+    width: 100%;
+    height: 33.33%;
+    font-size: 0; /* Hide text completely */
+
+    /* Keep functional */
+    cursor: pointer;
+    outline: none;
+    z-index: 10001;
+
+    /* Subtle hover feedback */
+    transition: transform 0.2s ease;
+}
+
+/* Hover effect for better user experience */
+#play-button:hover {
+    transform: scale(1.02);
+}
+
+#play-button:active {
+    transform: scale(0.98);
+}
+
+.start-sec {
+    transition: opacity 0.2s ease-out;
+}
+
+.shelf {
+    position: absolute;
+    width: 100%;
+    height: 85%;
+    top: 10%;
+    overflow: hidden;
+}
+
+.shelf img {
+    width: 100%;
+    height: 100%;
+    transform: none;
+    transform-origin: center;
+    z-index: 5;
+    object-fit: contain;
+    user-select: none;
+}
+
+#cart {
+    width: 35%;
+    height: 15%;
+    position: absolute;
+    z-index: 5;
+    bottom: 2%;
+    user-select: none;
+    left: 32.5%; /* Center the cart (50% - 17.5% which is half of 35%) */
+    cursor: grab; /* Indicate that the element is draggable */
+    touch-action: none; /* Prevent default touch behaviors */
+    display: none; /* Hide cart initially until game starts */
+}
+
+.row1 {
+    position: absolute; /* Position it over the shelf */
+    top: 18%; /* First shelf - sitting on shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row1 .items {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    z-index: 10;
+    user-select: none;
+    position: relative;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+/* Lays shelf image: keep same size as other items */
+.lays-shelf {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+    transform: none; /* ensure no rotation/scaling from JS applies */
+    display: block;
+    object-fit: contain;
+}
+
+.row2 {
+    position: absolute; /* Position it over the shelf */
+    top: 34%; /* Second shelf - sitting on shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row2 .items1 {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    z-index: 10;
+    user-select: none;
+    position: relative;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+.row3 {
+    position: absolute; /* Position it over the shelf */
+    top: 50%; /* Third shelf - sitting on shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row3 .items2 {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+.row4 {
+    position: absolute; /* Position it over the shelf */
+    top: 66%; /* Fourth shelf - sitting on shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row4 .items3 {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+.game-over-style {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: black;
+    display: none;
+    font-size: 20px;
+    text-align: center;
+    z-index: 10000;
+    border-radius: 20px;
+    backdrop-filter: blur(3px);
+}
+
+/* Game-Over Image - Hidden since using poster background */
+#bag {
+    display: none; /* Hide the logo as we're using poster background */
+}
+
+/* Media Queries for Responsiveness */
+
+/* Desktop devices - optimized container */
+@media only screen and (min-width: 769px) {
+    body {
+        padding: 10px 0;
+    }
+
+    .game-container {
+        height: auto;
+    }
+}
+
+/* Mobile devices - make fullscreen */
+@media only screen and (max-width: 768px) {
+    body {
+        background-color: white;
+        padding: 0;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    .game-container {
+        max-width: 100%;
+        max-height: 100%;
+        height: 100vh;
+        aspect-ratio: auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .header {
+        border-radius: 0;
+    }
+}
+
+/* Small Mobile Devices (up to 480px) */
+@media only screen and (min-width: 300px) and (max-width: 400px) {
+    .header {
+        height: 45px;
+    }
+
+    .header-logo {
+        height: 35px;
+    }
+
+    .header-info {
+        gap: 30px;
+    }
+
+    .score-box, .time-box {
+        font-size: 16px;
+        height: 35px;
+        min-width: 45px;
+    }
+
+    .score-value, .time-value {
+        font-size: 18px;
+    }
+
+    .label {
+        font-size: 12px;
+    }
+
+    .start-sec {
+        border-radius: 0;
+    }
+
+    #play-button {
+        width: 100%;
+        height: 33.33%;
+        bottom: 0;
+    }
+
+    #cart {
+        bottom: 3%;
+    }
+
+    .row1, .row2, .row3, .row4 {
+        width: 100%;
+    }
+
+    .row1 .items, .row2 .items1, .row3 .items2, .row4 .items3 {
+        width: 70px !important;
+        height: 70px !important;
+        max-width: 70px !important;
+        max-height: 70px !important;
+    }
+
+    .lays-shelf {
+        width: 70px !important;
+        height: 70px !important;
+        max-width: 70px !important;
+        max-height: 70px !important;
+    }
+
+    .overlay-effect {
+        width: 150px;
+        top: 45%;
+    }
+}
+
+/* Small Mobile Devices (400px to 450px) */
+@media only screen and (min-width: 401px) {
+    .header {
+        height: 50px;
+    }
+
+    .header-logo {
+        height: 45px;
+    }
+
+    .header-info {
+        gap: 35px;
+    }
+
+    .score-box, .time-box {
+        font-size: 17px;
+        height: 38px;
+        min-width: 48px;
+    }
+
+    .score-value, .time-value {
+        font-size: 20px;
+    }
+
+    .label {
+        font-size: 13px;
+    }
+
+    .start-sec {
+        border-radius: 0;
+    }
+
+    #play-button {
+        width: 100%;
+        height: 33.33%;
+        bottom: 0;
+    }
+
+    #cart {
+        bottom: 3%;
+    }
+
+    .row1, .row2, .row3, .row4 {
+        width: 100%;
+    }
+
+    .row1 .items, .row2 .items1, .row3 .items2, .row4 .items3 {
+        width: 75px !important;
+        height: 75px !important;
+        max-width: 75px !important;
+        max-height: 75px !important;
+    }
+
+    .lays-shelf {
+        width: 75px !important;
+        height: 75px !important;
+        max-width: 75px !important;
+        max-height: 75px !important;
+    }
+
+    .overlay-effect { width: 150px; top: 50%; }
+}
+
+@media only screen and (min-height: 950px) {
+    .row1 .items, .row2 .items1, .row3 .items2, .row4 .items3 {
+        width: 80px !important;
+        height: 80px !important;
+        max-width: 80px !important;
+        max-height: 80px !important;
+    }
+}
