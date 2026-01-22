@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 Panorama Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="start-screen">
+        <img src="iPhone SE - 1.svg" alt="Start Screen" id="start-image">
+        <div id="start-btn">Check Now</div>
+    </div>
+
+    <!-- Final CTA Screen -->
+    <div id="final-cta-screen">
+        <img src="iPhone SE - 2.webp" alt="Final CTA" id="final-cta-image">
+    </div>
+
+    <div id="logo-container">
+        <img src="craiyon_131059_image.webp" alt="Horlicks Logo" id="horlicks-logo">
+    </div>
+    <div id="border-overlay">
+        <img src="border.webp" alt="Target Border" id="target-border">
+    </div>
+
+    <!-- 360 View Message -->
+    <div id="scan-message">Scan your health drink</div>
+
+    <!-- Benefit Pins Container -->
+    <div id="pins-container">
+        <img src="taller.webp" alt="Taller" id="pin-taller" class="benefit-pin">
+        <img src="stronger.webp" alt="Stronger" id="pin-stronger" class="benefit-pin">
+        <img src="sharper.webp" alt="Sharper" id="pin-sharper" class="benefit-pin">
+        <img src="clinically-proven.webp" alt="Clinically Proven" id="pin-clinically" class="benefit-pin">
+
+        <!-- Drag Hint Animation -->
+        <div id="drag-hint">
+            <div class="drag-hand">👆</div>
+        </div>
+    </div>
+
+    <!-- Instruction Image -->
+    <img src="craiyon_174712_image.webp" alt="Instructions" id="instruction-text">
+
+    <!-- Final Text Image (shown after all pins dropped) -->
+    <img src="text-3.webp" alt="Final Message" id="final-text">
+
+    <!-- Drop Effect Container -->
+    <div id="drop-effect"></div>
+
+    <div id="container"></div>
+
+    <!-- Import maps polyfill -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

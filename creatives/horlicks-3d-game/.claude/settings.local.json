@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start index.html)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(if exist .git rmdir /s /q .git)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Horlicks 3D Maze Game\n\n- 3D maze game with character navigation\n- Lives and collectibles system\n- Portal mechanics with reward island\n- Holographic product display\n- Character animations (idle and running)\n- Enhanced reward island with trees and bushes\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git reset:*)",
+      "Bash(echo:*)",
+      "Bash(xargs du:*)",
+      "Bash(where:*)",
+      "Bash(npx @squoosh/cli --version)",
+      "Bash(node convert-to-webp.js:*)",
+      "Bash(node convert-sharp.js:*)",
+      "Bash(ls:*)",
+      "Bash(for wall in wall1111 wall2222 wall3333 wall4444)",
+      "Bash(do gltf-transform simplify:*)",
+      "Bash(for wall in wall1111.glb wall2222.glb wall3333.glb wall4444.glb)",
+      "Bash(node recompress-webp.js:*)",
+      "Bash(dir /s /b ThreeMazejs)",
+      "Bash(findstr:*)",
+      "Bash(dir:*)",
+      "Bash(mkdir:*)",
+      "Bash(curl:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(start:*)",
+      "Bash(netstat:*)",
+      "Bash(find:*)",
+      "Bash(zip -r:*)",
+      "Bash(tar:*)",
+      "Bash(cmd //c create-loopme-zip.bat)",
+      "Bash(powershell -Command:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(del nul)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

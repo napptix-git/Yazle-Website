@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nTire Downhill Game - Mobile First Implementation\n\nFeatures:\n- Realistic 3D tire with treads, rim, spokes, and hub\n- Rolling spherical world with trees\n- Coin collection system with golden coins\n- 3 lives system with invincibility after hit\n- High score saved to localStorage\n- Coins collected counter\n- Mobile-first design with touch/swipe controls\n- iPhone frame for desktop view\n- Responsive UI\n\nControls:\n- Swipe left/right to move\n- Swipe up or tap to jump\n- Arrow keys work on desktop\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(node --check:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(dir:*)",
+      "Bash(npx http-server:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

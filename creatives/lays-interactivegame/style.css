@@ -1,0 +1,511 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2a2a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+
+.game-container {
+    max-width: 430px;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 90vh;
+    background: linear-gradient(to bottom, #85c9f0, #007bb5);
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 8px #1a1a1a, 0 0 0 10px #444;
+}
+
+/* Header Styling (neutral, no branding) */
+.header {
+    background-color: #f0d14e; /* yellow header */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px 20px 0 0; /* Match container border radius */
+}
+
+/* Header logo styling */
+.header-logo {
+    height: 50px;
+    width: auto;
+    margin-left: 15px;
+    user-select: none;
+}
+
+/* Container for Score & Time */
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Keep gap small */
+    position: absolute;
+    left: 65%;
+}
+
+/* Score and Time Box Styling */
+.score-box, .time-box {
+    background-color: white;
+    color: #2b2f33; /* neutral accent color */
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 18px;
+    min-width: 50px; /* Prevent overflow issues */
+    height: 40px; /* Keep consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Labels for Score & Time */
+.label {
+    font-size: 14px;
+    display: block;
+    font-weight: normal;
+}
+
+/* Values inside Score & Time */
+.score-value, .time-value {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1; /* Remove extra space inside */
+}
+
+/* Move Time Box Slightly Left */
+.time-box {
+    margin-left: -5px; /* Shift left without affecting alignment */
+}
+
+/* Time styling to match the image */
+.time-value span {
+    font-weight: bold;
+    color: #2b2f33;
+}
+
+.start-sec {
+    width: 70%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 1;
+    align-items: center;
+    z-index: 100;
+    justify-content: center;
+    display: flex;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.start-sec img {
+    width: 85%;
+    position: absolute;
+    top: 5%;
+    height: 70%;
+    user-select: none;
+}
+
+#play-button {
+    position: absolute;
+    bottom: 20px; /* Adjust if needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff5722;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    padding: 5px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease-in-out;
+    animation: pulse 1.5s infinite ease-in-out;
+    z-index: 10000; /* Ensure it is above everything */
+}
+
+/* Scale up and shrink effect */
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.4);
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Hover effect for better user experience */
+#play-button:hover {
+    background-color: #ff784e;
+}
+
+.start-sec {
+    transition: opacity 0.2s ease-out;
+}
+
+.shelf {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: -5%;
+    overflow: hidden;
+}
+
+.shelf img {
+    width: 100%; /* Ensure the image fills the parent container horizontally */
+    height: 95%; /* Maintain the height proportion */
+    transform: scaleX(1.1); /* Scale only the width by 1.15 times */
+    transform-origin: center;
+    z-index: 5; /* Set the scaling point to the center of the image */
+    object-fit: cover;
+    user-select: none; /* Prevent distortion and ensure the image scales properly */
+}
+
+#cart {
+    width: 35%;
+    height: 15%;
+    position: absolute;
+    z-index: 5;
+    bottom: 2%;
+    user-select: none;
+    left: 50%; /* Set an initial position */
+    transform: translateX(-50%); /* Center the cart horizontally */
+    cursor: grab; /* Indicate that the element is draggable */
+    touch-action: none; /* Prevent default touch behaviors */
+}
+
+.row1 {
+    position: absolute; /* Position it over the shelf */
+    top: 24%; /* Adjust as needed to position it vertically on the shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row1 .items {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    z-index: 10;
+    user-select: none;
+    position: relative;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+/* Lays shelf image: keep same size as other items */
+.lays-shelf {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+    transform: none; /* ensure no rotation/scaling from JS applies */
+    display: block;
+    object-fit: contain;
+}
+
+.row2 {
+    position: absolute; /* Position it over the shelf */
+    top: 43%; /* Adjust as needed to position it vertically on the shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row2 .items1 {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    z-index: 10;
+    user-select: none;
+    position: relative;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+.row3 {
+    position: absolute; /* Position it over the shelf */
+    top: 59%; /* Adjust as needed to position it vertically on the shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row3 .items2 {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+.row4 {
+    position: absolute; /* Position it over the shelf */
+    top: 76%; /* Adjust as needed to position it vertically on the shelf */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: flex-end; /* Align items to bottom of shelf */
+    z-index: 10; /* Ensure this is above the shelf image */
+    padding: 0 5%; /* Add padding to prevent items from touching edges */
+}
+
+.row4 .items3 {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    object-fit: contain; /* Keep aspect ratio without distortion */
+}
+
+.game-over-style {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 350px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    padding: 30px 20px;
+    background-image: url('./assets/lays poster.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+    display: none;
+    font-size: 20px;
+    text-align: center;
+    z-index: 10000;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Game-Over Image - Hidden since using poster background */
+#bag {
+    display: none; /* Hide the logo as we're using poster background */
+}
+
+/* Media Queries for Responsiveness */
+
+/* Desktop devices - optimized container */
+@media only screen and (min-width: 769px) {
+    body {
+        padding: 10px 0;
+    }
+
+    .game-container {
+        height: auto;
+    }
+}
+
+/* Mobile devices - make fullscreen */
+@media only screen and (max-width: 768px) {
+    body {
+        background-color: white;
+        padding: 0;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    .game-container {
+        max-width: 100%;
+        max-height: 100%;
+        height: 100vh;
+        aspect-ratio: auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .header {
+        border-radius: 0;
+    }
+}
+
+/* Small Mobile Devices (up to 480px) */
+@media only screen and (min-width: 300px) and (max-width: 400px) {
+    .header {
+        height: 45px;
+    }
+
+    .header-logo {
+        height: 35px;
+    }
+
+    .header-info {
+        gap: 30px;
+    }
+
+    .score-box, .time-box {
+        font-size: 16px;
+        height: 35px;
+        min-width: 45px;
+    }
+
+    .score-value, .time-value {
+        font-size: 18px;
+    }
+
+    .label {
+        font-size: 12px;
+    }
+
+    .start-sec {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 280px;
+    }
+
+    #cart {
+        bottom: 3%;
+    }
+
+    .row1, .row2, .row3, .row4 {
+        width: 100%;
+    }
+
+    .row1 .items, .row2 .items1, .row3 .items2, .row4 .items3 {
+        width: 70px !important;
+        height: 70px !important;
+        max-width: 70px !important;
+        max-height: 70px !important;
+    }
+
+    .lays-shelf {
+        width: 70px !important;
+        height: 70px !important;
+        max-width: 70px !important;
+        max-height: 70px !important;
+    }
+
+    .row1 { top: 27%; }
+    .row2 { top: 44%; }
+    .row3 { top: 63%; }
+    .row4 { top: 79%; }
+
+    .overlay-effect {
+        width: 180px;
+        top: 45%;
+    }
+}
+
+/* Small Mobile Devices (400px to 450px) */
+@media only screen and (min-width: 401px) {
+    .header {
+        height: 50px;
+    }
+
+    .header-logo {
+        height: 45px;
+    }
+
+    .header-info {
+        gap: 35px;
+    }
+
+    .score-box, .time-box {
+        font-size: 17px;
+        height: 38px;
+        min-width: 48px;
+    }
+
+    .score-value, .time-value {
+        font-size: 20px;
+    }
+
+    .label {
+        font-size: 13px;
+    }
+
+    .start-sec {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 75%;
+        max-width: 290px;
+    }
+
+    #cart {
+        bottom: 3%;
+    }
+
+    .row1, .row2, .row3, .row4 {
+        width: 100%;
+    }
+
+    .row1 .items, .row2 .items1, .row3 .items2, .row4 .items3 {
+        width: 75px !important;
+        height: 75px !important;
+        max-width: 75px !important;
+        max-height: 75px !important;
+    }
+
+    .lays-shelf {
+        width: 75px !important;
+        height: 75px !important;
+        max-width: 75px !important;
+        max-height: 75px !important;
+    }
+
+    .row1 { top: 24%; }
+    .row2 { top: 43%; }
+    .row3 { top: 61%; }
+    .overlay-style { width: 180px; top: 50%; }
+}
+
+@media only screen and (min-height: 950px) {
+    .row1 { top: 25%; }
+    .row2 { top: 42%; }
+    .row3 { top: 60%; }
+    .row4 { top: 76%; }
+
+    .row1 .items, .row2 .items1, .row3 .items2, .row4 .items3 {
+        width: 80px !important;
+        height: 80px !important;
+        max-width: 80px !important;
+        max-height: 80px !important;
+    }
+}

@@ -1,0 +1,12 @@
+
+=== Testing base: https://e5387662.horlicks-3d-game.pages.dev ===
+  200 OK: /assets/Walls/tile111tx.glb
+  200 OK: /assets/platform.gltf
+  200 OK: /assets/rIsland.glb
+  200 OK: /js/three.min.js
+
+=== Testing base: https://e5387662.horlicks-3d-game.pages.dev/ThreeMaze ===
+  200 OK: /assets/Walls/tile111tx.glb
+  200 OK: /assets/platform.gltf
+  200 OK: /assets/rIsland.glb
+  200 OK: /js/three.min.js

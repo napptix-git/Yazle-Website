@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Horlicks Juice Mixer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="game-container" aria-live="polite">
+        <section class="start-screen" aria-live="polite">
+            <button id="start-button" aria-label="Start Horlicks Mixer">Start</button>
+        </section>
+
+        <section class="timer-overlay" aria-labelledby="timer-label">
+            <div class="timer-label" id="timer-label">Memorize timer</div>
+            <div class="timer-pill">
+                <div class="timer-fill" id="timer-fill"></div>
+            </div>
+        </section>
+
+        <section class="frame frame-one" aria-hidden="true"></section>
+        <section class="frame frame-two" aria-hidden="true">
+            <section class="timer-overlay timer-overlay-two" aria-labelledby="timer-label-two">
+                <div class="timer-label" id="timer-label-two">Game timer</div>
+                <div class="timer-pill">
+                    <div class="timer-fill" id="timer-fill-two"></div>
+                </div>
+            </section>
+
+            <!-- Instruction text -->
+            <img src="./assets/Click on the right ingredient to put them into the blender.png" alt="Instructions" class="game-instruction" id="game-instruction">
+
+            <!-- Clickable ingredient areas -->
+            <div class="ingredient-area milk-area" data-ingredient="milk"></div>
+            <div class="ingredient-area almond-area" data-ingredient="almond"></div>
+            <div class="ingredient-area weed-area" data-ingredient="weed"></div>
+            <div class="ingredient-area apple-area" data-ingredient="apple"></div>
+            <div class="ingredient-area cocoa-area" data-ingredient="cocoa"></div>
+
+            <!-- Falling ingredients container -->
+            <div id="falling-container"></div>
+
+            <img src="./assets/jar empty.png" alt="Empty Horlicks jar" class="center-jar" id="jar">
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

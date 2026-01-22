@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Nothing Phone \\(3\\) interactive 3D ad experience\n\n- 3D phone model viewer with rotation controls\n- Interactive hotspots for Camera, Display, and Processor\n- Info panels with detailed specifications\n- Nothing-inspired minimalist dark theme\n- Idle detection for rotation hints\n- Mobile responsive design\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

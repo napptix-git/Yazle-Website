@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Horlicks 3D Maze Game - Interactive Three.js adventure">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Three.js, 3D Game, Maze">
+    <meta name="author" content="David Abbate">
+    <title>Horlicks 3D Maze Game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            zoom: reset;
+        }
+
+        html {
+            zoom: 1;
+        }
+
+        /* Mobile: Show game directly (no frame) */
+        @media (max-width: 576px) {
+            #iphone-frame-container {
+                display: none !important;
+            }
+
+            #mobile-game-container {
+                display: block !important;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            #mobile-game-iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+                display: block;
+            }
+        }
+
+        /* Desktop/Laptop: Show iPhone frame */
+        @media (min-width: 577px) {
+            #mobile-game-container {
+                display: none !important;
+            }
+
+            #iphone-frame-container {
+                display: flex !important;
+                justify-content: center;
+                align-items: flex-start;
+                min-height: 100vh;
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                padding: 30px 20px;
+                overflow-y: auto;
+            }
+
+            .iphone-frame {
+                position: relative;
+                width: 390px;
+                height: 844px;
+                max-width: 390px;
+                background: #000;
+                border-radius: 50px;
+                box-shadow:
+                    0 0 0 14px #1a1a1a,
+                    0 0 0 16px #0d0d0d,
+                    0 30px 80px rgba(0, 0, 0, 0.6);
+                overflow: hidden;
+            }
+
+            /* Dynamic Island (notch) */
+            .dynamic-island {
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 126px;
+                height: 37px;
+                background: #0a0a0a;
+                border-radius: 22px;
+                z-index: 1000;
+                box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.9);
+                pointer-events: none;
+            }
+
+            /* Home indicator bar */
+            .home-indicator {
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 150px;
+                height: 5px;
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 100px;
+                z-index: 1000;
+                pointer-events: none;
+            }
+
+            /* Game iframe */
+            .game-content {
+                width: 100%;
+                height: 100%;
+                border: none;
+                background: #000;
+                pointer-events: auto;
+                touch-action: auto;
+                cursor: default;
+            }
+
+            .iphone-frame {
+                cursor: default;
+            }
+
+            /* Responsive scaling for smaller screens */
+            @media (max-height: 900px) {
+                .iphone-frame {
+                    transform: scale(0.9);
+                }
+            }
+
+            @media (max-height: 800px) {
+                .iphone-frame {
+                    transform: scale(0.8);
+                }
+            }
+
+            @media (max-height: 700px) {
+                .iphone-frame {
+                    transform: scale(0.7);
+                }
+            }
+
+            @media (max-height: 600px) {
+                .iphone-frame {
+                    transform: scale(0.6);
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile: Direct game (no frame) -->
+    <div id="mobile-game-container" style="display: none;">
+        <iframe id="mobile-game-iframe" src="game.html" allow="accelerometer; gyroscope" sandbox="allow-same-origin allow-scripts allow-forms allow-pointer-lock"></iframe>
+    </div>
+
+    <!-- Desktop/Laptop: iPhone frame with game inside -->
+    <div id="iphone-frame-container" style="display: none;">
+        <div class="iphone-frame">
+            <!-- Dynamic Island (notch) -->
+            <div class="dynamic-island"></div>
+
+            <!-- Game iframe -->
+            <iframe class="game-content" src="game.html" allow="accelerometer; gyroscope" sandbox="allow-same-origin allow-scripts allow-forms allow-pointer-lock"></iframe>
+
+            <!-- Home indicator bar -->
+            <div class="home-indicator"></div>
+        </div>
+    </div>
+
+    <script>
+        // Detect device type and show appropriate version
+        const isMobile = window.innerWidth <= 576;
+
+        if (isMobile) {
+            // Mobile: Show game directly
+            document.getElementById('mobile-game-container').style.display = 'block';
+        } else {
+            // Desktop/Laptop: Show iPhone frame
+            document.getElementById('iphone-frame-container').style.display = 'flex';
+
+            // Disable keyboard arrow keys on desktop to force on-screen button usage
+            window.addEventListener('keydown', (e) => {
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, true);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const nowMobile = window.innerWidth <= 576;
+
+            if (nowMobile !== isMobile) {
+                // Reload page if device type changed
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>

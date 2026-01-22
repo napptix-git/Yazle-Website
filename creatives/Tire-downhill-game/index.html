@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Tire Roller</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛞</text></svg>">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Three.js Library r128 (supports GLB properly) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GLTFLoader for loading .glb models -->
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <!-- iPhone Frame (shown only on desktop) -->
+    <div id="iphone-frame">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div id="TutContainer"></div>
+        </div>
+        <div class="iphone-home-bar"></div>
+    </div>
+
+    <!-- Mobile container (shown only on mobile) -->
+    <div id="mobile-container">
+        <div id="TutContainerMobile"></div>
+    </div>
+
+    <!-- Game Configuration (edit this to customize) -->
+    <script src="js/config.js"></script>
+
+    <!-- Main Game Logic -->
+    <script src="js/game.js"></script>
+</body>
+</html>

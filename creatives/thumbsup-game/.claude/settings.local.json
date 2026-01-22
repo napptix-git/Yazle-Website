@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m http.server:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd hand gesture tutorial animation for pin drag guidance\n\n- Add animated hand that shows users how to drag pins to the can\n- Hand appears over first pin, pulses, then moves to can\n- Animation loops every 2.5 seconds until user interacts\n- Tutorial stops when user touches/drags any pin\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)",
+      "Bash(git commit:*)",
+      "Bash(timeout 2 bash -c \"curl -s http://localhost:8000 > /dev/null && echo ''Server is running successfully''\")",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(timeout 3 bash:*)",
+      "Bash(dir:*)",
+      "Bash(curl:*)",
+      "Bash(git revert:*)",
+      "Bash(git remote:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

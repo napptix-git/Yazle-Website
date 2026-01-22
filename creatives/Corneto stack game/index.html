@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Oreo Cornetto Stack Challenge</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="preview-body">
+  <div class="preview-container">
+    <div class="mobile-frame">
+      <div class="notch"></div>
+      <div class="iframe-wrapper">
+        <!-- Game content -->
+        <div id="cloud-overlay"></div>
+        <div id="score-container">
+          <div id="score-label">LAYERS</div>
+          <div id="score">0</div>
+        </div>
+        <div id="perfect-indicator">PERFECT!</div>
+        <div id="layer-name"></div>
+        <div id="tutorial-hand">
+          <span class="hand-icon">👆</span>
+          <span class="tap-text">TAP!</span>
+        </div>
+        <div id="instructions">
+          <div class="content">
+            <div class="logo">
+              <span class="logo-icon">🍦</span>
+              <h1>OREO CORNETTO</h1>
+              <h2>STACK CHALLENGE</h2>
+            </div>
+            <p class="tagline">Build the perfect Oreo Cornetto!</p>
+            <p class="hint">Stack layers of vanilla cream, chocolate sauce, and cookies & cream</p>
+            <p class="cta">Tap or press <span class="key">SPACE</span> to start</p>
+          </div>
+        </div>
+        <div id="results">
+          <div class="content">
+            <div class="game-over-icon">🍦</div>
+            <h2>GAME OVER</h2>
+            <p class="final-score-label">Your Cornetto reached</p>
+            <p class="final-score"><span id="final-height">0</span> layers</p>
+            <button id="play-again-btn">
+              <span class="btn-icon">🔄</span> Play Again
+            </button>
+            <p class="hint">or press <span class="key">R</span> to restart</p>
+          </div>
+        </div>
+        <div id="victory">
+          <div class="content">
+            <div class="victory-icon">🏆</div>
+            <h2>PERFECT OREO CORNETTO!</h2>
+            <p class="victory-text">You've built a complete Oreo Cornetto with the chocolate disc on top!</p>
+            <button id="play-again-victory-btn">
+              <span class="btn-icon">🔄</span> Play Again
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cannon@0.6.2/build/cannon.min.js"></script>
+  <script src="src/script.js"></script>
+</body>
+</html>

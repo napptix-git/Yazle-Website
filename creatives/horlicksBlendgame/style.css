@@ -1,0 +1,312 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    color: #ffffff;
+    background: #e8eef8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    position: relative;
+    width: 332px;
+    height: 620px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.start-screen {
+    position: absolute;
+    inset: 0;
+    background: url("./assets/startgame.png") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: opacity 0.4s ease;
+}
+
+.start-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#start-button {
+    border: none;
+    border-radius: 999px;
+    padding: 14px 36px;
+    background: linear-gradient(180deg, #ffe65c 0%, #ffba00 100%);
+    color: #0a1d47;
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35), inset 0 3px 6px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#start-button:focus-visible,
+#start-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4), inset 0 4px 7px rgba(255, 255, 255, 0.65);
+}
+
+#start-button:active {
+    transform: translateY(1px);
+}
+
+.frame {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.frame.visible {
+    opacity: 1;
+}
+
+.frame-one {
+    background-image: url("./assets/Frame 1.png");
+}
+
+.frame-two {
+    background-image: url("./assets/Frame 2.png");
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.timer-overlay {
+    position: absolute;
+    top: 55%;
+    left: 11%;
+    width: 78%;
+    height: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.timer-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.timer-pill {
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    background: linear-gradient(180deg, rgba(34, 79, 149, 0.96) 0%, rgba(16, 45, 100, 0.95) 100%);
+    box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.1), inset 0 -5px 8px rgba(0, 0, 0, 0.35), 0 10px 20px rgba(0, 9, 43, 0.55);
+    border: 2px solid rgba(6, 20, 60, 0.65);
+    position: relative;
+    overflow: hidden;
+}
+
+.timer-fill {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    background: linear-gradient(90deg, #ffe356 0%, #ffbf00 100%);
+    border-radius: 32px;
+    box-shadow: inset 0 3px 8px rgba(255, 255, 255, 0.7), inset 0 -6px 8px rgba(182, 116, 0, 0.35), 0 12px 18px rgba(255, 199, 0, 0.35);
+    transform-origin: left center;
+    transform: scaleX(1);
+    will-change: transform;
+}
+
+.timer-overlay-two {
+    position: absolute;
+    top: 15%;
+    left: 11%;
+    width: 78%;
+    height: 6%;
+    z-index: 3;
+}
+
+.game-instruction {
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 310px;
+    z-index: 3;
+    display: none;
+}
+
+.center-jar {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: auto;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.45));
+    z-index: 2;
+}
+
+.ingredient-area {
+    position: absolute;
+    cursor: pointer;
+    z-index: 4;
+    transition: transform 0.1s ease;
+}
+
+.ingredient-area:hover {
+    transform: scale(1.05);
+}
+
+.ingredient-area:active {
+    transform: scale(0.95);
+}
+
+/* Milk glass - top left (above almond) */
+.milk-area {
+    bottom: 33%;
+    left: 15%;
+    width: 15%;
+    height: 16%;
+}
+
+/* Cocoa beans - top right (above apple) */
+.cocoa-area {
+    bottom: 33%;
+    right: 18%;
+    width: 16%;
+    height: 15%;
+}
+
+/* Almond - bottom left (yellow/tan) */
+.almond-area {
+    bottom: 12%;
+    left: 15%;
+    width: 18%;
+    height: 16%;
+}
+
+/* Weed/Wheat - bottom center-left (green/yellow grain) */
+.weed-area {
+    bottom: 12%;
+    left: 40%;
+    width: 14%;
+    height: 16%;
+}
+
+/* Apple - bottom center-right (red apple) */
+.apple-area {
+    bottom: 12%;
+    right: 18%;
+    width: 16%;
+    height: 16%;
+}
+
+#falling-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.ingredient-drop {
+    position: absolute;
+    top: 0;
+    width: 120px;
+    left: 50%;
+    margin-left: -60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+}
+
+.ingredient-drop.dropping {
+    animation: dropFromTop 1.5s ease-in forwards;
+}
+
+.falling-ingredient {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+}
+
+.ingredient-text {
+    width: 110px;
+    height: auto;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes dropFromTop {
+    0% {
+        transform: translateY(100px) scale(1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(300px) scale(0.7);
+        opacity: 0;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: translate(-50%, 0) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, 0) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(620px) translateX(var(--horizontal)) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    body {
+        padding: 16px 0;
+    }
+
+    .game-container {
+        transform: scale(0.95);
+    }
+}

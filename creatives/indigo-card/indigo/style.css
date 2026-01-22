@@ -1,0 +1,154 @@
+/* Base */
+* { margin: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+body { background: #000; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+overflow: hidden;}
+
+/* Stage: full-screen viewport */
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y; /* allow vertical scroll; we handle horizontal drag */
+}
+
+/* Train: horizontal strip of slides */
+#train {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 200%;        /* 2 slides → 200% */
+  height: 100%;
+  will-change: transform;
+  transform: translate3d(0,0,0);  /* JS sets to -index*100vw */
+  transition: transform 300ms ease;
+}
+
+/* Each car fills the viewport */
+.car {
+  position: relative;
+  flex: 0 0 100vw;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Media fit */
+#promo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* change to contain if you must see entire image */
+  /* display: block; */
+  z-index: 1;
+  user-select: none;
+}
+#promo-banner {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  object-fit: contain;  /* change to contain if you must see entire image */
+  /* display: block; */
+}
+
+/* Active slide hint (optional scale/opacity) */
+/* .car { transition: transform 240ms ease, opacity 240ms ease; }
+   .car.active { transform: scale(1.0); opacity: 1; }
+   .car:not(.active) { transform: scale(0.96); opacity: 0.9; } */
+
+/* Disable easing while dragging (for instant response) */
+#train.dragging { transition: none; }
+
+/* Play button */
+#play-button {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: 80px; height: 80px;
+  border: 0; border-radius: 50%;
+  background: rgba(0,0,0,0.7);
+  color: #fff; font-size: 24px;
+  cursor: pointer; z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 120ms ease, background-color 200ms ease, opacity 180ms ease;
+}
+#play-button:hover { transform: translateX(-50%) scale(1.06); background: rgba(255,255,255,0.85); color:#000; }
+#play-button.hidden { opacity: 0; pointer-events: none; }
+
+/* Make ALL banner slides (original + clones) render the same */
+.car[data-type="banner"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;        /* use cover if you want full-bleed crop */
+  background: #000;           /* letterbox fill when using contain */
+}
+
+/* (Optional) unify videos too, original + clones */
+.car[data-type="video"] video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#gestureImg {
+  position: absolute;
+  z-index: 250;          /* above slides */
+  width: 15%;
+  height: 90px;
+  width: 90px;
+  top: 57%;
+  left: 50%;
+  background-color: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);  /* proper center */
+  pointer-events: none;  /* touches pass through */
+  animation: gestureFloat 1.6s ease-in-out infinite;
+}
+
+/* optional: a soft fade when we hide it */
+#gestureImg.gesture-hide {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+/* IMPORTANT: include the centering transform inside keyframes so it's not overridden */
+@keyframes gestureFloat {
+  0%   { transform: translate(-50%, -50%) translateX(-20px); }
+  50%  { transform: translate(-50%, -50%) translateX( 20px); }
+  100% { transform: translate(-50%, -50%) translateX(-20px); }
+}
+#bookImg {
+  position: absolute;
+  bottom: 4%;              /* adjust placement */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;            /* size it as needed */
+  height: auto;
+  z-index: 200;            /* above slides */
+  cursor: pointer;
+  user-select: none;
+}
+#closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 300;       /* above everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  user-select: none;
+}
+
+#closeBtn:hover {
+  background: rgba(255,255,255,0.85);
+  color: #000;
+}

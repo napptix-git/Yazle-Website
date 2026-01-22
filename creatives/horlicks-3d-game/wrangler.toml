@@ -1,0 +1,9 @@
+name = "horlicks-3d-game"
+compatibility_date = "2024-01-01"
+
+[build]
+command = ""
+directory = "ThreeMaze"
+
+[site]
+bucket = "ThreeMaze"

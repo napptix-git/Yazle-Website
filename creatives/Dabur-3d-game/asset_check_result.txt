@@ -1,0 +1,806 @@
+Found 10 URLs.
+Error: URL can't contain control characters. '/ThreeMaze/assets/Skele/idle_1_male_free_animation_200_frames_loop.glb`;\n    const runAnimPath = `${ASSET_BASE}/assets/Skele/male_running_20_frames_loop.glb`;\n\n\n\n    // Lives system\n    let playerLives = 3;\n    const maxLives = 3;\n    let isInvulnerable = false;\n    const invulnerabilityDuration = 1000; // 1 second after hit\n\n    // Collectibles system (wholesome items vs hazards)\n    const collectibleConfig = {\n      wholesomeTypes: [' (found at least '\n') /assets/Skele/idle_1_male_free_animation_200_frames_loop.glb`;
+    const runAnimPath = `${ASSET_BASE}/assets/Skele/male_running_20_frames_loop.glb`;
+
+
+
+    // Lives system
+    let playerLives = 3;
+    const maxLives = 3;
+    let isInvulnerable = false;
+    const invulnerabilityDuration = 1000; // 1 second after hit
+
+    // Collectibles system (wholesome items vs hazards)
+    const collectibleConfig = {
+      wholesomeTypes: [
+Error: URL can't contain control characters. '/ThreeMaze/js/draco/`); // Load from Cloudflare CDN\n        gltfLoader.setDRACOLoader(dracoLoader);\n      } catch (e) {\n        console.warn(' (found at least ' ') /js/draco/`); // Load from Cloudflare CDN
+        gltfLoader.setDRACOLoader(dracoLoader);
+      } catch (e) {
+        console.warn(
+Error: URL can't contain control characters. '/ThreeMaze/assets/bg.jpg`);\n\n\n\n    const mainTexture = textureLoader.load(`${ASSET_BASE}/assets/Walls/MainText.fw.webp`);\n    mainTexture.flipY = false;// this might not work, cause texture isn' (found at least '\n') /assets/bg.jpg`);
+
+
+
+    const mainTexture = textureLoader.load(`${ASSET_BASE}/assets/Walls/MainText.fw.webp`);
+    mainTexture.flipY = false;// this might not work, cause texture isn
+Error: URL can't contain control characters. '/ThreeMaze/assets/fxDot.webp`);\n    const ringTex = textureLoader.load(`${ASSET_BASE}/assets/fxRing.webp`);\n\n    // Skeleton textures removed - no longer needed\n    // const playerBase = textureLoader.load(`${ASSET_BASE}/assets/Skele/baseSkel.jpg`);\n    // playerBase.flipY = false;\n    // playerBase.encoding = THREE.sRGBEncoding;\n\n    // const playerRed = textureLoader.load(`${ASSET_BASE}/assets/Skele/sk_red.webp`);\n    // playerRed.flipY = false;\n    // playerRed.encoding = THREE.sRGBEncoding;\n\n    // const playerBlue = textureLoader.load(`${ASSET_BASE}/assets/Skele/sk_blue.webp`);\n    // playerBlue.flipY = false;\n    // playerBlue.encoding = THREE.sRGBEncoding;\n\n    // const playerGreen = textureLoader.load(`${ASSET_BASE}/assets/Skele/sk_green.webp`);\n    // playerGreen.flipY = false;\n    // playerGreen.encoding = THREE.sRGBEncoding;\n\n\n\n\n\n    // HDR environment removed to reduce file size\n    // const dayEnvTex = rLoader.load(' (found at least '\n') /assets/fxDot.webp`);
+    const ringTex = textureLoader.load(`${ASSET_BASE}/assets/fxRing.webp`);
+
+    // Skeleton textures removed - no longer needed
+    // const playerBase = textureLoader.load(`${ASSET_BASE}/assets/Skele/baseSkel.jpg`);
+    // playerBase.flipY = false;
+    // playerBase.encoding = THREE.sRGBEncoding;
+
+    // const playerRed = textureLoader.load(`${ASSET_BASE}/assets/Skele/sk_red.webp`);
+    // playerRed.flipY = false;
+    // playerRed.encoding = THREE.sRGBEncoding;
+
+    // const playerBlue = textureLoader.load(`${ASSET_BASE}/assets/Skele/sk_blue.webp`);
+    // playerBlue.flipY = false;
+    // playerBlue.encoding = THREE.sRGBEncoding;
+
+    // const playerGreen = textureLoader.load(`${ASSET_BASE}/assets/Skele/sk_green.webp`);
+    // playerGreen.flipY = false;
+    // playerGreen.encoding = THREE.sRGBEncoding;
+
+
+
+
+
+    // HDR environment removed to reduce file size
+    // const dayEnvTex = rLoader.load(
+Error: URL can't contain control characters. '/ThreeMaze/assets/Walls/pillar444.glb`,\n        (gltf) => {\n          instancedPost = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, lightStoneMat, 121);\n          scene.add(instancedPost);\n          CreateTileInstancesChain()// tiles when posts done\n        });\n    }\n\n    function CreateTileInstancesChain() {\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/tile111tx.glb`,\n        (gltf) => {\n          iTile1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n          scene.add(iTile1);//tile 1 done \n          //load tile 2\n          gltfLoader.load(\n            `${ASSET_BASE}/assets/Walls/tile222tx.glb`,\n            (gltf) => {\n              iTile2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n              scene.add(iTile2); //tile 2 done\n              //load tile 3\n              gltfLoader.load(\n                `${ASSET_BASE}/assets/Walls/tile333tx.glb`,\n                (gltf) => {\n                  iTile3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n                  scene.add(iTile3);//tile 3 done \n                  //load tile 4\n                  gltfLoader.load(\n                    `${ASSET_BASE}/assets/Walls/tile444tx.glb`,\n                    (gltf) => {\n                      iTile4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n                      scene.add(iTile4);//tile 4 done\n                      // call something else  \n                      CreateWallInstanceChain();\n                    });\n                });\n            });\n        });\n    }\n\n    function CreateWallInstanceChain() {\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/wall1111.glb`,\n        (gltf) => {\n          instancedWall1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n          //instancedWall1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, wallMat, wallInstCount); \n          scene.add(instancedWall1);// wall 1 loaded\n          //load wall 2\n          gltfLoader.load(\n            `${ASSET_BASE}/assets/Walls/wall2222.glb`,\n            (gltf) => {\n              instancedWall2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n              scene.add(instancedWall2);// wall 2 loaded\n              //load wall 3\n              gltfLoader.load(\n                `${ASSET_BASE}/assets/Walls/wall3333.glb`,\n                (gltf) => {\n                  instancedWall3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n                  scene.add(instancedWall3);// wall 3 loaded\n                  //load wall 4\n                  gltfLoader.load(\n                    `${ASSET_BASE}/assets/Walls/wall4444.glb`,\n                    (gltf) => {\n                      instancedWall4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n                      scene.add(instancedWall4);// wall 4 loaded\n                      //do something else  \n                      CalculateMaze();\n                    });\n                });\n            });\n        });\n    }\n\n\n\n\n\n    //' (found at least '\n') /assets/Walls/pillar444.glb`,
+        (gltf) => {
+          instancedPost = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, lightStoneMat, 121);
+          scene.add(instancedPost);
+          CreateTileInstancesChain()// tiles when posts done
+        });
+    }
+
+    function CreateTileInstancesChain() {
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/tile111tx.glb`,
+        (gltf) => {
+          iTile1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+          scene.add(iTile1);//tile 1 done 
+          //load tile 2
+          gltfLoader.load(
+            `${ASSET_BASE}/assets/Walls/tile222tx.glb`,
+            (gltf) => {
+              iTile2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+              scene.add(iTile2); //tile 2 done
+              //load tile 3
+              gltfLoader.load(
+                `${ASSET_BASE}/assets/Walls/tile333tx.glb`,
+                (gltf) => {
+                  iTile3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+                  scene.add(iTile3);//tile 3 done 
+                  //load tile 4
+                  gltfLoader.load(
+                    `${ASSET_BASE}/assets/Walls/tile444tx.glb`,
+                    (gltf) => {
+                      iTile4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+                      scene.add(iTile4);//tile 4 done
+                      // call something else  
+                      CreateWallInstanceChain();
+                    });
+                });
+            });
+        });
+    }
+
+    function CreateWallInstanceChain() {
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/wall1111.glb`,
+        (gltf) => {
+          instancedWall1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+          //instancedWall1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, wallMat, wallInstCount); 
+          scene.add(instancedWall1);// wall 1 loaded
+          //load wall 2
+          gltfLoader.load(
+            `${ASSET_BASE}/assets/Walls/wall2222.glb`,
+            (gltf) => {
+              instancedWall2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+              scene.add(instancedWall2);// wall 2 loaded
+              //load wall 3
+              gltfLoader.load(
+                `${ASSET_BASE}/assets/Walls/wall3333.glb`,
+                (gltf) => {
+                  instancedWall3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+                  scene.add(instancedWall3);// wall 3 loaded
+                  //load wall 4
+                  gltfLoader.load(
+                    `${ASSET_BASE}/assets/Walls/wall4444.glb`,
+                    (gltf) => {
+                      instancedWall4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+                      scene.add(instancedWall4);// wall 4 loaded
+                      //do something else  
+                      CalculateMaze();
+                    });
+                });
+            });
+        });
+    }
+
+
+
+
+
+    //#region Build out
+    function BuildTile(xPos, zPos, incCellObj) {
+
+      AddTileInstance(xPos, zPos);//xPos*10, 0, (zPos*10)*-1  
+
+      const body = new CANNON.Body({
+        mass: 0,
+        position: new CANNON.Vec3((xPos * 10), -.5, (zPos * 10) * -1),
+        shape: tileShape,
+      });
+      world.addBody(body);
+      incCellObj.tileCol = body;
+    }
+
+
+    function BuildTileNoMaze(xPos, zPos) {
+      const num = Math.floor((Math.random() * 4));
+      let loadString = `${ASSET_BASE}/assets/Walls/tile111tx.glb`;
+      switch (num) {
+        case 0:
+          loadString = `${ASSET_BASE}/assets/Walls/tile111tx.glb`
+          break;
+
+        case 1:
+          loadString = `${ASSET_BASE}/assets/Walls/tile222tx.glb`
+          break;
+
+        case 2:
+          loadString = `${ASSET_BASE}/assets/Walls/tile333tx.glb`
+          break;
+
+        case 3:
+          loadString = `${ASSET_BASE}/assets/Walls/tile444tx.glb`
+          break;
+      }
+      gltfLoader.load(
+        //
+Error: URL can't contain control characters. '/ThreeMaze/assets/Walls/pillar444.glb`,\n        (gltf) => {\n          instancedPost = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, lightStoneMat, 121);\n          scene.add(instancedPost);\n        });\n    }\n\n    function AddPostInstance(xPos, zPos) {\n      //for instancing\n      dummyObj.position.set((xPos * 10) - 5, 0, ((zPos * 10) - 5) * -1);\n      dummyObj.rotation.x = Math.PI / 2;\n      dummyObj.updateMatrix();\n      instancedPost.setMatrixAt((xPos * (mWidth + 1)) + zPos, dummyObj.matrix);\n      instancedPost.instanceMatrix.needsUpdate = true;\n      //for instancing\n\n\n      const body = new CANNON.Body({\n        mass: 0,\n        position: new CANNON.Vec3(dummyObj.position.x, 2.5, dummyObj.position.z),\n        shape: pillarShape,\n      });\n      world.addBody(body);\n    }\n\n\n    function CreateTileInstances() {\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/tile111tx.glb`,\n        (gltf) => {\n          iTile1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n          scene.add(iTile1);\n        });\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/tile222tx.glb`,\n        (gltf) => {\n          iTile2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n          scene.add(iTile2);\n        });\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/tile333tx.glb`,\n        (gltf) => {\n          iTile3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n          scene.add(iTile3);\n        });\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/tile444tx.glb`,\n        (gltf) => {\n          iTile4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);\n          scene.add(iTile4);\n        });\n    }\n\n    function AddTileInstance(xPos, zPos) {\n      dummyTileObj.position.set(xPos * 10, 0, (zPos * 10) * -1);\n      dummyTileObj.rotation.x = Math.PI / 2;\n\n      dummyTileObj.updateMatrix();\n      let tNum = Math.floor((Math.random() * 4));\n      let fNum = FindValidIndex(tNum, tileIndexArray, tileInstCount);\n\n\n      switch (fNum) {\n        case 0:\n          iTile1.setMatrixAt(tileIndexArray[0], dummyTileObj.matrix);\n          iTile1.instanceMatrix.needsUpdate = true;\n          tileIndexArray[0]++;\n          break;\n\n        case 1:\n          iTile2.setMatrixAt(tileIndexArray[1], dummyTileObj.matrix);\n          iTile2.instanceMatrix.needsUpdate = true;\n          tileIndexArray[1]++;\n          break;\n\n        case 2:\n          iTile3.setMatrixAt(tileIndexArray[2], dummyTileObj.matrix);\n          iTile3.instanceMatrix.needsUpdate = true;\n          tileIndexArray[2]++;\n          break;\n\n        case 3:\n          iTile4.setMatrixAt(tileIndexArray[3], dummyTileObj.matrix);\n          iTile4.instanceMatrix.needsUpdate = true;\n          tileIndexArray[3]++;\n          break;\n      }\n    }\n\n\n\n    function CreateWallInstances() {\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/wall1111.glb`,\n        (gltf) => {\n          instancedWall1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n          scene.add(instancedWall1);\n        });\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/wall2222.glb`,\n        (gltf) => {\n          instancedWall2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n          scene.add(instancedWall2);\n        });\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/wall3333.glb`,\n        (gltf) => {\n          instancedWall3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n          scene.add(instancedWall3);\n        });\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/Walls/wall4444.glb`,\n        (gltf) => {\n          instancedWall4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);\n          scene.add(instancedWall4);\n        });\n    }\n\n\n    function AddNWallInstance(xPos, zPos, turn)// turn 1 is nWall \n    {\n      dummyWallObj.position.set(xPos * 10, 0, ((zPos * 10) * -1) - 5);\n      dummyWallObj.rotation.x = Math.PI / 2;\n\n      dummyWallObj.updateMatrix();\n      const wallNum = Math.floor((Math.random() * 4));\n      let fWNum = FindValidIndex(wallNum, wallIndexArray, wallInstCount);\n\n      switch (fWNum) {\n        case 0:\n          instancedWall1.setMatrixAt(wallIndexArray[0], dummyWallObj.matrix);\n          instancedWall1.instanceMatrix.needsUpdate = true;\n          wallIndexArray[0]++;\n          break;\n\n        case 1:\n          instancedWall2.setMatrixAt(wallIndexArray[1], dummyWallObj.matrix);\n          instancedWall2.instanceMatrix.needsUpdate = true;\n          wallIndexArray[1]++\n          break;\n\n        case 2:\n          instancedWall3.setMatrixAt(wallIndexArray[2], dummyWallObj.matrix);\n          instancedWall3.instanceMatrix.needsUpdate = true;\n          wallIndexArray[2]++\n          break;\n\n        case 3:\n          instancedWall4.setMatrixAt(wallIndexArray[3], dummyWallObj.matrix);\n          instancedWall4.instanceMatrix.needsUpdate = true;\n          wallIndexArray[3]++\n          break;\n      }\n    }\n\n    function AddEWallInstance(xPos, zPos, turn)// turn 1 is nWall \n    {\n      dummyEWallObj.rotation.x = Math.PI / 2;\n      dummyEWallObj.position.set((xPos * 10) + 5, 0, (zPos * 10) * -1);\n      dummyEWallObj.rotation.z = Math.PI / 2;\n\n      dummyEWallObj.updateMatrix();\n      const wallNum = Math.floor((Math.random() * 4));\n      let fWNum = FindValidIndex(wallNum, wallIndexArray, wallInstCount);\n\n      switch (fWNum) {\n        case 0:\n          instancedWall1.setMatrixAt(wallIndexArray[0], dummyEWallObj.matrix);\n          instancedWall1.instanceMatrix.needsUpdate = true;\n          wallIndexArray[0]++;\n          break;\n\n        case 1:\n          instancedWall2.setMatrixAt(wallIndexArray[1], dummyEWallObj.matrix);\n          instancedWall2.instanceMatrix.needsUpdate = true;\n          wallIndexArray[1]++\n          break;\n\n        case 2:\n          instancedWall3.setMatrixAt(wallIndexArray[2], dummyEWallObj.matrix);\n          instancedWall3.instanceMatrix.needsUpdate = true;\n          wallIndexArray[2]++\n          break;\n\n        case 3:\n          instancedWall4.setMatrixAt(wallIndexArray[3], dummyEWallObj.matrix);\n          instancedWall4.instanceMatrix.needsUpdate = true;\n          wallIndexArray[3]++\n          break;\n      }\n    }\n\n    function FindValidIndex(arrPos, arr, count) {\n      let found = false;\n\n      if (arr[arrPos] < count) {\n        return arrPos;// index is ok\n      }\n\n      //index is not ok from here.. find a valid, or null\n      let loopArrPos = arrPos + 1;\n      if (loopArrPos > (arr.length - 1)) {\n        loopArrPos = 0;\n      }\n\n      // run a for loop here\n      for (let i = 0; i < arr.length; i++) {\n\n        if (arr[loopArrPos] < count) {\n          found = true;\n          return loopArrPos;// index is ok\n          break;\n        }\n\n        loopArrPos++;// go to next\n        if (loopArrPos > (arr.length - 1)) {\n          loopArrPos = 0;\n        }\n      }\n\n      if (found == false) {\n        return null;\n      }\n    }\n\n    //instances===============================\n\n\n\n\n\n\n    //this will call calcLoop \n    function CalculateMaze() {\n      curTile = (curX * mWidth) + curY;\n      for (let row = 0; row < mWidth; row++) {\n        for (let column = 0; column < mLength; column++) {\n          let colObj = {\n            //cellG: cellGroup,\n            tileObj: 1,\n            nwObj: 1,\n            ewObj: 1,\n            tileCol: null,\n            nwCol: null,\n            ewCol: null,\n            tileTypeId: 15,\n            tileOccupantId: 0\n          };\n          cellArrayNew.push(colObj);\n        }\n      }\n      Visited.push(curTile);\n      theStack.push(curTile);\n\n\n      CalcLoop();\n    }\n    //calls popwalls\n    function CalcLoop() {\n      const prev = curTile;\n\n      CalcProbeNeighbor();\n      if (neighborCount > 0) //can move forward\n      {\n        CalcTakeAStep();\n        CheckFurthestPoint();\n        recSteps = 0;\n      }\n\n      if (neighborCount == 0) //recurse\n      {\n        theStack.pop();\n        if (theStack.length > 0) {\n          curTile = theStack[theStack.length - 1];\n          curX = Math.floor(curTile / mWidth);\n          curY = (curTile % mWidth);\n          recSteps++;\n        }\n      }\n\n      if (theStack.length > 0) {\n        CalcLoop();\n        return;\n      }\n      if (theStack.length == 0) {\n        const furX = Math.floor(furthestPoint / mWidth);\n        const furY = (furthestPoint % mWidth);\n\n        const endCellFacing = cellArrayNew[furX * mWidth + furY].tileTypeId;\n\n        //place portal here\n        BuildPortal(furX, furY, endCellFacing);\n\n\n        PopWalls();\n      }\n    }\n\n    function CreatePortalFX(xPos, yPos, zPos) {\n      const points = [];\n      points.push(new THREE.Vector3(0, 0, 0));\n      portalGeo = new THREE.BufferGeometry().setFromPoints(points);\n\n      portMat = new THREE.PointsMaterial(\n        {\n          opacity: .5,\n          color: 0x00ff00,\n          map: portTex,\n          size: 5.6,\n          sizeAttenuation: true,\n          transparent: true\n        });\n\n      ringMat = new THREE.PointsMaterial(\n        {\n          color: 0x00ff00,\n          map: ringTex,\n          size: 5.6,\n          sizeAttenuation: true,\n          transparent: true\n        });\n\n      let particle = new THREE.Points(portalGeo, portMat);\n      particle.position.set(\n        xPos,\n        yPos + .1,\n        zPos\n      );\n      particle.frustumCulled = false;\n      scene.add(particle);\n\n      let ringPart = new THREE.Points(portalGeo, ringMat);\n      ringPart.position.set(\n        xPos,\n        yPos + .1,\n        zPos\n      );\n      ringPart.frustumCulled = false;\n      scene.add(ringPart);\n    }\n\n    function BuildPortal(xPos, yPos, endFacing) {\n      gltfLoader.load(\n        `${ASSET_BASE}/assets/portal2.glb`,\n        (gltf) => {\n          const newPortal = gltf.scenes[0].children[0];\n\n\n          newPortal.position.x = xPos * 10;\n          newPortal.position.y = 0;\n          newPortal.position.z = (yPos * 10) * -1;\n\n\n          /*\n          newPortal.position.x = 10;\n          newPortal.position.y = 0;\n          newPortal.position.z = 0;*/\n\n\n          newPortal.scale.set(.7, .7, .7);\n\n          //create anchor for portal center\n          const centObj = new THREE.Object3D();\n          centObj.position.y = -1;\n          centObj.position.z = -2.5;\n          centObj.parent = newPortal;\n\n\n          switch (endFacing) {\n            case 14: // south open\n\n              break;\n\n            case 13://west open\n              newPortal.rotation.z = Math.PI / 2;\n              break;\n\n            case 11:// north open   \n              newPortal.rotation.z = Math.PI;\n              break;\n\n            case 7:// east open    \n              newPortal.rotation.z = Math.PI / -2;\n              break;\n          }\n\n          var centPos = new THREE.Vector3();\n          let centQuat = new THREE.Quaternion();\n\n          centObj.getWorldPosition(centPos);\n          const portalShape = new CANNON.Sphere(1);\n          const pBody = new CANNON.Body({\n            mass: 0,\n            position: new CANNON.Vec3(centPos.x, centPos.y, centPos.z),\n            shape: portalShape,\n          });\n\n          pBody.collisionResponse = 0;\n          pBody.addEventListener(' (found at least '\n') /assets/Walls/pillar444.glb`,
+        (gltf) => {
+          instancedPost = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, lightStoneMat, 121);
+          scene.add(instancedPost);
+        });
+    }
+
+    function AddPostInstance(xPos, zPos) {
+      //for instancing
+      dummyObj.position.set((xPos * 10) - 5, 0, ((zPos * 10) - 5) * -1);
+      dummyObj.rotation.x = Math.PI / 2;
+      dummyObj.updateMatrix();
+      instancedPost.setMatrixAt((xPos * (mWidth + 1)) + zPos, dummyObj.matrix);
+      instancedPost.instanceMatrix.needsUpdate = true;
+      //for instancing
+
+
+      const body = new CANNON.Body({
+        mass: 0,
+        position: new CANNON.Vec3(dummyObj.position.x, 2.5, dummyObj.position.z),
+        shape: pillarShape,
+      });
+      world.addBody(body);
+    }
+
+
+    function CreateTileInstances() {
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/tile111tx.glb`,
+        (gltf) => {
+          iTile1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+          scene.add(iTile1);
+        });
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/tile222tx.glb`,
+        (gltf) => {
+          iTile2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+          scene.add(iTile2);
+        });
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/tile333tx.glb`,
+        (gltf) => {
+          iTile3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+          scene.add(iTile3);
+        });
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/tile444tx.glb`,
+        (gltf) => {
+          iTile4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, tileInstCount);
+          scene.add(iTile4);
+        });
+    }
+
+    function AddTileInstance(xPos, zPos) {
+      dummyTileObj.position.set(xPos * 10, 0, (zPos * 10) * -1);
+      dummyTileObj.rotation.x = Math.PI / 2;
+
+      dummyTileObj.updateMatrix();
+      let tNum = Math.floor((Math.random() * 4));
+      let fNum = FindValidIndex(tNum, tileIndexArray, tileInstCount);
+
+
+      switch (fNum) {
+        case 0:
+          iTile1.setMatrixAt(tileIndexArray[0], dummyTileObj.matrix);
+          iTile1.instanceMatrix.needsUpdate = true;
+          tileIndexArray[0]++;
+          break;
+
+        case 1:
+          iTile2.setMatrixAt(tileIndexArray[1], dummyTileObj.matrix);
+          iTile2.instanceMatrix.needsUpdate = true;
+          tileIndexArray[1]++;
+          break;
+
+        case 2:
+          iTile3.setMatrixAt(tileIndexArray[2], dummyTileObj.matrix);
+          iTile3.instanceMatrix.needsUpdate = true;
+          tileIndexArray[2]++;
+          break;
+
+        case 3:
+          iTile4.setMatrixAt(tileIndexArray[3], dummyTileObj.matrix);
+          iTile4.instanceMatrix.needsUpdate = true;
+          tileIndexArray[3]++;
+          break;
+      }
+    }
+
+
+
+    function CreateWallInstances() {
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/wall1111.glb`,
+        (gltf) => {
+          instancedWall1 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+          scene.add(instancedWall1);
+        });
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/wall2222.glb`,
+        (gltf) => {
+          instancedWall2 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+          scene.add(instancedWall2);
+        });
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/wall3333.glb`,
+        (gltf) => {
+          instancedWall3 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+          scene.add(instancedWall3);
+        });
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/Walls/wall4444.glb`,
+        (gltf) => {
+          instancedWall4 = new THREE.InstancedMesh(gltf.scenes[0].children[0].geometry, mainMat, wallInstCount);
+          scene.add(instancedWall4);
+        });
+    }
+
+
+    function AddNWallInstance(xPos, zPos, turn)// turn 1 is nWall 
+    {
+      dummyWallObj.position.set(xPos * 10, 0, ((zPos * 10) * -1) - 5);
+      dummyWallObj.rotation.x = Math.PI / 2;
+
+      dummyWallObj.updateMatrix();
+      const wallNum = Math.floor((Math.random() * 4));
+      let fWNum = FindValidIndex(wallNum, wallIndexArray, wallInstCount);
+
+      switch (fWNum) {
+        case 0:
+          instancedWall1.setMatrixAt(wallIndexArray[0], dummyWallObj.matrix);
+          instancedWall1.instanceMatrix.needsUpdate = true;
+          wallIndexArray[0]++;
+          break;
+
+        case 1:
+          instancedWall2.setMatrixAt(wallIndexArray[1], dummyWallObj.matrix);
+          instancedWall2.instanceMatrix.needsUpdate = true;
+          wallIndexArray[1]++
+          break;
+
+        case 2:
+          instancedWall3.setMatrixAt(wallIndexArray[2], dummyWallObj.matrix);
+          instancedWall3.instanceMatrix.needsUpdate = true;
+          wallIndexArray[2]++
+          break;
+
+        case 3:
+          instancedWall4.setMatrixAt(wallIndexArray[3], dummyWallObj.matrix);
+          instancedWall4.instanceMatrix.needsUpdate = true;
+          wallIndexArray[3]++
+          break;
+      }
+    }
+
+    function AddEWallInstance(xPos, zPos, turn)// turn 1 is nWall 
+    {
+      dummyEWallObj.rotation.x = Math.PI / 2;
+      dummyEWallObj.position.set((xPos * 10) + 5, 0, (zPos * 10) * -1);
+      dummyEWallObj.rotation.z = Math.PI / 2;
+
+      dummyEWallObj.updateMatrix();
+      const wallNum = Math.floor((Math.random() * 4));
+      let fWNum = FindValidIndex(wallNum, wallIndexArray, wallInstCount);
+
+      switch (fWNum) {
+        case 0:
+          instancedWall1.setMatrixAt(wallIndexArray[0], dummyEWallObj.matrix);
+          instancedWall1.instanceMatrix.needsUpdate = true;
+          wallIndexArray[0]++;
+          break;
+
+        case 1:
+          instancedWall2.setMatrixAt(wallIndexArray[1], dummyEWallObj.matrix);
+          instancedWall2.instanceMatrix.needsUpdate = true;
+          wallIndexArray[1]++
+          break;
+
+        case 2:
+          instancedWall3.setMatrixAt(wallIndexArray[2], dummyEWallObj.matrix);
+          instancedWall3.instanceMatrix.needsUpdate = true;
+          wallIndexArray[2]++
+          break;
+
+        case 3:
+          instancedWall4.setMatrixAt(wallIndexArray[3], dummyEWallObj.matrix);
+          instancedWall4.instanceMatrix.needsUpdate = true;
+          wallIndexArray[3]++
+          break;
+      }
+    }
+
+    function FindValidIndex(arrPos, arr, count) {
+      let found = false;
+
+      if (arr[arrPos] < count) {
+        return arrPos;// index is ok
+      }
+
+      //index is not ok from here.. find a valid, or null
+      let loopArrPos = arrPos + 1;
+      if (loopArrPos > (arr.length - 1)) {
+        loopArrPos = 0;
+      }
+
+      // run a for loop here
+      for (let i = 0; i < arr.length; i++) {
+
+        if (arr[loopArrPos] < count) {
+          found = true;
+          return loopArrPos;// index is ok
+          break;
+        }
+
+        loopArrPos++;// go to next
+        if (loopArrPos > (arr.length - 1)) {
+          loopArrPos = 0;
+        }
+      }
+
+      if (found == false) {
+        return null;
+      }
+    }
+
+    //instances===============================
+
+
+
+
+
+
+    //this will call calcLoop 
+    function CalculateMaze() {
+      curTile = (curX * mWidth) + curY;
+      for (let row = 0; row < mWidth; row++) {
+        for (let column = 0; column < mLength; column++) {
+          let colObj = {
+            //cellG: cellGroup,
+            tileObj: 1,
+            nwObj: 1,
+            ewObj: 1,
+            tileCol: null,
+            nwCol: null,
+            ewCol: null,
+            tileTypeId: 15,
+            tileOccupantId: 0
+          };
+          cellArrayNew.push(colObj);
+        }
+      }
+      Visited.push(curTile);
+      theStack.push(curTile);
+
+
+      CalcLoop();
+    }
+    //calls popwalls
+    function CalcLoop() {
+      const prev = curTile;
+
+      CalcProbeNeighbor();
+      if (neighborCount > 0) //can move forward
+      {
+        CalcTakeAStep();
+        CheckFurthestPoint();
+        recSteps = 0;
+      }
+
+      if (neighborCount == 0) //recurse
+      {
+        theStack.pop();
+        if (theStack.length > 0) {
+          curTile = theStack[theStack.length - 1];
+          curX = Math.floor(curTile / mWidth);
+          curY = (curTile % mWidth);
+          recSteps++;
+        }
+      }
+
+      if (theStack.length > 0) {
+        CalcLoop();
+        return;
+      }
+      if (theStack.length == 0) {
+        const furX = Math.floor(furthestPoint / mWidth);
+        const furY = (furthestPoint % mWidth);
+
+        const endCellFacing = cellArrayNew[furX * mWidth + furY].tileTypeId;
+
+        //place portal here
+        BuildPortal(furX, furY, endCellFacing);
+
+
+        PopWalls();
+      }
+    }
+
+    function CreatePortalFX(xPos, yPos, zPos) {
+      const points = [];
+      points.push(new THREE.Vector3(0, 0, 0));
+      portalGeo = new THREE.BufferGeometry().setFromPoints(points);
+
+      portMat = new THREE.PointsMaterial(
+        {
+          opacity: .5,
+          color: 0x00ff00,
+          map: portTex,
+          size: 5.6,
+          sizeAttenuation: true,
+          transparent: true
+        });
+
+      ringMat = new THREE.PointsMaterial(
+        {
+          color: 0x00ff00,
+          map: ringTex,
+          size: 5.6,
+          sizeAttenuation: true,
+          transparent: true
+        });
+
+      let particle = new THREE.Points(portalGeo, portMat);
+      particle.position.set(
+        xPos,
+        yPos + .1,
+        zPos
+      );
+      particle.frustumCulled = false;
+      scene.add(particle);
+
+      let ringPart = new THREE.Points(portalGeo, ringMat);
+      ringPart.position.set(
+        xPos,
+        yPos + .1,
+        zPos
+      );
+      ringPart.frustumCulled = false;
+      scene.add(ringPart);
+    }
+
+    function BuildPortal(xPos, yPos, endFacing) {
+      gltfLoader.load(
+        `${ASSET_BASE}/assets/portal2.glb`,
+        (gltf) => {
+          const newPortal = gltf.scenes[0].children[0];
+
+
+          newPortal.position.x = xPos * 10;
+          newPortal.position.y = 0;
+          newPortal.position.z = (yPos * 10) * -1;
+
+
+          /*
+          newPortal.position.x = 10;
+          newPortal.position.y = 0;
+          newPortal.position.z = 0;*/
+
+
+          newPortal.scale.set(.7, .7, .7);
+
+          //create anchor for portal center
+          const centObj = new THREE.Object3D();
+          centObj.position.y = -1;
+          centObj.position.z = -2.5;
+          centObj.parent = newPortal;
+
+
+          switch (endFacing) {
+            case 14: // south open
+
+              break;
+
+            case 13://west open
+              newPortal.rotation.z = Math.PI / 2;
+              break;
+
+            case 11:// north open   
+              newPortal.rotation.z = Math.PI;
+              break;
+
+            case 7:// east open    
+              newPortal.rotation.z = Math.PI / -2;
+              break;
+          }
+
+          var centPos = new THREE.Vector3();
+          let centQuat = new THREE.Quaternion();
+
+          centObj.getWorldPosition(centPos);
+          const portalShape = new CANNON.Sphere(1);
+          const pBody = new CANNON.Body({
+            mass: 0,
+            position: new CANNON.Vec3(centPos.x, centPos.y, centPos.z),
+            shape: portalShape,
+          });
+
+          pBody.collisionResponse = 0;
+          pBody.addEventListener(
+Error: URL can't contain control characters. '/ThreeMaze/assets/sign3.glb`,\n        (gltf) => {\n          const newObj = gltf.scenes[0].children[0];\n          /*\n          newObj.position.x = 13.6;\n          newObj.position.y = 0;\n          newObj.position.z = -6;  //4.8\n          newObj.scale.set(.5,.5,.5);*/\n\n          newObj.position.x = 4.5;\n          newObj.position.y = 0;\n          newObj.position.z = 9;  //4.8\n          newObj.scale.set(1.3, 1.3, 1.3);\n\n\n          scene.add(newObj);\n        }\n      );\n\n      const shape = new CANNON.Box(new CANNON.Vec3(1, 10, 10));\n      const body = new CANNON.Body({\n        mass: 0,\n        position: new CANNON.Vec3(4, 0, 15),\n        shape: shape,\n      });\n      world.addBody(body);\n\n\n      const body2 = new CANNON.Body({\n        mass: 0,\n        position: new CANNON.Vec3(16, 0, 15),\n        shape: shape,\n      });\n      world.addBody(body2);\n    }\n\n\n\n\n    function CheckFurthestPoint() {\n      if (theStack.length > longestDistance) {\n        furthestPoint = theStack[theStack.length - 1];\n        longestDistance = theStack.length;\n      }\n    }\n\n    function BuildPlatform(xPos, zPos) {\n      const platMat = new THREE.MeshStandardMaterial({\n        color:' (found at least '\n') /assets/sign3.glb`,
+        (gltf) => {
+          const newObj = gltf.scenes[0].children[0];
+          /*
+          newObj.position.x = 13.6;
+          newObj.position.y = 0;
+          newObj.position.z = -6;  //4.8
+          newObj.scale.set(.5,.5,.5);*/
+
+          newObj.position.x = 4.5;
+          newObj.position.y = 0;
+          newObj.position.z = 9;  //4.8
+          newObj.scale.set(1.3, 1.3, 1.3);
+
+
+          scene.add(newObj);
+        }
+      );
+
+      const shape = new CANNON.Box(new CANNON.Vec3(1, 10, 10));
+      const body = new CANNON.Body({
+        mass: 0,
+        position: new CANNON.Vec3(4, 0, 15),
+        shape: shape,
+      });
+      world.addBody(body);
+
+
+      const body2 = new CANNON.Body({
+        mass: 0,
+        position: new CANNON.Vec3(16, 0, 15),
+        shape: shape,
+      });
+      world.addBody(body2);
+    }
+
+
+
+
+    function CheckFurthestPoint() {
+      if (theStack.length > longestDistance) {
+        furthestPoint = theStack[theStack.length - 1];
+        longestDistance = theStack.length;
+      }
+    }
+
+    function BuildPlatform(xPos, zPos) {
+      const platMat = new THREE.MeshStandardMaterial({
+        color: 
+Error: URL can't contain control characters. '/ThreeMaze/assets/platform.gltf`,\n        (gltf) => {\n          const newObj = gltf.scene.children[0];\n          newObj.position.x = xPos;\n          newObj.position.y = -.1;\n          newObj.position.z = zPos + .1;\n          newObj.scale.set(14, 14, 14)\n          newObj.material = platMat;\n          scene.add(newObj);\n\n\n\n          const shape = new CANNON.Box(new CANNON.Vec3(5 * 14, .5, 5 * 14));\n          const body = new CANNON.Body({\n            mass: 0,\n            position: new CANNON.Vec3(newObj.position.x, newObj.position.y - .5, newObj.position.z),\n            shape: shape,\n          });\n          world.addBody(body);\n\n\n          const sideWall = new CANNON.Box(new CANNON.Vec3(5 * 14, 20, 3));\n          const lWall = new CANNON.Body({\n            mass: 0,\n            position: new CANNON.Vec3(newObj.position.x - 73, newObj.position.y, newObj.position.z),\n            shape: sideWall\n          });\n\n          lWall.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2)\n          world.addBody(lWall);\n\n\n          const rWall = new CANNON.Body({\n            mass: 0,\n            position: new CANNON.Vec3(newObj.position.x + 73, newObj.position.y, newObj.position.z),\n            shape: sideWall\n          });\n\n          rWall.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);\n          world.addBody(rWall);\n\n\n          const backWall = new CANNON.Body({\n            mass: 0,\n            position: new CANNON.Vec3(newObj.position.x, newObj.position.y, newObj.position.z + 73),\n            shape: sideWall\n          });\n\n          world.addBody(backWall);\n\n          const frontWall = new CANNON.Body({\n            mass: 0,\n            position: new CANNON.Vec3(newObj.position.x, newObj.position.y, newObj.position.z - 73),\n            shape: sideWall\n          });\n\n          world.addBody(frontWall);\n        }\n      );\n    }\n\n    function BuildReward() {\n      gltfLoader.load(\n\n        `${ASSET_BASE}/assets/rIsland.glb`,\n        (gltf) => {\n          const newObj = gltf.scenes[0].children[0];\n          newObj.position.x = -50;\n          newObj.position.y = 10;\n          newObj.position.z = -40;  //4.8\n          newObj.scale.set(.1, .1, .1);\n          newObj.rotation.z = Math.PI / -6\n\n          // Apply different materials to island (ground) vs chest\n          let islandMesh = null;\n          let chestMesh = null;\n\n          newObj.traverse((child) => {\n            if (child.isMesh) {\n              // The chest is typically the smaller object on top\n              if (child.position.y > 0 || child.name.includes(' (found at least '\n') /assets/platform.gltf`,
+        (gltf) => {
+          const newObj = gltf.scene.children[0];
+          newObj.position.x = xPos;
+          newObj.position.y = -.1;
+          newObj.position.z = zPos + .1;
+          newObj.scale.set(14, 14, 14)
+          newObj.material = platMat;
+          scene.add(newObj);
+
+
+
+          const shape = new CANNON.Box(new CANNON.Vec3(5 * 14, .5, 5 * 14));
+          const body = new CANNON.Body({
+            mass: 0,
+            position: new CANNON.Vec3(newObj.position.x, newObj.position.y - .5, newObj.position.z),
+            shape: shape,
+          });
+          world.addBody(body);
+
+
+          const sideWall = new CANNON.Box(new CANNON.Vec3(5 * 14, 20, 3));
+          const lWall = new CANNON.Body({
+            mass: 0,
+            position: new CANNON.Vec3(newObj.position.x - 73, newObj.position.y, newObj.position.z),
+            shape: sideWall
+          });
+
+          lWall.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2)
+          world.addBody(lWall);
+
+
+          const rWall = new CANNON.Body({
+            mass: 0,
+            position: new CANNON.Vec3(newObj.position.x + 73, newObj.position.y, newObj.position.z),
+            shape: sideWall
+          });
+
+          rWall.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+          world.addBody(rWall);
+
+
+          const backWall = new CANNON.Body({
+            mass: 0,
+            position: new CANNON.Vec3(newObj.position.x, newObj.position.y, newObj.position.z + 73),
+            shape: sideWall
+          });
+
+          world.addBody(backWall);
+
+          const frontWall = new CANNON.Body({
+            mass: 0,
+            position: new CANNON.Vec3(newObj.position.x, newObj.position.y, newObj.position.z - 73),
+            shape: sideWall
+          });
+
+          world.addBody(frontWall);
+        }
+      );
+    }
+
+    function BuildReward() {
+      gltfLoader.load(
+
+        `${ASSET_BASE}/assets/rIsland.glb`,
+        (gltf) => {
+          const newObj = gltf.scenes[0].children[0];
+          newObj.position.x = -50;
+          newObj.position.y = 10;
+          newObj.position.z = -40;  //4.8
+          newObj.scale.set(.1, .1, .1);
+          newObj.rotation.z = Math.PI / -6
+
+          // Apply different materials to island (ground) vs chest
+          let islandMesh = null;
+          let chestMesh = null;
+
+          newObj.traverse((child) => {
+            if (child.isMesh) {
+              // The chest is typically the smaller object on top
+              if (child.position.y > 0 || child.name.includes(
+Error: URL can't contain control characters. '/ThreeMaze/assets/horlicks-product.webp`);\n          const spriteMaterial = new THREE.SpriteMaterial({\n            map: productTexture,\n            transparent: true,\n            opacity: 0.9,\n            color: new THREE.Color(' (found at least '\n') /assets/horlicks-product.webp`);
+          const spriteMaterial = new THREE.SpriteMaterial({
+            map: productTexture,
+            transparent: true,
+            opacity: 0.9,
+            color: new THREE.Color(
+Error: URL can't contain control characters. '/ThreeMaze/assets/Skele/idle_1_male_free_animation_200_frames_loop.glb`,\n        (gltf) => {\n          playerObj = gltf.scene;\n\n          // Normalize size and place on ground\n          const box = new THREE.Box3().setFromObject(playerObj);\n          const size = new THREE.Vector3();\n          box.getSize(size);\n          const height = Math.max(size.y, 0.001);\n          const targetHeight = 0.7; // Reduced from 2.2 to make character smaller\n          const scale = targetHeight / height;\n          playerObj.scale.setScalar(scale);\n\n          const center = new THREE.Vector3();\n          box.getCenter(center);\n          playerObj.position.sub(center);\n          const adjusted = new THREE.Box3().setFromObject(playerObj);\n          playerObj.position.y -= adjusted.min.y;\n\n          playerObj.position.x = 10;\n          playerObj.position.y += 0; // already grounded\n          playerObj.position.z = 20;\n          playerObj.rotation.y = Math.PI;\n\n          playerObj.traverse((object) => {\n            object.frustumCulled = false;\n            if (object.isMesh) {\n              object.castShadow = true;\n              object.receiveShadow = true;\n            }\n          }\n          );\n\n          RemoveHorns(playerObj);\n\n          skeleMixer = new THREE.AnimationMixer(playerObj);\n          aniMixers.push(skeleMixer);\n\n          loadAnimationClip(idleAnimPath, (clip) => {\n            if (clip) {\n              idleAction = skeleMixer.clipAction(clip);\n              idleAction.setLoop(THREE.LoopRepeat);\n              idleAction.enable = true;\n              skeleAnimArr.push(idleAction);\n            }\n            checkPlayerReady();\n          });\n\n          loadAnimationClip(runAnimPath, (clip) => {\n            if (clip) {\n              runAction = skeleMixer.clipAction(clip);\n              runAction.setLoop(THREE.LoopRepeat);\n              runAction.enable = true;\n            }\n            checkPlayerReady();\n          });\n          scene.add(playerObj)\n\n\n          const charShape = new CANNON.Sphere(1);\n          charBody = new CANNON.Body({\n            mass: 1,\n            position: new CANNON.Vec3(0, 0, 0),\n            shape: charShape\n          });\n\n          charBody.fixedRotation = true;\n          charBody.angularDamping = 1;\n\n          charBody.position.set(10, 1, 20);  //(10,1,20)   //island -54,11,-38.5\n          world.addBody(charBody);\n\n          objectsToUpdate.push({\n            mesh: playerObj,\n            body: charBody\n          });\n\n          camSpot = new THREE.Mesh(\n            new THREE.SphereBufferGeometry(.2, 4, 4),\n            wallMat);\n          camSpot.castShadow = true;\n          camSpot.position.x = 0;\n          camSpot.position.y = 4;//5.7    \n          camSpot.position.z = -5;//5\n          camSpot.rotation.y -= Math.PI;\n          camSpot.rotateX((Math.PI / 180) * -20);//-25\n          camSpot.visible = false;\n          scene.add(camSpot);\n          camSpot.parent = playerObj;\n\n          // Initialize UI\n          UpdateLivesDisplay();\n          UpdateGreenLightsDisplay();\n\n          SetEnv(startEnv);\n          //// swing the camera down in and begin game when this loads      \n        }\n      );\n    }\n\n    function RemoveHorns(root) {\n      if (!root) return;\n      root.traverse((child) => {\n        if (!child.name) return;\n        const nm = child.name.toLowerCase();\n        if (nm.includes(' (found at least '\n') /assets/Skele/idle_1_male_free_animation_200_frames_loop.glb`,
+        (gltf) => {
+          playerObj = gltf.scene;
+
+          // Normalize size and place on ground
+          const box = new THREE.Box3().setFromObject(playerObj);
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const height = Math.max(size.y, 0.001);
+          const targetHeight = 0.7; // Reduced from 2.2 to make character smaller
+          const scale = targetHeight / height;
+          playerObj.scale.setScalar(scale);
+
+          const center = new THREE.Vector3();
+          box.getCenter(center);
+          playerObj.position.sub(center);
+          const adjusted = new THREE.Box3().setFromObject(playerObj);
+          playerObj.position.y -= adjusted.min.y;
+
+          playerObj.position.x = 10;
+          playerObj.position.y += 0; // already grounded
+          playerObj.position.z = 20;
+          playerObj.rotation.y = Math.PI;
+
+          playerObj.traverse((object) => {
+            object.frustumCulled = false;
+            if (object.isMesh) {
+              object.castShadow = true;
+              object.receiveShadow = true;
+            }
+          }
+          );
+
+          RemoveHorns(playerObj);
+
+          skeleMixer = new THREE.AnimationMixer(playerObj);
+          aniMixers.push(skeleMixer);
+
+          loadAnimationClip(idleAnimPath, (clip) => {
+            if (clip) {
+              idleAction = skeleMixer.clipAction(clip);
+              idleAction.setLoop(THREE.LoopRepeat);
+              idleAction.enable = true;
+              skeleAnimArr.push(idleAction);
+            }
+            checkPlayerReady();
+          });
+
+          loadAnimationClip(runAnimPath, (clip) => {
+            if (clip) {
+              runAction = skeleMixer.clipAction(clip);
+              runAction.setLoop(THREE.LoopRepeat);
+              runAction.enable = true;
+            }
+            checkPlayerReady();
+          });
+          scene.add(playerObj)
+
+
+          const charShape = new CANNON.Sphere(1);
+          charBody = new CANNON.Body({
+            mass: 1,
+            position: new CANNON.Vec3(0, 0, 0),
+            shape: charShape
+          });
+
+          charBody.fixedRotation = true;
+          charBody.angularDamping = 1;
+
+          charBody.position.set(10, 1, 20);  //(10,1,20)   //island -54,11,-38.5
+          world.addBody(charBody);
+
+          objectsToUpdate.push({
+            mesh: playerObj,
+            body: charBody
+          });
+
+          camSpot = new THREE.Mesh(
+            new THREE.SphereBufferGeometry(.2, 4, 4),
+            wallMat);
+          camSpot.castShadow = true;
+          camSpot.position.x = 0;
+          camSpot.position.y = 4;//5.7    
+          camSpot.position.z = -5;//5
+          camSpot.rotation.y -= Math.PI;
+          camSpot.rotateX((Math.PI / 180) * -20);//-25
+          camSpot.visible = false;
+          scene.add(camSpot);
+          camSpot.parent = playerObj;
+
+          // Initialize UI
+          UpdateLivesDisplay();
+          UpdateGreenLightsDisplay();
+
+          SetEnv(startEnv);
+          //// swing the camera down in and begin game when this loads      
+        }
+      );
+    }
+
+    function RemoveHorns(root) {
+      if (!root) return;
+      root.traverse((child) => {
+        if (!child.name) return;
+        const nm = child.name.toLowerCase();
+        if (nm.includes(

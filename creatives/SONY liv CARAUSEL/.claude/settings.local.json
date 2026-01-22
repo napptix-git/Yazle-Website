@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(copy \"C:\\\\Users\\\\krish\\\\Downloads\\\\Gemini_Generated_Image_tjxxtitjxxtitjxx.jpg\" \"c:\\\\Users\\\\krish\\\\OneDrive\\\\Desktop\\\\game-ss\\\\slide1.jpg\")",
+      "Bash(cmd /c copy \"C:\\\\Users\\\\krish\\\\Downloads\\\\Gemini_Generated_Image_tjxxtitjxxtitjxx.jpg\" \"c:\\\\Users\\\\krish\\\\OneDrive\\\\Desktop\\\\game-ss\\\\slide1.jpg\")",
+      "Bash(cmd /c dir \"c:\\\\Users\\\\krish\\\\OneDrive\\\\Desktop\\\\game-ss\\\\slide1.jpg\")",
+      "Bash(cmd /c \"dir \"\"C:\\\\Users\\\\krish\\\\Downloads\\\\Gemini_Generated_Image_tjxxtitjxxtitjxx.jpg\"\" 2>&1\")",
+      "Bash(powershell -Command:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd 3D cube carousel with magnetic floating character effect\n\n- 3D rotating cube with 4 slides and touch/swipe gestures\n- Magnetic floating character overlays that lag behind rotation\n- Different characters for slides 1&3 vs 2&4\n- Hand gesture hint that appears after 1 second of inactivity\n- Navigation dots and arrow buttons\n- Responsive design for mobile ads\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git restore:*)",
+      "Bash(git commit:*)",
+      "Bash(git mv:*)"
+    ]
+  }
+}

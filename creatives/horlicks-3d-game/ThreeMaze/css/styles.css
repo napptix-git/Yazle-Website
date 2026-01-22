@@ -1,0 +1,741 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    touch-action: none;
+}
+
+
+*,*:focus,*:hover{
+    outline:none;
+}
+
+@font-face {
+    font-family: MikadoBlack;
+    src: url(../assets/Font/MikadoBlack.otf);
+  }
+
+html,body{
+    overflow: hidden;
+}
+
+.webgl{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+
+.--RB{
+    border:1px solid red;
+}
+
+.--upImg{
+    background: url("../assets/UI/upAB.fw.webp"); 
+    background-repeat: no-repeat;
+    background-size: 100%;    
+}
+.--upImgTouched{
+    background: url("../assets/UI/ubLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+.--upImg:active{
+    background: url("../assets/UI/ubLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+
+.--downImg{    
+    background: url("../assets/UI/downAB.fw.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;     
+}
+
+.--downImgTouched{
+    background: url("../assets/UI/dbLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+.--downImg:active{
+    background: url("../assets/UI/dbLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+
+
+.--leftImg{  
+    background: url("../assets/UI/lButton.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+.--leftImgTouched{
+    background: url("../assets/UI/lbLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+.--leftImg:active{
+    background: url("../assets/UI/lbLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+
+.--rightImg{
+    background: url("../assets/UI/rTBimgW.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+.--rightImgTouched{
+    background: url("../assets/UI/rbLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;     
+}
+.--rightImg:active{
+    background: url("../assets/UI/rbLit.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;     
+}
+
+
+.--tall{
+    width: 50%;
+    height: 100%; 
+}
+.--wide{
+    width: 100%;
+    height: 50%; 
+}
+.--full{
+    width: 100%;
+    height: 100%; 
+}
+
+
+
+.--w55{
+    width: 55%;
+}
+
+.--h55{
+    height: 55%;
+}
+
+
+.--abs-br{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.--f-row{
+    display: flex;
+    flex-direction: row;
+}
+.--f-col{
+    display: flex;
+    flex-direction: column;
+}
+.--f-centered{
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+.--f-col-align{
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+}
+.--f-row-align{
+    display: flex;
+    flex-direction: row;    
+    align-items: center;
+}
+
+
+.--RB{
+    border:1px solid rgb(255, 0, 0);
+}
+
+.btn{
+    padding: 0;
+    border: none;
+    min-width: 48px;
+    min-height: 48px;
+    opacity: 1;
+    filter: brightness(1.4) contrast(1.2) drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    background-color: transparent;
+}
+
+
+
+/* new, keep */
+.ctl-lr{
+    width: calc(17vw + 12vh);
+    height: calc(17vw + 12vh);
+    position: absolute;
+    bottom: calc(1vw + 2vh);
+    left: calc(1vw + 2vh);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.ctl-fb{
+    width: calc(17vw + 12vh);
+    height: calc(17vw + 12vh);
+    position: absolute;
+    bottom: calc(1vw + 2vh);
+    right: calc(1vw + 2vh);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-right: env(safe-area-inset-right);
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+
+.ctl__upper-l{      
+    display: flex;
+    align-items: flex-start;   
+}
+
+.ctl__lower-r{       
+    display: flex;
+    align-items: flex-end;
+}
+
+.ctl-fb__small-box{
+    margin-top: 7%;
+    width: 30%;
+    height: 60%;      
+}
+
+
+
+/*#endregion controls */
+
+
+
+
+
+.reloadButton{    
+    position: absolute;
+    top: 1vw;
+    left: 15vw;
+    width: 5vw;
+    min-width: 40px;
+    height: 5vw; 
+    min-height: 40px;     
+}
+
+.--resetImg{
+    background: url("../assets/UI/reload4.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+
+
+.menu{
+    position: absolute;
+    top: 1vw;
+    right: 5vw;        
+}
+
+
+.menu__gear-box{
+    width: 100%;
+    display: flex;
+    justify-content: end;    
+}
+
+
+.menu__gear{
+    position: relative;      
+    width: 8vw;
+    min-width: 40px;
+    height: 8vw; 
+    min-height: 40px;   
+    z-index: 1;    
+}
+
+
+
+
+.--gearImg{
+    background: url("../assets/UI/gear3.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+
+.menu__assembly{
+    margin-top: .5vw;  
+    width: 28vw; /*14*/ 
+    height: 50vw;  /*25*/         
+}
+
+
+.menu__main{
+    position: relative;    
+    top: calc(-80vw);      
+    background-color: rgba(0,0,0,0.6);
+    border: 1px solid black;    
+    border-radius: 2%;   
+    flex-wrap: wrap;
+    justify-content: space-evenly;     
+}
+
+
+
+
+
+.--elementMask {
+   clip-path: inset(0 0 0 0);
+    /* Also can take single values to make all sides the same, or 2 values (vert/horz), or 3 values (top/horz/bottom). */
+}
+
+/*.MBBox{ */
+.menu__button-box{   
+    width: 82%;     
+    height: 16%;
+    border:1px solid rgb(54, 54, 54);
+    background-color: #666666;
+    border-radius: 3%;       
+}
+
+
+
+.menu__button-bar{  
+    margin-top: 5%;
+    width: 94%;
+    height: 40%;     
+    justify-content: space-between;    
+}
+
+.MBDispBox{     
+    width: 60%;
+    height: 110%;    
+    background-color: rgb(168, 168, 168);
+    border-radius: 5%;   
+}
+
+
+.chevron{    
+    width: 26%;
+    height: 160%;    
+}
+
+.--l-chev-img{         
+    background: url("../assets/UI/lChev.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;  
+}
+.--r-chev-img{        
+    background: url("../assets/UI/rChev.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;   
+}
+
+
+.--dispMenuFont{
+    font-family: MikadoBlack;   
+    font-size: calc(7vw *.5);   
+    color: white;
+}
+.--smallMenuFont{
+    font-family: MikadoBlack;   
+    font-size: calc(4.375vw *.5);
+    color: white;
+}
+
+
+
+.MBLabelBox{  
+    margin-top: 5%;  
+    width: 94%;
+    height: 30%;      
+}
+
+
+
+
+
+
+
+
+
+/*   volume slider  */
+.slidecontainer {
+    margin-top: 2%;
+    width: 86%;     
+    height: 66%;    
+}
+
+
+
+.vSlider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 100%;
+    background: url("../assets/UI/sldBar.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+    outline: none; /* Remove outline */   
+}
+
+.vSlider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 4vw; /* 19  Set a specific slider handle width */
+    /*height: 2.3vw;*/ 
+    height: 4vw;
+    background: url("../assets/UI/skl2.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+    cursor: pointer; /* Cursor on hover */    
+}
+  
+.vSlider::-moz-range-thumb {
+    width: 4vw; /* Set a specific slider handle width */
+    height: 4vw; 
+    background: url("../assets/UI/skl2.webp");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+    cursor: pointer; /* Cursor on hover */    
+}
+
+
+
+
+
+
+/* trapToggle   */
+.trapTogAssembly{
+    margin-top: 8%;
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;   
+}
+
+.t1{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+}
+
+.t2{
+    width: 40%;
+    height: 62%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+
+
+.trapSwitch {
+    position: relative;   
+    width: 80%;
+    height: 100%;    
+}
+  
+  /* Hide default HTML checkbox */
+.trapSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  /* The slider */
+  .trapSlider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;    
+}
+  
+.trapSlider:before {
+    position: absolute;
+    content: "";
+    height: 96%;
+    width: 52%;
+    left: 0;   
+
+    background: url("../assets/UI/togBut.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 105%; /*66*/
+
+
+    -webkit-transition: .4s;
+    transition: .4s;    
+}
+  
+input:checked + .trapSlider {    
+    background-color: #ff0000;
+}  
+
+  
+input:checked + .trapSlider:before {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+}
+  
+  /* Rounded sliders */
+.trapSlider.round {
+    border-radius: 34px;
+    
+}
+  
+.trapSlider.round:before {
+    border-radius: 50%;
+}
+
+
+
+
+
+
+
+@media only screen and (orientation: landscape) {
+
+    .menu__gear{       
+        width: 5vw;       
+        height: 5vw;            
+        z-index: 1; 
+    }
+
+    .menu__assembly{            
+        width: 50vw; /*14*/    
+        height: 14vw;  /*25*/               
+    }
+
+    .menu__main{        
+        top: -20vw;       
+    }
+    
+   
+    .menu__button-box{   
+        width: 31%;        
+        height: 41%;           
+    }
+
+
+    .--dispMenuFont{        
+        font-size: 2.8vw;        
+    }
+    
+    .--smallMenuFont{        
+        font-size: 1.4vw;        
+    } 
+    
+    
+    .vSlider::-webkit-slider-thumb {       
+        width: 3vw;        
+        height: 3vw;       
+    }
+      
+    .vSlider::-moz-range-thumb {
+        width: 3vw; 
+        height: 3vw;         
+    }
+}
+
+
+/* pick up and fix here .. and reload button position */
+@media (max-aspect-ratio: 100/150) {
+
+   
+    .menu__gear{       
+        width: 5vw;       
+        height: 5vw;           
+        z-index: 1;         
+    }
+
+    .menu__assembly{           
+        width: 39.2vw; 
+        height: 70vw;            
+    }
+
+    .menu__main{        
+        top: calc(-80vw);            
+    }
+
+
+
+    .--dispMenuFont{        
+        font-size: calc(7vw *.7);        
+    }
+    
+    .--smallMenuFont{        
+        font-size: calc(4.375vw *.7);    
+    } 
+    
+    
+    .vSlider::-webkit-slider-thumb {       
+        width: 5vw;        
+        height: 5vw;       
+    }
+      
+    .vSlider::-moz-range-thumb {
+        width: 5vw; 
+        height: 5vw;         
+    }
+
+}
+
+
+
+
+.noCallOut{
+    -webkit-touch-callout: none; /* Safari Touch */
+    -webkit-user-select: none;   /* Webkit */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Edge*/
+    user-select: none;       /* Future-proof*/
+}
+
+
+/* Game HUD */
+.game-hud {
+    position: absolute;
+    top: max(2vh, env(safe-area-inset-top));
+    left: max(2vw, env(safe-area-inset-left));
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: MikadoBlack;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+}
+
+.hud-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.hud-label {
+    font-size: 1.2rem;
+}
+
+.hud-value {
+    font-size: 1.5rem;
+    color: #00ff00;
+}
+
+/* Portal Message */
+.portal-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: MikadoBlack;
+    font-size: 3rem;
+    color: #00ff00;
+    text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+    z-index: 100;
+}
+
+/* Island CTA Message */
+.island-message {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: MikadoBlack;
+    font-size: 2.5rem;
+    color: #00ff00;
+    text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+    z-index: 100;
+    pointer-events: none;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+/* Game Screens */
+.game-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.screen-content {
+    text-align: center;
+    font-family: MikadoBlack;
+    color: white;
+}
+
+.screen-content h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.screen-content p {
+    font-size: 1.5rem;
+}
+
+/* LoopMe CTA Button */
+.cta-button {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 1.8rem;
+    font-family: MikadoBlack;
+    background: linear-gradient(135deg, #00ff00, #00cc00);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-shadow: none;
+    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.5);
+    min-width: 250px;
+    min-height: 60px;
+}
+
+.cta-button:active {
+    transform: scale(0.95);
+}
+
+

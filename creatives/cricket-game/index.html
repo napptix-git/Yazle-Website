@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+    <title>Cricket Game</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <script src="alpine.min.js" defer></script>
+    <script src="tailwind.min.js"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                container: false,
+            },
+        };
+    </script>
+    <style>
+        #splash-new {
+            display: none;
+        }
+        .pushable {
+            position: relative;
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+            transition: filter 250ms;
+        }
+        .shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: hsl(0deg 0% 0% / 0.25);
+            will-change: transform;
+            transform: translateY(2px);
+            transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+        }
+        .edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: linear-gradient(
+                to left,
+                hsl(170, 100%, 16%) 0%,
+                hsl(121, 100%, 32%) 8%,
+                hsl(146, 100%, 32%) 92%,
+                hsl(154, 100%, 16%) 100%
+            );
+        }
+        .front {
+            display: block;
+            position: relative;
+            padding: 12px 42px;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            background: hsl(93, 94%, 35%);
+            will-change: transform;
+            transform: translateY(-4px);
+            transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+        }
+        .pushable:hover {
+            filter: brightness(110%);
+        }
+        .pushable:hover .front {
+            transform: translateY(-6px);
+            transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+        }
+        .pushable:active .front {
+            transform: translateY(-2px);
+            transition: transform 34ms;
+        }
+        .pushable:hover .shadow {
+            transform: translateY(4px);
+            transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+        }
+        .pushable:active .shadow {
+            transform: translateY(1px);
+            transition: transform 34ms;
+        }
+        .pushable:focus:not(:focus-visible) {
+            outline: none;
+        }
+    </style>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #00a8f1, #679f1f);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            max-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        canvas {
+            height: 100vh !important;
+            margin: 0;
+        }
+
+        #q-app {
+            display: none;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Hide social/share buttons */
+        #q-app a[href*="play.google"],
+        #q-app a[href*="twitter"],
+        #q-app a[href*="t.co"],
+        #q-app svg[viewBox="0 0 24 24"]:has(path[d*="M22.46"]),
+        #q-app svg[viewBox="0 0 24 24"]:has(path[d*="M12,2"]) {
+            display: none !important;
+        }
+
+        /* Hide button container row with social icons */
+        .q-btn-group,
+        [class*="share"],
+        [class*="social"] {
+            display: none !important;
+        }
+
+        /* Hide Quasar round/fab buttons (social icons) */
+        .q-btn--round,
+        .q-btn--fab,
+        .q-fab,
+        button.q-btn.q-btn--round,
+        .q-btn[href*="play.google"],
+        .q-btn[href*="twitter"] {
+            display: none !important;
+        }
+
+        /* Hide first and third round buttons (Play Store & Twitter) */
+        #q-app .q-btn--round:first-of-type,
+        #q-app .q-btn--round:last-of-type {
+            display: none !important;
+        }
+
+        /* Keep only middle button visible */
+        #q-app .q-btn--round:nth-of-type(2) {
+            display: inline-flex !important;
+        }
+
+    </style>
+    <script>
+        function loadJuice() {
+            const splash = document.querySelector("#splash-new");
+            if (splash) {
+                splash.style.display = "none";
+            }
+
+            const app = document.querySelector("#q-app");
+            if (app) {
+                app.style.display = "block";
+            }
+        }
+
+        function checkQuery() {
+            const score = new URLSearchParams(window.location.search).get("score");
+            const style = document.createElement("style");
+            if (score) {
+                style.innerHTML = `#splash-new { display: none; }`;
+                document.head.appendChild(style);
+                loadJuice();
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else {
+                style.innerHTML = `#splash-new { display: block; } #q-app { display: none; }`;
+                document.head.appendChild(style);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#play").addEventListener("click", loadJuice);
+        });
+
+        // Remove Play Store and Twitter buttons, keep only restart
+        function removeShareButtons() {
+            // Get ALL buttons and filter round ones
+            const allBtns = document.querySelectorAll('#q-app button, #q-app .q-btn');
+            const roundBtns = [];
+
+            allBtns.forEach(btn => {
+                if (btn.classList.contains('q-btn--round')) {
+                    roundBtns.push(btn);
+                }
+            });
+
+            // If exactly 3 round buttons, remove first and last
+            if (roundBtns.length === 3) {
+                roundBtns[0].style.cssText = 'display:none!important;visibility:hidden!important;width:0!important;height:0!important;overflow:hidden!important;';
+                roundBtns[2].style.cssText = 'display:none!important;visibility:hidden!important;width:0!important;height:0!important;overflow:hidden!important;';
+            }
+
+            // Also try parent container approach
+            const containers = document.querySelectorAll('#q-app div, #q-app span');
+            containers.forEach(container => {
+                const children = container.querySelectorAll(':scope > .q-btn--round');
+                if (children.length === 3) {
+                    children[0].style.cssText = 'display:none!important';
+                    children[2].style.cssText = 'display:none!important';
+                }
+            });
+        }
+
+        setInterval(removeShareButtons, 100);
+
+        // Play Store and Twitter buttons removed from sprite sheet
+        // Also hide the button circles (drawn by game code)
+        function hideButtonCircles() {
+            const canvas = document.querySelector('#q-app canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // Button circles are at bottom of canvas
+            // Positions based on game rendering
+            const buttonY = h - 55;
+            const buttonRadius = 32;
+            const centerX = w / 2;
+            const spacing = 75;
+
+            // Cover left button circle (Play Store) with green
+            ctx.fillStyle = '#5a8a35';
+            ctx.beginPath();
+            ctx.arc(centerX - spacing, buttonY, buttonRadius + 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Cover right button circle (Twitter) with green
+            ctx.beginPath();
+            ctx.arc(centerX + spacing, buttonY, buttonRadius + 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Run frequently to cover circles after game renders
+        setInterval(hideButtonCircles, 30);
+    </script>
+    <script type="module" crossorigin src="assets/index-CB9cSSVB.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/index-BGn-wZ8K.css">
+</head>
+<body>
+    <div id="splash-new" class="h-screen z-[9999] bg-white overflow-y-auto">
+        <div class="flex flex-col items-center justify-center gap-4">
+            <h1 class="text-center mt-12 font-bold text-3xl">Cricket Game</h1>
+            <img src="doodle-cricket.svg" alt="Cricket Game" class="w-[200px] mx-auto drop-shadow-xl">
+            <div class="flex justify-center relative">
+                <button id="play" class="pushable">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">Play</span>
+                </button>
+            </div>
+            <div class="mx-auto max-w-xs mt-8 text-base text-center">
+                <p>Click or tap to swing the bat and score runs!</p>
+                <p class="mt-2">Time your shots carefully to avoid getting out.</p>
+            </div>
+        </div>
+    </div>
+    <div id="q-app"></div>
+    <script>
+        checkQuery();
+    </script>
+</body>
+</html>

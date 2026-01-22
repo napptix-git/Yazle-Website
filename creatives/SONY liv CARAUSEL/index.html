@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>3D Cube Carousel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px;
+        }
+
+        #slider {
+            width: 80vw;
+            height: 80vw;
+            max-width: 400px;
+            max-height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: grab;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        /* Floating characters - OUTSIDE the cube */
+        .floating-character {
+            position: absolute;
+            width: 75vw;
+            max-width: 380px;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -45%);
+            z-index: 200;
+            pointer-events: none;
+            filter: drop-shadow(0 40px 50px rgba(0, 0, 0, 0.6));
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .floating-character.hidden {
+            opacity: 0;
+        }
+
+        /* Slides 1 & 3 - Akshay bigger and higher */
+        #floatingCharacter1,
+        #floatingCharacter3 {
+            width: 85vw;
+            max-width: 430px;
+            transform: translate(-50%, -55%);
+        }
+
+        /* Position each face of the cube - slides arranged clockwise */
+        .slide:nth-child(1) {
+            transform: rotateY(0deg) translateZ(calc(40vw));
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide:nth-child(2) {
+            transform: rotateY(90deg) translateZ(calc(40vw));
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .slide:nth-child(3) {
+            transform: rotateY(180deg) translateZ(calc(40vw));
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .slide:nth-child(4) {
+            transform: rotateY(270deg) translateZ(calc(40vw));
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .slide-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .slide-content .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .slide-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide-content p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Navigation dots */
+        .dots {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #fff;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        /* Navigation buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn.left {
+            left: 15px;
+        }
+
+        .nav-btn.right {
+            right: 15px;
+        }
+
+        /* Swipe hint */
+        .swipe-hint {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            animation: fadeInOut 2s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .container.interacted .swipe-hint {
+            display: none;
+        }
+
+        /* Hand gesture hint */
+        .hand-gesture {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: auto;
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .hand-gesture.show {
+            opacity: 1;
+            animation: swipeHint 1.2s ease-in-out infinite;
+        }
+
+        @keyframes swipeHint {
+            0%, 100% { transform: translateX(-50%) translateX(0) rotate(0deg); }
+            50% { transform: translateX(-50%) translateX(-40px) rotate(-15deg); }
+        }
+
+        /* Remove permanent hide - gesture now shows repeatedly */
+
+        @media (min-width: 500px) {
+            .slide:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+            .slide:nth-child(2) { transform: rotateY(90deg) translateZ(200px); }
+            .slide:nth-child(3) { transform: rotateY(180deg) translateZ(200px); }
+            .slide:nth-child(4) { transform: rotateY(270deg) translateZ(200px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div id="slider">
+            <!-- Face 1 - Front -->
+            <div class="slide" style="background-image: url('./Gemini_Generated_Image_tjxxtitjxxtitjxx.jpg'); background-size: cover; background-position: center;">
+            </div>
+
+            <!-- Face 2 - Right -->
+            <div class="slide" style="background-image: url('./Gemini_Generated_Image_rscux4rscux4rscu (1).png'); background-size: cover; background-position: center;">
+            </div>
+
+            <!-- Face 3 - Back -->
+            <div class="slide" style="background-image: url('./Gemini_Generated_Image_tjxxtitjxxtitjxx.jpg'); background-size: cover; background-position: center;">
+            </div>
+
+            <!-- Face 4 - Left -->
+            <div class="slide" style="background-image: url('./Gemini_Generated_Image_rscux4rscux4rscu (1).png'); background-size: cover; background-position: center;">
+            </div>
+        </div>
+
+        <!-- Floating Characters - OUTSIDE the cube -->
+        <img id="floatingCharacter1" class="floating-character" src="./craiyon_141829_image.png" alt="Character">
+        <img id="floatingCharacter2" class="floating-character hidden" src="./craiyon_151544_image.png" alt="Character">
+        <img id="floatingCharacter3" class="floating-character hidden" src="./craiyon_141829_image.png" alt="Character">
+        <img id="floatingCharacter4" class="floating-character hidden" src="./craiyon_151544_image.png" alt="Character">
+
+        <!-- Navigation Buttons -->
+        <button class="nav-btn left" id="prevBtn">‹</button>
+        <button class="nav-btn right" id="nextBtn">›</button>
+
+        <!-- Dots -->
+        <div class="dots" id="dots"></div>
+
+        <!-- Swipe Hint -->
+        <div class="swipe-hint">← Swipe left or right →</div>
+
+        <!-- Hand Gesture -->
+        <img class="hand-gesture" id="handGesture" src="./hand.png" alt="Swipe">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("container");
+            const slider = document.getElementById("slider");
+            const slides = document.querySelectorAll(".slide");
+            const dotsContainer = document.getElementById("dots");
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
+            const floatingChar1 = document.getElementById("floatingCharacter1");
+            const floatingChar2 = document.getElementById("floatingCharacter2");
+            const floatingChar3 = document.getElementById("floatingCharacter3");
+            const floatingChar4 = document.getElementById("floatingCharacter4");
+            const handGesture = document.getElementById("handGesture");
+
+            let isDragging = false;
+            let gestureTimer = null;
+            let startX = 0;
+            let currentX = 0;
+            let currentRotation = 0;
+            let targetRotation = 0;
+            let char1Rotation = 0;
+            let char2Rotation = 0;
+            let char3Rotation = 0;
+            let char4Rotation = 0;
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            const anglePerSlide = 90;
+
+            // Magnetic follow settings
+            const followSpeed = 0.08; // How fast character follows (lower = more lag)
+            let animationId = null;
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement("div");
+                dot.classList.add("dot");
+                if (i === 0) dot.classList.add("active");
+                dot.addEventListener("click", () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            // Event listeners
+            slider.addEventListener("mousedown", dragStart);
+            slider.addEventListener("mousemove", dragMove);
+            slider.addEventListener("mouseup", dragEnd);
+            slider.addEventListener("mouseleave", dragEnd);
+
+            slider.addEventListener("touchstart", dragStart, { passive: false });
+            slider.addEventListener("touchmove", dragMove, { passive: false });
+            slider.addEventListener("touchend", dragEnd);
+
+            prevBtn.addEventListener("click", () => {
+                onInteractionStart();
+                rotateToPrev();
+                onInteractionEnd();
+            });
+            nextBtn.addEventListener("click", () => {
+                onInteractionStart();
+                rotateToNext();
+                onInteractionEnd();
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowLeft") rotateToPrev();
+                if (e.key === "ArrowRight") rotateToNext();
+            });
+
+            // Animation loop for magnetic follow effect
+            function animateCharacter() {
+                // Calculate difference and smoothly interpolate for all characters
+                const diff1 = currentRotation - char1Rotation;
+                char1Rotation += diff1 * followSpeed;
+                const offsetX1 = (char1Rotation - currentRotation) * 3;
+                floatingChar1.style.transform = `translate(calc(-50% + ${offsetX1}px), -55%)`;
+
+                const diff2 = currentRotation - char2Rotation;
+                char2Rotation += diff2 * followSpeed;
+                const offsetX2 = (char2Rotation - currentRotation) * 3;
+                floatingChar2.style.transform = `translate(calc(-50% + ${offsetX2}px), -45%)`;
+
+                const diff3 = currentRotation - char3Rotation;
+                char3Rotation += diff3 * followSpeed;
+                const offsetX3 = (char3Rotation - currentRotation) * 3;
+                floatingChar3.style.transform = `translate(calc(-50% + ${offsetX3}px), -55%)`;
+
+                const diff4 = currentRotation - char4Rotation;
+                char4Rotation += diff4 * followSpeed;
+                const offsetX4 = (char4Rotation - currentRotation) * 3;
+                floatingChar4.style.transform = `translate(calc(-50% + ${offsetX4}px), -45%)`;
+
+                // Show/hide characters based on current slide
+                const normalizedRotation = ((currentRotation % 360) + 360) % 360;
+
+                // Slide 1 visible: rotation around 0 (between 315-360 or 0-45)
+                const isSlide1Visible = normalizedRotation < 45 || normalizedRotation > 315;
+
+                // Slide 2 visible: rotation around 90 (between 45-135)
+                const isSlide2Visible = normalizedRotation > 45 && normalizedRotation < 135;
+
+                // Slide 3 visible: rotation around 180 (between 135-225)
+                const isSlide3Visible = normalizedRotation > 135 && normalizedRotation < 225;
+
+                // Slide 4 visible: rotation around 270 (between 225-315)
+                const isSlide4Visible = normalizedRotation > 225 && normalizedRotation < 315;
+
+                floatingChar1.classList.toggle("hidden", !isSlide1Visible);
+                floatingChar2.classList.toggle("hidden", !isSlide2Visible);
+                floatingChar3.classList.toggle("hidden", !isSlide3Visible);
+                floatingChar4.classList.toggle("hidden", !isSlide4Visible);
+
+                animationId = requestAnimationFrame(animateCharacter);
+            }
+
+            // Start animation loop
+            animateCharacter();
+
+            function dragStart(e) {
+                e.preventDefault();
+                isDragging = true;
+                startX = getEventX(e);
+                currentX = startX;
+                slider.style.transition = "none";
+                slider.style.cursor = "grabbing";
+                markInteracted();
+                onInteractionStart();
+            }
+
+            function dragMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+
+                currentX = getEventX(e);
+                const deltaX = currentX - startX;
+
+                const dragRotation = -(deltaX / slider.clientWidth) * 90;
+                currentRotation = targetRotation + dragRotation;
+
+                slider.style.transform = `rotateY(${currentRotation}deg)`;
+            }
+
+            function dragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                slider.style.cursor = "grab";
+                slider.style.transition = "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+                const deltaX = currentX - startX;
+                const dragThreshold = slider.clientWidth * 0.15;
+
+                if (deltaX > dragThreshold) {
+                    rotateToNext();
+                } else if (deltaX < -dragThreshold) {
+                    rotateToPrev();
+                } else {
+                    snapToCurrentSlide();
+                }
+                onInteractionEnd();
+            }
+
+            function rotateToNext() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                targetRotation = -currentIndex * anglePerSlide;
+                updateCube();
+            }
+
+            function rotateToPrev() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                targetRotation = -currentIndex * anglePerSlide;
+                updateCube();
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                targetRotation = -currentIndex * anglePerSlide;
+                updateCube();
+            }
+
+            function snapToCurrentSlide() {
+                targetRotation = -currentIndex * anglePerSlide;
+                updateCube();
+            }
+
+            function updateCube() {
+                slider.style.transition = "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+                currentRotation = targetRotation;
+                slider.style.transform = `rotateY(${currentRotation}deg)`;
+
+                document.querySelectorAll(".dot").forEach((dot, i) => {
+                    dot.classList.toggle("active", i === currentIndex);
+                });
+
+                setTimeout(() => {
+                    slider.style.transition = "none";
+                }, 500);
+            }
+
+            function getEventX(e) {
+                return e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+            }
+
+            function markInteracted() {
+                container.classList.add("interacted");
+            }
+
+            // Show hand gesture after 1 second of inactivity
+            function showGesture() {
+                handGesture.classList.add("show");
+            }
+
+            function hideGesture() {
+                handGesture.classList.remove("show");
+                clearTimeout(gestureTimer);
+            }
+
+            function startGestureTimer() {
+                clearTimeout(gestureTimer);
+                gestureTimer = setTimeout(showGesture, 1000);
+            }
+
+            // Hide gesture when user starts interacting, restart timer when they stop
+            function onInteractionStart() {
+                hideGesture();
+            }
+
+            function onInteractionEnd() {
+                startGestureTimer();
+            }
+
+            // Start the gesture timer on page load
+            startGestureTimer();
+
+            updateCube();
+        });
+    </script>
+</body>
+</html>
